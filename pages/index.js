@@ -123,7 +123,8 @@ export default function Home() {
           width: 100%;
           max-width: 800px;
           margin: 2rem auto;
-          padding-top: 56.25%; /* 16:9 Aspect Ratio */
+          height: 0;
+          padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
           border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 4px 8px rgba(0,0,0,0.1);
