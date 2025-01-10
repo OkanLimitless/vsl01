@@ -18,7 +18,7 @@ export default function TestPage() {
         <title>Erection Button</title>
       </Head>
       
-      <h1 className="title">PRESS THIS "ERECTION BUTTON" TO START ACTING LIKE A PORN ACTOR</h1>
+      <h1 className="title">PRESS THIS <span>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
       
       <div className="video-container">
         <div id="vid_677444f834e21f48aa3179b8">
@@ -48,10 +48,10 @@ export default function TestPage() {
 
       <style jsx>{`
         :root {
-          --primary-color: #ff4757;
+          --primary-color: #ff0000;
           --secondary-color: #2ed573;
           --accent-color: #ffa502;
-          --bg-color: #1e1e1e;
+          --bg-color: #000000;
           --text-color: #ffffff;
           --font-primary: 'Roboto', sans-serif;
           --font-secondary: 'Oswald', sans-serif;
@@ -87,13 +87,31 @@ export default function TestPage() {
         .title {
           font-family: var(--font-secondary);
           font-size: clamp(1.8rem, 6vw, 3rem);
-          color: var(--primary-color);
+          color: var(--text-color);
           margin-bottom: var(--spacing-lg);
           text-transform: uppercase;
           padding: 0 1rem;
           line-height: 1.3;
-          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+          text-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
           animation: text-glow 2s ease-in-out infinite alternate;
+        }
+
+        .title span {
+          color: var(--primary-color);
+          text-shadow: 0 0 10px var(--primary-color);
+          animation: highlight-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes highlight-pulse {
+          0% {
+            text-shadow: 0 0 10px var(--primary-color);
+          }
+          50% {
+            text-shadow: 0 0 20px var(--primary-color);
+          }
+          100% {
+            text-shadow: 0 0 10px var(--primary-color);
+          }
         }
 
         @keyframes text-glow {
