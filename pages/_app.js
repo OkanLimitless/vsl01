@@ -44,17 +44,17 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </ErrorBoundary>
       <Script src="https://cdn.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" strategy="afterInteractive" />
-      <Script id="vTurb-player-init" strategy="afterInteractive">
-      {`
-        document.addEventListener("DOMContentLoaded", function() {
-          console.log('DOMContentLoaded - Initializing vTurb player');
-          
-          const playerContainer = document.getElementById('smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc');
-          if (!playerContainer) {
-            console.error('vTurb player container not found');
-            return;
-          }
-          console.log('vTurb player container found:', playerContainer);
+      <Script id="vTurb-player-init" strategy="afterInteractive" dangerouslySetInnerHTML={{
+        __html: `
+          document.addEventListener("DOMContentLoaded", function() {
+            console.log('DOMContentLoaded - Initializing vTurb player');
+            
+            const playerContainer = document.getElementById('smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc');
+            if (!playerContainer) {
+              console.error('vTurb player container not found');
+              return;
+            }
+            console.log('vTurb player container found:', playerContainer);
           
           // Ensure container has proper dimensions
           playerContainer.style.width = '100%';
@@ -179,8 +179,7 @@ function MyApp({ Component, pageProps }) {
           
           document.body.appendChild(script);
         });
-      `}
-      </Script>
+          `}} />
       <Script id="vTurb-cta-logic" strategy="afterInteractive">
       {`
         document.addEventListener("DOMContentLoaded", function () {
