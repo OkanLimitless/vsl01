@@ -33,6 +33,12 @@ export default function TestPage() {
       <div className="video-container">
         <div id="vid_677444f834e21f48aa3179b8"></div>
       </div>
+      
+      {showCTA && (
+        <a href="#" className="cta-button active">
+          Click Here to Continue
+        </a>
+      )}
 
       <style jsx>{`
         :root {
@@ -125,10 +131,10 @@ export default function TestPage() {
 
         .cta-button {
           display: none;
-          position: absolute;
-          bottom: var(--spacing-md);
-          left: 50%;
-          transform: translateX(-50%);
+          position: relative;
+          margin: var(--spacing-md) auto 0;
+          left: auto;
+          transform: none;
           background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
           color: white;
           padding: var(--spacing-sm) var(--spacing-md);
