@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import VideoPlayer from '../components/VideoPlayer';
 
 const ClientSideOnly = dynamic(
   () => Promise.resolve(({ children }) => <>{children}</>),
@@ -28,102 +27,12 @@ export default function TestPage() {
           }
 
 
-          .video-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            background-color: #000;
-          }
-
-          #vid_677444f834e21f48aa3179b8 {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-          }
-
-          .backdrop {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            backdrop-filter: blur(5px);
-            z-index: 1;
-          }
-
-          .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
-            background: var(--primary-color);
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            opacity: 0.9;
-            z-index: 2;
-          }
-
-          .play-button:hover {
-            transform: translate(-50%, -50%) scale(1.1);
-            opacity: 1;
-          }
-
-          .cta-button {
-            opacity: 0;
-            visibility: hidden;
-            position: absolute;
-            bottom: var(--spacing-md);
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary-color);
-            color: white;
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--border-radius);
-            text-decoration: none;
-            font-family: var(--font-tertiary);
-            font-weight: bold;
-            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-          }
-
-          .cta-button.active {
-            opacity: 1;
-            visibility: visible;
-            animation: button-pulse 2s infinite ease-in-out;
-          }
-
-          .cta-button:hover {
-            background: var(--secondary-color);
-            transform: translateX(-50%) scale(1.05);
-          }
-
-          @media (max-width: 768px) {
-            .video-container {
-              margin: var(--spacing-sm) auto;
-            }
-
-            .cta-button {
-              font-size: 0.9rem;
-              padding: 0.75rem 1.5rem;
-            }
-          }
         `}</style>
       </Head>
       
       <div className="container">
         <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
-
-        <VideoPlayer />
 
       <style jsx>{`
         :root {
