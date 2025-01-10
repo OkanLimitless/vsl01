@@ -11,6 +11,12 @@ export default function TestPage() {
     script.async = true;
     document.head.appendChild(script);
 
+    // Load tracking script
+    const trackScript = document.createElement('script');
+    trackScript.src = 'https://lp.zobal.site/track.js?rtkcmpid=6708023913744d9bc2e1cd15';
+    trackScript.async = true;
+    document.head.appendChild(trackScript);
+
     // CTA timer
     const timer = setTimeout(() => {
       setShowCTA(true);
@@ -19,6 +25,7 @@ export default function TestPage() {
     return () => {
       clearTimeout(timer);
       document.head.removeChild(script);
+      document.head.removeChild(trackScript);
     };
   }, []);
 
@@ -215,45 +222,41 @@ export default function TestPage() {
             padding: 0.5rem 1rem;
           }
         }
+        footer {
+          text-align: center;
+          font-size: 14px;
+          color: #414141;
+          padding: 20px;
+        }
+
+        footer a {
+          padding: 0;
+          color: #414141;
+          text-decoration: underline;
+        }
+
+        footer a:hover {
+          color: #000000;
+        }
+
+        @media (max-width:1200px) {
+          footer {
+            font-size: 13px;
+          }
+        }
+
+        @media (max-width:640px) {
+          footer {
+            font-size: 12px;
+            padding: 15px;
+          }
+        }
       `}</style>
       
       <div id="division-1657814825221" className="hDLYWH5953135">
         <div className="footer-1657814831958Q4sQ3C">
-          <style>
-            .footer-1657814831958Q4sQ3C-element {
-              text-align: center;
-              font-size: 14px;
-              color: #414141;
-              padding: 20px;
-            }
 
-            .footer-1657814831958Q4sQ3C-element a {
-              padding: 0;
-              color: #414141;
-              text-decoration: underline;
-            }
-
-            .footer-1657814831958Q4sQ3C-element a:hover {
-              color: #000000;
-            }
-
-            @media (max-width:1200px) {
-              .footer-1657814831958Q4sQ3C-element {
-                font-size: 13px;
-              }
-            }
-
-            @media (max-width:640px) {
-              .footer-1657814831958Q4sQ3C-element {
-                font-size: 12px;
-                padding: 15px;
-              }
-            }
-          </style>
-
-          <script type="text/javascript" src="https://lp.zobal.site/track.js?rtkcmpid=6708023913744d9bc2e1cd15"></script>
-
-          <footer class="footer-1657814831958Q4sQ3C-element">
+          <footer>
             <p><strong>Copyright 2024 – EP ®</strong></p>
             <p style="margin-top:4px;">All rights reserved</p>
             <div style="display:flex;align-items:center;justify-content:center;margin-top:24px;">
