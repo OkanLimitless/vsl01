@@ -143,7 +143,7 @@ export default function TestPage() {
       
       <ClientSideOnly>
         <div className="video-container">
-          <div id="vid_677444f834e21f48aa3179b8" style="min-height: 400px"></div>
+          <div id="vid_677444f834e21f48aa3179b8" style={{ minHeight: '400px' }}></div>
         </div>
         
         {isClient && showCTA && (
