@@ -45,7 +45,13 @@ export default function Home() {
             </div>
           </div>
           
-          <a href="https://lp.zobal.site/click" target="_blank" rel="noopener noreferrer" className="cta-button esconder">
+          <a 
+            href="https://lp.zobal.site/click" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="cta-button esconder"
+            style={{ display: 'none' }} // Initially hidden
+          >
             VIEW PACKAGES
           </a>
         </div>
@@ -116,7 +122,7 @@ export default function Home() {
           width: 100%;
           max-width: 800px;
           margin: 2rem auto;
-          padding-top: 56.25%;
+          padding-top: 56.25%; /* 16:9 Aspect Ratio */
           border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -146,6 +152,67 @@ export default function Home() {
           height: 100%;
           backdrop-filter: blur(5px);
           z-index: 1;
+        }
+
+        /* CTA Button Styles */
+        .cta-button {
+          opacity: 0;
+          visibility: hidden;
+          position: absolute;
+          bottom: 2rem;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #00dd00;
+          color: white;
+          padding: 1rem 2rem;
+          border-radius: 12px;
+          text-decoration: none;
+          font-family: var(--font-tertiary);
+          font-weight: bold;
+          transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+          z-index: 3;
+        }
+
+        .cta-button.active {
+          opacity: 1;
+          visibility: visible;
+          animation: button-pulse 2s infinite ease-in-out;
+        }
+
+        .cta-button:hover {
+          background: #ff0000;
+          transform: translateX(-50%) scale(1.05);
+        }
+
+        @keyframes button-pulse {
+          0% {
+            transform: translateX(-50%) scale(1);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
+          }
+          50% {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 8px 30px rgba(255, 0, 0, 0.8);
+          }
+          100% {
+            transform: translateX(-50%) scale(1);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
+          }
+        }
+
+        @media (max-width: 768px) {
+          .cta-button {
+            font-size: 0.9rem;
+            padding: 0.75rem 1.5rem;
+            bottom: 1.5rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .cta-button {
+            font-size: 0.8rem;
+            padding: 0.5rem 1rem;
+            bottom: 1rem;
+          }
         }
 
         /* CTA Button Styles */

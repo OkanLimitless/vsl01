@@ -68,6 +68,7 @@ function MyApp({ Component, pageProps }) {
 
           function showCTA() {
             if (ctaButton) {
+              ctaButton.style.display = 'block'; // Make visible
               ctaButton.classList.add('active');
               localStorage.setItem(\`ctaDisplayed\${SECONDS_TO_DISPLAY}\`, 'true');
             }
