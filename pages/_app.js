@@ -49,24 +49,30 @@ function MyApp({ Component, pageProps }) {
         document.addEventListener("DOMContentLoaded", function() {
           const videoContainer = document.getElementById('vid_player');
           if (videoContainer) {
-            // Initialize Smartplayer
-            const playerDiv = document.createElement('div');
-            playerDiv.id = 'smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc';
-            videoContainer.appendChild(playerDiv);
-            
             // Load player script
             const script = document.createElement('script');
             script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/player.js';
             script.async = true;
-            document.body.appendChild(script);
             
-            // Show video when ready
             script.onload = function() {
               const thumbnail = document.getElementById('thumb_player');
               if (thumbnail) {
                 thumbnail.style.display = 'none';
               }
+              
+              // Initialize Smartplayer
+              if (typeof smartplayer !== 'undefined') {
+                new smartplayer({
+                  container: 'smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc',
+                  url: 'https://videos.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/playlist.m3u8',
+                  poster: 'https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/thumbnail.jpg',
+                  autoplay: true,
+                  controls: true
+                });
+              }
             };
+            
+            document.body.appendChild(script);
           }
         });
       `}
