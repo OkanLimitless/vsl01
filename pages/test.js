@@ -1,6 +1,12 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
+import dynamic from 'next/dynamic';
+
+const ClientSideOnly = dynamic(
+  () => Promise.resolve(({ children }) => <>{children}</>),
+  { ssr: false }
+);
 
 const SECONDS_TO_DISPLAY = 2285; // 38 minutes and 5 seconds
 
