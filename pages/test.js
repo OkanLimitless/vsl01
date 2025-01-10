@@ -45,7 +45,6 @@ export default function TestPage() {
             VIEW PACKAGES
           </a>
         </div>
-      </div>
 
       <style jsx>{`
         :root {
