@@ -35,7 +35,6 @@ export default function TestPage() {
               border: 'none'
             }}
           ></iframe>
-        </div>
           <a 
             href="https://www.google.com" 
             target="_blank" 
