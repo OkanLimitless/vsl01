@@ -55,6 +55,15 @@ function MyApp({ Component, pageProps }) {
             return;
           }
           console.log('vTurb player container found:', playerContainer);
+          
+          // Add loading overlay
+          const loadingOverlay = document.createElement('div');
+          loadingOverlay.className = 'loading-overlay';
+          loadingOverlay.innerHTML = `
+            <div class="loading-spinner"></div>
+            <p>Loading video player...</p>
+          `;
+          playerContainer.appendChild(loadingOverlay);
 
           // Ensure container has dimensions
           playerContainer.style.width = '100%';
@@ -104,6 +113,11 @@ function MyApp({ Component, pageProps }) {
                     player.on('ready', () => {
                       console.log('vTurb player is ready');
                       playerContainer.style.backgroundColor = 'transparent';
+                      // Remove loading overlay
+                      const loadingOverlay = playerContainer.querySelector('.loading-overlay');
+                      if (loadingOverlay) {
+                        loadingOverlay.remove();
+                      }
                       
                       // vTurb specific event handling
                       player.on('vTurbStart', () => {
