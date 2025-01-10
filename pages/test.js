@@ -217,33 +217,36 @@ export default function TestPage() {
         }
       `}</style>
       
-      <div id="division-1657814825221" class="hDLYWH5953135">
-        <div class="footer-1657814831958Q4sQ3C">
+      <div id="division-1657814825221" className="hDLYWH5953135">
+        <div className="footer-1657814831958Q4sQ3C">
           <style>
             .footer-1657814831958Q4sQ3C-element {
               text-align: center;
-              font-size: 0.80vw;
+              font-size: 14px;
               color: #414141;
+              padding: 20px;
             }
 
             .footer-1657814831958Q4sQ3C-element a {
-              padding: 0 !important;
-              color: #414141 !important;
+              padding: 0;
+              color: #414141;
+              text-decoration: underline;
+            }
+
+            .footer-1657814831958Q4sQ3C-element a:hover {
+              color: #000000;
             }
 
             @media (max-width:1200px) {
               .footer-1657814831958Q4sQ3C-element {
-                text-align: center;
-                font-size: 1.30vw;
-                color: #414141;
+                font-size: 13px;
               }
             }
 
             @media (max-width:640px) {
               .footer-1657814831958Q4sQ3C-element {
-                text-align: center;
-                font-size: 2.20vw;
-                color: #414141;
+                font-size: 12px;
+                padding: 15px;
               }
             }
           </style>
