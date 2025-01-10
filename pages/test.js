@@ -26,51 +26,62 @@ export default function TestPage() {
       trackScript.async = true;
       document.head.appendChild(trackScript);
 
-      // Enhanced player initialization
+      // Enhanced player initialization with error handling
       let playerInitialized = false;
+      let playerCheckInterval;
+      let playerError = false;
+
       const initPlayer = () => {
-        if (window.player && !playerInitialized) {
-          playerInitialized = true;
-          
-          console.log('Player initialized successfully');
-          
-          // Listen for player state changes
-          window.player.on('timeupdate', (data) => {
-            console.log('Time update:', data.currentTime);
-            // Show CTA at 30 minutes (1800 seconds)
-            if (data.currentTime >= 1800 && !showCTA) {
-              console.log('Triggering CTA at 30 minutes');
+        try {
+          if (window.player && !playerInitialized) {
+            playerInitialized = true;
+            
+            console.log('Player initialized successfully');
+            
+            // Listen for player state changes
+            window.player.on('timeupdate', (data) => {
+              console.log('Time update:', data.currentTime);
+              // Show CTA at 30 minutes (1800 seconds)
+              if (data.currentTime >= 1800 && !showCTA) {
+                console.log('Triggering CTA at 30 minutes');
+                setShowCTA(true);
+              }
+            });
+
+            // Debug player methods
+            window.player.getCurrentTime()
+              .then(time => {
+                console.log('Initial time:', time);
+              })
+              .catch(err => {
+                console.error('Error getting current time:', err);
+                playerError = true;
+              });
+
+            // Test CTA after 5 seconds
+            setTimeout(() => {
+              console.log('Forcing CTA for testing');
               setShowCTA(true);
-            }
-          });
-
-          // Debug player methods
-          window.player.getCurrentTime().then(time => {
-            console.log('Initial time:', time);
-          });
-
-          // Test CTA after 5 seconds
-          setTimeout(() => {
-            console.log('Forcing CTA for testing');
-            setShowCTA(true);
-          }, 5000);
+            }, 5000);
+          }
+        } catch (err) {
+          console.error('Player initialization error:', err);
+          playerError = true;
         }
       };
 
       // Check for player every 500ms
-      const playerCheckInterval = setInterval(initPlayer, 500);
+      playerCheckInterval = setInterval(initPlayer, 500);
 
       // Cleanup
       return () => {
         clearInterval(playerCheckInterval);
-        document.head.removeChild(script);
-        document.head.removeChild(trackScript);
-      };
-
-      return () => {
-        clearInterval(checkPlayer);
-        document.head.removeChild(script);
-        document.head.removeChild(trackScript);
+        if (script && script.parentNode) {
+          document.head.removeChild(script);
+        }
+        if (trackScript && trackScript.parentNode) {
+          document.head.removeChild(trackScript);
+        }
       };
     }
   }, [showCTA]);
@@ -79,6 +90,7 @@ export default function TestPage() {
     <div className="container">
       <Head>
         <title>Erection Button</title>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       
       <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
