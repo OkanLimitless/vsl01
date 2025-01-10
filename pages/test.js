@@ -234,63 +234,87 @@ export default function TestPage() {
             padding: 0.5rem 1rem;
           }
         }
-        footer {
+
+        .site-footer {
+          margin-top: 4rem;
+          padding: 2rem 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          background-color: rgba(0, 0, 0, 0.8);
+          backdrop-filter: blur(4px);
+        }
+
+        .footer-content {
+          max-width: 800px;
+          margin: 0 auto;
           text-align: center;
-          font-size: 14px;
-          color: #414141;
-          padding: 20px;
         }
 
-        footer a {
-          padding: 0;
-          color: #414141;
-          text-decoration: underline;
+        .copyright {
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
         }
 
-        footer a:hover {
-          color: #000000;
+        .footer-links {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          margin-bottom: 1.5rem;
         }
 
-        @media (max-width:1200px) {
-          footer {
-            font-size: 13px;
+        .footer-links a {
+          color: var(--primary-color);
+          text-decoration: none;
+          font-size: 0.9rem;
+          transition: color var(--transition-speed) ease;
+        }
+
+        .footer-links a:hover {
+          color: var(--accent-color);
+        }
+
+        .divider {
+          color: rgba(255, 255, 255, 0.3);
+        }
+
+        .disclaimer {
+          color: rgba(255, 255, 255, 0.6);
+          font-size: 0.8rem;
+          line-height: 1.5;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+          .site-footer {
+            padding: 1.5rem;
           }
-        }
 
-        @media (max-width:640px) {
-          footer {
-            font-size: 12px;
-            padding: 15px;
+          .disclaimer {
+            font-size: 0.75rem;
           }
         }
       `}</style>
       
       <ClientSideOnly>
-        <div id="division-1657814825221" className="hDLYWH5953135">
-          <div className="footer-1657814831958Q4sQ3C">
-            <footer>
-              <p><strong>Copyright 2024 – EP ®</strong></p>
-              <p style={{marginTop: '4px'}}>All rights reserved</p>
-              <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '24px'}}>
-                <a id="t" style={{marginRight: '12px'}} href="https://zobal.site/vsls01/vbth3191/index.html?subid=v2_ee23f5b0-45e7-4e27-a038-209fb03d31cc_e58ce7ce-0722-45dc-91a3-9434adff0f95_677444f834e21f48aa3179b8_38f043cb-1c20-4611-8243-b532566619a8_3085_t-12#" target="_blank" rel="noopener noreferrer">
-                  Terms of use
-                </a> 
-                <span style={{marginRight: '12px'}}>·</span>
-                <a id="p" href="https://zobal.site/vsls01/vbth3191/index.html?subid=v2_ee23f5b0-45e7-4e27-a038-209fb03d31cc_e58ce7ce-0722-45dc-91a3-9434adff0f95_677444f834e21f48aa3179b8_38f043cb-1c20-4611-8243-b532566619a8_3085_t-12#" target="_blank" rel="noopener noreferrer">
-                  Privacy
-                </a>
-              </div>
-              <p style={{marginTop: '24px'}}>
-              This site is not affiliated with any advertising platform. This product is marketed with the support of
-              Hotmart. The platform does not perform prior editorial control of the products marketed, nor does it
-              evaluate the technicality and experience of those who produce them. The existence of a product and its
-              acquisition through the platform cannot be considered, under any circumstances, as a guarantee of the
-              quality of the content and the result. By acquiring it, the buyer declares to be aware of this information.
-              Hotmart's terms and policies can be consulted here, even before finalizing the purchase.
-              </p>
-            </footer>
+        <footer className="site-footer">
+          <div className="footer-content">
+            <p className="copyright">&copy; 2024 EP ® - All Rights Reserved</p>
+            <div className="footer-links">
+              <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a>
+              <span className="divider">|</span>
+              <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            </div>
+            <p className="disclaimer">
+              This site is not affiliated with any advertising platform. This product is marketed with the support of Hotmart. 
+              The platform does not perform prior editorial control of the products marketed, nor does it evaluate the 
+              technicality and experience of those who produce them. The existence of a product and its acquisition through 
+              the platform cannot be considered, under any circumstances, as a guarantee of the quality of the content and 
+              the result. By acquiring it, the buyer declares to be aware of this information. Hotmart's terms and policies 
+              can be consulted here, even before finalizing the purchase.
+            </p>
           </div>
-        </div>
+        </footer>
       </ClientSideOnly>
     </div>
   );
