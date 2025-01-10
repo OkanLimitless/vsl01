@@ -26,52 +26,38 @@ export default function TestPage() {
       trackScript.async = true;
       document.head.appendChild(trackScript);
 
-      // Enhanced player initialization with error handling
-      let playerInitialized = false;
-      let playerCheckInterval;
-      let playerError = false;
+      // Configuration
+      const SECONDS_TO_DISPLAY = 2285; // 38 minutes
+      const alreadyDisplayedKey = `alreadyElsDisplayed${SECONDS_TO_DISPLAY}`;
+      const alreadyElsDisplayed = localStorage.getItem(alreadyDisplayedKey);
+      let attempts = 0;
 
-      const initPlayer = () => {
-        try {
-          if (window.player && !playerInitialized) {
-            playerInitialized = true;
-            
-            console.log('Player initialized successfully');
-            
-            // Listen for player state changes
-            window.player.on('timeupdate', (data) => {
-              console.log('Time update:', data.currentTime);
-              // Show CTA at 30 minutes (1800 seconds)
-              if (data.currentTime >= 1800 && !showCTA) {
-                console.log('Triggering CTA at 30 minutes');
-                setShowCTA(true);
-              }
-            });
-
-            // Debug player methods
-            window.player.getCurrentTime()
-              .then(time => {
-                console.log('Initial time:', time);
-              })
-              .catch(err => {
-                console.error('Error getting current time:', err);
-                playerError = true;
-              });
-
-            // Test CTA after 5 seconds
-            setTimeout(() => {
-              console.log('Forcing CTA for testing');
-              setShowCTA(true);
-            }, 5000);
-          }
-        } catch (err) {
-          console.error('Player initialization error:', err);
-          playerError = true;
-        }
+      // Function to show CTA
+      const showCTAHandler = () => {
+        setShowCTA(true);
+        localStorage.setItem(alreadyDisplayedKey, true);
       };
 
-      // Check for player every 500ms
-      playerCheckInterval = setInterval(initPlayer, 500);
+      // Check if CTA was already shown
+      if (alreadyElsDisplayed === 'true') {
+        setTimeout(showCTAHandler, 100);
+      } else {
+        const startWatchVideoProgress = () => {
+          if (typeof smartplayer === 'undefined' || !(smartplayer.instances && smartplayer.instances.length)) {
+            if (attempts >= 10) return;
+            attempts += 1;
+            return setTimeout(startWatchVideoProgress, 1000);
+          }
+
+          smartplayer.instances[0].on('timeupdate', () => {
+            if (showCTA || smartplayer.instances[0].smartAutoPlay) return;
+            if (smartplayer.instances[0].video.currentTime < SECONDS_TO_DISPLAY) return;
+            showCTAHandler();
+          });
+        };
+
+        startWatchVideoProgress();
+      }
 
       // Cleanup
       return () => {
