@@ -1,52 +1,13 @@
-import { useState, useEffect } from 'react';
 import Head from 'next/head';
-import Script from 'next/script';
 import dynamic from 'next/dynamic';
+import VideoPlayer from '../components/VideoPlayer';
 
 const ClientSideOnly = dynamic(
   () => Promise.resolve(({ children }) => <>{children}</>),
   { ssr: false }
 );
 
-const SECONDS_TO_DISPLAY = 2285; // 38 minutes and 5 seconds
-
 export default function TestPage() {
-  const [showCTA, setShowCTA] = useState(false);
-  const [playerReady, setPlayerReady] = useState(false);
-
-  useEffect(() => {
-    const alreadyDisplayedKey = `ctaDisplayed${SECONDS_TO_DISPLAY}`;
-    const alreadyDisplayed = localStorage.getItem(alreadyDisplayedKey);
-
-    if (alreadyDisplayed === 'true') {
-      setShowCTA(true);
-      return;
-    }
-
-    let attempts = 0;
-    const maxAttempts = 10;
-
-    const checkVideoPlayer = () => {
-      if (typeof smartplayer === 'undefined' || !(smartplayer.instances && smartplayer.instances.length)) {
-        if (attempts >= maxAttempts) return;
-        attempts++;
-        setTimeout(checkVideoPlayer, 1000);
-        return;
-      }
-
-      const player = smartplayer.instances[0];
-      setPlayerReady(true);
-
-      player.on('timeupdate', () => {
-        if (player.video.currentTime >= SECONDS_TO_DISPLAY && !showCTA) {
-          setShowCTA(true);
-          localStorage.setItem(alreadyDisplayedKey, 'true');
-        }
-      });
-    };
-
-    checkVideoPlayer();
-  }, [showCTA]);
 
   return (
     <>
@@ -163,37 +124,7 @@ export default function TestPage() {
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
 
         <div id="video-section">
-          <div className="video-container">
-            <div id="vid_677444f834e21f48aa3179b8">
-              <img 
-                id="thumb_677444f834e21f48aa3179b8" 
-                src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/thumbnail.jpg" 
-                alt="Video Thumbnail"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              />
-              <div id="backdrop_677444f834e21f48aa3179b8" className="backdrop"></div>
-              <div className="play-button">▶</div>
-            </div>
-            <script
-              dangerouslySetInnerHTML={{
-                __html: `
-                  var s=document.createElement("script");
-                  s.src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js";
-                  s.async=!0;
-                  document.head.appendChild(s);
-                `
-              }}
-            />
-          </div>
-          
-          <a 
-            href="https://lp.zobal.site/click" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className={`cta-button ${showCTA ? 'active' : ''}`}
-          >
-            VIEW PACKAGES
-          </a>
+          <VideoPlayer />
         </div>
 
       <style jsx>{`
