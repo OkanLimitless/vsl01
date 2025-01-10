@@ -1,32 +1,42 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
+
+const ClientSideOnly = dynamic(() => Promise.resolve(({ children }) => children), {
+  ssr: false,
+});
 
 export default function TestPage() {
   const [showCTA, setShowCTA] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Load video player script
-    const script = document.createElement('script');
-    script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
-    script.async = true;
-    document.head.appendChild(script);
+    setIsClient(true);
+    
+    if (typeof window !== 'undefined') {
+      // Load video player script
+      const script = document.createElement('script');
+      script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
+      script.async = true;
+      document.head.appendChild(script);
 
-    // Load tracking script
-    const trackScript = document.createElement('script');
-    trackScript.src = 'https://lp.zobal.site/track.js?rtkcmpid=6708023913744d9bc2e1cd15';
-    trackScript.async = true;
-    document.head.appendChild(trackScript);
+      // Load tracking script
+      const trackScript = document.createElement('script');
+      trackScript.src = 'https://lp.zobal.site/track.js?rtkcmpid=6708023913744d9bc2e1cd15';
+      trackScript.async = true;
+      document.head.appendChild(trackScript);
 
-    // CTA timer
-    const timer = setTimeout(() => {
-      setShowCTA(true);
-    }, 30000); // 30 seconds
+      // CTA timer
+      const timer = setTimeout(() => {
+        setShowCTA(true);
+      }, 30000); // 30 seconds
 
-    return () => {
-      clearTimeout(timer);
-      document.head.removeChild(script);
-      document.head.removeChild(trackScript);
-    };
+      return () => {
+        clearTimeout(timer);
+        document.head.removeChild(script);
+        document.head.removeChild(trackScript);
+      };
+    }
   }, []);
 
   return (
@@ -38,15 +48,17 @@ export default function TestPage() {
       <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
       <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
       
-      <div className="video-container">
-        <div id="vid_677444f834e21f48aa3179b8"></div>
-      </div>
-      
-      {showCTA && (
-        <a href="#" className="cta-button active">
-          VIEW PACKAGES
-        </a>
-      )}
+      <ClientSideOnly>
+        <div className="video-container">
+          <div id="vid_677444f834e21f48aa3179b8"></div>
+        </div>
+        
+        {isClient && showCTA && (
+          <a href="#" className="cta-button active">
+            VIEW PACKAGES
+          </a>
+        )}
+      </ClientSideOnly>
 
       <style jsx>{`
         :root {
