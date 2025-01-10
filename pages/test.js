@@ -38,7 +38,7 @@ export default function TestPage() {
           onLoad={handleIframeLoad}
         />
         
-        {isClient && showCTA && (
+        {typeof window !== 'undefined' && showCTA && (
           <a href="#" className="cta-button active">
             VIEW PACKAGES
           </a>
