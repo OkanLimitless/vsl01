@@ -5,11 +5,21 @@ export default function TestPage() {
   const [showCTA, setShowCTA] = useState(false);
 
   useEffect(() => {
+    // Load video player script
+    const script = document.createElement('script');
+    script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    // CTA timer
     const timer = setTimeout(() => {
       setShowCTA(true);
     }, 30000); // 30 seconds
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      document.head.removeChild(script);
+    };
   }, []);
 
   return (
@@ -21,14 +31,7 @@ export default function TestPage() {
       <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
       
       <div className="video-container">
-        <div id="vid_677444f834e21f48aa3179b8">
-          <script type="text/javascript" id="scr_677444f834e21f48aa3179b8">
-            var s=document.createElement("script");
-            s.src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js";
-            s.async=true;
-            document.head.appendChild(s);
-          </script>
-        </div>
+        <div id="vid_677444f834e21f48aa3179b8"></div>
       </div>
 
       <style jsx>{`
