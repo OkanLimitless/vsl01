@@ -77,6 +77,10 @@ export default function TestPage() {
           --transition-speed: 0.3s;
         }
 
+        * {
+          background-color: #000000;
+        }
+
         html, body, #__next {
           margin: 0;
           padding: 0;
@@ -98,6 +102,7 @@ export default function TestPage() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          background-color: transparent;
         }
 
         .title {
