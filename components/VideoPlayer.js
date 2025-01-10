@@ -67,6 +67,7 @@ const VideoPlayer = () => {
         target="_blank" 
         rel="noopener noreferrer"
         className={`cta-button ${showCTA ? 'active' : ''}`}
+        style={{ zIndex: 3 }}
       >
         VIEW PACKAGES
       </a>
