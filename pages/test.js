@@ -88,30 +88,8 @@ export default function TestPage() {
           overflow-x: hidden;
         }
 
-        body::before {
-          content: '';
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: radial-gradient(
-            circle at 50% 20%,
-            rgba(255, 0, 0, 0.15) 0%,
-            rgba(0, 0, 0, 1) 80%
-          );
-          z-index: 1;
-          pointer-events: none;
-          animation: background-pulse 15s infinite alternate;
-        }
-
-        @keyframes background-pulse {
-          0% {
-            background-size: 100% 100%;
-          }
-          100% {
-            background-size: 120% 120%;
-          }
+        body {
+          background-color: #000000;
         }
 
         .container {
@@ -130,7 +108,7 @@ export default function TestPage() {
         .title {
           font-family: var(--font-secondary);
           font-size: 3.3vw;
-          color: var(--text-color);
+          color: #ffffff;
           margin-bottom: var(--spacing-lg);
           text-transform: uppercase;
           padding: 2vh 1rem;
