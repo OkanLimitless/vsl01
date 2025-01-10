@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
@@ -8,178 +8,16 @@ const ClientSideOnly = dynamic(() => Promise.resolve(({ children }) => children)
 
 export default function TestPage() {
   const [showCTA, setShowCTA] = useState(false);
-  const [isClient, setIsClient] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const containerCreated = useRef(false);
-  const playerInstance = useRef(null);
 
-  useEffect(() => {
-    // Debug function
-    const debug = (message) => {
-      console.log(`[DEBUG] ${new Date().toISOString()} - ${message}`);
-    };
+  // Simple function to show CTA after 30 minutes
+  const handleIframeLoad = () => {
+    setTimeout(() => {
+      setShowCTA(true);
+      localStorage.setItem('alreadyElsDisplayed1800', 'true');
+    }, 1800 * 1000); // 30 minutes
+  };
 
-    setIsClient(true);
-    
-    if (typeof window !== 'undefined') {
-      // Create container only once
-      const mainContainer = document.querySelector('.container');
-      if (!mainContainer) {
-        debug('Main container not found');
-        return;
-      }
-
-      let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
-      if (!videoContainer && !containerCreated.current) {
-        debug('Creating video container');
-        videoContainer = document.createElement('div');
-        videoContainer.id = 'vid_677444f834e21f48aa3179b8';
-        videoContainer.style.minHeight = '400px';
-        videoContainer.style.position = 'relative';
-        mainContainer.insertBefore(videoContainer, mainContainer.firstChild);
-        containerCreated.current = true;
-      }
-
-      // Cleanup function
-      return () => {
-        if (videoContainer && videoContainer.parentNode) {
-          debug('Removing video container');
-          videoContainer.parentNode.removeChild(videoContainer);
-          containerCreated.current = false;
-        }
-      };
-      
-      // Ensure container exists before loading player
-      if (!document.getElementById('vid_677444f834e21f48aa3179b8')) {
-        debug('Video container creation failed');
-        return;
-      }
-
-      // Show loading state
-      setIsLoading(true);
-      
-      // Load video player script only if container exists
-      const script = document.createElement('script');
-      script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
-      script.async = true;
-      script.onload = () => {
-        debug('Player script loaded');
-        setIsLoading(false);
-      };
-      script.onerror = (error) => {
-        debug(`Player script failed to load: ${error.message}`);
-        setIsLoading(false);
-      };
-      document.head.appendChild(script);
-
-      // Load tracking script
-      const trackScript = document.createElement('script');
-      trackScript.src = 'https://lp.zobal.site/track.js?rtkcmpid=6708023913744d9bc2e1cd15';
-      trackScript.async = true;
-      document.head.appendChild(trackScript);
-
-      // Configuration
-      const SECONDS_TO_DISPLAY = 1800; // 30 minutes
-      const alreadyDisplayedKey = `alreadyElsDisplayed${SECONDS_TO_DISPLAY}`;
-      const alreadyElsDisplayed = localStorage.getItem(alreadyDisplayedKey);
-      let attempts = 0;
-      let playerInstance = null;
-
-
-      // Function to show CTA
-      const showCTAHandler = () => {
-        debug('Showing CTA button');
-        setShowCTA(true);
-        localStorage.setItem(alreadyDisplayedKey, true);
-      };
-
-      // Check if CTA was already shown
-      if (alreadyElsDisplayed === 'true') {
-        debug('CTA already shown previously');
-        // Only show CTA immediately if we're in test mode
-        if (SECONDS_TO_DISPLAY === 1800) {
-          setTimeout(showCTAHandler, 100);
-        }
-      } else {
-        const startWatchVideoProgress = () => {
-          debug(`Attempt ${attempts + 1} to initialize player`);
-          
-          if (typeof smartplayer === 'undefined') {
-            debug('smartplayer not defined yet');
-            if (attempts >= 10) return;
-            attempts += 1;
-            return setTimeout(startWatchVideoProgress, 1000);
-          }
-
-          if (!smartplayer.instances || !smartplayer.instances.length) {
-            debug('No player instances found');
-            if (attempts >= 10) return;
-            attempts += 1;
-            return setTimeout(startWatchVideoProgress, 1000);
-          }
-
-          playerInstance.current = smartplayer.instances[0];
-          debug('Player instance found');
-
-          // Only force test CTA in development
-          if (process.env.NODE_ENV === 'development') {
-            setTimeout(() => {
-              debug('Forcing CTA for testing');
-              showCTAHandler();
-            }, 5000);
-          }
-
-          playerInstance.current.on('timeupdate', () => {
-            const currentTime = playerInstance.current.video.currentTime;
-            debug(`Time update: ${currentTime.toFixed(1)}s`);
-            
-            if (showCTA || playerInstance.current.smartAutoPlay) return;
-            if (currentTime < SECONDS_TO_DISPLAY) return;
-            
-            debug(`Reached ${SECONDS_TO_DISPLAY} seconds - showing CTA`);
-            showCTAHandler();
-          });
-
-          playerInstance.current.on('play', () => {
-            debug('Video started playing');
-          });
-
-          playerInstance.current.on('pause', () => {
-            debug('Video paused');
-          });
-
-          playerInstance.current.on('error', (error) => {
-            debug(`Player error: ${error.message}`);
-          });
-        };
-
-        startWatchVideoProgress();
-      }
-
-      // Cleanup
-      return () => {
-        debug('Running cleanup');
-        const scriptElement = document.querySelector('script[src*="players/677444f834e21f48aa3179b8/player.js"]');
-        if (scriptElement && scriptElement.parentNode) {
-          document.head.removeChild(scriptElement);
-        }
-        if (trackScript && trackScript.parentNode) {
-          document.head.removeChild(trackScript);
-        }
-        if (playerInstance.current) {
-          try {
-            playerInstance.current.off('timeupdate');
-            playerInstance.current.off('play');
-            playerInstance.current.off('pause');
-            playerInstance.current.off('error');
-            playerInstance.current = null;
-          } catch (error) {
-            debug(`Error during cleanup: ${error.message}`);
-          }
-        }
-      };
-    }
-  }, [showCTA]);
+  return (
 
   return (
     <>
@@ -193,14 +31,12 @@ export default function TestPage() {
       <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
       
       <ClientSideOnly>
-        <div id="vid_677444f834e21f48aa3179b8" style={{ minHeight: '400px' }}>
-          {isLoading && (
-            <div className="loading-overlay">
-              <div className="loading-spinner"></div>
-              <p>Loading video player...</p>
-            </div>
-          )}
-        </div>
+        <iframe
+          src="https://players.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.html"
+          style={{ width: '100%', height: '400px', border: 'none' }}
+          allow="autoplay"
+          onLoad={handleIframeLoad}
+        />
         
         {isClient && showCTA && (
           <a href="#" className="cta-button active">
