@@ -145,7 +145,7 @@ export default function TestPage() {
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
 
         <div id="video-section">
-          <div id="video-container" style={{ width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+          <div className="video-container">
             <div id="vid_677444f834e21f48aa3179b8">
               <img 
                 id="thumb_677444f834e21f48aa3179b8" 
@@ -230,8 +230,8 @@ export default function TestPage() {
           width: 100%;
           max-width: 1200px;
           margin: var(--spacing-md) auto 0;
-          aspect-ratio: 16/9;
-          height: auto;
+          height: 0;
+          padding-bottom: 56.25%; /* 16:9 aspect ratio */
         }
 
         #vid_677444f834e21f48aa3179b8 {
@@ -243,6 +243,9 @@ export default function TestPage() {
         }
 
         #vid_677444f834e21f48aa3179b8 img {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
