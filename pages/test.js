@@ -33,13 +33,25 @@ export default function TestPage() {
           
           // Listen for player state changes
           window.player.on('timeupdate', (data) => {
-            // Show CTA at 30 seconds (or adjust this time as needed)
-            if (data.currentTime >= 30 && !showCTA) {
+            // Show CTA at 30 minutes (1800 seconds)
+            if (data.currentTime >= 1800 && !showCTA) {
               setShowCTA(true);
             }
           });
+
+          // Debugging: Force show CTA after 5 seconds for testing
+          // setTimeout(() => setShowCTA(true), 5000);
         }
       }, 500);
+
+      // Debugging: Log player state
+      const debugInterval = setInterval(() => {
+        if (window.player) {
+          window.player.getCurrentTime().then(time => {
+            console.log('Current video time:', time);
+          });
+        }
+      }, 1000);
 
       return () => {
         clearInterval(checkPlayer);
