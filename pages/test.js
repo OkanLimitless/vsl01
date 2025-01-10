@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 
@@ -10,6 +10,7 @@ export default function TestPage() {
   const [showCTA, setShowCTA] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const containerCreated = useRef(false);
 
   useEffect(() => {
     // Debug function
@@ -20,22 +21,26 @@ export default function TestPage() {
     setIsClient(true);
     
     if (typeof window !== 'undefined') {
-      // Ensure main container exists
-      const mainContainer = document.querySelector('.container');
-      if (!mainContainer) {
-        debug('Main container not found');
-        return;
-      }
+      // Only create container once
+      if (!containerCreated.current) {
+        // Ensure main container exists
+        const mainContainer = document.querySelector('.container');
+        if (!mainContainer) {
+          debug('Main container not found');
+          return;
+        }
 
-      // Get existing video container or create if it doesn't exist
-      let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
-      if (!videoContainer) {
-        debug('Creating video container');
-        videoContainer = document.createElement('div');
-        videoContainer.id = 'vid_677444f834e21f48aa3179b8';
-        videoContainer.style.minHeight = '400px';
-        videoContainer.style.position = 'relative';
-        mainContainer.insertBefore(videoContainer, mainContainer.firstChild);
+        // Get existing video container or create if it doesn't exist
+        let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
+        if (!videoContainer) {
+          debug('Creating video container');
+          videoContainer = document.createElement('div');
+          videoContainer.id = 'vid_677444f834e21f48aa3179b8';
+          videoContainer.style.minHeight = '400px';
+          videoContainer.style.position = 'relative';
+          mainContainer.insertBefore(videoContainer, mainContainer.firstChild);
+          containerCreated.current = true;
+        }
       }
       
       // Ensure container exists before loading player
