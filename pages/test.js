@@ -19,20 +19,28 @@ export default function TestPage() {
     setIsClient(true);
     
     if (typeof window !== 'undefined') {
-      // Create video container if it doesn't exist
+      // Create video container structure if it doesn't exist
+      let containerParent = document.querySelector('.video-container');
+      if (!containerParent) {
+        debug('Creating video container parent');
+        containerParent = document.createElement('div');
+        containerParent.className = 'video-container';
+        const mainContainer = document.querySelector('.container');
+        if (mainContainer) {
+          mainContainer.insertBefore(containerParent, mainContainer.querySelector('.cta-button') || mainContainer.querySelector('.site-footer'));
+        } else {
+          debug('Main container not found');
+          return;
+        }
+      }
+
       let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
       if (!videoContainer) {
         debug('Creating video container');
         videoContainer = document.createElement('div');
         videoContainer.id = 'vid_677444f834e21f48aa3179b8';
         videoContainer.style.minHeight = '400px';
-        const containerParent = document.querySelector('.video-container');
-        if (containerParent) {
-          containerParent.appendChild(videoContainer);
-        } else {
-          debug('Video container parent not found');
-          return;
-        }
+        containerParent.appendChild(videoContainer);
       }
 
       // Load video player script
