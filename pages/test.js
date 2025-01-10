@@ -18,8 +18,6 @@ export default function TestPage() {
   };
 
   return (
-
-  return (
     <>
       <Head>
         <title>Erection Button</title>
