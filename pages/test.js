@@ -1,61 +1,108 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import Script from 'next/script';
 
-const ClientSideOnly = ({ children }) => {
-  if (typeof window !== 'undefined') {
-    return children;
-  }
-  return null;
-};
+const SECONDS_TO_DISPLAY = 2285; // 38 minutes and 5 seconds
 
 export default function TestPage() {
   const [showCTA, setShowCTA] = useState(false);
-  const [iframeError, setIframeError] = useState(false);
+  const [playerReady, setPlayerReady] = useState(false);
 
-  // Simple function to show CTA after 30 minutes
-  const handleIframeLoad = () => {
-    setTimeout(() => {
+  useEffect(() => {
+    const alreadyDisplayedKey = `ctaDisplayed${SECONDS_TO_DISPLAY}`;
+    const alreadyDisplayed = localStorage.getItem(alreadyDisplayedKey);
+
+    if (alreadyDisplayed === 'true') {
       setShowCTA(true);
-      localStorage.setItem('alreadyElsDisplayed1800', 'true');
-    }, 1800 * 1000); // 30 minutes
-  };
+      return;
+    }
 
-  const handleIframeError = () => {
-    setIframeError(true);
-  };
+    let attempts = 0;
+    const maxAttempts = 10;
+
+    const checkVideoPlayer = () => {
+      if (typeof smartplayer === 'undefined' || !(smartplayer.instances && smartplayer.instances.length)) {
+        if (attempts >= maxAttempts) return;
+        attempts++;
+        setTimeout(checkVideoPlayer, 1000);
+        return;
+      }
+
+      const player = smartplayer.instances[0];
+      setPlayerReady(true);
+
+      player.on('timeupdate', () => {
+        if (player.video.currentTime >= SECONDS_TO_DISPLAY && !showCTA) {
+          setShowCTA(true);
+          localStorage.setItem(alreadyDisplayedKey, 'true');
+        }
+      });
+    };
+
+    checkVideoPlayer();
+  }, [showCTA]);
 
   return (
     <>
       <Head>
         <title>Erection Button</title>
         <link rel="icon" href="/favicon.ico" />
+        <style>{`
+          .esconder { display: none; }
+          .cta-button {
+            background: #00dd00;
+            border-radius: 4px;
+            color: #ffffff;
+            padding: 16px 32px;
+            font-weight: 600;
+            width: fit-content;
+            text-align: center;
+            margin: 2vh auto;
+            font-size: 1.49vw;
+            box-sizing: border-box;
+            max-width: 100%;
+            transition: all 0.5s ease-in-out;
+            cursor: pointer;
+          }
+          .cta-button:hover { filter: brightness(1.2); }
+          @media (max-width: 1200px) {
+            .cta-button { font-size: 1.69vw; padding: 8px 16px; }
+          }
+          @media (max-width: 640px) {
+            .cta-button { font-size: 3.94vw; padding: 12px 24px; }
+          }
+        `}</style>
       </Head>
+      
+      <Script
+        src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js"
+        strategy="afterInteractive"
+      />
+
       <div className="container">
-      
-      <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
-      <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
-      
-      <ClientSideOnly>
-        {iframeError ? (
-          <div className="error-message">
-            Video player failed to load. Please try again later.
+        <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
+        <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
+
+        <div id="video-section">
+          <div id="video-player-container">
+            <img 
+              id="video-thumbnail" 
+              src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/thumbnail.jpg" 
+              alt="Video Thumbnail"
+              style={{ width: '100%', maxWidth: '800px', display: playerReady ? 'none' : 'block' }}
+            />
+            <div id="video-backdrop"></div>
           </div>
-        ) : (
-          <iframe
-            src="https://players.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.html"
-            style={{ width: '100%', height: '400px', border: 'none' }}
-            allow="autoplay"
-            onLoad={handleIframeLoad}
-            onError={handleIframeError}
-          />
-        )}
-        
-        {typeof window !== 'undefined' && showCTA && (
-          <a href="#" className="cta-button active">
+          
+          <a 
+            href="https://lp.zobal.site/click" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={`cta-button ${showCTA ? '' : 'esconder'}`}
+          >
             VIEW PACKAGES
           </a>
-        )}
-      </ClientSideOnly>
+        </div>
 
       <style jsx>{`
         :root {
