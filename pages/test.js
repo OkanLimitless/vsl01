@@ -225,31 +225,6 @@ export default function TestPage() {
           padding: 0 4px;
         }
 
-        .video-container {
-          position: relative;
-          width: 100%;
-          max-width: 1200px;
-          margin: var(--spacing-md) auto 0;
-          height: 0;
-          padding-bottom: 56.25%; /* 16:9 aspect ratio */
-        }
-
-        #vid_677444f834e21f48aa3179b8 {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
-
-        #vid_677444f834e21f48aa3179b8 img {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
 
 
         .error-message {
