@@ -47,11 +47,21 @@ function MyApp({ Component, pageProps }) {
       <Script id="smartplayer-init" strategy="afterInteractive">
       {`
         document.addEventListener("DOMContentLoaded", function() {
+          console.log('DOMContentLoaded - Initializing player');
+          
           const playerContainer = document.getElementById('smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc');
           if (!playerContainer) {
             console.error('Player container not found');
             return;
           }
+          console.log('Player container found:', playerContainer);
+
+          // Ensure container has dimensions
+          playerContainer.style.width = '100%';
+          playerContainer.style.height = '100%';
+          playerContainer.style.position = 'absolute';
+          playerContainer.style.top = '0';
+          playerContainer.style.left = '0';
 
           // Load player script
           const script = document.createElement('script');
@@ -59,29 +69,51 @@ function MyApp({ Component, pageProps }) {
           script.async = true;
           
           script.onload = function() {
+            console.log('Player script loaded');
             try {
               const thumbnail = document.getElementById('thumb_player');
               if (thumbnail) {
                 thumbnail.style.display = 'none';
               }
               
-              // Wait for smartplayer to be defined
-              const checkPlayer = setInterval(() => {
+              // Initialize player with retry logic
+              let attempts = 0;
+              const maxAttempts = 10;
+              
+              const initPlayer = setInterval(() => {
                 if (typeof smartplayer !== 'undefined') {
-                  clearInterval(checkPlayer);
+                  clearInterval(initPlayer);
+                  console.log('Smartplayer library loaded, initializing...');
                   try {
-                    new smartplayer({
+                    const player = new smartplayer({
                       container: 'smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc',
                       url: 'https://videos.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/playlist.m3u8',
                       poster: 'https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/thumbnail.jpg',
                       autoplay: true,
-                      controls: true
+                      controls: true,
+                      width: '100%',
+                      height: '100%'
                     });
+                    
+                    player.on('ready', () => {
+                      console.log('Player is ready');
+                      playerContainer.style.backgroundColor = 'transparent';
+                    });
+                    
+                    player.on('error', (error) => {
+                      console.error('Player error:', error);
+                    });
+                    
                   } catch (e) {
                     console.error('Smartplayer initialization error:', e);
                   }
+                } else if (attempts >= maxAttempts) {
+                  clearInterval(initPlayer);
+                  console.error('Smartplayer library not loaded after max attempts');
+                } else {
+                  attempts++;
                 }
-              }, 100);
+              }, 500);
             } catch (e) {
               console.error('Player script load error:', e);
             }
