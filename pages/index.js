@@ -31,6 +31,25 @@ export default function Home() {
         <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
 
+        {/* Video Section */}
+        <div id="video-section" className="video-section">
+          <div className="video-container">
+            <div id="vid_player" className="video-player">
+              <img
+                id="thumb_player"
+                src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/thumbnail.jpg"
+                alt="Video Thumbnail"
+                className="video-thumbnail"
+              />
+              <div className="backdrop"></div>
+            </div>
+          </div>
+          
+          <a href="https://lp.zobal.site/click" target="_blank" rel="noopener noreferrer" className="cta-button esconder">
+            VIEW PACKAGES
+          </a>
+        </div>
+
         <ClientSideOnly>
           <footer className="site-footer">
             <div className="footer-content">
@@ -89,6 +108,89 @@ export default function Home() {
           margin: 1rem 0;
           font-size: 0.9rem;
           opacity: 0.8;
+        }
+
+        /* Video Container Styles */
+        .video-container {
+          position: relative;
+          width: 100%;
+          max-width: 800px;
+          margin: 2rem auto;
+          padding-top: 56.25%;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Video Player Elements */
+        .video-player {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+
+        .video-thumbnail {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+        }
+
+        .backdrop {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          backdrop-filter: blur(5px);
+          z-index: 1;
+        }
+
+        /* CTA Button Styles */
+        .cta-button {
+          opacity: 0;
+          visibility: hidden;
+          position: absolute;
+          bottom: 2rem;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #00dd00;
+          color: white;
+          padding: 1rem 2rem;
+          border-radius: 12px;
+          text-decoration: none;
+          font-family: var(--font-tertiary);
+          font-weight: bold;
+          transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+          z-index: 3;
+        }
+
+        .cta-button.active {
+          opacity: 1;
+          visibility: visible;
+          animation: button-pulse 2s infinite ease-in-out;
+        }
+
+        .cta-button:hover {
+          background: #ff0000;
+          transform: translateX(-50%) scale(1.05);
+        }
+
+        @keyframes button-pulse {
+          0% {
+            transform: translateX(-50%) scale(1);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
+          }
+          50% {
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 8px 30px rgba(255, 0, 0, 0.8);
+          }
+          100% {
+            transform: translateX(-50%) scale(1);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
+          }
         }
 
         .site-footer {

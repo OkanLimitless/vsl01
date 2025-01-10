@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import { Component } from 'react'
+import Script from 'next/script'
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -41,6 +42,49 @@ function MyApp({ Component, pageProps }) {
     <ErrorBoundary>
       <Component {...pageProps} />
     </ErrorBoundary>
+    <Script src="https://cdn.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" strategy="afterInteractive" />
+    <Script src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/player.js" strategy="afterInteractive" />
+    <Script id="video-cta-logic" strategy="afterInteractive">
+      {`
+        document.addEventListener("DOMContentLoaded", function () {
+          const SECONDS_TO_DISPLAY = 30;
+          const ctaButton = document.querySelector(".cta-button");
+          const alreadyDisplayed = localStorage.getItem(\`ctaDisplayed\${SECONDS_TO_DISPLAY}\`);
+          let attempts = 0;
+          const maxAttempts = 10;
+
+          function showCTA() {
+            if (ctaButton) {
+              ctaButton.classList.add('active');
+              localStorage.setItem(\`ctaDisplayed\${SECONDS_TO_DISPLAY}\`, 'true');
+            }
+          }
+
+          function watchVideoProgress() {
+            if (typeof smartplayer === 'undefined' || !smartplayer.instances.length) {
+              if (attempts >= maxAttempts) return;
+              attempts++;
+              setTimeout(watchVideoProgress, 1000);
+              return;
+            }
+
+            const player = smartplayer.instances[0];
+            player.on('timeupdate', function () {
+              if (ctaButton.classList.contains('active') || player.smartAutoPlay) return;
+              if (player.video.currentTime >= SECONDS_TO_DISPLAY) {
+                showCTA();
+              }
+            });
+          }
+
+          if (alreadyDisplayed === 'true') {
+            showCTA();
+          } else {
+            watchVideoProgress();
+          }
+        });
+      `}
+    </Script>
   )
 }
 
