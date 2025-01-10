@@ -35,13 +35,7 @@ export default function TestPage() {
       }
 
       const player = smartplayer.instances[0];
-      
-      // Move the player to our container
-      const playerContainer = document.getElementById('video-player');
-      if (playerContainer) {
-        playerContainer.appendChild(player.video);
-        setPlayerReady(true);
-      }
+      setPlayerReady(true);
 
       player.on('timeupdate', () => {
         if (player.video.currentTime >= SECONDS_TO_DISPLAY && !showCTA) {
@@ -96,15 +90,7 @@ export default function TestPage() {
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
 
         <div id="video-section">
-          <div id="video-player-container" style={{ width: '100%', maxWidth: '800px', margin: '0 auto' }}>
-            <div id="video-player" style={{ display: playerReady ? 'block' : 'none' }}></div>
-            <img 
-              id="video-thumbnail" 
-              src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/thumbnail.jpg" 
-              alt="Video Thumbnail"
-              style={{ width: '100%', display: playerReady ? 'none' : 'block' }}
-            />
-          </div>
+          <div id="video-player"></div>
           
           <a 
             href="https://lp.zobal.site/click" 
