@@ -1,13 +1,15 @@
 {
-  "build": {
-    "env": {
-      "NEXT_PUBLIC_VERCEL_ENV": "production"
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/next"
     }
-  },
+  ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/pages/$1"
+      "dest": "/$1"
     }
   ]
 }
