@@ -169,11 +169,12 @@ export default function TestPage() {
   }, [showCTA]);
 
   return (
-    <div className="container">
+    <>
       <Head>
         <title>Erection Button</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <div className="container">
       
       <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
       <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
@@ -477,6 +478,7 @@ export default function TestPage() {
           </div>
         </footer>
       </ClientSideOnly>
-    </div>
+      </div>
+    </>
   );
 }
