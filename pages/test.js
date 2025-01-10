@@ -105,12 +105,17 @@ export default function TestPage() {
 
       // Cleanup
       return () => {
-        clearInterval(playerCheckInterval);
         if (script && script.parentNode) {
           document.head.removeChild(script);
         }
         if (trackScript && trackScript.parentNode) {
           document.head.removeChild(trackScript);
+        }
+        if (playerInstance) {
+          playerInstance.off('timeupdate');
+          playerInstance.off('play');
+          playerInstance.off('pause');
+          playerInstance.off('error');
         }
       };
     }
