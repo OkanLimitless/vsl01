@@ -9,6 +9,7 @@ const ClientSideOnly = dynamic(() => Promise.resolve(({ children }) => children)
 export default function TestPage() {
   const [showCTA, setShowCTA] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Debug function
@@ -43,12 +44,21 @@ export default function TestPage() {
         containerParent.appendChild(videoContainer);
       }
 
+      // Show loading state
+      setIsLoading(true);
+      
       // Load video player script
       const script = document.createElement('script');
       script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
       script.async = true;
-      script.onload = () => debug('Player script loaded');
-      script.onerror = (error) => debug(`Player script failed to load: ${error.message}`);
+      script.onload = () => {
+        debug('Player script loaded');
+        setIsLoading(false);
+      };
+      script.onerror = (error) => {
+        debug(`Player script failed to load: ${error.message}`);
+        setIsLoading(false);
+      };
       document.head.appendChild(script);
 
       // Load tracking script
@@ -165,6 +175,12 @@ export default function TestPage() {
       
       <ClientSideOnly>
         <div className="video-container">
+          {isLoading ? (
+            <div className="loading-overlay">
+              <div className="loading-spinner"></div>
+              <p>Loading video player...</p>
+            </div>
+          ) : null}
           <div id="vid_677444f834e21f48aa3179b8" style={{ minHeight: '400px' }}></div>
         </div>
         
@@ -340,6 +356,40 @@ export default function TestPage() {
             font-size: 0.8rem;
             padding: 0.5rem 1rem;
           }
+        }
+
+        .loading-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.8);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 10;
+        }
+
+        .loading-spinner {
+          border: 4px solid rgba(255, 255, 255, 0.3);
+          border-top: 4px solid #ff0000;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+
+        .loading-overlay p {
+          margin-top: 1rem;
+          color: white;
+          font-size: 0.9rem;
         }
 
         .site-footer {
