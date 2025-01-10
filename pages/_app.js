@@ -47,12 +47,26 @@ function MyApp({ Component, pageProps }) {
       <Script id="smartplayer-init" strategy="afterInteractive">
       {`
         document.addEventListener("DOMContentLoaded", function() {
-          // Ensure video container exists
           const videoContainer = document.getElementById('vid_player');
           if (videoContainer) {
+            // Initialize Smartplayer
+            const playerDiv = document.createElement('div');
+            playerDiv.id = 'smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc';
+            videoContainer.appendChild(playerDiv);
+            
+            // Load player script
             const script = document.createElement('script');
             script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/player.js';
+            script.async = true;
             document.body.appendChild(script);
+            
+            // Show video when ready
+            script.onload = function() {
+              const thumbnail = document.getElementById('thumb_player');
+              if (thumbnail) {
+                thumbnail.style.display = 'none';
+              }
+            };
           }
         });
       `}

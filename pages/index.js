@@ -35,11 +35,13 @@ export default function Home() {
         <div id="video-section" className="video-section">
           <div className="video-container">
             <div id="vid_player" className="video-player">
+              <div id="smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc"></div>
               <img
                 id="thumb_player"
                 src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/thumbnail.jpg"
                 alt="Video Thumbnail"
                 className="video-thumbnail"
+                style={{ display: 'none' }} // Hide thumbnail initially
               />
               <div className="backdrop"></div>
             </div>
