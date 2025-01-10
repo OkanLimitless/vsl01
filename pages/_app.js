@@ -87,7 +87,6 @@ function MyApp({ Component, pageProps }) {
       `}
       </Script>
     </>
-    </Script>
   )
 }
 
