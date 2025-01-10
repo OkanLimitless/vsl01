@@ -22,25 +22,20 @@ export default function TestPage() {
       
       <div className="video-container">
         <div id="vid_677444f834e21f48aa3179b8">
-          <div id="vid_677444f834e21f48aa3179b8">
-            <img 
-              id="thumb_677444f834e21f48aa3179b8" 
-              src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/thumbnail.jpg" 
-              alt="Video Thumbnail" 
-            />
-            <div id="backdrop_677444f834e21f48aa3179b8" className="backdrop"></div>
-            <div 
-              className="play-button"
-              onClick={() => {
-                const script = document.createElement('script');
-                script.src = "https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js";
-                script.async = true;
-                document.head.appendChild(script);
-              }}
-            >
-              ▶
-            </div>
-          </div>
+          <iframe
+            id="player_677444f834e21f48aa3179b8"
+            src="https://players.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.html"
+            allow="autoplay; fullscreen"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              border: 'none'
+            }}
+          ></iframe>
+        </div>
           <a 
             href="https://www.google.com" 
             target="_blank" 
