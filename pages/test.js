@@ -90,6 +90,9 @@ export default function TestPage() {
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
 
         <div id="video-section">
+          <div id="video-container" style={{ width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+            <div id="video-player"></div>
+          </div>
           
           <a 
             href="https://lp.zobal.site/click" 
