@@ -56,6 +56,13 @@ function MyApp({ Component, pageProps }) {
           }
           console.log('vTurb player container found:', playerContainer);
           
+          // Ensure container has proper dimensions
+          playerContainer.style.width = '100%';
+          playerContainer.style.height = '100%';
+          playerContainer.style.position = 'absolute';
+          playerContainer.style.top = '0';
+          playerContainer.style.left = '0';
+          
           // Add loading overlay
           const loadingOverlay = document.createElement('div');
           loadingOverlay.className = 'loading-overlay';
@@ -94,6 +101,10 @@ function MyApp({ Component, pageProps }) {
                   clearInterval(initPlayer);
                   console.log('vTurb library loaded, initializing...');
                   try {
+                    // Ensure container is visible and has dimensions
+                    playerContainer.style.display = 'block';
+                    playerContainer.style.visibility = 'visible';
+                    
                     const player = new smartplayer({
                       container: 'smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc',
                       url: 'https://videos.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/playlist.m3u8',
@@ -137,6 +148,14 @@ function MyApp({ Component, pageProps }) {
                     
                     player.on('error', (error) => {
                       console.error('vTurb player error:', error);
+                      // Show error message to user
+                      const errorMsg = document.createElement('div');
+                      errorMsg.className = 'player-error';
+                      errorMsg.innerHTML = `
+                        <p>Failed to load video. Please try refreshing the page.</p>
+                        <p>Error: ${error.message}</p>
+                      `;
+                      playerContainer.appendChild(errorMsg);
                     });
                     
                   } catch (e) {

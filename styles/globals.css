@@ -80,6 +80,23 @@ html, body, #__next {
   font-size: 0.9rem;
 }
 
+.player-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  background: rgba(255, 0, 0, 0.8);
+  padding: 1rem;
+  border-radius: 4px;
+  text-align: center;
+  z-index: 100;
+}
+
+.player-error p {
+  margin: 0.5rem 0;
+}
+
 .video-player {
   position: relative;
   width: 100%;
