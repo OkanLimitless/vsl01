@@ -67,6 +67,21 @@ export default function TestPage() {
           }
 
 
+          .video-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: #000;
+          }
+
+          #vid_677444f834e21f48aa3179b8 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          }
+
           .backdrop {
             position: absolute;
             top: 0;
@@ -74,6 +89,7 @@ export default function TestPage() {
             width: 100%;
             height: 100%;
             backdrop-filter: blur(5px);
+            z-index: 1;
           }
 
           .play-button {
@@ -93,6 +109,7 @@ export default function TestPage() {
             justify-content: center;
             transition: all 0.3s ease;
             opacity: 0.9;
+            z-index: 2;
           }
 
           .play-button:hover {
@@ -101,7 +118,8 @@ export default function TestPage() {
           }
 
           .cta-button {
-            display: none;
+            opacity: 0;
+            visibility: hidden;
             position: absolute;
             bottom: var(--spacing-md);
             left: 50%;
@@ -113,13 +131,13 @@ export default function TestPage() {
             text-decoration: none;
             font-family: var(--font-tertiary);
             font-weight: bold;
-            transition: all 0.3s ease;
-            opacity: 0;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
           }
 
           .cta-button.active {
-            display: block;
             opacity: 1;
+            visibility: visible;
+            animation: button-pulse 2s infinite ease-in-out;
           }
 
           .cta-button:hover {
@@ -151,6 +169,7 @@ export default function TestPage() {
                 id="thumb_677444f834e21f48aa3179b8" 
                 src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/thumbnail.jpg" 
                 alt="Video Thumbnail"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
               <div id="backdrop_677444f834e21f48aa3179b8" className="backdrop"></div>
               <div className="play-button">▶</div>
