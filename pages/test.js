@@ -35,14 +35,18 @@ export default function TestPage() {
         }
       }
 
+      // Clean up any existing video container
       let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
-      if (!videoContainer) {
-        debug('Creating video container');
-        videoContainer = document.createElement('div');
-        videoContainer.id = 'vid_677444f834e21f48aa3179b8';
-        videoContainer.style.minHeight = '400px';
-        containerParent.appendChild(videoContainer);
+      if (videoContainer) {
+        debug('Removing existing video container');
+        videoContainer.remove();
       }
+      
+      debug('Creating new video container');
+      videoContainer = document.createElement('div');
+      videoContainer.id = 'vid_677444f834e21f48aa3179b8';
+      videoContainer.style.minHeight = '400px';
+      containerParent.appendChild(videoContainer);
 
       // Show loading state
       setIsLoading(true);
@@ -154,10 +158,19 @@ export default function TestPage() {
           document.head.removeChild(trackScript);
         }
         if (playerInstance) {
-          playerInstance.off('timeupdate');
-          playerInstance.off('play');
-          playerInstance.off('pause');
-          playerInstance.off('error');
+          try {
+            playerInstance.off('timeupdate');
+            playerInstance.off('play');
+            playerInstance.off('pause');
+            playerInstance.off('error');
+          } catch (error) {
+            debug(`Error during cleanup: ${error.message}`);
+          }
+        }
+        // Clean up video container
+        const videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
+        if (videoContainer && videoContainer.parentNode) {
+          videoContainer.remove();
         }
       };
     }
