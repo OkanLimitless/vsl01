@@ -14,10 +14,19 @@ export default function TestPage() {
     setIsClient(true);
     
     if (typeof window !== 'undefined') {
+      // Ensure video container exists
+      const videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
+      if (!videoContainer) {
+        debug('Video container not found');
+        return;
+      }
+
       // Load video player script
       const script = document.createElement('script');
       script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
       script.async = true;
+      script.onload = () => debug('Player script loaded');
+      script.onerror = (error) => debug(`Player script failed to load: ${error.message}`);
       document.head.appendChild(script);
 
       // Load tracking script
@@ -133,7 +142,7 @@ export default function TestPage() {
       
       <ClientSideOnly>
         <div className="video-container">
-          <div id="vid_677444f834e21f48aa3179b8"></div>
+          <div id="vid_677444f834e21f48aa3179b8" style="min-height: 400px"></div>
         </div>
         
         {isClient && showCTA && (
