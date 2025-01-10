@@ -108,8 +108,9 @@ export default function TestPage() {
           position: relative;
           width: 100%;
           max-width: 800px;
-          margin: var(--spacing-md) auto;
-          padding: 56.25% 0 0 0;
+          margin: var(--spacing-md) auto 0;
+          height: 0;
+          padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio */
           border-radius: var(--border-radius);
           overflow: hidden;
           box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
