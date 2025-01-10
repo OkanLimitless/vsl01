@@ -123,9 +123,7 @@ export default function TestPage() {
         <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
 
-        <div id="video-section">
-          <VideoPlayer />
-        </div>
+        <VideoPlayer />
 
       <style jsx>{`
         :root {

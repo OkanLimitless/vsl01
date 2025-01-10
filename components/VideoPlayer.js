@@ -48,7 +48,7 @@ const VideoPlayer = () => {
   }, [showCTA]);
 
   return (
-    <div id="video-section">
+    <div className="video-section">
       <div className="video-container">
         <div id="vid_677444f834e21f48aa3179b8">
           <img 
