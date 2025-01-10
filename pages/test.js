@@ -21,13 +21,13 @@ export default function TestPage() {
       <h1 className="title">PRESS THIS "ERECTION BUTTON" TO START ACTING LIKE A PORN ACTOR</h1>
       
       <div className="video-container">
-        <img 
-          src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/thumbnail.jpg" 
-          alt="Video Thumbnail" 
-          className="video-thumbnail"
-        />
-        <div className="backdrop"></div>
-        <div className="play-button">▶</div>
+        <iframe
+          src="https://player.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/677444f834e21f48aa3179b8/player.html"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          className="video-iframe"
+        ></iframe>
         
         {showCTA && (
           <a 
@@ -82,46 +82,13 @@ export default function TestPage() {
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .video-thumbnail {
+        .video-iframe {
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 100%;
-          object-fit: cover;
-        }
-
-        .backdrop {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          backdrop-filter: blur(5px);
-        }
-
-        .play-button {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-size: clamp(1.5rem, 5vw, 2rem);
-          color: white;
-          cursor: pointer;
-          background: var(--primary-color);
-          width: clamp(60px, 15vw, 80px);
-          height: clamp(60px, 15vw, 80px);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          transition: all 0.3s ease;
-          opacity: 0.9;
-        }
-
-        .play-button:hover {
-          transform: translate(-50%, -50%) scale(1.1);
-          opacity: 1;
+          border: none;
         }
 
         .cta-button {
