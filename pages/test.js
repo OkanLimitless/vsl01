@@ -112,8 +112,9 @@ export default function TestPage() {
 
         .video-container {
           position: relative;
-          width: 100%;
+          width: 90vw;
           max-width: 800px;
+          min-width: 300px;
           margin: var(--spacing-md) auto 0;
           height: 0;
           padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio */
@@ -185,6 +186,7 @@ export default function TestPage() {
           }
 
           .video-container {
+            width: 95vw;
             margin: var(--spacing-sm) auto;
           }
 
