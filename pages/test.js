@@ -10,6 +10,7 @@ const ClientSideOnly = ({ children }) => {
 
 export default function TestPage() {
   const [showCTA, setShowCTA] = useState(false);
+  const [iframeError, setIframeError] = useState(false);
 
   // Simple function to show CTA after 30 minutes
   const handleIframeLoad = () => {
@@ -17,6 +18,10 @@ export default function TestPage() {
       setShowCTA(true);
       localStorage.setItem('alreadyElsDisplayed1800', 'true');
     }, 1800 * 1000); // 30 minutes
+  };
+
+  const handleIframeError = () => {
+    setIframeError(true);
   };
 
   return (
@@ -31,12 +36,19 @@ export default function TestPage() {
       <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
       
       <ClientSideOnly>
-        <iframe
-          src="https://players.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.html"
-          style={{ width: '100%', height: '400px', border: 'none' }}
-          allow="autoplay"
-          onLoad={handleIframeLoad}
-        />
+        {iframeError ? (
+          <div className="error-message">
+            Video player failed to load. Please try again later.
+          </div>
+        ) : (
+          <iframe
+            src="https://players.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.html"
+            style={{ width: '100%', height: '400px', border: 'none' }}
+            allow="autoplay"
+            onLoad={handleIframeLoad}
+            onError={handleIframeError}
+          />
+        )}
         
         {typeof window !== 'undefined' && showCTA && (
           <a href="#" className="cta-button active">
@@ -100,6 +112,13 @@ export default function TestPage() {
           margin: var(--spacing-md) auto 0;
         }
 
+
+        .error-message {
+          color: #ff0000;
+          padding: 2rem;
+          text-align: center;
+          font-size: 1.2rem;
+        }
 
         .cta-button {
           display: none;
