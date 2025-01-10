@@ -29,6 +29,7 @@ export default function TestPage() {
       </Head>
       
       <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
+      <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
       
       <div className="video-container">
         <div id="vid_677444f834e21f48aa3179b8"></div>
@@ -36,7 +37,7 @@ export default function TestPage() {
       
       {showCTA && (
         <a href="#" className="cta-button active">
-          Click Here to Continue
+          VIEW PACKAGES
         </a>
       )}
 
@@ -137,6 +138,14 @@ export default function TestPage() {
           border: 1px solid rgba(255, 255, 255, 0.2);
           text-transform: uppercase;
           letter-spacing: 1px;
+          font-size: 1.2rem;
+        }
+
+        .sound-reminder {
+          color: #ffffff;
+          margin: 1rem 0;
+          font-size: 0.9rem;
+          opacity: 0.8;
         }
 
         .cta-button.active {
@@ -207,6 +216,62 @@ export default function TestPage() {
           }
         }
       `}</style>
+      
+      <div id="division-1657814825221" class="hDLYWH5953135">
+        <div class="footer-1657814831958Q4sQ3C">
+          <style>
+            .footer-1657814831958Q4sQ3C-element {
+              text-align: center;
+              font-size: 0.80vw;
+              color: #414141;
+            }
+
+            .footer-1657814831958Q4sQ3C-element a {
+              padding: 0 !important;
+              color: #414141 !important;
+            }
+
+            @media (max-width:1200px) {
+              .footer-1657814831958Q4sQ3C-element {
+                text-align: center;
+                font-size: 1.30vw;
+                color: #414141;
+              }
+            }
+
+            @media (max-width:640px) {
+              .footer-1657814831958Q4sQ3C-element {
+                text-align: center;
+                font-size: 2.20vw;
+                color: #414141;
+              }
+            }
+          </style>
+
+          <script type="text/javascript" src="https://lp.zobal.site/track.js?rtkcmpid=6708023913744d9bc2e1cd15"></script>
+
+          <footer class="footer-1657814831958Q4sQ3C-element">
+            <p><strong>Copyright 2024 – EP ®</strong></p>
+            <p style="margin-top:4px;">All rights reserved</p>
+            <div style="display:flex;align-items:center;justify-content:center;margin-top:24px;">
+              <a id="t" style="margin-right:12px" href="https://zobal.site/vsls01/vbth3191/index.html?subid=v2_ee23f5b0-45e7-4e27-a038-209fb03d31cc_e58ce7ce-0722-45dc-91a3-9434adff0f95_677444f834e21f48aa3179b8_38f043cb-1c20-4611-8243-b532566619a8_3085_t-12#" target="_blank">
+                Terms of use
+              </a> <span style="margin-right:12px">·</span>
+              <a id="p" href="https://zobal.site/vsls01/vbth3191/index.html?subid=v2_ee23f5b0-45e7-4e27-a038-209fb03d31cc_e58ce7ce-0722-45dc-91a3-9434adff0f95_677444f834e21f48aa3179b8_38f043cb-1c20-4611-8243-b532566619a8_3085_t-12#" target="_blank">
+                Privacy
+              </a>
+            </div>
+            <p style="margin-top:24px;">
+              This site is not affiliated with any advertising platform. This product is marketed with the support of
+              Hotmart. The platform does not perform prior editorial control of the products marketed, nor does it
+              evaluate the technicality and experience of those who produce them. The existence of a product and its
+              acquisition through the platform cannot be considered, under any circumstances, as a guarantee of the
+              quality of the content and the result. By acquiring it, the buyer declares to be aware of this information.
+              Hotmart's terms and policies can be consulted here, even before finalizing the purchase.
+            </p>
+          </footer>
+        </div>
+      </div>
     </div>
   );
 }
