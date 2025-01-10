@@ -77,16 +77,6 @@ export default function TestPage() {
           --transition-speed: 0.3s;
         }
 
-        #__next {
-          background: black !important;
-          margin: 0;
-          padding: 0;
-          min-height: 100vh;
-          width: 100%;
-          color: var(--text-color);
-          font-family: var(--font-primary);
-          overflow-x: hidden;
-        }
 
         .container {
           max-width: 1200px;
