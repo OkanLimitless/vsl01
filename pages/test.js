@@ -21,49 +21,60 @@ export default function TestPage() {
     
     if (typeof window !== 'undefined') {
       // Create video container structure if it doesn't exist
-      let containerParent = document.querySelector('.video-container');
-      if (!containerParent) {
-        debug('Creating video container parent');
-        containerParent = document.createElement('div');
-        containerParent.className = 'video-container';
-        const mainContainer = document.querySelector('.container');
-        if (mainContainer) {
-          mainContainer.insertBefore(containerParent, mainContainer.querySelector('.cta-button') || mainContainer.querySelector('.site-footer'));
-        } else {
-          debug('Main container not found');
-          return;
-        }
+      // Get or create main container
+      const mainContainer = document.querySelector('.container');
+      if (!mainContainer) {
+        debug('Main container not found');
+        return;
       }
 
-      // Clean up any existing video container
-      let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
-      if (videoContainer) {
-        debug('Removing existing video container');
-        videoContainer.remove();
+      // Remove existing video container parent if it exists
+      const existingContainerParent = document.querySelector('.video-container');
+      if (existingContainerParent) {
+        debug('Removing existing video container parent');
+        existingContainerParent.remove();
       }
-      
+
+      // Create new video container parent
+      debug('Creating video container parent');
+      const containerParent = document.createElement('div');
+      containerParent.className = 'video-container';
+      mainContainer.insertBefore(containerParent, mainContainer.firstChild);
+
+      // Create new video container
       debug('Creating new video container');
-      videoContainer = document.createElement('div');
+      const videoContainer = document.createElement('div');
       videoContainer.id = 'vid_677444f834e21f48aa3179b8';
       videoContainer.style.minHeight = '400px';
       containerParent.appendChild(videoContainer);
+      
+      // Ensure container exists before loading player
+      if (!document.getElementById('vid_677444f834e21f48aa3179b8')) {
+        debug('Video container creation failed');
+        return;
+      }
 
       // Show loading state
       setIsLoading(true);
       
-      // Load video player script
-      const script = document.createElement('script');
-      script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
-      script.async = true;
-      script.onload = () => {
-        debug('Player script loaded');
+      // Load video player script only if container exists
+      if (document.getElementById('vid_677444f834e21f48aa3179b8')) {
+        const script = document.createElement('script');
+        script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
+        script.async = true;
+        script.onload = () => {
+          debug('Player script loaded');
+          setIsLoading(false);
+        };
+        script.onerror = (error) => {
+          debug(`Player script failed to load: ${error.message}`);
+          setIsLoading(false);
+        };
+        document.head.appendChild(script);
+      } else {
+        debug('Video container not found - skipping player script load');
         setIsLoading(false);
-      };
-      script.onerror = (error) => {
-        debug(`Player script failed to load: ${error.message}`);
-        setIsLoading(false);
-      };
-      document.head.appendChild(script);
+      }
 
       // Load tracking script
       const trackScript = document.createElement('script');
