@@ -75,7 +75,10 @@ export default function TestPage() {
       // Check if CTA was already shown
       if (alreadyElsDisplayed === 'true') {
         debug('CTA already shown previously');
-        setTimeout(showCTAHandler, 100);
+        // Only show CTA immediately if we're in test mode
+        if (SECONDS_TO_DISPLAY === 1800) {
+          setTimeout(showCTAHandler, 100);
+        }
       } else {
         const startWatchVideoProgress = () => {
           debug(`Attempt ${attempts + 1} to initialize player`);
@@ -97,11 +100,13 @@ export default function TestPage() {
           playerInstance = smartplayer.instances[0];
           debug('Player instance found');
 
-          // Force test CTA after 5 seconds
-          setTimeout(() => {
-            debug('Forcing CTA for testing');
-            showCTAHandler();
-          }, 5000);
+          // Only force test CTA in development
+          if (process.env.NODE_ENV === 'development') {
+            setTimeout(() => {
+              debug('Forcing CTA for testing');
+              showCTAHandler();
+            }, 5000);
+          }
 
           playerInstance.on('timeupdate', () => {
             const currentTime = playerInstance.video.currentTime;
