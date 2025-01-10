@@ -77,19 +77,15 @@ export default function TestPage() {
           --transition-speed: 0.3s;
         }
 
-        html, body {
+        html, body, #__next {
           margin: 0;
           padding: 0;
           min-height: 100vh;
           width: 100%;
-          background-color: var(--bg-color);
+          background-color: #000000;
           color: var(--text-color);
           font-family: var(--font-primary);
           overflow-x: hidden;
-        }
-
-        body {
-          background-color: #000000;
         }
 
         .container {
