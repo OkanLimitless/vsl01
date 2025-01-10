@@ -27,32 +27,76 @@ export default function TestPage() {
       document.head.appendChild(trackScript);
 
       // Configuration
-      const SECONDS_TO_DISPLAY = 2285; // 38 minutes
+      const SECONDS_TO_DISPLAY = 1800; // 30 minutes
       const alreadyDisplayedKey = `alreadyElsDisplayed${SECONDS_TO_DISPLAY}`;
       const alreadyElsDisplayed = localStorage.getItem(alreadyDisplayedKey);
       let attempts = 0;
+      let playerInstance = null;
+
+      // Debug function
+      const debug = (message) => {
+        console.log(`[DEBUG] ${new Date().toISOString()} - ${message}`);
+      };
 
       // Function to show CTA
       const showCTAHandler = () => {
+        debug('Showing CTA button');
         setShowCTA(true);
         localStorage.setItem(alreadyDisplayedKey, true);
       };
 
       // Check if CTA was already shown
       if (alreadyElsDisplayed === 'true') {
+        debug('CTA already shown previously');
         setTimeout(showCTAHandler, 100);
       } else {
         const startWatchVideoProgress = () => {
-          if (typeof smartplayer === 'undefined' || !(smartplayer.instances && smartplayer.instances.length)) {
+          debug(`Attempt ${attempts + 1} to initialize player`);
+          
+          if (typeof smartplayer === 'undefined') {
+            debug('smartplayer not defined yet');
             if (attempts >= 10) return;
             attempts += 1;
             return setTimeout(startWatchVideoProgress, 1000);
           }
 
-          smartplayer.instances[0].on('timeupdate', () => {
-            if (showCTA || smartplayer.instances[0].smartAutoPlay) return;
-            if (smartplayer.instances[0].video.currentTime < SECONDS_TO_DISPLAY) return;
+          if (!smartplayer.instances || !smartplayer.instances.length) {
+            debug('No player instances found');
+            if (attempts >= 10) return;
+            attempts += 1;
+            return setTimeout(startWatchVideoProgress, 1000);
+          }
+
+          playerInstance = smartplayer.instances[0];
+          debug('Player instance found');
+
+          // Force test CTA after 5 seconds
+          setTimeout(() => {
+            debug('Forcing CTA for testing');
             showCTAHandler();
+          }, 5000);
+
+          playerInstance.on('timeupdate', () => {
+            const currentTime = playerInstance.video.currentTime;
+            debug(`Time update: ${currentTime.toFixed(1)}s`);
+            
+            if (showCTA || playerInstance.smartAutoPlay) return;
+            if (currentTime < SECONDS_TO_DISPLAY) return;
+            
+            debug(`Reached ${SECONDS_TO_DISPLAY} seconds - showing CTA`);
+            showCTAHandler();
+          });
+
+          playerInstance.on('play', () => {
+            debug('Video started playing');
+          });
+
+          playerInstance.on('pause', () => {
+            debug('Video paused');
+          });
+
+          playerInstance.on('error', (error) => {
+            debug(`Player error: ${error.message}`);
           });
         };
 
