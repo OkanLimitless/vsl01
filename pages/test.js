@@ -34,6 +34,7 @@ export default function TestPage() {
         videoContainer = document.createElement('div');
         videoContainer.id = 'vid_677444f834e21f48aa3179b8';
         videoContainer.style.minHeight = '400px';
+        videoContainer.style.position = 'relative';
         mainContainer.insertBefore(videoContainer, mainContainer.firstChild);
       }
       
@@ -47,23 +48,18 @@ export default function TestPage() {
       setIsLoading(true);
       
       // Load video player script only if container exists
-      if (document.getElementById('vid_677444f834e21f48aa3179b8')) {
-        const script = document.createElement('script');
-        script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
-        script.async = true;
-        script.onload = () => {
-          debug('Player script loaded');
-          setIsLoading(false);
-        };
-        script.onerror = (error) => {
-          debug(`Player script failed to load: ${error.message}`);
-          setIsLoading(false);
-        };
-        document.head.appendChild(script);
-      } else {
-        debug('Video container not found - skipping player script load');
+      const script = document.createElement('script');
+      script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
+      script.async = true;
+      script.onload = () => {
+        debug('Player script loaded');
         setIsLoading(false);
-      }
+      };
+      script.onerror = (error) => {
+        debug(`Player script failed to load: ${error.message}`);
+        setIsLoading(false);
+      };
+      document.head.appendChild(script);
 
       // Load tracking script
       const trackScript = document.createElement('script');
@@ -151,8 +147,9 @@ export default function TestPage() {
 
       // Cleanup
       return () => {
-        if (script && script.parentNode) {
-          document.head.removeChild(script);
+        const scriptElement = document.querySelector('script[src*="players/677444f834e21f48aa3179b8/player.js"]');
+        if (scriptElement && scriptElement.parentNode) {
+          document.head.removeChild(scriptElement);
         }
         if (trackScript && trackScript.parentNode) {
           document.head.removeChild(trackScript);
