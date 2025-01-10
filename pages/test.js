@@ -11,6 +11,11 @@ export default function TestPage() {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // Debug function
+    const debug = (message) => {
+      console.log(`[DEBUG] ${new Date().toISOString()} - ${message}`);
+    };
+
     setIsClient(true);
     
     if (typeof window !== 'undefined') {
@@ -42,10 +47,6 @@ export default function TestPage() {
       let attempts = 0;
       let playerInstance = null;
 
-      // Debug function
-      const debug = (message) => {
-        console.log(`[DEBUG] ${new Date().toISOString()} - ${message}`);
-      };
 
       // Function to show CTA
       const showCTAHandler = () => {
