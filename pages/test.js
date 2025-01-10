@@ -95,9 +95,23 @@ export default function TestPage() {
           left: 0;
           width: 100%;
           height: 100%;
-          background: radial-gradient(circle at center, rgba(255,0,0,0.1) 0%, rgba(0,0,0,1) 70%);
+          background: radial-gradient(
+            circle at 50% 20%,
+            rgba(255, 0, 0, 0.15) 0%,
+            rgba(0, 0, 0, 1) 80%
+          );
           z-index: 1;
           pointer-events: none;
+          animation: background-pulse 15s infinite alternate;
+        }
+
+        @keyframes background-pulse {
+          0% {
+            background-size: 100% 100%;
+          }
+          100% {
+            background-size: 120% 120%;
+          }
         }
 
         .container {
@@ -140,24 +154,31 @@ export default function TestPage() {
 
         .cta-button {
           display: none;
-          position: relative;
-          margin: var(--spacing-md) auto 0;
-          left: auto;
-          transform: none;
-          background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+          position: fixed;
+          bottom: 2rem;
+          left: 50%;
+          transform: translateX(-50%);
+          background: linear-gradient(
+            45deg,
+            var(--primary-color),
+            var(--accent-color)
+          );
           color: white;
-          padding: var(--spacing-sm) var(--spacing-md);
+          padding: 1.2rem 2.5rem;
           border-radius: var(--border-radius);
           text-decoration: none;
           font-family: var(--font-tertiary);
           font-weight: bold;
           transition: all var(--transition-speed) ease;
           opacity: 0;
-          box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
+          border: 2px solid rgba(255, 255, 255, 0.3);
           text-transform: uppercase;
-          letter-spacing: 1px;
+          letter-spacing: 2px;
           font-size: 1.2rem;
+          z-index: 100;
+          backdrop-filter: blur(4px);
+          background-color: rgba(0, 0, 0, 0.3);
         }
 
         .sound-reminder {
@@ -170,24 +191,31 @@ export default function TestPage() {
         .cta-button.active {
           display: block;
           opacity: 1;
-          animation: button-pulse 1.5s infinite;
+          animation: button-pulse 2s infinite ease-in-out;
         }
 
         .cta-button:hover {
-          background: linear-gradient(45deg, var(--accent-color), var(--secondary-color));
-          transform: translateX(-50%) scale(1.05);
-          box-shadow: 0 6px 20px rgba(46, 213, 115, 0.6);
+          background: linear-gradient(
+            45deg,
+            var(--accent-color),
+            var(--secondary-color)
+          );
+          transform: translateX(-50%) scale(1.1);
+          box-shadow: 0 8px 30px rgba(255, 0, 0, 0.8);
         }
 
         @keyframes button-pulse {
           0% {
             transform: translateX(-50%) scale(1);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
           }
           50% {
-            transform: translateX(-50%) scale(1.05);
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 8px 30px rgba(255, 0, 0, 0.8);
           }
           100% {
             transform: translateX(-50%) scale(1);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.5);
           }
         }
 
