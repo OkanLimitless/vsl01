@@ -112,21 +112,9 @@ export default function TestPage() {
 
         .video-container {
           position: relative;
-          width: 90vw;
+          width: 100%;
           max-width: 800px;
-          min-width: 300px;
           margin: var(--spacing-md) auto 0;
-          height: 0;
-          padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio */
-          border-radius: var(--border-radius);
-          overflow: hidden;
-          box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
-          border: 2px solid rgba(255, 255, 255, 0.1);
-          transition: box-shadow var(--transition-speed) ease;
-        }
-
-        .video-container:hover {
-          box-shadow: 0 0 30px rgba(255, 71, 87, 0.6);
         }
 
 
@@ -186,7 +174,6 @@ export default function TestPage() {
           }
 
           .video-container {
-            width: 95vw;
             margin: var(--spacing-sm) auto;
           }
 
