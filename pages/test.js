@@ -159,63 +159,38 @@ export default function TestPage() {
         `}</style>
       </Head>
       
-      <div className="video-container">
-        <div id="vid_677444f834e21f48aa3179b8">
-          <img 
-            id="thumb_677444f834e21f48aa3179b8" 
-            src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/thumbnail.jpg" 
-            alt="Video Thumbnail"
-          />
-          <div id="backdrop_677444f834e21f48aa3179b8" className="backdrop"></div>
-          <div className="play-button">▶</div>
-          <a 
-            href="https://lp.zobal.site/click" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className={`cta-button ${showCTA ? 'active' : 'esconder'}`}
-          >
-            VIEW PACKAGES
-          </a>
-        </div>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              var s=document.createElement("script");
-              s.src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js";
-              s.async=!0;
-              document.head.appendChild(s);
-              
-              document.addEventListener("DOMContentLoaded", function() {
-                var ctaButton = document.querySelector('.cta-button');
-                var videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
-                
-                if (videoContainer) {
-                  videoContainer.addEventListener('timeupdate', function(e) {
-                    if (e.target.currentTime >= ${SECONDS_TO_DISPLAY}) {
-                      ctaButton.classList.add('active');
-                    }
-                  });
-                }
-              });
-            `
-          }}
-        />
-      </div>
-
       <div className="container">
         <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
 
         <div id="video-section">
           <div id="video-container" style={{ width: '100%', maxWidth: '800px', margin: '0 auto' }}>
-            <div id="video-player"></div>
+            <div id="vid_677444f834e21f48aa3179b8">
+              <img 
+                id="thumb_677444f834e21f48aa3179b8" 
+                src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/thumbnail.jpg" 
+                alt="Video Thumbnail"
+              />
+              <div id="backdrop_677444f834e21f48aa3179b8" className="backdrop"></div>
+              <div className="play-button">▶</div>
+            </div>
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  var s=document.createElement("script");
+                  s.src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js";
+                  s.async=!0;
+                  document.head.appendChild(s);
+                `
+              }}
+            />
           </div>
           
           <a 
             href="https://lp.zobal.site/click" 
             target="_blank" 
             rel="noopener noreferrer"
-            className={`cta-button ${showCTA ? '' : 'esconder'}`}
+            className={`cta-button ${showCTA ? 'active' : ''}`}
           >
             VIEW PACKAGES
           </a>
