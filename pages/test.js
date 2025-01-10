@@ -247,8 +247,21 @@ export default function TestPage() {
         .video-container {
           position: relative;
           width: 100%;
-          max-width: 800px;
+          max-width: 1200px;
           margin: var(--spacing-md) auto 0;
+          aspect-ratio: 16/9;
+        }
+
+        #vid_677444f834e21f48aa3179b8 {
+          position: relative;
+          width: 100%;
+          height: 100%;
+        }
+
+        #vid_677444f834e21f48aa3179b8 img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
         }
 
 
