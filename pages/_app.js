@@ -47,33 +47,51 @@ function MyApp({ Component, pageProps }) {
       <Script id="smartplayer-init" strategy="afterInteractive">
       {`
         document.addEventListener("DOMContentLoaded", function() {
-          const videoContainer = document.getElementById('vid_player');
-          if (videoContainer) {
-            // Load player script
-            const script = document.createElement('script');
-            script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/player.js';
-            script.async = true;
-            
-            script.onload = function() {
+          const playerContainer = document.getElementById('smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc');
+          if (!playerContainer) {
+            console.error('Player container not found');
+            return;
+          }
+
+          // Load player script
+          const script = document.createElement('script');
+          script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/player.js';
+          script.async = true;
+          
+          script.onload = function() {
+            try {
               const thumbnail = document.getElementById('thumb_player');
               if (thumbnail) {
                 thumbnail.style.display = 'none';
               }
               
-              // Initialize Smartplayer
-              if (typeof smartplayer !== 'undefined') {
-                new smartplayer({
-                  container: 'smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc',
-                  url: 'https://videos.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/playlist.m3u8',
-                  poster: 'https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/thumbnail.jpg',
-                  autoplay: true,
-                  controls: true
-                });
-              }
-            };
-            
-            document.body.appendChild(script);
-          }
+              // Wait for smartplayer to be defined
+              const checkPlayer = setInterval(() => {
+                if (typeof smartplayer !== 'undefined') {
+                  clearInterval(checkPlayer);
+                  try {
+                    new smartplayer({
+                      container: 'smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc',
+                      url: 'https://videos.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/playlist.m3u8',
+                      poster: 'https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/thumbnail.jpg',
+                      autoplay: true,
+                      controls: true
+                    });
+                  } catch (e) {
+                    console.error('Smartplayer initialization error:', e);
+                  }
+                }
+              }, 100);
+            } catch (e) {
+              console.error('Player script load error:', e);
+            }
+          };
+          
+          script.onerror = function() {
+            console.error('Failed to load player script');
+          };
+          
+          document.body.appendChild(script);
         });
       `}
       </Script>
