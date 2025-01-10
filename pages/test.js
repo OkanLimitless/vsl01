@@ -26,18 +26,28 @@ export default function TestPage() {
       trackScript.async = true;
       document.head.appendChild(trackScript);
 
-      // CTA timer
-      const timer = setTimeout(() => {
-        setShowCTA(true);
-      }, 30000); // 30 seconds
+      // Wait for player to load
+      const checkPlayer = setInterval(() => {
+        if (window.player) {
+          clearInterval(checkPlayer);
+          
+          // Listen for player state changes
+          window.player.on('timeupdate', (data) => {
+            // Show CTA at 30 seconds (or adjust this time as needed)
+            if (data.currentTime >= 30 && !showCTA) {
+              setShowCTA(true);
+            }
+          });
+        }
+      }, 500);
 
       return () => {
-        clearTimeout(timer);
+        clearInterval(checkPlayer);
         document.head.removeChild(script);
         document.head.removeChild(trackScript);
       };
     }
-  }, []);
+  }, [showCTA]);
 
   return (
     <div className="container">
