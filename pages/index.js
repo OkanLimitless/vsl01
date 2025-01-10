@@ -137,6 +137,7 @@ export default function Home() {
           border-radius: 12px;
           overflow: hidden;
           box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+          background: rgba(255,0,0,0.1); /* Debug background */
         }
 
         /* Video Player Elements */
