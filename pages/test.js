@@ -98,7 +98,6 @@ export default function TestPage() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          background-color: var(--bg-color);
         }
 
         .title {
