@@ -44,7 +44,19 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </ErrorBoundary>
       <Script src="https://cdn.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" strategy="afterInteractive" />
-      <Script src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/player.js" strategy="afterInteractive" />
+      <Script id="smartplayer-init" strategy="afterInteractive">
+      {`
+        document.addEventListener("DOMContentLoaded", function() {
+          // Ensure video container exists
+          const videoContainer = document.getElementById('vid_player');
+          if (videoContainer) {
+            const script = document.createElement('script');
+            script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/player.js';
+            document.body.appendChild(script);
+          }
+        });
+      `}
+      </Script>
       <Script id="video-cta-logic" strategy="afterInteractive">
       {`
         document.addEventListener("DOMContentLoaded", function () {
