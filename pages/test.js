@@ -11,6 +11,7 @@ export default function TestPage() {
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const containerCreated = useRef(false);
+  const playerInstance = useRef(null);
 
   useEffect(() => {
     // Debug function
@@ -21,27 +22,32 @@ export default function TestPage() {
     setIsClient(true);
     
     if (typeof window !== 'undefined') {
-      // Only create container once
-      if (!containerCreated.current) {
-        // Ensure main container exists
-        const mainContainer = document.querySelector('.container');
-        if (!mainContainer) {
-          debug('Main container not found');
-          return;
-        }
-
-        // Get existing video container or create if it doesn't exist
-        let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
-        if (!videoContainer) {
-          debug('Creating video container');
-          videoContainer = document.createElement('div');
-          videoContainer.id = 'vid_677444f834e21f48aa3179b8';
-          videoContainer.style.minHeight = '400px';
-          videoContainer.style.position = 'relative';
-          mainContainer.insertBefore(videoContainer, mainContainer.firstChild);
-          containerCreated.current = true;
-        }
+      // Create container only once
+      const mainContainer = document.querySelector('.container');
+      if (!mainContainer) {
+        debug('Main container not found');
+        return;
       }
+
+      let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
+      if (!videoContainer && !containerCreated.current) {
+        debug('Creating video container');
+        videoContainer = document.createElement('div');
+        videoContainer.id = 'vid_677444f834e21f48aa3179b8';
+        videoContainer.style.minHeight = '400px';
+        videoContainer.style.position = 'relative';
+        mainContainer.insertBefore(videoContainer, mainContainer.firstChild);
+        containerCreated.current = true;
+      }
+
+      // Cleanup function
+      return () => {
+        if (videoContainer && videoContainer.parentNode) {
+          debug('Removing video container');
+          videoContainer.parentNode.removeChild(videoContainer);
+          containerCreated.current = false;
+        }
+      };
       
       // Ensure container exists before loading player
       if (!document.getElementById('vid_677444f834e21f48aa3179b8')) {
@@ -112,7 +118,7 @@ export default function TestPage() {
             return setTimeout(startWatchVideoProgress, 1000);
           }
 
-          playerInstance = smartplayer.instances[0];
+          playerInstance.current = smartplayer.instances[0];
           debug('Player instance found');
 
           // Only force test CTA in development
@@ -123,26 +129,26 @@ export default function TestPage() {
             }, 5000);
           }
 
-          playerInstance.on('timeupdate', () => {
-            const currentTime = playerInstance.video.currentTime;
+          playerInstance.current.on('timeupdate', () => {
+            const currentTime = playerInstance.current.video.currentTime;
             debug(`Time update: ${currentTime.toFixed(1)}s`);
             
-            if (showCTA || playerInstance.smartAutoPlay) return;
+            if (showCTA || playerInstance.current.smartAutoPlay) return;
             if (currentTime < SECONDS_TO_DISPLAY) return;
             
             debug(`Reached ${SECONDS_TO_DISPLAY} seconds - showing CTA`);
             showCTAHandler();
           });
 
-          playerInstance.on('play', () => {
+          playerInstance.current.on('play', () => {
             debug('Video started playing');
           });
 
-          playerInstance.on('pause', () => {
+          playerInstance.current.on('pause', () => {
             debug('Video paused');
           });
 
-          playerInstance.on('error', (error) => {
+          playerInstance.current.on('error', (error) => {
             debug(`Player error: ${error.message}`);
           });
         };
@@ -152,6 +158,7 @@ export default function TestPage() {
 
       // Cleanup
       return () => {
+        debug('Running cleanup');
         const scriptElement = document.querySelector('script[src*="players/677444f834e21f48aa3179b8/player.js"]');
         if (scriptElement && scriptElement.parentNode) {
           document.head.removeChild(scriptElement);
@@ -159,12 +166,13 @@ export default function TestPage() {
         if (trackScript && trackScript.parentNode) {
           document.head.removeChild(trackScript);
         }
-        if (playerInstance) {
+        if (playerInstance.current) {
           try {
-            playerInstance.off('timeupdate');
-            playerInstance.off('play');
-            playerInstance.off('pause');
-            playerInstance.off('error');
+            playerInstance.current.off('timeupdate');
+            playerInstance.current.off('play');
+            playerInstance.current.off('pause');
+            playerInstance.current.off('error');
+            playerInstance.current = null;
           } catch (error) {
             debug(`Error during cleanup: ${error.message}`);
           }
