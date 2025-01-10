@@ -66,25 +66,6 @@ export default function TestPage() {
             --border-radius: 12px;
           }
 
-          .video-container {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: var(--spacing-md) auto;
-            padding: 56.25% 0 0 0;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-          }
-
-          .video-container img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-          }
 
           .backdrop {
             position: absolute;
@@ -250,10 +231,13 @@ export default function TestPage() {
           max-width: 1200px;
           margin: var(--spacing-md) auto 0;
           aspect-ratio: 16/9;
+          height: auto;
         }
 
         #vid_677444f834e21f48aa3179b8 {
-          position: relative;
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
         }
