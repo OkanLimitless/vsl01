@@ -63,15 +63,17 @@ export default function TestPage() {
 
         .title {
           font-family: var(--font-secondary);
-          font-size: 2rem;
+          font-size: clamp(1.5rem, 5vw, 2.5rem);
           color: var(--primary-color);
           margin-bottom: var(--spacing-lg);
           text-transform: uppercase;
+          padding: 0 1rem;
+          line-height: 1.2;
         }
 
         .video-container {
           position: relative;
-          width: 100%;
+          width: 95%;
           max-width: 800px;
           margin: 0 auto;
           padding-top: 56.25%;
@@ -103,12 +105,12 @@ export default function TestPage() {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          font-size: 2rem;
+          font-size: clamp(1.5rem, 5vw, 2rem);
           color: white;
           cursor: pointer;
           background: var(--primary-color);
-          width: 80px;
-          height: 80px;
+          width: clamp(60px, 15vw, 80px);
+          height: clamp(60px, 15vw, 80px);
           border-radius: 50%;
           display: flex;
           align-items: center;
@@ -129,12 +131,14 @@ export default function TestPage() {
           transform: translateX(-50%);
           background: var(--primary-color);
           color: white;
-          padding: var(--spacing-sm) var(--spacing-md);
+          padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2rem);
           border-radius: var(--border-radius);
           text-decoration: none;
           font-family: var(--font-tertiary);
           font-weight: bold;
+          font-size: clamp(0.9rem, 3vw, 1rem);
           transition: all 0.3s ease;
+          white-space: nowrap;
         }
 
         .cta-button:hover {
