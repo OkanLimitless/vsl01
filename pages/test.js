@@ -66,9 +66,23 @@ export default function TestPage() {
           margin: 0;
           padding: 0;
           min-height: 100vh;
+          width: 100%;
           background-color: var(--bg-color);
           color: var(--text-color);
           font-family: var(--font-primary);
+          overflow-x: hidden;
+        }
+
+        body::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(circle at center, rgba(255,0,0,0.1) 0%, rgba(0,0,0,1) 70%);
+          z-index: 1;
+          pointer-events: none;
         }
 
         .container {
@@ -81,18 +95,51 @@ export default function TestPage() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          background-color: var(--bg-color);
         }
 
         .title {
           font-family: var(--font-secondary);
-          font-size: clamp(1.8rem, 6vw, 3rem);
+          font-size: clamp(2.5rem, 8vw, 4.5rem);
           color: var(--text-color);
           margin-bottom: var(--spacing-lg);
           text-transform: uppercase;
           padding: 0 1rem;
-          line-height: 1.3;
-          text-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
-          animation: text-glow 2s ease-in-out infinite alternate;
+          line-height: 1.2;
+          text-shadow: 
+            0 0 10px #fff,
+            0 0 20px #fff,
+            0 0 30px #ff0000,
+            0 0 40px #ff0000,
+            0 0 70px #ff0000,
+            0 0 80px #ff0000,
+            0 0 100px #ff0000;
+          animation: neon-glow 1.5s ease-in-out infinite alternate;
+          position: relative;
+          z-index: 2;
+        }
+
+        @keyframes neon-glow {
+          0% {
+            text-shadow: 
+              0 0 10px #fff,
+              0 0 20px #fff,
+              0 0 30px #ff0000,
+              0 0 40px #ff0000,
+              0 0 70px #ff0000,
+              0 0 80px #ff0000,
+              0 0 100px #ff0000;
+          }
+          100% {
+            text-shadow: 
+              0 0 5px #fff,
+              0 0 10px #fff,
+              0 0 15px #ff0000,
+              0 0 20px #ff0000,
+              0 0 35px #ff0000,
+              0 0 40px #ff0000,
+              0 0 50px #ff0000;
+          }
         }
 
         .title span {
