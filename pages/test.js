@@ -19,11 +19,20 @@ export default function TestPage() {
     setIsClient(true);
     
     if (typeof window !== 'undefined') {
-      // Ensure video container exists
-      const videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
+      // Create video container if it doesn't exist
+      let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
       if (!videoContainer) {
-        debug('Video container not found');
-        return;
+        debug('Creating video container');
+        videoContainer = document.createElement('div');
+        videoContainer.id = 'vid_677444f834e21f48aa3179b8';
+        videoContainer.style.minHeight = '400px';
+        const containerParent = document.querySelector('.video-container');
+        if (containerParent) {
+          containerParent.appendChild(videoContainer);
+        } else {
+          debug('Video container parent not found');
+          return;
+        }
       }
 
       // Load video player script
