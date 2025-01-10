@@ -43,8 +43,18 @@ function MyApp({ Component, pageProps }) {
       <ErrorBoundary>
         <Component {...pageProps} />
       </ErrorBoundary>
-      <Script src="https://cdn.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" strategy="afterInteractive" />
-      <Script id="vTurb-player-init" strategy="afterInteractive" dangerouslySetInnerHTML={{
+      <Script 
+        src="https://cdn.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" 
+        strategy="afterInteractive"
+        onLoad={() => {
+          console.log('Smartplayer library loaded');
+          // Now we can safely initialize vTurb player
+          const initScript = document.createElement('script');
+          initScript.innerHTML = document.getElementById('vTurb-player-init').textContent;
+          document.body.appendChild(initScript);
+        }}
+      />
+      <Script id="vTurb-player-init" strategy="lazyOnload" dangerouslySetInnerHTML={{
         __html: `
           document.addEventListener("DOMContentLoaded", function() {
             console.log('DOMContentLoaded - Initializing vTurb player');
