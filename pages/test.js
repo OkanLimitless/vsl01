@@ -80,9 +80,21 @@ export default function TestPage() {
         `}</style>
       </Head>
       
+      <div id="video-container" style={{ width: '100%', maxWidth: '800px', margin: '0 auto' }}>
+        <div id="video-player"></div>
+      </div>
+
       <Script
         src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js"
         strategy="afterInteractive"
+        onLoad={() => {
+          // Ensure the video player container exists
+          const container = document.getElementById('video-container');
+          if (container) {
+            // Initialize the player
+            vTurbCreatSmartvdsElements();
+          }
+        }}
       />
 
       <div className="container">
