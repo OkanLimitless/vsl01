@@ -90,7 +90,6 @@ export default function TestPage() {
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
 
         <div id="video-section">
-          <div id="video-player"></div>
           
           <a 
             href="https://lp.zobal.site/click" 
