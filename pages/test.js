@@ -20,33 +20,22 @@ export default function TestPage() {
     setIsClient(true);
     
     if (typeof window !== 'undefined') {
-      // Create video container structure if it doesn't exist
-      // Get or create main container
+      // Ensure main container exists
       const mainContainer = document.querySelector('.container');
       if (!mainContainer) {
         debug('Main container not found');
         return;
       }
 
-      // Remove existing video container parent if it exists
-      const existingContainerParent = document.querySelector('.video-container');
-      if (existingContainerParent) {
-        debug('Removing existing video container parent');
-        existingContainerParent.remove();
+      // Get existing video container or create if it doesn't exist
+      let videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
+      if (!videoContainer) {
+        debug('Creating video container');
+        videoContainer = document.createElement('div');
+        videoContainer.id = 'vid_677444f834e21f48aa3179b8';
+        videoContainer.style.minHeight = '400px';
+        mainContainer.insertBefore(videoContainer, mainContainer.firstChild);
       }
-
-      // Create new video container parent
-      debug('Creating video container parent');
-      const containerParent = document.createElement('div');
-      containerParent.className = 'video-container';
-      mainContainer.insertBefore(containerParent, mainContainer.firstChild);
-
-      // Create new video container
-      debug('Creating new video container');
-      const videoContainer = document.createElement('div');
-      videoContainer.id = 'vid_677444f834e21f48aa3179b8';
-      videoContainer.style.minHeight = '400px';
-      containerParent.appendChild(videoContainer);
       
       // Ensure container exists before loading player
       if (!document.getElementById('vid_677444f834e21f48aa3179b8')) {
@@ -178,11 +167,6 @@ export default function TestPage() {
             debug(`Error during cleanup: ${error.message}`);
           }
         }
-        // Clean up video container
-        const videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
-        if (videoContainer && videoContainer.parentNode) {
-          videoContainer.remove();
-        }
       };
     }
   }, [showCTA]);
@@ -198,14 +182,13 @@ export default function TestPage() {
       <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
       
       <ClientSideOnly>
-        <div className="video-container">
-          {isLoading ? (
+        <div id="vid_677444f834e21f48aa3179b8" style={{ minHeight: '400px' }}>
+          {isLoading && (
             <div className="loading-overlay">
               <div className="loading-spinner"></div>
               <p>Loading video player...</p>
             </div>
-          ) : null}
-          <div id="vid_677444f834e21f48aa3179b8" style={{ minHeight: '400px' }}></div>
+          )}
         </div>
         
         {isClient && showCTA && (
