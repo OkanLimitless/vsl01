@@ -18,23 +18,25 @@ export default function TestPage() {
         <title>Erection Button</title>
       </Head>
       
-      <h1 className="title">PRESS THIS <span>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
+      <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
       
       <div className="video-container">
         <div id="vid_677444f834e21f48aa3179b8">
-          <iframe
-            id="player_677444f834e21f48aa3179b8"
-            src="https://players.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.html"
-            allow="autoplay; fullscreen"
+          <img
+            id="thumb_677444f834e21f48aa3179b8"
+            src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/thumbnail.jpg"
+            alt="Video Thumbnail"
             style={{
               position: 'absolute',
               top: 0,
               left: 0,
               width: '100%',
               height: '100%',
-              border: 'none'
+              objectFit: 'cover'
             }}
-          ></iframe>
+          />
+          <div id="backdrop_677444f834e21f48aa3179b8" className="backdrop"></div>
+          <div className="play-button">▶</div>
           <a 
             href="https://www.google.com" 
             target="_blank" 
@@ -43,6 +45,25 @@ export default function TestPage() {
           >
             VIEW PACKAGES
           </a>
+          <script type="text/javascript" id="scr_677444f834e21f48aa3179b8">
+            var s=document.createElement("script");
+            s.src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js";
+            s.async=true;
+            document.head.appendChild(s);
+            
+            document.addEventListener("DOMContentLoaded", function() {
+              var ctaButton = document.querySelector('.cta-button');
+              var videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
+              
+              if (videoContainer) {
+                videoContainer.addEventListener('timeupdate', function(e) {
+                  if (e.target.currentTime >= 30) { // Show after 30 seconds
+                    ctaButton.classList.add('active');
+                  }
+                });
+              }
+            });
+          </script>
         </div>
       </div>
 
@@ -101,73 +122,19 @@ export default function TestPage() {
 
         .title {
           font-family: var(--font-secondary);
-          font-size: clamp(2.5rem, 8vw, 4.5rem);
+          font-size: 3.3vw;
           color: var(--text-color);
           margin-bottom: var(--spacing-lg);
           text-transform: uppercase;
-          padding: 0 1rem;
-          line-height: 1.2;
-          text-shadow: 
-            0 0 10px #fff,
-            0 0 20px #fff,
-            0 0 30px #ff0000,
-            0 0 40px #ff0000,
-            0 0 70px #ff0000,
-            0 0 80px #ff0000,
-            0 0 100px #ff0000;
-          animation: neon-glow 1.5s ease-in-out infinite alternate;
+          padding: 2vh 1rem;
+          line-height: 1.3;
+          font-weight: 800;
           position: relative;
           z-index: 2;
         }
 
-        @keyframes neon-glow {
-          0% {
-            text-shadow: 
-              0 0 10px #fff,
-              0 0 20px #fff,
-              0 0 30px #ff0000,
-              0 0 40px #ff0000,
-              0 0 70px #ff0000,
-              0 0 80px #ff0000,
-              0 0 100px #ff0000;
-          }
-          100% {
-            text-shadow: 
-              0 0 5px #fff,
-              0 0 10px #fff,
-              0 0 15px #ff0000,
-              0 0 20px #ff0000,
-              0 0 35px #ff0000,
-              0 0 40px #ff0000,
-              0 0 50px #ff0000;
-          }
-        }
-
         .title span {
-          color: var(--primary-color);
-          text-shadow: 0 0 10px var(--primary-color);
-          animation: highlight-pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes highlight-pulse {
-          0% {
-            text-shadow: 0 0 10px var(--primary-color);
-          }
-          50% {
-            text-shadow: 0 0 20px var(--primary-color);
-          }
-          100% {
-            text-shadow: 0 0 10px var(--primary-color);
-          }
-        }
-
-        @keyframes text-glow {
-          0% {
-            text-shadow: 0 0 5px var(--primary-color);
-          }
-          100% {
-            text-shadow: 0 0 20px var(--primary-color);
-          }
+          padding: 0 4px;
         }
 
         .video-container {
