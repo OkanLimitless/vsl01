@@ -50,19 +50,6 @@ export default function TestPage() {
             s.src="https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js";
             s.async=true;
             document.head.appendChild(s);
-            
-            document.addEventListener("DOMContentLoaded", function() {
-              var ctaButton = document.querySelector('.cta-button');
-              var videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
-              
-              if (videoContainer) {
-                videoContainer.addEventListener('timeupdate', function(e) {
-                  if (e.target.currentTime >= 30) { // Show after 30 seconds
-                    ctaButton.classList.add('active');
-                  }
-                });
-              }
-            });
           </script>
         </div>
       </div>
