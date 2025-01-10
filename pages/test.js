@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 
-const ClientSideOnly = dynamic(() => Promise.resolve(({ children }) => children), {
-  ssr: false,
-});
+const ClientSideOnly = ({ children }) => {
+  if (typeof window !== 'undefined') {
+    return children;
+  }
+  return null;
+};
 
 export default function TestPage() {
   const [showCTA, setShowCTA] = useState(false);
