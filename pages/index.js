@@ -32,8 +32,9 @@ export default function Home() {
         <p>⚠️ Last Day To Watch This Presentation: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
       </div>
       <div className="container">
-        <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
-        <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
+        <h1 className="title">
+          🔊 MAKE SURE YOUR SOUND IS ON
+        </h1>
 
         {/* Video Section */}
         <VideoPlayer />
@@ -170,18 +171,16 @@ export default function Home() {
           font-weight: 800;
           position: relative;
           z-index: 2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
         }
 
         .title span {
           padding: 0 4px;
         }
 
-        .sound-reminder {
-          color: #ffffff;
-          margin: 1rem 0;
-          font-size: 0.9rem;
-          opacity: 0.8;
-        }
 
         /* Video Container Styles */
         .video-container {
