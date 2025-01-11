@@ -1,33 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 const VideoPlayer = () => {
-  const [showCTA, setShowCTA] = useState(false);
-
   useEffect(() => {
     // Load the smartplayer script
     const script = document.createElement('script');
     script.src = 'https://scripts.converteai.net/fa037796-870e-4d05-a5a0-79244e13ce7f/players/6782768082fbade93fa5911a/player.js';
     script.async = true;
     script.id = 'scr_6782768082fbade93fa5911a';
-    
-    // Add time tracking directly to the smartplayer instance
-    script.onload = () => {
-      const player = window.smartPlayer;
-      if (player) {
-        player.on('timeupdate', (currentTime) => {
-          if (currentTime >= 10 && !showCTA) {
-            setShowCTA(true);
-          }
-        });
-      }
-    };
-
     document.head.appendChild(script);
 
     return () => {
       document.head.removeChild(script);
     };
-  }, [showCTA]);
+  }, []);
 
   return (
     <div className="video-section">
@@ -39,29 +24,8 @@ const VideoPlayer = () => {
             style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
             alt="thumbnail"
           />
-          <div 
-            id="backdrop_6782768082fbade93fa5911a" 
-            style={{ 
-              backdropFilter: 'blur(5px)', 
-              WebkitBackdropFilter: 'blur(5px)', 
-              position: 'absolute', 
-              top: 0, 
-              height: '100%', 
-              width: '100%' 
-            }}
-          ></div>
         </div>
       </div>
-      
-      <a 
-        href="https://lp.zobal.site/click" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className={`cta-button ${showCTA ? 'active' : ''}`}
-        style={{ zIndex: 3 }}
-      >
-        VIEW PACKAGES
-      </a>
     </div>
   );
 };
