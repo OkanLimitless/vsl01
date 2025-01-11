@@ -13,33 +13,42 @@ const VideoPlayer = () => {
     
     // Add load handler to track when video is ready
     script.onload = () => {
-      const checkVideo = () => {
-        const video = document.querySelector('video');
-        if (video) {
-          setVideoLoaded(true);
+      let videoCheckInterval;
+      let videoElement;
+
+      const initializeVideo = () => {
+        videoElement = document.querySelector('video');
+        if (videoElement) {
+          // Ensure video starts from 0 seconds
+          videoElement.currentTime = 0;
           
+          // Set up time update listener
           const handleTimeUpdate = () => {
-            if (video.currentTime >= 10 && !showCTA) {
+            if (videoElement.currentTime >= 10 && !showCTA) {
               setShowCTA(true);
             }
           };
           
-          video.addEventListener('timeupdate', handleTimeUpdate);
+          videoElement.addEventListener('timeupdate', handleTimeUpdate);
           
-          // Cleanup
+          // Cleanup function
           return () => {
-            video.removeEventListener('timeupdate', handleTimeUpdate);
+            videoElement.removeEventListener('timeupdate', handleTimeUpdate);
+            clearInterval(videoCheckInterval);
           };
-        } else {
-          // If video not found yet, check again in 500ms
-          setTimeout(checkVideo, 500);
         }
+        return null;
       };
 
-      const cleanup = checkVideo();
-      return () => {
-        if (cleanup) cleanup();
-      };
+      // Check for video element every 100ms until found
+      videoCheckInterval = setInterval(() => {
+        const cleanup = initializeVideo();
+        if (cleanup) {
+          clearInterval(videoCheckInterval);
+          setVideoLoaded(true);
+          return cleanup;
+        }
+      }, 100);
     };
 
     document.head.appendChild(script);
