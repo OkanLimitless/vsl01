@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 const VideoPlayer = () => {
   const [showCTA, setShowCTA] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     // Load the smartplayer script
@@ -11,44 +10,16 @@ const VideoPlayer = () => {
     script.async = true;
     script.id = 'scr_678267b582fbade93fa58c5c';
     
-    // Add load handler to track when video is ready
+    // Add time tracking directly to the smartplayer instance
     script.onload = () => {
-      let videoCheckInterval;
-      let videoElement;
-
-      const initializeVideo = () => {
-        videoElement = document.querySelector('video');
-        if (videoElement) {
-          // Ensure video starts from 0 seconds
-          videoElement.currentTime = 0;
-          
-          // Set up time update listener
-          const handleTimeUpdate = () => {
-            if (videoElement.currentTime >= 10 && !showCTA) {
-              setShowCTA(true);
-            }
-          };
-          
-          videoElement.addEventListener('timeupdate', handleTimeUpdate);
-          
-          // Cleanup function
-          return () => {
-            videoElement.removeEventListener('timeupdate', handleTimeUpdate);
-            clearInterval(videoCheckInterval);
-          };
-        }
-        return null;
-      };
-
-      // Check for video element every 100ms until found
-      videoCheckInterval = setInterval(() => {
-        const cleanup = initializeVideo();
-        if (cleanup) {
-          clearInterval(videoCheckInterval);
-          setVideoLoaded(true);
-          return cleanup;
-        }
-      }, 100);
+      const player = window.smartPlayer;
+      if (player) {
+        player.on('timeupdate', (currentTime) => {
+          if (currentTime >= 10 && !showCTA) {
+            setShowCTA(true);
+          }
+        });
+      }
     };
 
     document.head.appendChild(script);
