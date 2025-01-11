@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
+import VideoPlayer from '../components/VideoPlayer';
 
 const ClientSideOnly = dynamic(
   () => Promise.resolve(({ children }) => <>{children}</>),
@@ -32,39 +33,7 @@ export default function Home() {
         <p className="sound-reminder">Please make sure your sound is enabled for the best experience</p>
 
         {/* Video Section */}
-        <div id="video-section" className="video-section">
-          <div className="video-container">
-            <div id="vid_player" className="video-player">
-              <div 
-                id="smartplayer-ee23f5b0-45e7-4e27-a038-209fb03d31cc" 
-                style={{ 
-                  position: 'absolute', 
-                  top: 0, 
-                  left: 0, 
-                  width: '100%', 
-                  height: '100%' 
-                }}
-              ></div>
-              <img
-                id="thumb_player"
-                src="https://images.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/656a1302a316f8000993422b/thumbnail.jpg"
-                alt="Video Thumbnail"
-                className="video-thumbnail"
-              />
-              <div className="backdrop"></div>
-            </div>
-          </div>
-          
-          <a 
-            href="https://lp.zobal.site/click" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="cta-button esconder"
-            style={{ display: 'none' }} // Initially hidden
-          >
-            VIEW PACKAGES
-          </a>
-        </div>
+        <VideoPlayer />
 
         <ClientSideOnly>
           <footer className="site-footer">
