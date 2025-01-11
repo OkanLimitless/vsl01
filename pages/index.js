@@ -35,6 +35,74 @@ export default function Home() {
         {/* Video Section */}
         <VideoPlayer />
 
+        {/* Featured In Section */}
+        <div className="featured-section">
+          <div className="featured-header">
+            <p><span>AS FEATURED IN</span></p>
+          </div>
+          <div className="logo-grid">
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fce40fa89617d681dd22e8afa71dffe72826a181d%2Fft3.png?auto=compress,format&fit=scale&w=101&h=80" 
+              alt="Featured Logo 1"
+              loading="lazy"
+            />
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F34ab16f31881281575ffdce9fe9d104b05d00c4a%2Fft4.png?auto=compress,format&fit=scale&w=84&h=84" 
+              alt="Featured Logo 2"
+              loading="lazy"
+            />
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F0f761c6519a78db8280d626afad111d6a0c595c8%2Fft2.png?auto=compress,format&fit=scale&w=89&h=85" 
+              alt="Featured Logo 3"
+              loading="lazy"
+            />
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fc03d3b4b3c5bfc6ca2e350f9e465fb8842d94462%2Fft1.png?auto=compress,format&fit=scale&w=115&h=90" 
+              alt="Featured Logo 4"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        {/* Scientific References Section */}
+        <div className="references-section">
+          <div className="references-header">
+            <p><span>Scientific References</span></p>
+          </div>
+          <div className="references-grid">
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F439bb6267e5605b4e68886f835f0abb3ac073514%2Fref_2.png?auto=compress,format&fit=scale&w=308&h=52" 
+              alt="Scientific Reference 1"
+              loading="lazy"
+            />
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fce9ee87f492e279f28512c69c92705d30cebf37b%2FJournal-sexual-logo-removebg-preview.png?auto=compress,format&fit=scale&w=379&h=76" 
+              alt="Scientific Reference 2"
+              loading="lazy"
+            />
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F617e8eb8d2ab9fbd29f51df8e43eb1b04761392f%2Fpasted%20image%200%20%282%29.png?auto=compress,format&fit=scale&w=243&h=81" 
+              alt="Scientific Reference 3"
+              loading="lazy"
+            />
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F42e00510186f96a3f459bd6e498e64d349ecd53b%2FMIT-Logo.png?auto=compress,format&fit=scale&w=222&h=125" 
+              alt="Scientific Reference 4"
+              loading="lazy"
+            />
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fdb446f6354d97436079a6a9233aff4ebbe35ef0d%2Fref_1.png?auto=compress,format&fit=scale&w=187&h=64" 
+              alt="Scientific Reference 5"
+              loading="lazy"
+            />
+            <img 
+              src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fd53981d166bcb27485e51a589ddf60006c1f8a89%2Fref_3.png?auto=compress,format&fit=scale&w=264&h=73" 
+              alt="Scientific Reference 6"
+              loading="lazy"
+            />
+          </div>
+        </div>
+
         <ClientSideOnly>
           <footer className="site-footer">
             <div className="footer-content">
@@ -289,6 +357,88 @@ export default function Home() {
           line-height: 1.5;
           max-width: 800px;
           margin: 0 auto;
+        }
+
+        /* Featured Section Styles */
+        .featured-section {
+          margin: 4rem auto;
+          max-width: 1200px;
+          padding: 0 1rem;
+        }
+
+        .featured-header {
+          text-align: center;
+          margin-bottom: 2rem;
+        }
+
+        .featured-header span {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #ffffff;
+          text-transform: uppercase;
+        }
+
+        .logo-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          gap: 2rem;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .logo-grid img {
+          width: 100%;
+          height: auto;
+          max-width: 200px;
+          margin: 0 auto;
+          display: block;
+          filter: grayscale(100%);
+          transition: filter 0.3s ease;
+        }
+
+        .logo-grid img:hover {
+          filter: grayscale(0%);
+        }
+
+        /* References Section Styles */
+        .references-section {
+          margin: 4rem auto;
+          max-width: 1200px;
+          padding: 0 1rem;
+        }
+
+        .references-header {
+          text-align: center;
+          margin-bottom: 2rem;
+        }
+
+        .references-header span {
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #ffffff;
+          text-transform: uppercase;
+        }
+
+        .references-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 2rem;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .references-grid img {
+          width: 100%;
+          height: auto;
+          max-width: 300px;
+          margin: 0 auto;
+          display: block;
+          filter: grayscale(100%);
+          transition: filter 0.3s ease;
+        }
+
+        .references-grid img:hover {
+          filter: grayscale(0%);
         }
 
         @media (max-width: 768px) {
