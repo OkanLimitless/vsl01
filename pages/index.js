@@ -29,7 +29,7 @@ export default function Home() {
       </Head>
       
       <div className="notification-bar">
-        <p>⚠️ The last day this presentation will be available: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+        <p>⚠️ Last Day To Watch This Presentation: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
       </div>
       <div className="container">
         <h1 className="title">PRESS THIS <span style={{backgroundColor: '#ff0000'}}>"ERECTION BUTTON"</span> TO START ACTING LIKE A PORN ACTOR</h1>
