@@ -5,15 +5,30 @@ const VideoPlayer = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
+    // Ensure video container exists
+    const videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
+    if (!videoContainer) return;
+
     // Load the smartplayer script
     const script = document.createElement('script');
     script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
     script.async = true;
+    script.onload = () => {
+      // Check if smartplayer initialized properly
+      if (typeof smartplayer === 'undefined') {
+        console.error('Smartplayer failed to initialize');
+        return;
+      }
+    };
     document.head.appendChild(script);
 
     const handleTimeUpdate = () => {
-      if (videoRef.current && videoRef.current.currentTime >= 10 && !showCTA) {
-        setShowCTA(true);
+      try {
+        if (videoRef.current && videoRef.current.currentTime >= 10 && !showCTA) {
+          setShowCTA(true);
+        }
+      } catch (error) {
+        console.error('Error in timeupdate handler:', error);
       }
     };
 
