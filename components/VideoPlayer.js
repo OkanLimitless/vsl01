@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const VideoPlayer = () => {
   const [showCTA, setShowCTA] = useState(false);
-  const SECONDS_TO_DISPLAY = 2285; // 38 minutes and 5 seconds
+  const videoRef = useRef(null);
 
   useEffect(() => {
     // Load the smartplayer script
@@ -11,40 +11,30 @@ const VideoPlayer = () => {
     script.async = true;
     document.head.appendChild(script);
 
-    // Cleanup the script on component unmount
-    return () => {
-      document.head.removeChild(script);
+    const handleTimeUpdate = () => {
+      if (videoRef.current && videoRef.current.currentTime >= 10 && !showCTA) {
+        setShowCTA(true);
+      }
     };
-  }, []);
-
-  useEffect(() => {
-    const alreadyDisplayedKey = `ctaDisplayed${SECONDS_TO_DISPLAY}`;
-    const alreadyDisplayed = localStorage.getItem(alreadyDisplayedKey);
-    let attempts = 0;
-    const maxAttempts = 10;
 
     const checkVideoPlayer = () => {
-      if (typeof smartplayer === 'undefined' || !(smartplayer.instances && smartplayer.instances.length)) {
-        if (attempts >= maxAttempts) return;
-        attempts++;
-        setTimeout(checkVideoPlayer, 1000);
-        return;
+      if (typeof smartplayer !== 'undefined' && smartplayer.instances && smartplayer.instances.length) {
+        const player = smartplayer.instances[0];
+        videoRef.current = player.video;
+        player.video.addEventListener('timeupdate', handleTimeUpdate);
+      } else {
+        setTimeout(checkVideoPlayer, 500);
       }
-
-      const player = smartplayer.instances[0];
-      player.on('timeupdate', () => {
-        if (player.video.currentTime >= SECONDS_TO_DISPLAY && !showCTA) {
-          setShowCTA(true);
-          localStorage.setItem(alreadyDisplayedKey, 'true');
-        }
-      });
     };
 
-    if (alreadyDisplayed === 'true') {
-      setShowCTA(true);
-    } else {
-      checkVideoPlayer();
-    }
+    checkVideoPlayer();
+
+    return () => {
+      document.head.removeChild(script);
+      if (videoRef.current) {
+        videoRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+      }
+    };
   }, [showCTA]);
 
   return (
