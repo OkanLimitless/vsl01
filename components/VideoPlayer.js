@@ -1,54 +1,41 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const VideoPlayer = () => {
   const [showCTA, setShowCTA] = useState(false);
-  const videoRef = useRef(null);
 
   useEffect(() => {
-    // Ensure video container exists
-    const videoContainer = document.getElementById('vid_677444f834e21f48aa3179b8');
-    if (!videoContainer) return;
-
     // Load the smartplayer script
     const script = document.createElement('script');
     script.src = 'https://scripts.converteai.net/ee23f5b0-45e7-4e27-a038-209fb03d31cc/players/677444f834e21f48aa3179b8/player.js';
     script.async = true;
-    script.onload = () => {
-      // Check if smartplayer initialized properly
-      if (typeof smartplayer === 'undefined') {
-        console.error('Smartplayer failed to initialize');
-        return;
-      }
-    };
     document.head.appendChild(script);
 
-    const handleTimeUpdate = () => {
-      try {
-        if (videoRef.current && videoRef.current.currentTime >= 10 && !showCTA) {
-          setShowCTA(true);
-        }
-      } catch (error) {
-        console.error('Error in timeupdate handler:', error);
-      }
-    };
-
-    const checkVideoPlayer = () => {
-      if (typeof smartplayer !== 'undefined' && smartplayer.instances && smartplayer.instances.length) {
-        const player = smartplayer.instances[0];
-        videoRef.current = player.video;
-        player.video.addEventListener('timeupdate', handleTimeUpdate);
+    const checkVideo = () => {
+      const video = document.querySelector('video');
+      if (video) {
+        const handleTimeUpdate = () => {
+          if (video.currentTime >= 10 && !showCTA) {
+            setShowCTA(true);
+          }
+        };
+        
+        video.addEventListener('timeupdate', handleTimeUpdate);
+        
+        // Cleanup
+        return () => {
+          video.removeEventListener('timeupdate', handleTimeUpdate);
+        };
       } else {
-        setTimeout(checkVideoPlayer, 500);
+        // If video not found yet, check again in 500ms
+        setTimeout(checkVideo, 500);
       }
     };
 
-    checkVideoPlayer();
+    const cleanup = checkVideo();
 
     return () => {
       document.head.removeChild(script);
-      if (videoRef.current) {
-        videoRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-      }
+      if (cleanup) cleanup();
     };
   }, [showCTA]);
 
