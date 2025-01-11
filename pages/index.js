@@ -429,6 +429,10 @@ export default function Home() {
           text-align: center;
           margin-bottom: 2rem;
           padding: 1rem;
+          background: black;
+          display: inline-block;
+          border-radius: var(--border-radius);
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
         .references-header span {
@@ -437,6 +441,7 @@ export default function Home() {
           color: white;
           text-transform: uppercase;
           letter-spacing: 1px;
+          padding: 0.5rem 1rem;
         }
 
         .references-grid {
