@@ -50,12 +50,6 @@ const VideoPlayer = () => {
               width: '100%' 
             }}
           ></div>
-          {!videoLoaded && (
-            <div className="loading-overlay">
-              <div className="loading-spinner"></div>
-              <p>Loading video...</p>
-            </div>
-          )}
         </div>
       </div>
       
