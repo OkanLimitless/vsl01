@@ -7,6 +7,23 @@ const VideoPlayer = () => {
     script.src = 'https://scripts.converteai.net/fa037796-870e-4d05-a5a0-79244e13ce7f/players/6782768082fbade93fa5911a/player.js';
     script.async = true;
     script.id = 'scr_6782768082fbade93fa5911a';
+    
+    // Add event listener for when script loads
+    script.onload = () => {
+      // Wait for iframe to be created
+      const checkVideo = setInterval(() => {
+        const iframe = document.querySelector('#vid_6782768082fbade93fa5911a iframe');
+        if (iframe) {
+          clearInterval(checkVideo);
+          // Access the video element inside iframe
+          const video = iframe.contentWindow.document.querySelector('video');
+          if (video) {
+            video.currentTime = 30 * 60; // Skip to 30 minutes
+          }
+        }
+      }, 500); // Check every 500ms
+    };
+
     document.head.appendChild(script);
 
     return () => {
