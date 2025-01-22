@@ -437,12 +437,13 @@ export default function Home() {
         }
 
         .research-header {
-          background: white;
+          background: #111;
           padding: 1rem 2rem;
           display: flex;
           align-items: center;
           gap: 1rem;
           width: 100%;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .doctor-image {
@@ -453,13 +454,13 @@ export default function Home() {
         }
 
         .research-header span {
-          color: #333;
+          color: white;
           font-size: 1.1rem;
           font-weight: 500;
         }
 
         .main-title {
-          background: white;
+          background: #111;
           padding: 2rem;
           text-align: center;
           width: 100%;
@@ -467,7 +468,7 @@ export default function Home() {
 
         .main-title h1 {
           font-size: 2.5rem;
-          color: #333;
+          color: white;
           max-width: 800px;
           margin: 0 auto;
           line-height: 1.3;
@@ -486,6 +487,7 @@ export default function Home() {
           border-radius: 8px;
           text-align: center;
           font-size: 1.1rem;
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .alert-text {
