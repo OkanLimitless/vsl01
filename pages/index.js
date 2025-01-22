@@ -32,12 +32,30 @@ export default function Home() {
         <p>⚠️ Last Day To Watch This Presentation: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
       </div>
       <div className="container">
-        <h1 className="title">
-          🔊 MAKE SURE YOUR SOUND IS ON
-        </h1>
+        {/* Research Group Header */}
+        <div className="research-header">
+          <img 
+            src="https://media.atomicatpages.net/u/xvMWv9TeqRbfe0S75EQu53KtBf33/Pictures/ywLrJX6407750.webp" 
+            alt="Research Group"
+            className="doctor-image"
+          />
+          <span>The Male Performance Research Group</span>
+        </div>
+
+        {/* Main Title */}
+        <div className="main-title">
+          <h1>
+            Is a Hidden <span className="highlight">"Performance Blocker"</span> Holding You Back?
+          </h1>
+        </div>
 
         {/* Video Section */}
         <VideoPlayer />
+        
+        {/* Alert Banner under video */}
+        <div className="video-alert">
+          <span className="alert-text">MEN'S HEALTH ALERT!</span> In the next 3 minutes, <span className="alert-emphasis">discover what could change your life forever!</span>
+        </div>
 
         {/* Featured In Section */}
         <div className="featured-section">
@@ -110,7 +128,7 @@ export default function Home() {
         <ClientSideOnly>
           <footer className="site-footer">
             <div className="footer-content">
-              <p className="copyright">&copy; 2024 EP ® - All Rights Reserved</p>
+              <p className="copyright">&copy; 2025 EP ® - All Rights Reserved</p>
               <div className="footer-links">
                 <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a>
                 <span className="divider">|</span>
@@ -415,6 +433,91 @@ export default function Home() {
         @media (max-width: 480px) {
           .title {
             font-size: 1.5rem;
+          }
+        }
+
+        .research-header {
+          background: white;
+          padding: 1rem 2rem;
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          width: 100%;
+        }
+
+        .doctor-image {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .research-header span {
+          color: #333;
+          font-size: 1.1rem;
+          font-weight: 500;
+        }
+
+        .main-title {
+          background: white;
+          padding: 2rem;
+          text-align: center;
+          width: 100%;
+        }
+
+        .main-title h1 {
+          font-size: 2.5rem;
+          color: #333;
+          max-width: 800px;
+          margin: 0 auto;
+          line-height: 1.3;
+        }
+
+        .highlight {
+          color: #ff6b00;
+        }
+
+        .video-alert {
+          background: #000;
+          color: white;
+          padding: 1rem;
+          margin: 1rem auto;
+          max-width: 800px;
+          border-radius: 8px;
+          text-align: center;
+          font-size: 1.1rem;
+        }
+
+        .alert-text {
+          color: #ff6b00;
+          font-weight: bold;
+        }
+
+        .alert-emphasis {
+          font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+          .main-title h1 {
+            font-size: 1.8rem;
+          }
+
+          .research-header {
+            padding: 0.8rem 1rem;
+          }
+
+          .doctor-image {
+            width: 32px;
+            height: 32px;
+          }
+
+          .research-header span {
+            font-size: 0.9rem;
+          }
+
+          .video-alert {
+            font-size: 0.9rem;
+            padding: 0.8rem;
           }
         }
       `}</style>
