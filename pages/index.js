@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Erection Button</title>
+        <title>Discovery</title>
         <link rel="icon" href="/favicon.ico" />
         <style>{`
           :root {
