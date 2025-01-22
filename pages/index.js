@@ -437,7 +437,6 @@ export default function Home() {
         }
 
         .research-header {
-          background: #111;
           padding: 1rem 2rem;
           display: flex;
           align-items: center;
@@ -460,7 +459,6 @@ export default function Home() {
         }
 
         .main-title {
-          background: #111;
           padding: 2rem;
           text-align: center;
           width: 100%;
