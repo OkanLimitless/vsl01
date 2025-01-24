@@ -1,7 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const VideoPlayer = () => {
+  const mensHealthRef = useRef(null);
+
   useEffect(() => {
+    // Function to handle CTA visibility
+    const handleCTAVisibility = (isVisible) => {
+      if (mensHealthRef.current) {
+        mensHealthRef.current.style.display = isVisible ? 'none' : 'block';
+      }
+    };
+
+    // Set up observer for CTA element
+    const observerInterval = setInterval(() => {
+      const cta = document.querySelector('.callaction_6790dfc60f8856647ba39eee_0');
+      if (cta) {
+        handleCTAVisibility(!cta.classList.contains('smartplayer-hide'));
+      }
+    }, 1000);
+
     // Load the smartplayer script for the new video
     const script = document.createElement('script');
     script.src = 'https://scripts.converteai.net/3b5f2e0a-d4d5-4b09-832d-cc04a06c6b74/players/6790dfc60f8856647ba39eee/player.js';
@@ -11,12 +28,13 @@ const VideoPlayer = () => {
 
     return () => {
       document.head.removeChild(script);
+      clearInterval(observerInterval);
     };
   }, []);
 
   return (
-    <div className="video-section" style={{ position: 'relative' }}>
-      <div className="video-container" style={{ marginBottom: '20px' }}>
+    <div className="video-section">
+      <div className="video-container">
         <div 
           id="vid_6790dfc60f8856647ba39eee"
           style={{ position: 'relative', width: '100%', padding: '56.25% 0 0' }}
@@ -48,40 +66,17 @@ const VideoPlayer = () => {
           />
         </div>
       </div>
-      <style>{`
-        .smartplayer-call-action.smartplayer-hide {
-          display: none;
-        }
-        .smartplayer-call-action.callaction_6790dfc60f8856647ba39eee_0 {
-          text-align: center;
-          padding: 20px 10px;
-          position: relative;
-          z-index: 1;
-        }
-        .smartplayer-call-action.callaction_6790dfc60f8856647ba39eee_0 a.smartplayer-call-action--link {
-          background-color: #00c110;
-          color: #FFFFFF;
-          padding: 1em 3em;
-          display: inline-block;
-          border-radius: 0.4em;
-          font-size: 22px;
-          line-height: 1;
-          font-weight: 600;
-          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
-          text-decoration: none;
-          transition: all 0.3s ease;
-        }
-        .smartplayer-call-action.callaction_6790dfc60f8856647ba39eee_0 a.smartplayer-call-action--link:hover {
-          background-color: #1890ff;
-          color: #ffffff;
-          text-decoration: none;
-        }
-        /* Ensure content below CTA shifts down smoothly */
-        #callaction_6790dfc60f8856647ba39eee_0 {
-          margin-bottom: 20px;
-          transition: margin 0.3s ease;
-        }
-      `}</style>
+      <div
+        ref={mensHealthRef}
+        className="mens-health-alert"
+        style={{
+          textAlign: 'center',
+          padding: '20px',
+          marginTop: '20px'
+        }}
+      >
+        {"Men's Health Alert"}
+      </div>
     </div>
   );
 };
