@@ -15,8 +15,8 @@ const VideoPlayer = () => {
   }, []);
 
   return (
-    <div className="video-section">
-      <div className="video-container">
+    <div className="video-section" style={{ position: 'relative' }}>
+      <div className="video-container" style={{ marginBottom: '20px' }}>
         <div 
           id="vid_6790dfc60f8856647ba39eee"
           style={{ position: 'relative', width: '100%', padding: '56.25% 0 0' }}
@@ -48,6 +48,40 @@ const VideoPlayer = () => {
           />
         </div>
       </div>
+      <style>{`
+        .smartplayer-call-action.smartplayer-hide {
+          display: none;
+        }
+        .smartplayer-call-action.callaction_6790dfc60f8856647ba39eee_0 {
+          text-align: center;
+          padding: 20px 10px;
+          position: relative;
+          z-index: 1;
+        }
+        .smartplayer-call-action.callaction_6790dfc60f8856647ba39eee_0 a.smartplayer-call-action--link {
+          background-color: #00c110;
+          color: #FFFFFF;
+          padding: 1em 3em;
+          display: inline-block;
+          border-radius: 0.4em;
+          font-size: 22px;
+          line-height: 1;
+          font-weight: 600;
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+          text-decoration: none;
+          transition: all 0.3s ease;
+        }
+        .smartplayer-call-action.callaction_6790dfc60f8856647ba39eee_0 a.smartplayer-call-action--link:hover {
+          background-color: #1890ff;
+          color: #ffffff;
+          text-decoration: none;
+        }
+        /* Ensure content below CTA shifts down smoothly */
+        #callaction_6790dfc60f8856647ba39eee_0 {
+          margin-bottom: 20px;
+          transition: margin 0.3s ease;
+        }
+      `}</style>
     </div>
   );
 };
