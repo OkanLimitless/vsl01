@@ -4,9 +4,9 @@ const VideoPlayer = () => {
   useEffect(() => {
     // Load the smartplayer script for the new video
     const script = document.createElement('script');
-    script.src = 'https://scripts.converteai.net/3b5f2e0a-d4d5-4b09-832d-cc04a06c6b74/players/678fe5eedc2aaba0992bb0f1/player.js';
+    script.src = 'https://scripts.converteai.net/3b5f2e0a-d4d5-4b09-832d-cc04a06c6b74/players/6790dfc60f8856647ba39eee/player.js';
     script.async = true;
-    script.id = 'scr_678fe5eedc2aaba0992bb0f1';
+    script.id = 'scr_6790dfc60f8856647ba39eee';
     document.head.appendChild(script);
 
     return () => {
@@ -18,12 +18,12 @@ const VideoPlayer = () => {
     <div className="video-section">
       <div className="video-container">
         <div 
-          id="vid_678fe5eedc2aaba0992bb0f1" 
+          id="vid_6790dfc60f8856647ba39eee"
           style={{ position: 'relative', width: '100%', padding: '56.25% 0 0' }}
         >
-          <img 
-            id="thumb_678fe5eedc2aaba0992bb0f1"
-            src="https://images.converteai.net/3b5f2e0a-d4d5-4b09-832d-cc04a06c6b74/players/678fe5eedc2aaba0992bb0f1/thumbnail.jpg"
+          <img
+            id="thumb_6790dfc60f8856647ba39eee"
+            src="https://images.converteai.net/3b5f2e0a-d4d5-4b09-832d-cc04a06c6b74/players/6790dfc60f8856647ba39eee/thumbnail.jpg"
             style={{ 
               position: 'absolute',
               top: 0,
@@ -36,7 +36,7 @@ const VideoPlayer = () => {
             alt="thumbnail"
           />
           <div 
-            id="backdrop_678fe5eedc2aaba0992bb0f1"
+            id="backdrop_6790dfc60f8856647ba39eee"
             style={{
               WebkitBackdropFilter: 'blur(5px)',
               backdropFilter: 'blur(5px)',
