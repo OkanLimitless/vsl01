@@ -1,21 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 
 const VideoPlayer = () => {
-  const mensHealthRef = useRef(null);
-
   useEffect(() => {
-    // Function to handle CTA visibility
-    const handleCTAVisibility = (isVisible) => {
-      if (mensHealthRef.current) {
-        mensHealthRef.current.style.display = isVisible ? 'none' : 'block';
-      }
-    };
-
     // Set up observer for CTA element
     const observerInterval = setInterval(() => {
       const cta = document.querySelector('.callaction_6790dfc60f8856647ba39eee_0');
-      if (cta) {
-        handleCTAVisibility(!cta.classList.contains('smartplayer-hide'));
+      const alertElement = document.querySelector('.video-alert');
+      if (cta && alertElement) {
+        alertElement.style.display = !cta.classList.contains('smartplayer-hide') ? 'none' : 'block';
       }
     }, 1000);
 
@@ -65,17 +57,6 @@ const VideoPlayer = () => {
             }}
           />
         </div>
-      </div>
-      <div
-        ref={mensHealthRef}
-        className="mens-health-alert"
-        style={{
-          textAlign: 'center',
-          padding: '20px',
-          marginTop: '20px'
-        }}
-      >
-        {"Men's Health Alert"}
       </div>
     </div>
   );
