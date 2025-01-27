@@ -206,6 +206,9 @@ export default function Lead2() {
             background: #000;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
 
           .top-notification {
@@ -218,18 +221,21 @@ export default function Lead2() {
           }
 
           .content-wrapper {
+            width: 100%;
             max-width: 800px;
             margin: 0 auto;
-            padding: 0;
-            background: #fff;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
           }
 
           .title-box {
+            width: 100%;
             background: #fff;
-            border: 2px solid #000;
             padding: 15px;
             text-align: center;
-            margin-bottom: 0;
+            margin: 0;
           }
 
           .title-box h1 {
@@ -245,92 +251,129 @@ export default function Lead2() {
           }
 
           .discount-header {
+            width: 100%;
             background: #ff0000;
             color: #fff;
             text-align: center;
-            padding: 15px;
-            margin-top: 0;
+            padding: 10px;
+            margin: 0;
           }
 
           .discount-header h2 {
             color: #ffff00;
             font-size: 24px;
             margin: 0;
+            font-weight: bold;
+          }
+
+          .discount-header p {
+            margin: 5px 0 0;
+            color: white;
+            font-size: 16px;
           }
 
           .package-cards {
+            width: 100%;
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            padding: 20px;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 15px;
             background: #fff;
           }
 
           .package-card {
             flex: 1;
-            max-width: 250px;
             background: #fff;
             border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
+          }
+
+          .package-card img {
+            max-width: 100%;
+            height: auto;
           }
 
           .buy-now-button {
             background: #00c110;
             color: white;
             text-align: center;
-            padding: 12px;
+            padding: 10px;
             display: block;
             text-decoration: none;
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: bold;
             border-radius: 5px;
             margin: 10px 0;
           }
 
           .timer-section {
+            width: 100%;
             text-align: center;
-            padding: 20px;
-            background: #000;
-            color: #fff;
+            padding: 20px 0;
+            color: white;
           }
 
           .timer {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-top: 10px;
           }
 
           .time-unit {
             background: #ff6b00;
-            padding: 10px 15px;
+            color: white;
+            padding: 8px 15px;
             border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
+          }
+
+          .time-label {
+            font-size: 12px;
+            margin-top: 2px;
           }
 
           .guarantee-section {
+            width: 100%;
             text-align: center;
-            padding: 30px;
+            padding: 20px 0;
             background: #000;
-            color: #fff;
+          }
+
+          .guarantee-section img {
+            max-width: 100%;
+            height: auto;
           }
 
           .references-section {
+            width: 100%;
             background: #fff;
             padding: 20px;
             text-align: center;
           }
 
+          .reference-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+          }
+
+          .reference-logos img {
+            height: 40px;
+            object-fit: contain;
+          }
+
           @media (max-width: 768px) {
             .package-cards {
               flex-direction: column;
-              align-items: center;
             }
 
             .package-card {
-              width: 100%;
-              max-width: 100%;
+              margin-bottom: 15px;
             }
           }
         `}</style>
