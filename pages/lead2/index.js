@@ -80,45 +80,38 @@ export default function Lead2() {
 
           {showCTA && (
             <>
-              <div className="attention-arrows">
-                <div className="arrow">⬇️</div>
-                <div className="arrow">⬇️</div>
-                <div className="arrow">⬇️</div>
+              <div className="live-stats">
+                <div className="stock-alert">
+                  ⚠️ Warning: Only <span className="highlight">{bottlesLeft}</span> bottles left in stock
+                </div>
+                
+                <div className="viewers-bar">
+                  <div className="pulse-dot"></div>
+                  {viewerCount} people watching right now
+                </div>
+
+                <div className="recent-purchases">
+                  {recentPurchases.map((purchase, index) => (
+                    <div key={index} className="purchase-notification">
+                      🔥 {purchase}
+                    </div>
+                  ))}
+                </div>
               </div>
-              
-              <div className="cta-wrapper">
-                <div className="live-stats">
-                  <div className="stock-alert">
-                    <span className="warning-icon">⚠️</span>
-                    Warning: Only <span className="highlight">{bottlesLeft}</span> bottles left in stock
-                  </div>
-                  <div className="viewers-bar">
-                    <span className="pulse-dot"></span>
-                    <span className="live-count">{viewerCount}</span> people watching right now
-                  </div>
-                  <div className="recent-sales">
-                    {recentPurchases.map((purchase, index) => (
-                      <div key={index} className="notification" style={{animationDelay: `${index * 4}s`}}>
-                        🔥 {purchase}
-                      </div>
-                    ))}
-                  </div>
-                </div>
 
-                <a 
-                  href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
-                  className="cta-button pulse"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  CLICK HERE TO GET YOUR BOTTLE
-                  <div className="sub-text">While Supplies Last</div>
-                </a>
+              <a 
+                href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
+                className="cta-button pulse"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                CLICK HERE TO GET YOUR BOTTLE
+                <div className="sub-text">While Supplies Last</div>
+              </a>
 
-                <div className="trust-badges">
-                  <div className="secure-badge">🔒 Secure 256-bit SSL Encryption</div>
-                  <div className="guarantee">✓ 180-Day Money Back Guarantee</div>
-                </div>
+              <div className="trust-badges">
+                <div className="secure-badge">🔒 Secure 256-bit SSL Encryption</div>
+                <div className="guarantee">✓ 180-Day Money Back Guarantee</div>
               </div>
             </>
           )}
@@ -260,164 +253,125 @@ export default function Lead2() {
             object-fit: contain;
           }
 
-          .cta-wrapper {
-            background: #000;
-            padding: 20px;
-            text-align: center;
-          }
-
           .live-stats {
             margin-bottom: 20px;
           }
 
           .stock-alert {
-            background: #ff0000;
+            background: #ff3b3b;
             color: white;
-            padding: 12px;
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite;
-          }
-
-          .warning-icon {
+            padding: 12px 20px;
             font-size: 20px;
-            margin-right: 8px;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 4px;
           }
 
           .highlight {
-            color: #ffff00;
+            color: #fff;
             font-weight: bold;
           }
 
           .viewers-bar {
-            background: #1a1a1a;
-            color: white;
-            padding: 10px;
-            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            padding: 10px;
+            font-size: 20px;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 15px 0;
           }
 
           .pulse-dot {
             width: 8px;
             height: 8px;
-            background: #ff0000;
+            background: #ff3b3b;
             border-radius: 50%;
-            animation: pulse 1s infinite;
+            animation: pulse 1.5s ease-in-out infinite;
           }
 
-          .live-count {
-            color: #ff0000;
-            font-weight: bold;
+          .recent-purchases {
+            margin: 15px 0;
           }
 
-          .recent-sales {
+          .purchase-notification {
             color: white;
-            font-size: 14px;
-            margin-top: 10px;
-          }
-
-          .notification {
-            position: absolute;
-            white-space: nowrap;
-            animation: slideIn 12s linear infinite;
+            font-size: 18px;
+            padding: 8px;
+            margin: 8px 0;
+            opacity: 0.9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
           }
 
           .cta-button {
             display: inline-block;
-            background: linear-gradient(to bottom, #00d40e, #00a80b);
+            background: #2ecc71;
             color: white;
             font-size: 28px;
             font-weight: bold;
-            padding: 25px 50px;
-            border-radius: 12px;
+            padding: 20px 40px;
+            border-radius: 8px;
             text-decoration: none;
             text-transform: uppercase;
-            box-shadow: 0 5px 15px rgba(0,255,0,0.3);
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
             transition: all 0.3s ease;
-            animation: pulse 2s infinite;
           }
 
           .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,255,0,0.4);
-            background: linear-gradient(to bottom, #00e40f, #00b80c);
-            color: white;
-            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+            background: #27ae60;
           }
 
           .sub-text {
             font-size: 16px;
             opacity: 0.9;
             margin-top: 5px;
-            text-transform: none;
           }
 
           .trust-badges {
-            margin-top: 20px;
-            color: white;
             display: flex;
             justify-content: center;
-            gap: 20px;
-            font-size: 14px;
+            align-items: center;
+            gap: 30px;
+            margin-top: 20px;
+            color: white;
+            font-size: 16px;
           }
 
           @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-          }
-
-          @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-          }
-
-          @keyframes slideIn {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.5; }
+            100% { transform: scale(1); opacity: 1; }
           }
 
           @media (max-width: 768px) {
-            .featured-logos img,
-            .scientific-logos img {
-              height: 30px;
+            .stock-alert,
+            .viewers-bar {
+              font-size: 16px;
+              padding: 10px;
+            }
+
+            .purchase-notification {
+              font-size: 16px;
             }
 
             .cta-button {
-              font-size: 20px;
+              font-size: 22px;
               padding: 15px 30px;
             }
-          }
 
-          .attention-arrows {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-          }
-
-          .arrow {
-            font-size: 40px;
-            animation: bounce 1s infinite;
-          }
-
-          .arrow:nth-child(2) {
-            animation-delay: 0.2s;
-          }
-
-          .arrow:nth-child(3) {
-            animation-delay: 0.4s;
-          }
-
-          @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(20px); }
+            .trust-badges {
+              flex-direction: column;
+              gap: 15px;
+              font-size: 14px;
+            }
           }
         `}</style>
       </div>
