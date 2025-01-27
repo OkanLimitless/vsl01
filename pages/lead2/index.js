@@ -12,7 +12,13 @@ export default function Lead2() {
   const [viewerCount, setViewerCount] = useState(390);
   const [showCTA, setShowCTA] = useState(false);
   const [bottlesLeft, setBottlesLeft] = useState(15);
-  const [recentPurchases, setRecentPurchases] = useState(['John from New York', 'Jane from Chicago', 'Bob from Boston']);
+  const [recentPurchases] = useState([
+    'John from New York just purchased 1 bottle - $79',
+    'Sarah from California ordered 6 bottles - Best Value $49/each',
+    'Mike from Texas got 3 bottles - $69/each',
+    'Emma from Florida secured 1 bottle pack',
+    'David from Chicago chose 6 bottles package'
+  ]);
 
   useEffect(() => {
     // Viewer counter logic
@@ -151,6 +157,7 @@ export default function Lead2() {
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: white;
           }
 
           .top-notification {
@@ -170,8 +177,7 @@ export default function Lead2() {
             width: 100%;
             max-width: 800px;
             margin: 20px auto;
-            background: #fff;
-            border: 2px solid #000;
+            padding: 0 20px;
           }
 
           .title-section {
@@ -258,13 +264,13 @@ export default function Lead2() {
           }
 
           .stock-alert {
+            width: 100%;
             background: #ff3b3b;
             color: white;
-            padding: 12px 20px;
-            font-size: 20px;
+            padding: 15px;
+            font-size: 22px;
             text-align: center;
             margin: 15px 0;
-            border-radius: 4px;
           }
 
           .highlight {
@@ -273,52 +279,52 @@ export default function Lead2() {
           }
 
           .viewers-bar {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            padding: 10px;
-            font-size: 20px;
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            padding: 12px;
+            font-size: 22px;
             margin: 15px 0;
           }
 
           .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background: #ff3b3b;
+            width: 10px;
+            height: 10px;
+            background: #ff0000;
             border-radius: 50%;
             animation: pulse 1.5s ease-in-out infinite;
           }
 
           .recent-purchases {
+            width: 100%;
             margin: 15px 0;
           }
 
           .purchase-notification {
+            width: 100%;
             color: white;
-            font-size: 18px;
-            padding: 8px;
-            margin: 8px 0;
-            opacity: 0.9;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 20px;
+            padding: 8px 0;
+            margin: 5px 0;
+            text-align: left;
           }
 
           .cta-button {
-            display: inline-block;
+            display: block;
+            width: 100%;
+            max-width: 600px;
+            margin: 30px auto;
             background: #2ecc71;
             color: white;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
-            padding: 20px 40px;
-            border-radius: 8px;
+            padding: 25px 20px;
+            border-radius: 12px;
             text-decoration: none;
+            text-align: center;
             text-transform: uppercase;
-            margin: 20px 0;
             box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
             transition: all 0.3s ease;
           }
@@ -330,19 +336,19 @@ export default function Lead2() {
           }
 
           .sub-text {
-            font-size: 16px;
-            opacity: 0.9;
-            margin-top: 5px;
+            font-size: 20px;
+            margin-top: 8px;
+            text-transform: none;
           }
 
           .trust-badges {
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px;
-            margin-top: 20px;
-            color: white;
-            font-size: 16px;
+            gap: 40px;
+            margin: 30px 0;
+            font-size: 18px;
           }
 
           @keyframes pulse {
@@ -352,10 +358,13 @@ export default function Lead2() {
           }
 
           @media (max-width: 768px) {
+            .content-box {
+              padding: 0 15px;
+            }
+
             .stock-alert,
             .viewers-bar {
-              font-size: 16px;
-              padding: 10px;
+              font-size: 18px;
             }
 
             .purchase-notification {
@@ -363,14 +372,19 @@ export default function Lead2() {
             }
 
             .cta-button {
-              font-size: 22px;
-              padding: 15px 30px;
+              font-size: 24px;
+              padding: 20px 15px;
+            }
+
+            .sub-text {
+              font-size: 16px;
             }
 
             .trust-badges {
-              flex-direction: column;
-              gap: 15px;
-              font-size: 14px;
+              flex-direction: row;
+              flex-wrap: wrap;
+              gap: 20px;
+              font-size: 16px;
             }
           }
         `}</style>
