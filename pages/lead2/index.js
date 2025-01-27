@@ -131,6 +131,12 @@ export default function Lead2() {
               <div className="live-stats">
                 <div className="stock-alert">
                   ⚠️ Warning: Only <span className="highlight">{bottlesLeft}</span> bottles left in stock
+                  <div className="scroll-indicator">
+                    <span>Scroll Down To Secure Your Bottle</span>
+                    <div className="chevron"></div>
+                    <div className="chevron"></div>
+                    <div className="chevron"></div>
+                  </div>
                 </div>
                 
                 <div className="viewers-bar">
@@ -138,15 +144,21 @@ export default function Lead2() {
                   <span className="highlight">{viewerCount}</span> people watching right now
                 </div>
 
-                <div className="urgency-messages">
-                  <div className="timer-message">
-                    ⏰ Special Offer Ends In: <span className="countdown">23:59:59</span>
-                  </div>
-                  <div className="stock-message">
-                    📊 High Demand: <span className="highlight">87%</span> of Today's Stock Sold
-                  </div>
-                  <div className="discount-message">
-                    💰 Save Up To <span className="highlight">$780</span> Today Only
+                <div className="real-time-activity">
+                  <div className="activity-header">🔴 LIVE ACTIVITY</div>
+                  <div className="activity-stats">
+                    <div className="stat-item">
+                      <span className="stat-number">2,847</span>
+                      <span className="stat-label">Bottles Sold Today</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-number">94%</span>
+                      <span className="stat-label">Success Rate</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-number">180</span>
+                      <span className="stat-label">Day Guarantee</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -600,6 +612,128 @@ export default function Lead2() {
             to {
               opacity: 1;
               transform: translateX(0);
+            }
+          }
+
+          .scroll-indicator {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #fff;
+            text-align: center;
+          }
+
+          .chevron {
+            margin: 0 auto;
+            width: 28px;
+            height: 8px;
+            opacity: 0;
+            transform: scale3d(0.5, 0.5, 0.5);
+            animation: move 3s ease-out infinite;
+          }
+
+          .chevron:first-child {
+            animation: move 3s ease-out 1s infinite;
+          }
+
+          .chevron:nth-child(2) {
+            animation: move 3s ease-out 2s infinite;
+          }
+
+          .chevron:before,
+          .chevron:after {
+            content: ' ';
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 51%;
+            background: #fff;
+          }
+
+          .chevron:before {
+            left: 0;
+            transform: skew(0deg, 30deg);
+          }
+
+          .chevron:after {
+            right: 0;
+            transform: skew(0deg, -30deg);
+          }
+
+          .real-time-activity {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+          }
+
+          .activity-header {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+          }
+
+          .activity-stats {
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            flex-wrap: wrap;
+          }
+
+          .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          }
+
+          .stat-number {
+            color: #2ecc71;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+          }
+
+          .stat-label {
+            color: #fff;
+            font-size: 14px;
+            opacity: 0.9;
+          }
+
+          @keyframes move {
+            25% {
+              opacity: 1;
+            }
+            33% {
+              opacity: 1;
+              transform: translateY(30px);
+            }
+            67% {
+              opacity: 1;
+              transform: translateY(40px);
+            }
+            100% {
+              opacity: 0;
+              transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
+            }
+          }
+
+          @media (max-width: 768px) {
+            .activity-stats {
+              gap: 15px;
+            }
+
+            .stat-number {
+              font-size: 20px;
+            }
+
+            .stat-label {
+              font-size: 12px;
             }
           }
         `}</style>
