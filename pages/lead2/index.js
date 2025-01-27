@@ -150,9 +150,9 @@ export default function Lead2() {
               <div className="live-stats">
                 <div className="attention-container">
                   <div className="attention-arrows">
-                    <img src="images/down.png" alt="arrow" className="arrow" />
-                    <img src="images/down.png" alt="arrow" className="arrow" />
-                    <img src="images/down.png" alt="arrow" className="arrow" />
+                    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/2d0a2f3d1f0e4d8c1b927849d3c92d3c6c0e9d4f/down.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
+                    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/2d0a2f3d1f0e4d8c1b927849d3c92d3c6c0e9d4f/down.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
+                    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/2d0a2f3d1f0e4d8c1b927849d3c92d3c6c0e9d4f/down.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
                   </div>
                   <div className="stock-alert">
                     ⚠️ Warning: Only <span className="highlight">{bottlesLeft}</span> bottles left in stock
@@ -379,7 +379,7 @@ export default function Lead2() {
             height: 40px;
             animation: bounceArrow 1s infinite;
             opacity: 0.9;
-            filter: brightness(1.2);
+            filter: brightness(1.2) invert(1);
           }
 
           .arrow:nth-child(2) {
