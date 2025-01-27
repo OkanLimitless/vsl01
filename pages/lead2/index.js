@@ -144,6 +144,10 @@ export default function Lead2() {
           </div>
 
           <VideoPlayer />
+          <div className="sound-check">
+            <span className="volume-icon">��</span>
+            Please check if the sound is on.
+          </div>
 
           {showCTA && (
             <>
@@ -784,6 +788,31 @@ export default function Lead2() {
             .guarantee-timer {
               font-size: 18px;
             }
+          }
+
+          .sound-check {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 10px;
+            margin: 10px 0;
+            text-align: center;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 16px;
+          }
+
+          .volume-icon {
+            font-size: 20px;
+            animation: pulse 2s infinite;
+          }
+
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
           }
         `}</style>
       </div>
