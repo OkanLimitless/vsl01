@@ -76,14 +76,46 @@ export default function Lead2() {
 
           <VideoPlayer />
 
-          {/* These sections are always visible */}
+          {showCTA && (
+            <div className="cta-wrapper">
+              <div className="live-stats">
+                <div className="stock-alert">
+                  <span className="warning-icon">⚠️</span>
+                  Warning: Only <span className="highlight">15 bottles</span> left in stock
+                </div>
+                <div className="viewers-bar">
+                  <span className="pulse-dot"></span>
+                  <span className="live-count">14</span> people watching right now
+                </div>
+                <div className="recent-sales">
+                  <span className="notification">🔥 John from New York just purchased 3 bottles</span>
+                </div>
+              </div>
+
+              <a 
+                href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
+                className="cta-button pulse"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                CLICK HERE TO GET YOUR BOTTLE
+                <div className="sub-text">While Supplies Last</div>
+              </a>
+
+              <div className="trust-badges">
+                <div className="secure-badge">🔒 Secure 256-bit SSL Encryption</div>
+                <div className="guarantee">✓ 180-Day Money Back Guarantee</div>
+              </div>
+            </div>
+          )}
+
           <div className="featured-section">
             <h2>AS FEATURED IN</h2>
             <div className="featured-logos">
-              <img src="/images/nbc-news.png" alt="NBC News" />
-              <img src="/images/usa-today.png" alt="USA Today" />
-              <img src="/images/cbs.png" alt="CBS" />
-              <img src="/images/fox-news.png" alt="Fox News" />
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/featured/nbc.png" alt="NBC News" />
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/featured/usa.png" alt="USA Today" />
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/featured/cbs.png" alt="CBS" />
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/featured/fox.png" alt="Fox News" />
             </div>
           </div>
 
@@ -91,40 +123,16 @@ export default function Lead2() {
             <div className="scientific-button">SCIENTIFIC REFERENCES</div>
             <div className="scientific-logos">
               <div className="top-row">
-                <img src="/images/johns-hopkins.png" alt="Johns Hopkins University" />
-                <img src="/images/sexual-medicine.png" alt="Sexual Medicine" />
-                <img src="/images/harvard.png" alt="Harvard University" />
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/jhu.png" alt="Johns Hopkins University" />
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/harvard.png" alt="Harvard University" />
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/mit.png" alt="MIT" />
               </div>
               <div className="bottom-row">
-                <img src="/images/mit.png" alt="MIT" />
-                <img src="/images/nih.png" alt="NIH" />
-                <img src="/images/pubmed.png" alt="PubMed" />
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/nih.png" alt="NIH" />
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/pubmed.png" alt="PubMed" />
               </div>
             </div>
           </div>
-
-          {/* CTA only shows at reveal time */}
-          {showCTA && (
-            <div className="cta-section">
-              <div className="urgency-alert">
-                <span className="material-symbols-outlined">warning</span>
-                Warning: Only 15 bottles left in stock
-              </div>
-              <div className="viewers-bar">
-                <span className="dot"></span>
-                14 people watching right now
-              </div>
-              <a 
-                href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
-                className="cta-button"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CLICK HERE TO GET YOUR BOTTLE
-                <div className="sub-text">While Supplies Last</div>
-              </a>
-            </div>
-          )}
         </div>
 
         <style jsx>{`
@@ -237,36 +245,48 @@ export default function Lead2() {
             object-fit: contain;
           }
 
-          .cta-section {
+          .cta-wrapper {
             background: #000;
-            padding: 30px 20px;
+            padding: 20px;
             text-align: center;
           }
 
-          .urgency-alert {
+          .live-stats {
+            margin-bottom: 20px;
+          }
+
+          .stock-alert {
             background: #ff0000;
             color: white;
-            padding: 10px;
+            padding: 12px;
+            font-size: 18px;
             font-weight: bold;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            margin-bottom: 10px;
+            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite;
+          }
+
+          .warning-icon {
+            font-size: 20px;
+            margin-right: 8px;
+          }
+
+          .highlight {
+            color: #ffff00;
+            font-weight: bold;
           }
 
           .viewers-bar {
             background: #1a1a1a;
             color: white;
             padding: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
           }
 
-          .dot {
+          .pulse-dot {
             width: 8px;
             height: 8px;
             background: #ff0000;
@@ -274,28 +294,77 @@ export default function Lead2() {
             animation: pulse 1s infinite;
           }
 
+          .live-count {
+            color: #ff0000;
+            font-weight: bold;
+          }
+
+          .recent-sales {
+            color: white;
+            font-size: 14px;
+            margin-top: 10px;
+          }
+
+          .notification {
+            animation: slideIn 12s linear infinite;
+            display: inline-block;
+          }
+
           .cta-button {
             display: inline-block;
-            background: #00c110;
+            background: linear-gradient(to bottom, #00d40e, #00a80b);
             color: white;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            padding: 20px 40px;
-            border-radius: 8px;
+            padding: 25px 50px;
+            border-radius: 12px;
             text-decoration: none;
-            transition: transform 0.3s ease;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0,255,0,0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+          }
+
+          .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,255,0,0.4);
+            background: linear-gradient(to bottom, #00e40f, #00b80c);
+            color: white;
+            text-decoration: none;
           }
 
           .sub-text {
-            font-size: 14px;
-            opacity: 0.8;
+            font-size: 16px;
+            opacity: 0.9;
             margin-top: 5px;
+            text-transform: none;
+          }
+
+          .trust-badges {
+            margin-top: 20px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 14px;
           }
 
           @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; }
-            100% { opacity: 1; }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+          }
+
+          @keyframes shake {
+            10%, 90% { transform: translate3d(-1px, 0, 0); }
+            20%, 80% { transform: translate3d(2px, 0, 0); }
+            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+            40%, 60% { transform: translate3d(4px, 0, 0); }
+          }
+
+          @keyframes slideIn {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
           }
 
           @media (max-width: 768px) {
