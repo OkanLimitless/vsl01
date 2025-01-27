@@ -76,42 +76,54 @@ export default function Lead2() {
 
           <VideoPlayer />
 
+          {/* These sections are always visible */}
+          <div className="featured-section">
+            <h2>AS FEATURED IN</h2>
+            <div className="featured-logos">
+              <img src="/images/nbc-news.png" alt="NBC News" />
+              <img src="/images/usa-today.png" alt="USA Today" />
+              <img src="/images/cbs.png" alt="CBS" />
+              <img src="/images/fox-news.png" alt="Fox News" />
+            </div>
+          </div>
+
+          <div className="scientific-section">
+            <div className="scientific-button">SCIENTIFIC REFERENCES</div>
+            <div className="scientific-logos">
+              <div className="top-row">
+                <img src="/images/johns-hopkins.png" alt="Johns Hopkins University" />
+                <img src="/images/sexual-medicine.png" alt="Sexual Medicine" />
+                <img src="/images/harvard.png" alt="Harvard University" />
+              </div>
+              <div className="bottom-row">
+                <img src="/images/mit.png" alt="MIT" />
+                <img src="/images/nih.png" alt="NIH" />
+                <img src="/images/pubmed.png" alt="PubMed" />
+              </div>
+            </div>
+          </div>
+
+          {/* CTA only shows at reveal time */}
           {showCTA && (
-            <>
-              <div className="cta-section">
-                <a 
-                  href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
-                  className="cta-button bounce"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Click Here To Get Access Now!
-                </a>
-                <div className="urgency-text">
-                  ⚠️ Warning: Limited Time Offer - Spots Are Filling Up Fast!
-                </div>
+            <div className="cta-section">
+              <div className="urgency-alert">
+                <span className="material-symbols-outlined">warning</span>
+                Warning: Only 15 bottles left in stock
               </div>
-
-              <div className="guarantee-section">
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/guarantee.png" alt="180 Day Guarantee" />
-                <h2>100% SATISFACTION GUARANTEE</h2>
-                <p>AlphaBites comes with a 100% money back guarantee - 180 full days from your original purchase...</p>
+              <div className="viewers-bar">
+                <span className="dot"></span>
+                14 people watching right now
               </div>
-
-              <div className="references-section">
-                <h2>Scientific References</h2>
-                <div className="reference-logos">
-                  <div className="top-row">
-                    <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l1.png" alt="Cambridge" />
-                    <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l2.png" alt="The Lancet" />
-                    <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l3.png" alt="Frontiers" />
-                  </div>
-                  <div className="bottom-row">
-                    <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l4.png" alt="NCBI" />
-                  </div>
-                </div>
-              </div>
-            </>
+              <a 
+                href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
+                className="cta-button"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                CLICK HERE TO GET YOUR BOTTLE
+                <div className="sub-text">While Supplies Last</div>
+              </a>
+            </div>
           )}
         </div>
 
@@ -165,10 +177,101 @@ export default function Lead2() {
             color: #ff0000;
           }
 
-          .cta-section {
-            padding: 30px;
-            text-align: center;
+          .featured-section {
             background: #000;
+            padding: 40px 20px;
+            text-align: center;
+          }
+
+          .featured-section h2 {
+            color: white;
+            font-size: 24px;
+            margin-bottom: 30px;
+          }
+
+          .featured-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+          }
+
+          .featured-logos img {
+            height: 40px;
+            filter: brightness(0) invert(1);
+          }
+
+          .scientific-section {
+            background: #fff;
+            padding: 40px 20px;
+            text-align: center;
+          }
+
+          .scientific-button {
+            display: inline-block;
+            background: #000;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-bottom: 30px;
+          }
+
+          .scientific-logos {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+          }
+
+          .top-row, .bottom-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+          }
+
+          .scientific-logos img {
+            height: 50px;
+            object-fit: contain;
+          }
+
+          .cta-section {
+            background: #000;
+            padding: 30px 20px;
+            text-align: center;
+          }
+
+          .urgency-alert {
+            background: #ff0000;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+          }
+
+          .viewers-bar {
+            background: #1a1a1a;
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+          }
+
+          .dot {
+            width: 8px;
+            height: 8px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: pulse 1s infinite;
           }
 
           .cta-button {
@@ -180,122 +283,30 @@ export default function Lead2() {
             padding: 20px 40px;
             border-radius: 8px;
             text-decoration: none;
-            margin: 20px 0;
             transition: transform 0.3s ease;
-            animation: bounce 1s infinite;
           }
 
-          .cta-button:hover {
-            background: #00a00d;
-            color: white;
-            text-decoration: none;
+          .sub-text {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
           }
 
-          .urgency-text {
-            color: #ff0000;
-            font-size: 18px;
-            font-weight: bold;
-            margin-top: 15px;
-          }
-
-          @keyframes bounce {
-            0%, 100% {
-              transform: translateY(0);
-            }
-            50% {
-              transform: translateY(-10px);
-            }
+          @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
           }
 
           @media (max-width: 768px) {
-            .content-box {
-              margin: 10px;
-            }
-
-            .title-section h1 {
-              font-size: 24px;
+            .featured-logos img,
+            .scientific-logos img {
+              height: 30px;
             }
 
             .cta-button {
               font-size: 20px;
               padding: 15px 30px;
-            }
-
-            .urgency-text {
-              font-size: 16px;
-            }
-          }
-
-          .guarantee-section {
-            width: 100%;
-            text-align: center;
-            padding: 40px 20px;
-            background: #000;
-            color: white;
-          }
-
-          .guarantee-section img {
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 20px;
-          }
-
-          .guarantee-section h2 {
-            font-size: 36px;
-            font-weight: bold;
-            margin: 20px 0;
-          }
-
-          .guarantee-section p {
-            font-size: 16px;
-            line-height: 1.5;
-            max-width: 800px;
-            margin: 0 auto;
-          }
-
-          .references-section {
-            width: 100%;
-            padding: 40px 20px;
-            background: #fff;
-            text-align: center;
-          }
-
-          .references-section h2 {
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 30px;
-          }
-
-          .reference-logos {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-          }
-
-          .top-row, .bottom-row {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-          }
-
-          .reference-logos img {
-            height: 50px;
-            object-fit: contain;
-          }
-
-          @media (max-width: 768px) {
-            .guarantee-section h2 {
-              font-size: 28px;
-            }
-
-            .reference-logos img {
-              height: 40px;
-            }
-
-            .top-row, .bottom-row {
-              gap: 20px;
             }
           }
         `}</style>
