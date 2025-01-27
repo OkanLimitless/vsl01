@@ -77,19 +77,33 @@ export default function Lead2() {
           <VideoPlayer />
 
           {showCTA && (
-            <div className="cta-section">
-              <a 
-                href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
-                className="cta-button bounce"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Click Here To Get Access Now!
-              </a>
-              <div className="urgency-text">
-                ⚠️ Warning: Limited Time Offer - Spots Are Filling Up Fast!
+            <>
+              <div className="cta-section">
+                <a 
+                  href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
+                  className="cta-button bounce"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Click Here To Get Access Now!
+                </a>
+                <div className="urgency-text">
+                  ⚠️ Warning: Limited Time Offer - Spots Are Filling Up Fast!
+                </div>
               </div>
-            </div>
+
+              <div className="references-section">
+                <div className="scientific-refs">
+                  <h2>Scientific References</h2>
+                  <div className="ref-logos">
+                    <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l1.png" alt="Cambridge" />
+                    <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l2.png" alt="The Lancet" />
+                    <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l3.png" alt="Frontiers" />
+                    <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l4.png" alt="NCBI" />
+                  </div>
+                </div>
+              </div>
+            </>
           )}
         </div>
 
@@ -201,6 +215,42 @@ export default function Lead2() {
 
             .urgency-text {
               font-size: 16px;
+            }
+          }
+
+          .references-section {
+            background: #fff;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #ddd;
+          }
+
+          .scientific-refs h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+          }
+
+          .ref-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+          }
+
+          .ref-logos img {
+            height: 40px;
+            object-fit: contain;
+          }
+
+          @media (max-width: 768px) {
+            .ref-logos {
+              gap: 15px;
+            }
+
+            .ref-logos img {
+              height: 30px;
             }
           }
         `}</style>
