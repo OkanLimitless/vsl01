@@ -88,11 +88,11 @@ export default function Lead2() {
 
       <div className="page-container">
         <div className="top-notification">
-          {viewerCount} people are watching this presentation. Due to the high number of accesses, it will only be available until: 1/27/2025
+          <span className="viewer-count">{viewerCount}</span> people are watching this presentation. Due to the high number of accesses, it will only be available until: 1/27/2025
         </div>
 
-        <div className="content-wrapper">
-          <div className="title-box">
+        <div className="content-box">
+          <div className="title-section">
             <h1>
               Potent <span className="red-text">Salt Trick</span> SkyRocket
               <br />
@@ -102,115 +102,12 @@ export default function Lead2() {
 
           <VideoPlayer />
 
-          <div className="discount-header">
-            <h2>Select Your Discount Package</h2>
-            <p>LIMITED TIME OFFER!</p>
-          </div>
-
-          <div className="package-cards">
-            <div className="package-card">
-              <div className="package-label">TRY ONE</div>
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/bottles/1.webp" alt="1 Bottle" />
-              <div className="price">
-                <span className="currency">$</span>
-                <span className="amount">79</span>
-              </div>
-              <a href="https://lp.wellhealthsub.site/click/1" className="buy-now-button">BUY NOW</a>
-              <div className="shipping-info">
-                + $9.99 SHIPPING
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Shipping" />
-              </div>
-              <div className="price-comparison">
-                <del>$594</del> $158
-              </div>
-              <div className="payment-methods">
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/paypal-500x.png" alt="PayPal" />
-                <div className="cards">
-                  <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/cards.png" alt="Credit Cards" />
-                </div>
-              </div>
-            </div>
-
-            <div className="package-card">
-              <div className="package-label">BEST VALUE</div>
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/bottles/5.webp" alt="5 Bottles" />
-              <div className="price">
-                <span className="currency">$</span>
-                <span className="amount">49</span>
-                <span className="per-bottle">/bottle</span>
-              </div>
-              <a href="https://lp.wellhealthsub.site/click/3" className="buy-now-button">BUY NOW</a>
-              <div className="shipping-info">
-                FREE SHIPPING
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Free Shipping" />
-              </div>
-              <div className="price-comparison">
-                <del>$1782</del> $294
-              </div>
-              <div className="payment-methods">
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/paypal-500x.png" alt="PayPal" />
-                <div className="cards">
-                  <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/cards.png" alt="Credit Cards" />
-                </div>
-              </div>
-            </div>
-
-            <div className="package-card">
-              <div className="package-label">MOST POPULAR</div>
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/bottles/3.webp" alt="3 Bottles" />
-              <div className="price">
-                <span className="currency">$</span>
-                <span className="amount">69</span>
-                <span className="per-bottle">/bottle</span>
-              </div>
-              <a href="https://lp.wellhealthsub.site/click/2" className="buy-now-button">BUY NOW</a>
-              <div className="shipping-info">
-                FREE SHIPPING
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Free Shipping" />
-              </div>
-              <div className="price-comparison">
-                <del>$891</del> $207
-              </div>
-              <div className="payment-methods">
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/paypal-500x.png" alt="PayPal" />
-                <div className="cards">
-                  <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/cards.png" alt="Credit Cards" />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="timer-section">
-            <h3>Limited-Time Offer! Prices May Increase After:</h3>
-            <div className="timer">
-              <div className="time-unit">
-                <div className="time-value">{hours.toString().padStart(2, '0')}</div>
-                <div className="time-label">hrs</div>
-              </div>
-              <div className="time-unit">
-                <div className="time-value">{minutes.toString().padStart(2, '0')}</div>
-                <div className="time-label">min</div>
-              </div>
-              <div className="time-unit">
-                <div className="time-value">{seconds.toString().padStart(2, '0')}</div>
-                <div className="time-label">sec</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="guarantee-section">
-            <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/guarantee.png" alt="180 Day Guarantee" />
-            <h2>100% SATISFACTION GUARANTEE</h2>
-            <p>AlphaBites comes with a 100% money back guarantee - 180 full days from your original purchase...</p>
-          </div>
-
-          <div className="references-section">
-            <h2>Scientific References</h2>
-            <div className="reference-logos">
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l1.png" alt="Cambridge" />
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l2.png" alt="The Lancet" />
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l3.png" alt="Frontiers" />
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l4.png" alt="NCBI" />
+          <div className="cta-section">
+            <a href="https://lp.wellhealthsub.site/click/1" className="cta-button bounce">
+              Click Here To Get Access Now!
+            </a>
+            <div className="urgency-text">
+              ⚠️ Warning: Limited Time Offer - Spots Are Filling Up Fast!
             </div>
           </div>
         </div>
@@ -218,9 +115,8 @@ export default function Lead2() {
         <style jsx>{`
           .page-container {
             width: 100%;
+            min-height: 100vh;
             background: #000;
-            margin: 0;
-            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -232,30 +128,32 @@ export default function Lead2() {
             color: white;
             text-align: center;
             padding: 8px;
-            font-size: 14px;
+            font-size: 16px;
           }
 
-          .content-wrapper {
+          .viewer-count {
+            font-weight: bold;
+          }
+
+          .content-box {
             width: 100%;
             max-width: 800px;
             margin: 0 auto;
             background: #000;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            border: 2px solid #000;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
           }
 
-          .title-box {
-            width: 100%;
+          .title-section {
             background: #fff;
-            padding: 15px;
+            padding: 20px;
             text-align: center;
-            margin: 0;
+            border-bottom: 2px solid #000;
           }
 
-          .title-box h1 {
+          .title-section h1 {
             color: #000;
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             line-height: 1.2;
             margin: 0;
@@ -265,188 +163,60 @@ export default function Lead2() {
             color: #ff0000;
           }
 
-          .discount-header {
-            width: 100%;
-            background: #ff0000;
-            color: #fff;
+          .cta-section {
+            padding: 30px;
             text-align: center;
-            padding: 10px;
-            margin: 0;
-          }
-
-          .discount-header h2 {
-            color: #ffff00;
-            font-size: 24px;
-            margin: 0;
-            font-weight: bold;
-          }
-
-          .discount-header p {
-            margin: 5px 0 0;
-            color: white;
-            font-size: 16px;
-          }
-
-          .package-cards {
-            display: flex;
-            justify-content: space-between;
-            gap: 10px;
-            padding: 20px;
-            background: #fff;
-          }
-
-          .package-card {
-            flex: 1;
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 0;
-            text-align: center;
-          }
-
-          .package-label {
             background: #000;
-            color: #fff;
-            padding: 8px;
-            font-weight: bold;
-            text-align: center;
           }
 
-          .package-card img {
-            max-width: 100%;
-            height: auto;
-            margin: 10px 0;
-          }
-
-          .price {
-            font-size: 24px;
-            font-weight: bold;
-            margin: 10px 0;
-          }
-
-          .currency {
-            font-size: 20px;
-            vertical-align: top;
-          }
-
-          .per-bottle {
-            font-size: 16px;
-          }
-
-          .buy-now-button {
+          .cta-button {
+            display: inline-block;
             background: #00c110;
             color: white;
-            text-align: center;
-            padding: 10px;
-            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 20px 40px;
+            border-radius: 8px;
             text-decoration: none;
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+            animation: bounce 1s infinite;
+          }
+
+          .cta-button:hover {
+            background: #00a00d;
+            color: white;
+            text-decoration: none;
+          }
+
+          .urgency-text {
+            color: #ff0000;
             font-size: 18px;
             font-weight: bold;
-            margin: 10px;
-            border-radius: 5px;
+            margin-top: 15px;
           }
 
-          .shipping-info {
-            color: #666;
-            font-size: 12px;
-            margin: 5px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
-          }
-
-          .shipping-info img {
-            height: 20px;
-            margin: 0;
-          }
-
-          .price-comparison {
-            font-size: 14px;
-            color: #666;
-            margin: 5px 0;
-          }
-
-          .price-comparison del {
-            color: #999;
-            margin-right: 5px;
-          }
-
-          .payment-methods {
-            padding: 10px;
-          }
-
-          .payment-methods img {
-            max-width: 120px;
-            margin: 5px 0;
-          }
-
-          .timer-section {
-            width: 100%;
-            text-align: center;
-            padding: 20px 0;
-            color: white;
-          }
-
-          .timer {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 10px;
-          }
-
-          .time-unit {
-            background: #ff6b00;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-size: 20px;
-            font-weight: bold;
-          }
-
-          .time-label {
-            font-size: 12px;
-            margin-top: 2px;
-          }
-
-          .guarantee-section {
-            width: 100%;
-            text-align: center;
-            padding: 20px 0;
-            background: #000;
-          }
-
-          .guarantee-section img {
-            max-width: 100%;
-            height: auto;
-          }
-
-          .references-section {
-            width: 100%;
-            background: #fff;
-            padding: 20px;
-            text-align: center;
-          }
-
-          .reference-logos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-          }
-
-          .reference-logos img {
-            height: 40px;
-            object-fit: contain;
+          @keyframes bounce {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-10px);
+            }
           }
 
           @media (max-width: 768px) {
-            .package-cards {
-              flex-direction: column;
+            .title-section h1 {
+              font-size: 24px;
             }
 
-            .package-card {
-              margin-bottom: 15px;
+            .cta-button {
+              font-size: 20px;
+              padding: 15px 30px;
+            }
+
+            .urgency-text {
+              font-size: 16px;
             }
           }
         `}</style>
