@@ -79,186 +79,136 @@ export default function Lead2() {
   return (
     <>
       <Head>
-        <title>Health more</title>
+        <title>Potent Salt Trick SkyRocket SexDrive & Performance</title>
         <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
       </Head>
 
       <div className="pageWrapper width101">
-        <header className="header first-time">
-          <div className="header2">
-            <div className="container">
-              <div className="row justify-content-center">
-                <div className="col-xxl-12 col-xl-12 text-center">
-                  <p>
-                    <span id="pessoasAssistindo" style={{fontWeight: 'bold', textDecoration: 'underline'}}>
-                      {viewerCount}
-                    </span>
-                    {' '}people are watching this presentation. Due to the high number of accesses, 
-                    it will only be available until:{' '}
-                    <span style={{fontWeight: 'bold'}}>
-                      {new Date().toLocaleDateString('en-us')}
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <section className="video-wrapper">
-            <div className="bordavideo">
-              <VideoPlayer />
-              <p className="sound-note">
-                <i className="fa fa-volume-up"></i>
-                <strong>Please check if the sound is on.</strong>
-              </p>
-            </div>
-          </section>
-        </header>
-
-        {/* Timer Section */}
-        <div className="countdown-section">
-          <h3>Limited-time offer! Prices may increase after:</h3>
-          <div className="countdown">
-            <div className="wrapperCountdown">
-              <div className="digitsCircle">{hours.toString().padStart(2, '0')}</div>
-              <div className="units">hrs</div>
-            </div>
-            <div className="wrapperCountdown">
-              <div className="digitsCircle">{minutes.toString().padStart(2, '0')}</div>
-              <div className="units">min</div>
-            </div>
-            <div className="wrapperCountdown">
-              <div className="digitsCircle">{seconds.toString().padStart(2, '0')}</div>
-              <div className="units">sec</div>
-            </div>
-          </div>
+        {/* Red notification bar */}
+        <div className="top-notification">
+          <p>{viewerCount} people are watching this presentation. Due to the high number of accesses, it will only be available until: {new Date().toLocaleDateString('en-us')}</p>
         </div>
 
-        {/* Hidden Sections */}
-        <div className="show-on-call-action" style={{ display: showPackages ? 'block' : 'none' }}>
-          {/* Packages Section */}
-          <div className="container" id="firstPackage">
-            <section className="oferta-especial pt-lg-4 pb-lg-4 pt-4 pb-4">
-              <div className="container">
-                <div className="row justify-content-center">
-                  <div className="col-lg-12 text-center">
-                    <h2 className="discount-title">Select Your Discount Package</h2>
-                    <p className="limited-offer">LIMITED TIME OFFER!</p>
-                  </div>
-                </div>
-              </div>
-            </section>
+        {/* Title Image */}
+        <div className="title-container">
+          <img 
+            src="https://cdn.converteai.net/47892230-16bf-42fa-877c-9736cc726e4e/2025/01/18/678bb6aa2a676f00010fe52d.png"
+            alt="Potent Salt Trick"
+            className="title-image"
+          />
+        </div>
 
-            {/* Package Cards */}
-            <div className="row justify-content-center">
-              {/* Single Bottle */}
-              <div className="col-12 col-lg-4">
-                <div className="package-card">
-                  <div className="package-header">Try One</div>
-                  <img src="/images/bottles/1.webp" alt="1 Bottle" className="bottle-img" />
-                  <div className="price-tag">
-                    <span className="currency">$</span>
-                    <span className="amount">79</span>
-                  </div>
-                  <a href="https://lp.wellhealthsub.site/click/1" className="buy-button">
-                    BUY NOW
-                  </a>
-                  <div className="shipping">+ $9.99 SHIPPING</div>
-                  <div className="original-price">
-                    <del>$594</del> $158
-                  </div>
-                  <img src="/images/icons/paypal-500x.png" alt="PayPal" className="payment-method" />
-                </div>
-              </div>
+        {/* Video Section */}
+        <div className="video-container">
+          <VideoPlayer />
+        </div>
 
-              {/* Best Value - 5 Bottles */}
-              <div className="col-12 col-lg-4">
-                <div className="package-card featured">
-                  <div className="package-header">Best Value</div>
-                  <img src="/images/bottles/5.webp" alt="5 Bottles" className="bottle-img" />
-                  <div className="price-tag">
-                    <span className="currency">$</span>
-                    <span className="amount">49</span>
-                    <span className="per-bottle">/ bottle</span>
-                  </div>
-                  <a href="https://lp.wellhealthsub.site/click/3" className="buy-button">
-                    BUY NOW
-                  </a>
-                  <div className="shipping">FREE SHIPPING</div>
-                  <div className="original-price">
-                    <del>$1782</del> $294
-                  </div>
-                  <img src="/images/icons/paypal-500x.png" alt="PayPal" className="payment-method" />
-                </div>
-              </div>
+        {/* Package Selection */}
+        <div className="package-selection" style={{ display: showPackages ? 'block' : 'none' }}>
+          <div className="discount-header">
+            <h2>Select Your Discount Package</h2>
+            <p>LIMITED TIME OFFER!</p>
+          </div>
 
-              {/* Popular - 3 Bottles */}
-              <div className="col-12 col-lg-4">
-                <div className="package-card">
-                  <div className="package-header">Most Popular</div>
-                  <img src="/images/bottles/3.webp" alt="3 Bottles" className="bottle-img" />
-                  <div className="price-tag">
-                    <span className="currency">$</span>
-                    <span className="amount">69</span>
-                    <span className="per-bottle">/ bottle</span>
-                  </div>
-                  <a href="https://lp.wellhealthsub.site/click/2" className="buy-button">
-                    BUY NOW
-                  </a>
-                  <div className="shipping">FREE SHIPPING</div>
-                  <div className="original-price">
-                    <del>$891</del> $207
-                  </div>
-                  <img src="/images/icons/paypal-500x.png" alt="PayPal" className="payment-method" />
-                </div>
+          <div className="package-grid">
+            {/* Try One Package */}
+            <div className="package-card">
+              <div className="package-label">TRY ONE</div>
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/bottles/1.webp" alt="1 Bottle" />
+              <div className="price">
+                <span className="currency">$</span>
+                <span className="amount">79</span>
+              </div>
+              <a href="https://lp.wellhealthsub.site/click/1" className="buy-now-button">BUY NOW</a>
+              <div className="shipping-info">
+                + $9.99 SHIPPING
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Shipping" />
+              </div>
+              <div className="price-comparison">
+                <del>$594</del> $158
+              </div>
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/paypal-500x.png" alt="Payment Methods" className="payment-methods" />
+            </div>
+
+            {/* Best Value Package */}
+            <div className="package-card featured">
+              <div className="package-label">BEST VALUE</div>
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/bottles/5.webp" alt="6 Bottles" />
+              <div className="price">
+                <span className="currency">$</span>
+                <span className="amount">49</span>
+                <span className="per-bottle">/bottle</span>
+              </div>
+              <a href="https://lp.wellhealthsub.site/click/3" className="buy-now-button">BUY NOW</a>
+              <div className="shipping-info">
+                FREE SHIPPING
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Free Shipping" />
+              </div>
+              <div className="price-comparison">
+                <del>$1782</del> $294
+              </div>
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/paypal-500x.png" alt="Payment Methods" className="payment-methods" />
+            </div>
+
+            {/* Most Popular Package */}
+            <div className="package-card">
+              <div className="package-label">MOST POPULAR</div>
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/bottles/3.webp" alt="3 Bottles" />
+              <div className="price">
+                <span className="currency">$</span>
+                <span className="amount">69</span>
+                <span className="per-bottle">/bottle</span>
+              </div>
+              <a href="https://lp.wellhealthsub.site/click/2" className="buy-now-button">BUY NOW</a>
+              <div className="shipping-info">
+                FREE SHIPPING
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Free Shipping" />
+              </div>
+              <div className="price-comparison">
+                <del>$891</del> $207
+              </div>
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/paypal-500x.png" alt="Payment Methods" className="payment-methods" />
+            </div>
+          </div>
+
+          {/* Timer Section */}
+          <div className="timer-section">
+            <h3>Limited-Time Offer! Prices May Increase After:</h3>
+            <div className="timer">
+              <div className="time-unit">
+                <div className="time-value">{hours.toString().padStart(2, '0')}</div>
+                <div className="time-label">hrs</div>
+              </div>
+              <div className="time-unit">
+                <div className="time-value">{minutes.toString().padStart(2, '0')}</div>
+                <div className="time-label">min</div>
+              </div>
+              <div className="time-unit">
+                <div className="time-value">{seconds.toString().padStart(2, '0')}</div>
+                <div className="time-label">sec</div>
               </div>
             </div>
           </div>
 
           {/* Guarantee Section */}
-          <section className="guarantee-section">
-            <div className="container">
-              <div className="guarantee-content">
-                <img src="/images/guarantee.png" alt="60 Day Guarantee" className="guarantee-img" />
-                <div className="guarantee-text">
-                  <h2>100% SATISFACTION GUARANTEE</h2>
-                  <p>
-                    AlphaBites comes with a 100% money back guarantee - 180 full days from your original purchase. 
-                    If you're not totally and completely satisfied with our product or your results within the first 
-                    180 days simply let us know by calling our toll-free number or dropping us an email and we'll 
-                    gladly give you a full refund within 48 hours of the product being returned. That's right - 
-                    simply return the product, even your empty bottles, anytime within 180 days of your purchase 
-                    and you'll receive a full, no-questions-asked refund (minus shipping and handling fees).
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
+          <div className="guarantee-section">
+            <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/guarantee.png" alt="180 Day Guarantee" />
+            <h2>100% SATISFACTION GUARANTEE</h2>
+            <p>AlphaBites comes with a 100% money back guarantee - 180 full days from your original purchase...</p>
+          </div>
 
           {/* Scientific References */}
-          <section className="references-section">
-            <div className="container">
-              <div className="row justify-content-center">
-                <div className="col-12 text-center">
-                  <h2>Scientific References</h2>
-                </div>
-                <div className="col-xxl-3 col-xl-3 col-6">
-                  <img src="/images/estudos/l1.png" alt="Reference 1" className="ref-img" />
-                </div>
-                <div className="col-xxl-3 col-xl-3 col-6">
-                  <img src="/images/estudos/l2.png" alt="Reference 2" className="ref-img" />
-                </div>
-                <div className="col-xxl-3 col-xl-3 col-6">
-                  <img src="/images/estudos/l3.png" alt="Reference 3" className="ref-img" />
-                </div>
-                <div className="col-xxl-3 col-xl-3 col-6">
-                  <img src="/images/estudos/l4.png" alt="Reference 4" className="ref-img" />
-                </div>
-              </div>
+          <div className="references-section">
+            <h2>Scientific References</h2>
+            <div className="reference-logos">
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l1.png" alt="Cambridge" />
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l2.png" alt="The Lancet" />
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l3.png" alt="Frontiers" />
+              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l4.png" alt="NCBI" />
             </div>
-          </section>
+          </div>
         </div>
 
         <style jsx>{`
@@ -268,48 +218,105 @@ export default function Lead2() {
             font-family: 'Poppins', sans-serif;
           }
 
-          .header2 {
-            background: #111;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          .top-notification {
+            background: #ff0000;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
           }
 
-          .video-wrapper {
+          .title-container {
+            text-align: center;
+            padding: 20px;
+            background: white;
+          }
+
+          .title-image {
+            max-width: 100%;
+            height: auto;
+          }
+
+          .video-container {
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
           }
 
-          .bordavideo {
-            border-radius: 8px;
-            overflow: hidden;
-            background: #000;
+          .package-selection {
+            background: black;
+            padding: 40px 20px;
           }
 
-          .sound-note {
+          .discount-header {
             text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.8);
+            color: white;
+            margin-bottom: 40px;
           }
 
-          .countdown-section {
+          .discount-header h2 {
+            color: yellow;
+            font-size: 2em;
+            margin-bottom: 10px;
+          }
+
+          .package-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+          }
+
+          .package-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+          }
+
+          .package-card.featured {
+            transform: scale(1.05);
+            border: 2px solid #ff6b00;
+          }
+
+          .package-label {
+            background: black;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: -20px -20px 20px -20px;
+          }
+
+          .buy-now-button {
+            background: linear-gradient(to bottom, #00dd00, #00aa00);
+            color: black;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 24px;
+            display: block;
+            margin: 20px 0;
+          }
+
+          .timer-section {
             text-align: center;
             padding: 40px 20px;
           }
 
-          .countdown {
+          .timer {
             display: flex;
             justify-content: center;
             gap: 20px;
             margin-top: 20px;
           }
 
-          .wrapperCountdown {
+          .time-unit {
             text-align: center;
           }
 
-          .digitsCircle {
+          .time-value {
             background: #ff6b00;
             color: white;
             padding: 15px 25px;
@@ -318,71 +325,9 @@ export default function Lead2() {
             font-weight: bold;
           }
 
-          .units {
+          .time-label {
             margin-top: 5px;
             color: rgba(255, 255, 255, 0.8);
-          }
-
-          .show-on-call-action {
-            opacity: 0;
-            transition: opacity 0.5s ease;
-          }
-
-          .show-on-call-action.visible {
-            opacity: 1;
-          }
-
-          .package-card {
-            border: 5px solid #c1cac9;
-            border-radius: 20px;
-            margin: 15px;
-            padding: 20px;
-            text-align: center;
-            background: white;
-            color: black;
-            transition: transform 0.3s ease;
-          }
-
-          .package-card:hover {
-            transform: translateY(-5px);
-          }
-
-          .package-card.featured {
-            border-color: #ff6b00;
-            transform: scale(1.05);
-          }
-
-          .package-header {
-            background: black;
-            color: white;
-            padding: 10px;
-            border-radius: 15px 15px 0 0;
-            font-weight: bold;
-            margin: -20px -20px 20px -20px;
-          }
-
-          .bottle-img {
-            width: 96%;
-            margin: 20px 0;
-          }
-
-          .buy-button {
-            background: linear-gradient(to bottom, #00dd00, #00aa00);
-            color: #001824;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 45px;
-            font-weight: 900;
-            display: block;
-            margin: 20px 0;
-            transition: transform 0.2s ease;
-          }
-
-          .buy-button:hover {
-            transform: scale(1.05);
-            background: linear-gradient(to bottom, #00ff00, #00dd00);
-            text-decoration: none;
           }
 
           .guarantee-section {
@@ -411,11 +356,11 @@ export default function Lead2() {
           }
 
           @media (max-width: 768px) {
-            .video-wrapper {
+            .video-container {
               padding: 10px;
             }
 
-            .digitsCircle {
+            .time-value {
               padding: 10px 15px;
               font-size: 20px;
             }
@@ -428,7 +373,7 @@ export default function Lead2() {
               transform: none;
             }
 
-            .buy-button {
+            .buy-now-button {
               font-size: 30px;
               padding: 10px 20px;
             }
