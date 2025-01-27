@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import VideoPlayer from '../components/VideoPlayer';
+import { useState, useEffect } from 'react';
 
 const ClientSideOnly = dynamic(
   () => Promise.resolve(({ children }) => <>{children}</>),
@@ -8,6 +9,41 @@ const ClientSideOnly = dynamic(
 );
 
 export default function Home() {
+  const [viewerCount, setViewerCount] = useState(56);
+  const [stockLeft, setStockLeft] = useState(37);
+  const [timeLeft, setTimeLeft] = useState(27 * 60); // 27 minutes in seconds
+
+  // Simulate random viewer count changes
+  useEffect(() => {
+    const viewerInterval = setInterval(() => {
+      setViewerCount(prev => {
+        const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+        return Math.max(45, Math.min(78, prev + change)); // Keep between 45-78
+      });
+    }, 3000);
+
+    // Decrease stock occasionally
+    const stockInterval = setInterval(() => {
+      setStockLeft(prev => {
+        if (Math.random() < 0.3) { // 30% chance to decrease
+          return Math.max(1, prev - 1);
+        }
+        return prev;
+      });
+    }, 15000);
+
+    // Timer countdown
+    const timerInterval = setInterval(() => {
+      setTimeLeft(prev => Math.max(0, prev - 1));
+    }, 1000);
+
+    return () => {
+      clearInterval(viewerInterval);
+      clearInterval(stockInterval);
+      clearInterval(timerInterval);
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -55,6 +91,36 @@ export default function Home() {
         {/* Alert Banner under video */}
         <div className="video-alert">
           <span className="alert-text">MEN'S HEALTH ALERT!</span> In the next 3 minutes, <span className="alert-emphasis">discover what could change your life forever!</span>
+        </div>
+
+        {/* New Urgency Elements */}
+        <div className="urgency-container">
+          <div className="live-counter">
+            <div className="pulse-dot"></div>
+            <span>{viewerCount} people watching right now</span>
+          </div>
+          
+          <div className="timer-container">
+            <span className="timer-label">Time remaining to watch:</span>
+            <span className="timer-value">
+              {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+            </span>
+          </div>
+
+          <div className="stock-counter">
+            <span className="stock-warning">⚠️ Warning: Only {stockLeft} bottles left in stock</span>
+          </div>
+        </div>
+
+        {/* Custom CTA Button */}
+        <div className="cta-button-container">
+          <button 
+            onClick={() => window.open('https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571', '_blank')}
+            className="cta-button"
+          >
+            <span className="cta-main-text">CLICK HERE TO GET YOUR BOTTLE</span>
+            <span className="cta-sub-text">While Supplies Last</span>
+          </button>
         </div>
 
         {/* Featured In Section */}
@@ -518,6 +584,126 @@ export default function Home() {
           .video-alert {
             font-size: 0.9rem;
             padding: 0.8rem;
+          }
+        }
+
+        .urgency-container {
+          width: 100%;
+          max-width: 800px;
+          margin: 1rem auto;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .live-counter {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.1);
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          color: white;
+        }
+
+        .pulse-dot {
+          width: 10px;
+          height: 10px;
+          background-color: #ff0000;
+          border-radius: 50%;
+          animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.5); opacity: 0.7; }
+          100% { transform: scale(1); opacity: 1; }
+        }
+
+        .timer-container {
+          background: #ff6b00;
+          color: white;
+          padding: 0.8rem;
+          border-radius: 8px;
+          text-align: center;
+          font-weight: bold;
+          animation: highlight 2s infinite;
+        }
+
+        .timer-value {
+          font-size: 1.2rem;
+          margin-left: 0.5rem;
+        }
+
+        .stock-counter {
+          background: #ff0000;
+          color: white;
+          padding: 0.8rem;
+          border-radius: 8px;
+          text-align: center;
+          font-weight: bold;
+        }
+
+        .cta-button-container {
+          margin: 2rem auto;
+          text-align: center;
+        }
+
+        .cta-button {
+          background: linear-gradient(to bottom, #00dd00, #00aa00);
+          border: none;
+          padding: 1.5rem 3rem;
+          border-radius: 8px;
+          cursor: pointer;
+          transform: scale(1);
+          transition: transform 0.2s;
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          box-shadow: 0 4px 15px rgba(0, 221, 0, 0.3);
+          animation: pulse-green 2s infinite;
+        }
+
+        .cta-button:hover {
+          transform: scale(1.05);
+          background: linear-gradient(to bottom, #00ff00, #00dd00);
+        }
+
+        .cta-main-text {
+          color: white;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+
+        .cta-sub-text {
+          color: rgba(255, 255, 255, 0.9);
+          font-size: 0.9rem;
+        }
+
+        @keyframes highlight {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.02); }
+          100% { transform: scale(1); }
+        }
+
+        @keyframes pulse-green {
+          0% { box-shadow: 0 0 0 0 rgba(0, 221, 0, 0.4); }
+          70% { box-shadow: 0 0 0 10px rgba(0, 221, 0, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(0, 221, 0, 0); }
+        }
+
+        @media (max-width: 768px) {
+          .cta-button {
+            padding: 1.2rem 2rem;
+          }
+
+          .cta-main-text {
+            font-size: 1.2rem;
+          }
+
+          .timer-container, .stock-counter {
+            font-size: 0.9rem;
           }
         }
       `}</style>
