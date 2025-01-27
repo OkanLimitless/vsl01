@@ -109,10 +109,19 @@ export default function Lead2() {
 
           <div className="package-cards">
             <div className="package-card">
+              <div className="package-label">TRY ONE</div>
               <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/bottles/1.webp" alt="1 Bottle" />
+              <div className="price">
+                <span className="currency">$</span>
+                <span className="amount">79</span>
+              </div>
               <a href="https://lp.wellhealthsub.site/click/1" className="buy-now-button">BUY NOW</a>
-              <div className="shipping">
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Shipping" className="shipping-icon" />
+              <div className="shipping-info">
+                + $9.99 SHIPPING
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Shipping" />
+              </div>
+              <div className="price-comparison">
+                <del>$594</del> $158
               </div>
               <div className="payment-methods">
                 <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/paypal-500x.png" alt="PayPal" />
@@ -123,10 +132,20 @@ export default function Lead2() {
             </div>
 
             <div className="package-card">
+              <div className="package-label">BEST VALUE</div>
               <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/bottles/5.webp" alt="5 Bottles" />
+              <div className="price">
+                <span className="currency">$</span>
+                <span className="amount">49</span>
+                <span className="per-bottle">/bottle</span>
+              </div>
               <a href="https://lp.wellhealthsub.site/click/3" className="buy-now-button">BUY NOW</a>
-              <div className="shipping">
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Shipping" className="shipping-icon" />
+              <div className="shipping-info">
+                FREE SHIPPING
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Free Shipping" />
+              </div>
+              <div className="price-comparison">
+                <del>$1782</del> $294
               </div>
               <div className="payment-methods">
                 <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/paypal-500x.png" alt="PayPal" />
@@ -137,10 +156,20 @@ export default function Lead2() {
             </div>
 
             <div className="package-card">
+              <div className="package-label">MOST POPULAR</div>
               <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/bottles/3.webp" alt="3 Bottles" />
+              <div className="price">
+                <span className="currency">$</span>
+                <span className="amount">69</span>
+                <span className="per-bottle">/bottle</span>
+              </div>
               <a href="https://lp.wellhealthsub.site/click/2" className="buy-now-button">BUY NOW</a>
-              <div className="shipping">
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Shipping" className="shipping-icon" />
+              <div className="shipping-info">
+                FREE SHIPPING
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/freeship.jpg" alt="Free Shipping" />
+              </div>
+              <div className="price-comparison">
+                <del>$891</del> $207
               </div>
               <div className="payment-methods">
                 <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/icons/paypal-500x.png" alt="PayPal" />
@@ -260,71 +289,95 @@ export default function Lead2() {
 
           .package-cards {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             gap: 10px;
             padding: 20px;
             background: #fff;
-            max-width: 800px;
-            margin: 0 auto;
           }
 
           .package-card {
             flex: 1;
             background: #fff;
-            padding: 15px;
-            text-align: center;
             border: 1px solid #ddd;
+            padding: 0;
+            text-align: center;
+          }
+
+          .package-label {
+            background: #000;
+            color: #fff;
+            padding: 8px;
+            font-weight: bold;
+            text-align: center;
           }
 
           .package-card img {
             max-width: 100%;
             height: auto;
-            margin-bottom: 10px;
+            margin: 10px 0;
+          }
+
+          .price {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+          }
+
+          .currency {
+            font-size: 20px;
+            vertical-align: top;
+          }
+
+          .per-bottle {
+            font-size: 16px;
           }
 
           .buy-now-button {
             background: #00c110;
             color: white;
             text-align: center;
-            padding: 12px;
+            padding: 10px;
             display: block;
             text-decoration: none;
             font-size: 18px;
             font-weight: bold;
+            margin: 10px;
             border-radius: 5px;
-            margin: 10px 0;
           }
 
-          .shipping {
-            margin: 10px 0;
-          }
-
-          .shipping-icon {
-            height: 20px;
-            width: auto;
-          }
-
-          .payment-methods {
+          .shipping-info {
+            color: #666;
+            font-size: 12px;
+            margin: 5px 0;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 5px;
-          }
-
-          .payment-methods img {
-            max-width: 120px;
-            height: auto;
-          }
-
-          .cards {
-            display: flex;
             justify-content: center;
             gap: 5px;
           }
 
-          .cards img {
+          .shipping-info img {
             height: 20px;
-            width: auto;
+            margin: 0;
+          }
+
+          .price-comparison {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0;
+          }
+
+          .price-comparison del {
+            color: #999;
+            margin-right: 5px;
+          }
+
+          .payment-methods {
+            padding: 10px;
+          }
+
+          .payment-methods img {
+            max-width: 120px;
+            margin: 5px 0;
           }
 
           .timer-section {
