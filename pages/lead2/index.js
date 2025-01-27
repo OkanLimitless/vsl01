@@ -13,13 +13,19 @@ export default function Lead2() {
   const [showCTA, setShowCTA] = useState(false);
   const [bottlesLeft, setBottlesLeft] = useState(15);
   const [currentPurchase, setCurrentPurchase] = useState(null);
+  const [guaranteeTime, setGuaranteeTime] = useState(600); // 10 minutes in seconds
 
   useEffect(() => {
     // Viewer counter logic
     const viewerInterval = setInterval(() => {
       setViewerCount(prev => {
-        if (Math.random() < 0.3) {
-          return prev + Math.floor(Math.random() * 3) - 1;
+        // 70% chance to change the number
+        if (Math.random() < 0.7) {
+          // Generate a change between -3 and +5
+          const change = Math.floor(Math.random() * 9) - 3;
+          const newCount = prev + change;
+          // Keep it between 350 and 450
+          return Math.min(450, Math.max(350, newCount));
         }
         return prev;
       });
@@ -100,6 +106,19 @@ export default function Lead2() {
     }
   }, [showCTA]);
 
+  useEffect(() => {
+    if (showCTA) {
+      const countdownInterval = setInterval(() => {
+        setGuaranteeTime(prev => {
+          if (prev <= 0) return 0;
+          return prev - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(countdownInterval);
+    }
+  }, [showCTA]);
+
   return (
     <>
       <Head>
@@ -144,20 +163,12 @@ export default function Lead2() {
                   <span className="highlight">{viewerCount}</span> people watching right now
                 </div>
 
-                <div className="real-time-activity">
-                  <div className="activity-header">🔴 LIVE ACTIVITY</div>
-                  <div className="activity-stats">
-                    <div className="stat-item">
-                      <span className="stat-number">2,847</span>
-                      <span className="stat-label">Bottles Sold Today</span>
-                    </div>
-                    <div className="stat-item">
-                      <span className="stat-number">94%</span>
-                      <span className="stat-label">Success Rate</span>
-                    </div>
-                    <div className="stat-item">
-                      <span className="stat-number">180</span>
-                      <span className="stat-label">Day Guarantee</span>
+                <div className="guarantee-countdown">
+                  <div className="guarantee-icon">🔒</div>
+                  <div className="guarantee-content">
+                    <div className="guarantee-title">100% Money-Back Guarantee!</div>
+                    <div className="guarantee-timer">
+                      Special Deal Expires In: {Math.floor(guaranteeTime / 60)}:{(guaranteeTime % 60).toString().padStart(2, '0')}
                     </div>
                   </div>
                 </div>
@@ -659,81 +670,47 @@ export default function Lead2() {
             transform: skew(0deg, -30deg);
           }
 
-          .real-time-activity {
-            background: rgba(255, 255, 255, 0.05);
+          .guarantee-countdown {
+            background: linear-gradient(to right, rgba(46, 204, 113, 0.1), rgba(46, 204, 113, 0.2));
+            border: 1px solid rgba(46, 204, 113, 0.3);
             border-radius: 8px;
-            padding: 15px;
+            padding: 20px;
             margin: 20px 0;
-          }
-
-          .activity-header {
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
             text-align: center;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            animation: pulse 2s infinite;
           }
 
-          .activity-stats {
-            display: flex;
-            justify-content: space-around;
-            gap: 20px;
-            flex-wrap: wrap;
+          .guarantee-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
           }
 
-          .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-          }
-
-          .stat-number {
+          .guarantee-title {
             color: #2ecc71;
             font-size: 24px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
           }
 
-          .stat-label {
+          .guarantee-timer {
             color: #fff;
-            font-size: 14px;
-            opacity: 0.9;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: monospace;
           }
 
-          @keyframes move {
-            25% {
-              opacity: 1;
-            }
-            33% {
-              opacity: 1;
-              transform: translateY(30px);
-            }
-            67% {
-              opacity: 1;
-              transform: translateY(40px);
-            }
-            100% {
-              opacity: 0;
-              transform: translateY(55px) scale3d(0.5, 0.5, 0.5);
-            }
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
           }
 
           @media (max-width: 768px) {
-            .activity-stats {
-              gap: 15px;
-            }
-
-            .stat-number {
+            .guarantee-title {
               font-size: 20px;
             }
-
-            .stat-label {
-              font-size: 12px;
+            .guarantee-timer {
+              font-size: 18px;
             }
           }
         `}</style>
