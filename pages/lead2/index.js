@@ -12,6 +12,7 @@ export default function Lead2() {
   const [viewerCount, setViewerCount] = useState(390);
   const [showCTA, setShowCTA] = useState(false);
   const [bottlesLeft, setBottlesLeft] = useState(15);
+  const [currentPurchase, setCurrentPurchase] = useState(null);
 
   useEffect(() => {
     // Viewer counter logic
@@ -76,6 +77,28 @@ export default function Lead2() {
 
     return () => clearInterval(timerInterval);
   }, []);
+
+  useEffect(() => {
+    if (showCTA) {
+      const purchases = [
+        { location: 'New York, US', product: 'Single Bottle', time: '2 minutes ago', verified: true },
+        { location: 'London, UK', product: '6 Bottle Pack', time: 'Just now', verified: true },
+        { location: 'Toronto, CA', product: '3 Bottle Pack', time: '1 minute ago', verified: true },
+        { location: 'Sydney, AU', product: 'Single Bottle', time: '3 minutes ago', verified: true }
+      ];
+
+      let currentIndex = 0;
+      const showPurchase = () => {
+        setCurrentPurchase(purchases[currentIndex]);
+        currentIndex = (currentIndex + 1) % purchases.length;
+      };
+
+      showPurchase(); // Show first purchase immediately
+      const purchaseInterval = setInterval(showPurchase, 8000); // Show new purchase every 8 seconds
+
+      return () => clearInterval(purchaseInterval);
+    }
+  }, [showCTA]);
 
   return (
     <>
@@ -145,31 +168,45 @@ export default function Lead2() {
             </>
           )}
 
-<div className="featured-section">
-  <h2>AS FEATURED IN</h2>
-  <div className="featured-logos">
-    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fc03d3b4b3c5bfc6ca2e350f9e465fb8842d94462%2Fft1.png?auto=compress,format&fit=scale&w=115&h=90" alt="NBC News" />
-    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F0f761c6519a78db8280d626afad111d6a0c595c8%2Fft2.png?auto=compress,format&fit=scale&w=89&h=85" alt="USA Today" />
-    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fce40fa89617d681dd22e8afa71dffe72826a181d%2Fft3.png?auto=compress,format&fit=scale&w=101&h=80" alt="CBS" />
-    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F34ab16f31881281575ffdce9fe9d104b05d00c4a%2Fft4.png?auto=compress,format&fit=scale&w=84&h=84" alt="Fox News" />
-  </div>
-</div>
+          {currentPurchase && (
+            <div className="purchase-notification">
+              <div className="notification-content">
+                <div className="notification-icon">✓</div>
+                <div className="notification-text">
+                  <span className="verified-text">Verified Purchase</span>
+                  <span className="purchase-details">
+                    {currentPurchase.location} • {currentPurchase.time}
+                  </span>
+                  <span className="product-name">{currentPurchase.product}</span>
+                </div>
+              </div>
+            </div>
+          )}
 
-<div className="scientific-section">
-  <div className="scientific-button">SCIENTIFIC REFERENCES</div>
-  <div className="scientific-logos">
-    <div className="top-row">
-      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F42e00510186f96a3f459bd6e498e64d349ecd53b%2FMIT-Logo.png?auto=compress,format&fit=scale&w=222&h=125" alt="MIT" />
-      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fce9ee87f492e279f28512c69c92705d30cebf37b%2FJournal-sexual-logo-removebg-preview.png?auto=compress,format&fit=scale&w=379&h=76" alt="Harvard University" />
-      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F617e8eb8d2ab9fbd29f51df8e43eb1b04761392f%2Fpasted%20image%200%20%282%29.png?auto=compress,format&fit=scale&w=243&h=81" alt="Johns Hopkins University" />
-    </div>
-    <div className="bottom-row">
-      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fdb446f6354d97436079a6a9233aff4ebbe35ef0d%2Fref_1.png?auto=compress,format&fit=scale&w=187&h=64" alt="NIH" />
-      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fd53981d166bcb27485e51a589ddf60006c1f8a89%2Fref_3.png?auto=compress,format&fit=scale&w=264&h=73" alt="PubMed" />
-    </div>
-  </div>
-</div>
+          <div className="featured-section">
+            <h2>AS FEATURED IN</h2>
+            <div className="featured-logos">
+              <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fc03d3b4b3c5bfc6ca2e350f9e465fb8842d94462%2Fft1.png?auto=compress,format&fit=scale&w=115&h=90" alt="NBC News" />
+              <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F0f761c6519a78db8280d626afad111d6a0c595c8%2Fft2.png?auto=compress,format&fit=scale&w=89&h=85" alt="USA Today" />
+              <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fce40fa89617d681dd22e8afa71dffe72826a181d%2Fft3.png?auto=compress,format&fit=scale&w=101&h=80" alt="CBS" />
+              <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F34ab16f31881281575ffdce9fe9d104b05d00c4a%2Fft4.png?auto=compress,format&fit=scale&w=84&h=84" alt="Fox News" />
+            </div>
+          </div>
 
+          <div className="scientific-section">
+            <div className="scientific-button">SCIENTIFIC REFERENCES</div>
+            <div className="scientific-logos">
+              <div className="top-row">
+                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F42e00510186f96a3f459bd6e498e64d349ecd53b%2FMIT-Logo.png?auto=compress,format&fit=scale&w=222&h=125" alt="MIT" />
+                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fce9ee87f492e279f28512c69c92705d30cebf37b%2FJournal-sexual-logo-removebg-preview.png?auto=compress,format&fit=scale&w=379&h=76" alt="Harvard University" />
+                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F617e8eb8d2ab9fbd29f51df8e43eb1b04761392f%2Fpasted%20image%200%20%282%29.png?auto=compress,format&fit=scale&w=243&h=81" alt="Johns Hopkins University" />
+              </div>
+              <div className="bottom-row">
+                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fdb446f6354d97436079a6a9233aff4ebbe35ef0d%2Fref_1.png?auto=compress,format&fit=scale&w=187&h=64" alt="NIH" />
+                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fd53981d166bcb27485e51a589ddf60006c1f8a89%2Fref_3.png?auto=compress,format&fit=scale&w=264&h=73" alt="PubMed" />
+              </div>
+            </div>
+          </div>
         </div>
 
         <footer className="site-footer">
@@ -381,6 +418,7 @@ export default function Lead2() {
             text-transform: uppercase;
             box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
             transition: all 0.3s ease;
+            animation: bounce 2s infinite;
           }
 
           .cta-button:hover {
@@ -490,6 +528,79 @@ export default function Lead2() {
             color: #666;
             font-size: 12px;
             line-height: 1.5;
+          }
+
+          .purchase-notification {
+            background: rgba(46, 204, 113, 0.1);
+            border-left: 4px solid #2ecc71;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            animation: slideIn 0.5s ease-out;
+          }
+
+          .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+          }
+
+          .notification-icon {
+            background: #2ecc71;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+          }
+
+          .notification-text {
+            display: flex;
+            flex-direction: column;
+          }
+
+          .verified-text {
+            color: #2ecc71;
+            font-weight: bold;
+            font-size: 14px;
+          }
+
+          .purchase-details {
+            color: #888;
+            font-size: 12px;
+            margin: 2px 0;
+          }
+
+          .product-name {
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+          }
+
+          @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+              transform: translateY(0);
+            }
+            40% {
+              transform: translateY(-20px);
+            }
+            60% {
+              transform: translateY(-10px);
+            }
+          }
+
+          @keyframes slideIn {
+            from {
+              opacity: 0;
+              transform: translateX(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
           }
         `}</style>
       </div>
