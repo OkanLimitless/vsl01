@@ -152,13 +152,6 @@ export default function Home() {
             <div className="pulse-dot"></div>
             <span>{viewerCount} people watching right now</span>
           </div>
-          
-          <div className="timer-container">
-            <span className="timer-label">Time remaining to watch:</span>
-            <span className="timer-value">
-              {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
-            </span>
-          </div>
 
           <div className="stock-counter">
             <span className="stock-warning">⚠️ Warning: Only {stockLeft} bottles left in stock</span>
@@ -672,21 +665,6 @@ export default function Home() {
           0% { transform: scale(1); opacity: 1; }
           50% { transform: scale(1.5); opacity: 0.7; }
           100% { transform: scale(1); opacity: 1; }
-        }
-
-        .timer-container {
-          background: #ff6b00;
-          color: white;
-          padding: 0.8rem;
-          border-radius: 8px;
-          text-align: center;
-          font-weight: bold;
-          animation: highlight 2s infinite;
-        }
-
-        .timer-value {
-          font-size: 1.2rem;
-          margin-left: 0.5rem;
         }
 
         .stock-counter {
