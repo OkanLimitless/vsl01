@@ -145,7 +145,7 @@ export default function Lead2() {
 
           <VideoPlayer />
           <div className="sound-check">
-            <span className="volume-icon">��</span>
+            <i className="fas fa-volume-up volume-icon"></i>
             Please check if the sound is on.
           </div>
 
@@ -793,20 +793,21 @@ export default function Lead2() {
           .sound-check {
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             text-align: center;
             border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             font-size: 16px;
           }
 
           .volume-icon {
             font-size: 20px;
             animation: pulse 2s infinite;
+            color: #2ecc71;
           }
 
           @keyframes pulse {
