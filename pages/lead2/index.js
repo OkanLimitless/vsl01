@@ -174,6 +174,12 @@ export default function Lead2() {
                 </div>
               </div>
 
+              <div className="attention-arrows">
+                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/86ea8dd1ea79e36dda50d768a7860be4c5f5904c/arrow-down-1.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
+                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/86ea8dd1ea79e36dda50d768a7860be4c5f5904c/arrow-down-1.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
+                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/86ea8dd1ea79e36dda50d768a7860be4c5f5904c/arrow-down-1.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
+              </div>
+
               <a 
                 href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
                 className="cta-button pulse"
@@ -711,6 +717,37 @@ export default function Lead2() {
             }
             .guarantee-timer {
               font-size: 18px;
+            }
+          }
+
+          .attention-arrows {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+          }
+
+          .arrow {
+            width: 50px;
+            height: 50px;
+            animation: bounceArrow 1s infinite;
+            opacity: 0.8;
+          }
+
+          .arrow:nth-child(2) {
+            animation-delay: 0.2s;
+          }
+
+          .arrow:nth-child(3) {
+            animation-delay: 0.4s;
+          }
+
+          @keyframes bounceArrow {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(15px);
             }
           }
         `}</style>
