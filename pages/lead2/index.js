@@ -123,30 +123,31 @@ export default function Lead2() {
             </>
           )}
 
-          <div className="featured-section">
-            <h2>AS FEATURED IN</h2>
-            <div className="featured-logos">
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/featured/nbc.png" alt="NBC News" />
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/featured/usa.png" alt="USA Today" />
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/featured/cbs.png" alt="CBS" />
-              <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/featured/fox.png" alt="Fox News" />
-            </div>
-          </div>
+<div className="featured-section">
+  <h2>AS FEATURED IN</h2>
+  <div className="featured-logos">
+    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fc03d3b4b3c5bfc6ca2e350f9e465fb8842d94462%2Fft1.png?auto=compress,format&fit=scale&w=115&h=90" alt="NBC News" />
+    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F0f761c6519a78db8280d626afad111d6a0c595c8%2Fft2.png?auto=compress,format&fit=scale&w=89&h=85" alt="USA Today" />
+    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fce40fa89617d681dd22e8afa71dffe72826a181d%2Fft3.png?auto=compress,format&fit=scale&w=101&h=80" alt="CBS" />
+    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F34ab16f31881281575ffdce9fe9d104b05d00c4a%2Fft4.png?auto=compress,format&fit=scale&w=84&h=84" alt="Fox News" />
+  </div>
+</div>
 
-          <div className="scientific-section">
-            <div className="scientific-button">SCIENTIFIC REFERENCES</div>
-            <div className="scientific-logos">
-              <div className="top-row">
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/jhu.png" alt="Johns Hopkins University" />
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/harvard.png" alt="Harvard University" />
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/mit.png" alt="MIT" />
-              </div>
-              <div className="bottom-row">
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/nih.png" alt="NIH" />
-                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/refs/pubmed.png" alt="PubMed" />
-              </div>
-            </div>
-          </div>
+<div className="scientific-section">
+  <div className="scientific-button">SCIENTIFIC REFERENCES</div>
+  <div className="scientific-logos">
+    <div className="top-row">
+      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F42e00510186f96a3f459bd6e498e64d349ecd53b%2FMIT-Logo.png?auto=compress,format&fit=scale&w=222&h=125" alt="MIT" />
+      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fce9ee87f492e279f28512c69c92705d30cebf37b%2FJournal-sexual-logo-removebg-preview.png?auto=compress,format&fit=scale&w=379&h=76" alt="Harvard University" />
+      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2F617e8eb8d2ab9fbd29f51df8e43eb1b04761392f%2Fpasted%20image%200%20%282%29.png?auto=compress,format&fit=scale&w=243&h=81" alt="Johns Hopkins University" />
+    </div>
+    <div className="bottom-row">
+      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fdb446f6354d97436079a6a9233aff4ebbe35ef0d%2Fref_1.png?auto=compress,format&fit=scale&w=187&h=64" alt="NIH" />
+      <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41%2Fd53981d166bcb27485e51a589ddf60006c1f8a89%2Fref_3.png?auto=compress,format&fit=scale&w=264&h=73" alt="PubMed" />
+    </div>
+  </div>
+</div>
+
         </div>
 
         <style jsx>{`
