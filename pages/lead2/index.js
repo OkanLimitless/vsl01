@@ -172,6 +172,20 @@ export default function Lead2() {
 
         </div>
 
+        <footer className="site-footer">
+          <div className="footer-content">
+            <p className="copyright">© 2025 EP ® - All Rights Reserved</p>
+            <div className="footer-links">
+              <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a>
+              <span className="divider">|</span>
+              <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            </div>
+            <p className="disclaimer">
+              This site is not affiliated with any advertising platform. This product is marketed with the support of Hotmart. The platform does not perform prior editorial control of the products marketed, nor does it evaluate the technicality and experience of those who produce them. The existence of a product and its acquisition through the platform cannot be considered, under any circumstances, as a guarantee of the quality of the content and the result. By acquiring it, the buyer declares to be aware of this information. Hotmart's terms and policies can be consulted here, even before finalizing the purchase.
+            </p>
+          </div>
+        </footer>
+
         <style jsx>{`
           .page-container {
             width: 100%;
@@ -432,6 +446,50 @@ export default function Lead2() {
 
           .countdown {
             animation: blink 1s ease-in-out infinite;
+          }
+
+          .site-footer {
+            width: 100%;
+            background: #000;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+          }
+
+          .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+          }
+
+          .copyright {
+            color: #888;
+            margin-bottom: 15px;
+          }
+
+          .footer-links {
+            margin-bottom: 20px;
+          }
+
+          .footer-links a {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s;
+          }
+
+          .footer-links a:hover {
+            color: #fff;
+          }
+
+          .divider {
+            color: #888;
+            margin: 0 10px;
+          }
+
+          .disclaimer {
+            color: #666;
+            font-size: 12px;
+            line-height: 1.5;
           }
         `}</style>
       </div>
