@@ -9,38 +9,59 @@ const ClientSideOnly = dynamic(
 );
 
 export default function Home() {
-  const [viewerCount, setViewerCount] = useState(56);
+  const [viewerCount, setViewerCount] = useState(8);
   const [stockLeft, setStockLeft] = useState(37);
-  const [timeLeft, setTimeLeft] = useState(27 * 60); // 27 minutes in seconds
+  const [showNotification, setShowNotification] = useState(false);
+  const [currentBuyer, setCurrentBuyer] = useState(null);
 
-  // Simulate random viewer count changes
   useEffect(() => {
+    // Viewer counter logic
     const viewerInterval = setInterval(() => {
       setViewerCount(prev => {
-        const change = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
-        return Math.max(45, Math.min(78, prev + change)); // Keep between 45-78
-      });
-    }, 3000);
-
-    // Decrease stock occasionally
-    const stockInterval = setInterval(() => {
-      setStockLeft(prev => {
-        if (Math.random() < 0.3) { // 30% chance to decrease
-          return Math.max(1, prev - 1);
+        if (Math.random() < 0.3) { // 30% chance to change
+          const increase = Math.random() < 0.7; // 70% chance to increase
+          if (increase && prev < 15) return prev + 1;
+          if (!increase && prev > 8) return prev - 1;
         }
         return prev;
       });
-    }, 15000);
+    }, 5000 + Math.random() * 7000); // Random interval between 5-12 seconds
 
-    // Timer countdown
-    const timerInterval = setInterval(() => {
-      setTimeLeft(prev => Math.max(0, prev - 1));
-    }, 1000);
+    // Stock counter logic
+    const stockInterval = setInterval(() => {
+      setStockLeft(prev => {
+        if (prev > 15 && Math.random() < 0.4) return prev - 1;
+        return prev;
+      });
+    }, 8000 + Math.random() * 7000); // Random interval between 8-15 seconds
+
+    // Buy notifications logic
+    const buyers = [
+      { name: 'Michael R.', location: 'Los Angeles, CA' },
+      { name: 'James S.', location: 'Houston, TX' },
+      { name: 'William D.', location: 'Chicago, IL' },
+      { name: 'Robert K.', location: 'Miami, FL' },
+      { name: 'Thomas B.', location: 'Phoenix, AZ' }
+    ];
+
+    const showRandomPurchase = () => {
+      const buyer = buyers[Math.floor(Math.random() * buyers.length)];
+      setCurrentBuyer(buyer);
+      setShowNotification(true);
+      setTimeout(() => setShowNotification(false), 4000);
+    };
+
+    // Show first notification after 15-30 seconds
+    const initialNotification = setTimeout(() => {
+      showRandomPurchase();
+      // Then show subsequent notifications every 40-90 seconds
+      setInterval(showRandomPurchase, 40000 + Math.random() * 50000);
+    }, 15000 + Math.random() * 15000);
 
     return () => {
       clearInterval(viewerInterval);
       clearInterval(stockInterval);
-      clearInterval(timerInterval);
+      clearTimeout(initialNotification);
     };
   }, []);
 
@@ -64,6 +85,38 @@ export default function Home() {
         `}</style>
       </Head>
       
+      {/* New Sticky Announcement Bar */}
+      <div className="announcement-bar">
+        <div className="urgent-message">
+          <span className="alert-icon"><i className="fas fa-exclamation-circle"></i></span>
+          <span className="message">URGENT: Last Chance To Watch</span>
+          <span className="divider">|</span>
+          <span className="date">{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+          <span className="divider">|</span>
+          <span className="stock-status">
+            <span className="pulse-dot"></span>
+            <span className="live-label">LIVE:</span>
+            <strong>{stockLeft}</strong> bottles remaining
+            <span className="divider">|</span>
+            <span className="visitors">
+              <i className="fas fa-users"></i>
+              <strong>{viewerCount}</strong> people viewing
+            </span>
+          </span>
+        </div>
+      </div>
+
+      {/* Buy Notification Popup */}
+      {showNotification && currentBuyer && (
+        <div className="social-proof-popup show">
+          <div className="popup-content">
+            <p><strong>{currentBuyer.name}</strong> from <span>{currentBuyer.location}</span></p>
+            <p>Just purchased</p>
+            <small>a moment ago</small>
+          </div>
+        </div>
+      )}
+
       <div className="notification-bar">
         <p>⚠️ Last Day To Watch This Presentation: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
       </div>
@@ -704,6 +757,80 @@ export default function Home() {
 
           .timer-container, .stock-counter {
             font-size: 0.9rem;
+          }
+        }
+
+        .announcement-bar {
+          position: sticky;
+          top: 0;
+          width: 100%;
+          background: #111;
+          color: white;
+          padding: 0.8rem;
+          z-index: 1000;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .urgent-message {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 1rem;
+          font-size: 0.9rem;
+        }
+
+        .pulse-dot {
+          width: 8px;
+          height: 8px;
+          background-color: #ff0000;
+          border-radius: 50%;
+          display: inline-block;
+          margin-right: 0.5rem;
+          animation: pulse 1.5s infinite;
+        }
+
+        .divider {
+          color: rgba(255, 255, 255, 0.3);
+        }
+
+        .stock-status strong, .visitors strong {
+          color: #ff6b00;
+        }
+
+        .social-proof-popup {
+          position: fixed;
+          bottom: 20px;
+          left: 20px;
+          background: rgba(0, 0, 0, 0.9);
+          color: white;
+          padding: 1rem;
+          border-radius: 8px;
+          z-index: 1000;
+          transform: translateY(100%);
+          transition: transform 0.3s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-proof-popup.show {
+          transform: translateY(0);
+        }
+
+        .popup-content {
+          font-size: 0.9rem;
+        }
+
+        .popup-content p {
+          margin: 0;
+        }
+
+        .popup-content small {
+          color: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+          .urgent-message {
+            font-size: 0.8rem;
+            gap: 0.5rem;
           }
         }
       `}</style>
