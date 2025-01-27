@@ -10,10 +10,7 @@ const ClientSideOnly = dynamic(
 
 export default function Lead2() {
   const [viewerCount, setViewerCount] = useState(390);
-  const [hours, setHours] = useState(1);
-  const [minutes, setMinutes] = useState(30);
-  const [seconds, setSeconds] = useState(0);
-  const [showPackages, setShowPackages] = useState(false);
+  const [showCTA, setShowCTA] = useState(false);
 
   useEffect(() => {
     // Viewer counter logic
@@ -26,28 +23,6 @@ export default function Lead2() {
       });
     }, 2000);
 
-    // Countdown timer
-    const timerInterval = setInterval(() => {
-      setSeconds(prev => {
-        if (prev === 0) {
-          setMinutes(prevMin => {
-            if (prevMin === 0) {
-              setHours(prevHr => {
-                if (prevHr === 0) {
-                  return 1; // Reset timer
-                }
-                return prevHr - 1;
-              });
-              return 59;
-            }
-            return prevMin - 1;
-          });
-          return 59;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
     // Video progress watcher
     const watchVideoProgress = () => {
       if (typeof smartplayer === 'undefined') {
@@ -57,22 +32,21 @@ export default function Lead2() {
 
       smartplayer.instances[0].on('timeupdate', () => {
         if (smartplayer.instances[0].video.currentTime >= 1882) { // ~31 minutes
-          setShowPackages(true);
-          localStorage.setItem('alreadyElsDisplayed', true);
+          setShowCTA(true);
+          localStorage.setItem('alreadyCtaDisplayed', true);
         }
       });
     };
 
-    // Check if packages should be shown
-    if (localStorage.getItem('alreadyElsDisplayed') === 'true') {
-      setShowPackages(true);
+    // Check if CTA should be shown
+    if (localStorage.getItem('alreadyCtaDisplayed') === 'true') {
+      setShowCTA(true);
     } else {
       watchVideoProgress();
     }
 
     return () => {
       clearInterval(viewerInterval);
-      clearInterval(timerInterval);
     };
   }, []);
 
@@ -102,14 +76,21 @@ export default function Lead2() {
 
           <VideoPlayer />
 
-          <div className="cta-section">
-            <a href="https://lp.wellhealthsub.site/click/1" className="cta-button bounce">
-              Click Here To Get Access Now!
-            </a>
-            <div className="urgency-text">
-              ⚠️ Warning: Limited Time Offer - Spots Are Filling Up Fast!
+          {showCTA && (
+            <div className="cta-section">
+              <a 
+                href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
+                className="cta-button bounce"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Click Here To Get Access Now!
+              </a>
+              <div className="urgency-text">
+                ⚠️ Warning: Limited Time Offer - Spots Are Filling Up Fast!
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <style jsx>{`
@@ -138,10 +119,9 @@ export default function Lead2() {
           .content-box {
             width: 100%;
             max-width: 800px;
-            margin: 0 auto;
-            background: #000;
+            margin: 20px auto;
+            background: #fff;
             border: 2px solid #000;
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
           }
 
           .title-section {
@@ -206,6 +186,10 @@ export default function Lead2() {
           }
 
           @media (max-width: 768px) {
+            .content-box {
+              margin: 10px;
+            }
+
             .title-section h1 {
               font-size: 24px;
             }
