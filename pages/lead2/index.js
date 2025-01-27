@@ -150,9 +150,11 @@ export default function Lead2() {
               <div className="live-stats">
                 <div className="attention-container">
                   <div className="attention-arrows">
-                    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/2d0a2f3d1f0e4d8c1b927849d3c92d3c6c0e9d4f/down.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
-                    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/2d0a2f3d1f0e4d8c1b927849d3c92d3c6c0e9d4f/down.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
-                    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/2d0a2f3d1f0e4d8c1b927849d3c92d3c6c0e9d4f/down.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
+                    <div className="arrow-wrapper">
+                      <div className="arrow-down"></div>
+                      <div className="arrow-down"></div>
+                      <div className="arrow-down"></div>
+                    </div>
                   </div>
                   <div className="stock-alert">
                     ⚠️ Warning: Only <span className="highlight">{bottlesLeft}</span> bottles left in stock
@@ -363,31 +365,62 @@ export default function Lead2() {
           }
 
           .attention-container {
-            position: relative;
-            margin: 30px 0 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.95);
+            padding: 15px 0;
+            backdrop-filter: blur(8px);
           }
 
           .attention-arrows {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
           }
 
-          .arrow {
-            width: 40px;
-            height: 40px;
-            animation: bounceArrow 1s infinite;
-            opacity: 0.9;
-            filter: brightness(1.2) invert(1);
+          .arrow-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
           }
 
-          .arrow:nth-child(2) {
+          .arrow-down {
+            width: 20px;
+            height: 20px;
+            border-right: 4px solid #fff;
+            border-bottom: 4px solid #fff;
+            transform: rotate(45deg);
+            margin: 0 auto;
+            animation: arrowBounce 2s infinite;
+            opacity: 0;
+          }
+
+          .arrow-down:nth-child(1) {
+            animation-delay: 0s;
+          }
+
+          .arrow-down:nth-child(2) {
             animation-delay: 0.2s;
           }
 
-          .arrow:nth-child(3) {
+          .arrow-down:nth-child(3) {
             animation-delay: 0.4s;
+          }
+
+          @keyframes arrowBounce {
+            0% {
+              opacity: 0;
+              transform: rotate(45deg) translate(-20px, -20px);
+            }
+            50% {
+              opacity: 1;
+            }
+            100% {
+              opacity: 0;
+              transform: rotate(45deg) translate(20px, 20px);
+            }
           }
 
           .stock-alert {
@@ -398,6 +431,7 @@ export default function Lead2() {
             text-align: center;
             border-radius: 4px;
             box-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
+            margin: 0 20px;
           }
 
           .scroll-text {
@@ -405,15 +439,12 @@ export default function Lead2() {
             margin-top: 8px;
             color: #fff;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-weight: 500;
           }
 
-          @keyframes bounceArrow {
-            0%, 100% {
-              transform: translateY(0);
-            }
-            50% {
-              transform: translateY(10px);
-            }
+          .highlight {
+            color: #fff;
+            font-weight: bold;
           }
 
           .viewers-bar {
@@ -753,15 +784,6 @@ export default function Lead2() {
             .guarantee-timer {
               font-size: 18px;
             }
-          }
-
-          .attention-container {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(0,0,0,0.9);
-            padding: 10px 0;
-            backdrop-filter: blur(5px);
           }
         `}</style>
       </div>
