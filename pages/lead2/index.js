@@ -12,13 +12,6 @@ export default function Lead2() {
   const [viewerCount, setViewerCount] = useState(390);
   const [showCTA, setShowCTA] = useState(false);
   const [bottlesLeft, setBottlesLeft] = useState(15);
-  const [recentPurchases] = useState([
-    'John from New York just purchased 1 bottle - $79',
-    'Sarah from California ordered 6 bottles - Best Value $49/each',
-    'Mike from Texas got 3 bottles - $69/each',
-    'Emma from Florida secured 1 bottle pack',
-    'David from Chicago chose 6 bottles package'
-  ]);
 
   useEffect(() => {
     // Viewer counter logic
@@ -58,6 +51,32 @@ export default function Lead2() {
     };
   }, []);
 
+  useEffect(() => {
+    let hours = 23;
+    let minutes = 59;
+    let seconds = 59;
+
+    const timerInterval = setInterval(() => {
+      if (seconds > 0) {
+        seconds--;
+      } else if (minutes > 0) {
+        minutes--;
+        seconds = 59;
+      } else if (hours > 0) {
+        hours--;
+        minutes = 59;
+        seconds = 59;
+      }
+
+      const countdownElement = document.querySelector('.countdown');
+      if (countdownElement) {
+        countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      }
+    }, 1000);
+
+    return () => clearInterval(timerInterval);
+  }, []);
+
   return (
     <>
       <Head>
@@ -93,15 +112,19 @@ export default function Lead2() {
                 
                 <div className="viewers-bar">
                   <div className="pulse-dot"></div>
-                  {viewerCount} people watching right now
+                  <span className="highlight">{viewerCount}</span> people watching right now
                 </div>
 
-                <div className="recent-purchases">
-                  {recentPurchases.map((purchase, index) => (
-                    <div key={index} className="purchase-notification">
-                      🔥 {purchase}
-                    </div>
-                  ))}
+                <div className="urgency-messages">
+                  <div className="timer-message">
+                    ⏰ Special Offer Ends In: <span className="countdown">23:59:59</span>
+                  </div>
+                  <div className="stock-message">
+                    📊 High Demand: <span className="highlight">87%</span> of Today's Stock Sold
+                  </div>
+                  <div className="discount-message">
+                    💰 Save Up To <span className="highlight">$780</span> Today Only
+                  </div>
                 </div>
               </div>
 
@@ -297,18 +320,35 @@ export default function Lead2() {
             animation: pulse 1.5s ease-in-out infinite;
           }
 
-          .recent-purchases {
+          .urgency-messages {
             width: 100%;
-            margin: 15px 0;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
           }
 
-          .purchase-notification {
-            width: 100%;
+          .timer-message,
+          .stock-message,
+          .discount-message {
             color: white;
             font-size: 20px;
-            padding: 8px 0;
+            padding: 10px;
             margin: 5px 0;
-            text-align: left;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          }
+
+          .timer-message:last-child,
+          .stock-message:last-child,
+          .discount-message:last-child {
+            border-bottom: none;
+          }
+
+          .countdown {
+            color: #ff3b3b;
+            font-weight: bold;
+            font-family: monospace;
           }
 
           .cta-button {
@@ -367,10 +407,6 @@ export default function Lead2() {
               font-size: 18px;
             }
 
-            .purchase-notification {
-              font-size: 16px;
-            }
-
             .cta-button {
               font-size: 24px;
               padding: 20px 15px;
@@ -386,6 +422,16 @@ export default function Lead2() {
               gap: 20px;
               font-size: 16px;
             }
+          }
+
+          @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+          }
+
+          .countdown {
+            animation: blink 1s ease-in-out infinite;
           }
         `}</style>
       </div>
