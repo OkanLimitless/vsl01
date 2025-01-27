@@ -148,13 +148,15 @@ export default function Lead2() {
           {showCTA && (
             <>
               <div className="live-stats">
-                <div className="stock-alert">
-                  ⚠️ Warning: Only <span className="highlight">{bottlesLeft}</span> bottles left in stock
-                  <div className="scroll-indicator">
-                    <span>Scroll Down To Secure Your Bottle</span>
-                    <div className="chevron"></div>
-                    <div className="chevron"></div>
-                    <div className="chevron"></div>
+                <div className="attention-container">
+                  <div className="attention-arrows">
+                    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/86ea8dd1ea79e36dda50d768a7860be4c5f5904c/arrow-down-1.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
+                    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/86ea8dd1ea79e36dda50d768a7860be4c5f5904c/arrow-down-1.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
+                    <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/86ea8dd1ea79e36dda50d768a7860be4c5f5904c/arrow-down-1.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
+                  </div>
+                  <div className="stock-alert">
+                    ⚠️ Warning: Only <span className="highlight">{bottlesLeft}</span> bottles left in stock
+                    <div className="scroll-text">Scroll Down To Secure Your Bottle</div>
                   </div>
                 </div>
                 
@@ -172,12 +174,6 @@ export default function Lead2() {
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="attention-arrows">
-                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/86ea8dd1ea79e36dda50d768a7860be4c5f5904c/arrow-down-1.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
-                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/86ea8dd1ea79e36dda50d768a7860be4c5f5904c/arrow-down-1.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
-                <img src="https://convertri.imgix.net/e7429909-68fc-11ee-b5e1-06326af95a41/86ea8dd1ea79e36dda50d768a7860be4c5f5904c/arrow-down-1.png?auto=compress,format&fit=scale&w=50&h=50" alt="arrow" className="arrow" />
               </div>
 
               <a 
@@ -366,19 +362,58 @@ export default function Lead2() {
             margin-bottom: 20px;
           }
 
+          .attention-container {
+            position: relative;
+            margin: 30px 0 15px;
+          }
+
+          .attention-arrows {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+          }
+
+          .arrow {
+            width: 40px;
+            height: 40px;
+            animation: bounceArrow 1s infinite;
+            opacity: 0.9;
+            filter: brightness(1.2);
+          }
+
+          .arrow:nth-child(2) {
+            animation-delay: 0.2s;
+          }
+
+          .arrow:nth-child(3) {
+            animation-delay: 0.4s;
+          }
+
           .stock-alert {
-            width: 100%;
             background: #ff3b3b;
             color: white;
             padding: 15px;
             font-size: 22px;
             text-align: center;
-            margin: 15px 0;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
           }
 
-          .highlight {
+          .scroll-text {
+            font-size: 18px;
+            margin-top: 8px;
             color: #fff;
-            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+          }
+
+          @keyframes bounceArrow {
+            0%, 100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(10px);
+            }
           }
 
           .viewers-bar {
@@ -720,35 +755,13 @@ export default function Lead2() {
             }
           }
 
-          .attention-arrows {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-          }
-
-          .arrow {
-            width: 50px;
-            height: 50px;
-            animation: bounceArrow 1s infinite;
-            opacity: 0.8;
-          }
-
-          .arrow:nth-child(2) {
-            animation-delay: 0.2s;
-          }
-
-          .arrow:nth-child(3) {
-            animation-delay: 0.4s;
-          }
-
-          @keyframes bounceArrow {
-            0%, 100% {
-              transform: translateY(0);
-            }
-            50% {
-              transform: translateY(15px);
-            }
+          .attention-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(0,0,0,0.9);
+            padding: 10px 0;
+            backdrop-filter: blur(5px);
           }
         `}</style>
       </div>
