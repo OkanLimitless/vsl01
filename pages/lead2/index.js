@@ -11,6 +11,8 @@ const ClientSideOnly = dynamic(
 export default function Lead2() {
   const [viewerCount, setViewerCount] = useState(390);
   const [showCTA, setShowCTA] = useState(false);
+  const [bottlesLeft, setBottlesLeft] = useState(15);
+  const [recentPurchases, setRecentPurchases] = useState(['John from New York', 'Jane from Chicago', 'Bob from Boston']);
 
   useEffect(() => {
     // Viewer counter logic
@@ -77,36 +79,48 @@ export default function Lead2() {
           <VideoPlayer />
 
           {showCTA && (
-            <div className="cta-wrapper">
-              <div className="live-stats">
-                <div className="stock-alert">
-                  <span className="warning-icon">⚠️</span>
-                  Warning: Only <span className="highlight">15 bottles</span> left in stock
+            <>
+              <div className="attention-arrows">
+                <div className="arrow">⬇️</div>
+                <div className="arrow">⬇️</div>
+                <div className="arrow">⬇️</div>
+              </div>
+              
+              <div className="cta-wrapper">
+                <div className="live-stats">
+                  <div className="stock-alert">
+                    <span className="warning-icon">⚠️</span>
+                    Warning: Only <span className="highlight">{bottlesLeft}</span> bottles left in stock
+                  </div>
+                  <div className="viewers-bar">
+                    <span className="pulse-dot"></span>
+                    <span className="live-count">{viewerCount}</span> people watching right now
+                  </div>
+                  <div className="recent-sales">
+                    {recentPurchases.map((purchase, index) => (
+                      <div key={index} className="notification" style={{animationDelay: `${index * 4}s`}}>
+                        🔥 {purchase}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="viewers-bar">
-                  <span className="pulse-dot"></span>
-                  <span className="live-count">14</span> people watching right now
-                </div>
-                <div className="recent-sales">
-                  <span className="notification">🔥 John from New York just purchased 3 bottles</span>
+
+                <a 
+                  href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
+                  className="cta-button pulse"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  CLICK HERE TO GET YOUR BOTTLE
+                  <div className="sub-text">While Supplies Last</div>
+                </a>
+
+                <div className="trust-badges">
+                  <div className="secure-badge">🔒 Secure 256-bit SSL Encryption</div>
+                  <div className="guarantee">✓ 180-Day Money Back Guarantee</div>
                 </div>
               </div>
-
-              <a 
-                href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
-                className="cta-button pulse"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CLICK HERE TO GET YOUR BOTTLE
-                <div className="sub-text">While Supplies Last</div>
-              </a>
-
-              <div className="trust-badges">
-                <div className="secure-badge">🔒 Secure 256-bit SSL Encryption</div>
-                <div className="guarantee">✓ 180-Day Money Back Guarantee</div>
-              </div>
-            </div>
+            </>
           )}
 
           <div className="featured-section">
@@ -306,8 +320,9 @@ export default function Lead2() {
           }
 
           .notification {
+            position: absolute;
+            white-space: nowrap;
             animation: slideIn 12s linear infinite;
-            display: inline-block;
           }
 
           .cta-button {
@@ -377,6 +392,31 @@ export default function Lead2() {
               font-size: 20px;
               padding: 15px 30px;
             }
+          }
+
+          .attention-arrows {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+          }
+
+          .arrow {
+            font-size: 40px;
+            animation: bounce 1s infinite;
+          }
+
+          .arrow:nth-child(2) {
+            animation-delay: 0.2s;
+          }
+
+          .arrow:nth-child(3) {
+            animation-delay: 0.4s;
+          }
+
+          @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(20px); }
           }
         `}</style>
       </div>
