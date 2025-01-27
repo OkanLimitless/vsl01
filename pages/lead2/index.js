@@ -92,13 +92,21 @@ export default function Lead2() {
                 </div>
               </div>
 
+              <div className="guarantee-section">
+                <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/guarantee.png" alt="180 Day Guarantee" />
+                <h2>100% SATISFACTION GUARANTEE</h2>
+                <p>AlphaBites comes with a 100% money back guarantee - 180 full days from your original purchase...</p>
+              </div>
+
               <div className="references-section">
-                <div className="scientific-refs">
-                  <h2>Scientific References</h2>
-                  <div className="ref-logos">
+                <h2>Scientific References</h2>
+                <div className="reference-logos">
+                  <div className="top-row">
                     <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l1.png" alt="Cambridge" />
                     <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l2.png" alt="The Lancet" />
                     <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l3.png" alt="Frontiers" />
+                  </div>
+                  <div className="bottom-row">
                     <img src="https://wellhealthsub.site/salt/alpha/pvpote/lead4/assets/images/estudos/l4.png" alt="NCBI" />
                   </div>
                 </div>
@@ -218,39 +226,76 @@ export default function Lead2() {
             }
           }
 
-          .references-section {
-            background: #fff;
-            padding: 30px;
+          .guarantee-section {
+            width: 100%;
             text-align: center;
-            border-top: 1px solid #ddd;
+            padding: 40px 20px;
+            background: #000;
+            color: white;
           }
 
-          .scientific-refs h2 {
-            color: #333;
-            font-size: 24px;
+          .guarantee-section img {
+            max-width: 100%;
+            height: auto;
             margin-bottom: 20px;
           }
 
-          .ref-logos {
+          .guarantee-section h2 {
+            font-size: 36px;
+            font-weight: bold;
+            margin: 20px 0;
+          }
+
+          .guarantee-section p {
+            font-size: 16px;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+          }
+
+          .references-section {
+            width: 100%;
+            padding: 40px 20px;
+            background: #fff;
+            text-align: center;
+          }
+
+          .references-section h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 30px;
+          }
+
+          .reference-logos {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
             gap: 20px;
+          }
+
+          .top-row, .bottom-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
             flex-wrap: wrap;
           }
 
-          .ref-logos img {
-            height: 40px;
+          .reference-logos img {
+            height: 50px;
             object-fit: contain;
           }
 
           @media (max-width: 768px) {
-            .ref-logos {
-              gap: 15px;
+            .guarantee-section h2 {
+              font-size: 28px;
             }
 
-            .ref-logos img {
-              height: 30px;
+            .reference-logos img {
+              height: 40px;
+            }
+
+            .top-row, .bottom-row {
+              gap: 20px;
             }
           }
         `}</style>
