@@ -138,7 +138,6 @@ export default function LandingPage() {
                 onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
               >
                 CLAIM YOUR SUPPLY NOW
-                <span className="cta-sub">Before They Ban It</span>
               </button>
             </div>
           </div>
@@ -407,7 +406,7 @@ export default function LandingPage() {
           color: white;
           font-family: 'Poppins', sans-serif;
           min-height: 100vh;
-          padding-top: 80px;
+          padding-top: 100px;
         }
 
         /* Top Bar */
@@ -1007,11 +1006,21 @@ export default function LandingPage() {
 
           .top-bar {
             padding: 5px 10px;
+            font-size: 12px;
           }
 
           .top-bar-content {
             flex-direction: column;
             gap: 8px;
+          }
+
+          .warning-banner {
+            font-size: 11px;
+            line-height: 1.3;
+          }
+
+          .live-counter {
+            font-size: 11px;
           }
 
           .top-cta-button {
@@ -1023,14 +1032,6 @@ export default function LandingPage() {
           .hero-cta-button {
             padding: 12px 20px;
             font-size: 16px;
-          }
-
-          .warning-banner {
-            gap: 5px;
-          }
-
-          .live-counter {
-            font-size: 12px;
           }
 
           .alert-banner {
@@ -1060,7 +1061,7 @@ export default function LandingPage() {
           }
 
           .landing-page {
-            padding-top: 70px;
+            padding-top: 120px;
           }
         }
 
