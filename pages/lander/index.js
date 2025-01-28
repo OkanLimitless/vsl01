@@ -392,6 +392,7 @@ export default function LandingPage() {
           color: white;
           font-family: 'Poppins', sans-serif;
           min-height: 100vh;
+          padding-top: 80px;
         }
 
         /* Top Bar */
@@ -444,10 +445,10 @@ export default function LandingPage() {
 
         /* Hero Section */
         .hero {
-          padding: 40px 20px;
+          padding: 20px;
           text-align: center;
-          max-width: 1200px;
-          margin: 0 auto;
+          position: relative;
+          z-index: 1;
         }
 
         .alert-banner {
@@ -974,6 +975,10 @@ export default function LandingPage() {
 
           .guarantee-features {
             justify-content: center;
+          }
+
+          .landing-page {
+            padding-top: 70px;
           }
         }
 
