@@ -87,7 +87,7 @@ export default function LandingPage() {
         <div className="top-bar">
           <div className="warning-banner">
             <span className="warning-icon">⚠️</span>
-            WARNING: This page may be taken down at any moment due to pressure from Big Pharma
+            <span className="warning-text">WARNING: This page may be taken down at any moment due to pressure from Big Pharma</span>
           </div>
           <div className="live-counter">
             <div className="pulse-dot"></div>
@@ -98,8 +98,8 @@ export default function LandingPage() {
         {/* Hero Section */}
         <section className="hero">
           <div className="alert-banner">
-            <span className="alert-icon">��</span>
-            EXPOSED: The Billion-Dollar Secret Big Pharma Doesn't Want You to Know About
+            <span className="alert-icon">⚠️</span>
+            <span>EXPOSED: The Billion-Dollar Secret Big Pharma Doesn't Want You to Know About</span>
           </div>
           <h1>The Underground Brazilian Formula That's Making ED Pills Obsolete</h1>
           <h2>WARNING: This Natural Performance Enhancer Is So Powerful, They're Trying To Ban It</h2>
@@ -397,43 +397,49 @@ export default function LandingPage() {
         /* Top Bar */
         .top-bar {
           background: #ff3b3b;
-          padding: 10px;
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          position: sticky;
+          padding: 8px 15px;
+          position: fixed;
           top: 0;
+          left: 0;
+          right: 0;
           z-index: 1000;
-          max-width: 100%;
-          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          font-size: 14px;
         }
 
         .warning-banner {
-          background: #ff3b3b;
-          color: white;
-          padding: 10px 20px;
           display: flex;
           align-items: center;
-          gap: 10px;
-          font-weight: bold;
-          animation: pulse 2s infinite;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          gap: 8px;
+          color: white;
+          font-weight: 600;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .warning-text {
+          white-space: normal;
+          overflow-wrap: break-word;
+          line-height: 1.2;
         }
 
         .live-counter {
           display: flex;
           align-items: center;
+          justify-content: center;
           gap: 8px;
+          color: white;
+          font-size: 14px;
         }
 
         .pulse-dot {
           width: 8px;
           height: 8px;
-          background: white;
+          background: #2ecc71;
           border-radius: 50%;
-          animation: pulse 1.5s infinite;
+          animation: pulse 2s infinite;
         }
 
         /* Hero Section */
@@ -448,7 +454,7 @@ export default function LandingPage() {
           background: rgba(255, 59, 59, 0.1);
           border: 2px solid #ff3b3b;
           color: #ff3b3b;
-          padding: 15px 30px;
+          padding: 12px 20px;
           border-radius: 8px;
           margin-bottom: 30px;
           font-weight: bold;
@@ -456,6 +462,13 @@ export default function LandingPage() {
           align-items: center;
           gap: 10px;
           animation: shake 5s infinite;
+          text-align: left;
+          font-size: 16px;
+          line-height: 1.3;
+        }
+
+        .alert-icon {
+          flex-shrink: 0;
         }
 
         .hero h1 {
@@ -925,8 +938,22 @@ export default function LandingPage() {
           }
 
           .top-bar {
-            flex-direction: column;
-            gap: 10px;
+            padding: 5px 10px;
+            font-size: 12px;
+          }
+
+          .warning-banner {
+            gap: 5px;
+          }
+
+          .live-counter {
+            font-size: 12px;
+          }
+
+          .alert-banner {
+            padding: 10px 15px;
+            font-size: 14px;
+            margin-bottom: 20px;
           }
 
           .comparison-grid {
