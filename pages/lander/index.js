@@ -248,76 +248,81 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Replace the packages section with this */}
+        {/* Update the CTA sections */}
         <section className="cta-sections">
           <div className="cta-block">
-            <div className="power-badge">🔥 UNLEASH YOUR POWER</div>
-            <h2>Experience The Brazilian Secret That's Making Headlines</h2>
+            <div className="power-badge">🤫 CLASSIFIED INFORMATION</div>
+            <h2>The Underground Formula They Don't Want You to Have</h2>
             <div className="stats-grid">
               <div className="stat-item">
-                <span className="stat-number">297%</span>
-                <span className="stat-label">Performance Boost</span>
+                <span className="stat-number">3.1x</span>
+                <span className="stat-label">More Powerful Than ED Pills</span>
               </div>
               <div className="stat-item">
-                <span className="stat-number">98.7%</span>
-                <span className="stat-label">Success Rate</span>
+                <span className="stat-number">$547</span>
+                <span className="stat-label">Big Pharma Alternative Cost</span>
               </div>
               <div className="stat-item">
                 <span className="stat-number">30min</span>
-                <span className="stat-label">Fast Acting</span>
-              </div>
-            </div>
-            <button 
-              className="mega-cta-button" 
-              onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
-            >
-              CLAIM YOUR BRAZILIAN WOOD™ NOW
-              <span className="cta-sub">While Stock Lasts</span>
-            </button>
-          </div>
-
-          <div className="benefits-block">
-            <div className="benefit-grid">
-              <div className="mega-benefit">
-                <h3>🚀 INSTANT POWER</h3>
-                <p>Experience up to 297% boost in performance within 30 minutes</p>
-              </div>
-              <div className="mega-benefit">
-                <h3>💪 LASTING STAMINA</h3>
-                <p>Maintain peak performance for up to 12 hours straight</p>
-              </div>
-              <div className="mega-benefit">
-                <h3>📏 MAXIMUM GROWTH</h3>
-                <p>Users report significant size improvements within weeks</p>
-              </div>
-              <div className="mega-benefit">
-                <h3>🧬 PERMANENT RESULTS</h3>
-                <p>Unlike other solutions, effects compound over time</p>
+                <span className="stat-label">Until They Notice</span>
               </div>
             </div>
             <button 
               className="mega-cta-button pulse" 
               onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
             >
-              GET YOUR BRAZILIAN WOOD™ TODAY
-              <span className="cta-sub">Limited Time Offer</span>
+              GET ACCESS NOW BEFORE IT'S BANNED
+              <span className="cta-sub">Limited Supply Available</span>
+            </button>
+          </div>
+
+          <div className="benefits-block">
+            <div className="secret-alert">
+              <span className="alert-icon">🔥</span>
+              LEAKED CLINICAL RESULTS
+            </div>
+            <div className="benefit-grid">
+              <div className="mega-benefit">
+                <h3>⚡️ INSTANT DOMINANCE</h3>
+                <p>Outperforms prescription pills by 312% in blind tests</p>
+              </div>
+              <div className="mega-benefit">
+                <h3>⏰ MARATHON POWER</h3>
+                <p>Subjects reported 12+ hours of peak performance</p>
+              </div>
+              <div className="mega-benefit">
+                <h3>📊 PROVEN GROWTH</h3>
+                <p>Clinical data shows 3.2x better results than alternatives</p>
+              </div>
+              <div className="mega-benefit">
+                <h3>🧪 BANNED FORMULA</h3>
+                <p>Uses restricted compounds from the Amazon rainforest</p>
+              </div>
+            </div>
+            <button 
+              className="mega-cta-button danger-pulse" 
+              onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
+            >
+              BYPASS THE BAN - ORDER NOW
+              <span className="cta-sub">While We Can Still Ship It</span>
             </button>
           </div>
 
           <div className="urgency-block">
-            <div className="countdown-wrapper">
-              <div className="fire-badge">🔥 EXPLOSIVE DEAL</div>
-              <h3>Special Offer Ends In:</h3>
-              <div className="countdown">
-                {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+            <div className="warning-wrapper">
+              <div className="danger-badge">⚠️ FINAL WARNING</div>
+              <h3>Government Agencies Are Trying to Stop Us</h3>
+              <p>Once our current stock is gone, we may never be able to sell this again</p>
+              <div className="stock-alert">
+                Only <span className="highlight">{bottlesLeft}</span> Bottles Left Before Permanent Ban
               </div>
             </div>
             <button 
               className="mega-cta-button shake" 
               onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
             >
-              SECURE YOUR BRAZILIAN WOOD™ NOW
-              <span className="cta-sub">Only {bottlesLeft} Bottles Left!</span>
+              SECURE YOUR SUPPLY NOW
+              <span className="cta-sub">Before They Shut Us Down</span>
             </button>
           </div>
         </section>
@@ -399,6 +404,8 @@ export default function LandingPage() {
           position: sticky;
           top: 0;
           z-index: 1000;
+          max-width: 100%;
+          overflow: hidden;
         }
 
         .warning-banner {
@@ -410,6 +417,9 @@ export default function LandingPage() {
           gap: 10px;
           font-weight: bold;
           animation: pulse 2s infinite;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .live-counter {
@@ -650,8 +660,9 @@ export default function LandingPage() {
         /* cta-sections */
         .cta-sections {
           padding: 40px 20px;
-          max-width: 1000px;
-          margin: 0 auto;
+          background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.95) 100%);
+          border: 1px solid #ff3b3b;
+          margin: 40px 0;
         }
 
         .cta-block {
@@ -659,7 +670,7 @@ export default function LandingPage() {
           text-align: center;
         }
 
-        .power-badge, .fire-badge {
+        .power-badge, .danger-badge {
           background: #ff3b3b;
           color: white;
           padding: 8px 20px;
@@ -667,6 +678,8 @@ export default function LandingPage() {
           display: inline-block;
           margin-bottom: 20px;
           font-weight: bold;
+          text-transform: uppercase;
+          letter-spacing: 1px;
           animation: pulse 2s infinite;
         }
 
@@ -678,9 +691,11 @@ export default function LandingPage() {
         }
 
         .stat-item {
-          background: rgba(255, 255, 255, 0.05);
+          background: rgba(255, 59, 59, 0.1);
+          border: 1px solid #ff3b3b;
           padding: 20px;
           border-radius: 10px;
+          text-align: center;
         }
 
         .stat-number {
@@ -727,15 +742,22 @@ export default function LandingPage() {
         }
 
         .mega-benefit {
-          background: rgba(255, 255, 255, 0.05);
-          padding: 20px;
-          border-radius: 10px;
-          text-align: center;
+          background: rgba(255, 59, 59, 0.05);
+          border: 1px solid rgba(255, 59, 59, 0.2);
+          padding: 25px;
+          border-radius: 15px;
+          transition: all 0.3s ease;
+        }
+
+        .mega-benefit:hover {
+          transform: translateY(-5px);
+          background: rgba(255, 59, 59, 0.1);
         }
 
         .mega-benefit h3 {
-          color: #2ecc71;
-          margin-bottom: 10px;
+          color: #ff3b3b;
+          margin-bottom: 15px;
+          font-size: 1.2rem;
         }
 
         .mega-benefit p {
@@ -743,39 +765,41 @@ export default function LandingPage() {
           font-size: 0.9rem;
         }
 
-        .countdown-wrapper {
+        .warning-wrapper {
           text-align: center;
+          background: rgba(255, 59, 59, 0.1);
+          padding: 30px;
+          border-radius: 15px;
           margin-bottom: 30px;
         }
 
-        .countdown {
-          font-size: 3rem;
-          font-weight: bold;
+        .stock-alert {
+          font-size: 1.2rem;
           color: #ff3b3b;
-          font-family: monospace;
-          animation: blink 1s infinite;
+          margin-top: 20px;
+          font-weight: bold;
         }
 
-        .pulse {
-          animation: pulse 2s infinite;
+        .highlight {
+          background: #ff3b3b;
+          color: white;
+          padding: 2px 8px;
+          border-radius: 4px;
         }
 
-        .shake {
-          animation: shake 5s infinite;
+        .danger-pulse {
+          animation: dangerPulse 2s infinite;
         }
 
-        @media (max-width: 768px) {
-          .stats-grid {
-            grid-template-columns: 1fr;
+        @keyframes dangerPulse {
+          0% {
+            box-shadow: 0 0 0 0 rgba(255, 59, 59, 0.4);
           }
-
-          .benefit-grid {
-            grid-template-columns: 1fr;
+          70% {
+            box-shadow: 0 0 0 15px rgba(255, 59, 59, 0);
           }
-
-          .mega-cta-button {
-            padding: 20px 30px;
-            font-size: 1.2rem;
+          100% {
+            box-shadow: 0 0 0 0 rgba(255, 59, 59, 0);
           }
         }
 
