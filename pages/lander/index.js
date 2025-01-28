@@ -124,6 +124,64 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* New Formula Announcement */}
+        <section className="new-formula">
+          <div className="announcement-badge">🔥 NEW 2024 FORMULA</div>
+          <h2>Breakthrough Formula Finally Available to the Public</h2>
+          <p>After years of research and testing, this powerful Brazilian formula is now available in limited quantities</p>
+          
+          <div className="comparison-grid">
+            <div className="old-formula">
+              <h3>Regular Male Enhancement</h3>
+              <ul>
+                <li>❌ Synthetic Ingredients</li>
+                <li>❌ Slow Acting Formula</li>
+                <li>❌ Temporary Results</li>
+                <li>❌ Side Effects</li>
+                <li>❌ Low Success Rate</li>
+              </ul>
+            </div>
+            <div className="vs">VS</div>
+            <div className="new-formula">
+              <h3>Brazilian Wood™</h3>
+              <ul>
+                <li>✅ 100% Natural Formula</li>
+                <li>✅ Fast Acting Results</li>
+                <li>✅ Long-Lasting Effects</li>
+                <li>✅ No Side Effects</li>
+                <li>✅ 98.7% Success Rate</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* Guarantee Section */}
+        <section className="guarantee">
+          <div className="guarantee-badge">
+            <span className="guarantee-icon">🛡️</span>
+            <span className="guarantee-days">180</span>
+            <span className="guarantee-text">DAY</span>
+          </div>
+          <div className="guarantee-content">
+            <h2>100% Money Back Guarantee</h2>
+            <p>If you're not completely satisfied with Brazilian Wood™, simply return the bottles (even if empty) within 180 days for a full refund. No questions asked.</p>
+            <div className="guarantee-features">
+              <div className="feature">
+                <i className="fas fa-check-circle"></i>
+                <span>No Questions Asked</span>
+              </div>
+              <div className="feature">
+                <i className="fas fa-check-circle"></i>
+                <span>Easy Returns</span>
+              </div>
+              <div className="feature">
+                <i className="fas fa-check-circle"></i>
+                <span>100% Refund</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Packages Section */}
         <section className="packages">
           <div className="stock-warning">
@@ -301,6 +359,160 @@ export default function LandingPage() {
         }
 
         .benefit-item i {
+          color: #2ecc71;
+        }
+
+        /* New Formula Section */
+        .new-formula {
+          padding: 60px 20px;
+          text-align: center;
+          background: linear-gradient(to bottom, #000, #111);
+          position: relative;
+        }
+
+        .announcement-badge {
+          background: #ff3b3b;
+          color: white;
+          padding: 8px 20px;
+          border-radius: 25px;
+          display: inline-block;
+          margin-bottom: 20px;
+          font-weight: bold;
+          animation: pulse 2s infinite;
+        }
+
+        .new-formula h2 {
+          font-size: 2rem;
+          margin-bottom: 15px;
+          color: #fff;
+        }
+
+        .new-formula p {
+          color: #888;
+          font-size: 1.1rem;
+          max-width: 600px;
+          margin: 0 auto 40px;
+        }
+
+        .comparison-grid {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 30px;
+          max-width: 1000px;
+          margin: 0 auto;
+          flex-wrap: wrap;
+        }
+
+        .old-formula, .new-formula {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 30px;
+          border-radius: 15px;
+          flex: 1;
+          min-width: 280px;
+        }
+
+        .old-formula {
+          border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .new-formula {
+          border: 1px solid rgba(46, 204, 113, 0.2);
+          transform: scale(1.05);
+        }
+
+        .vs {
+          font-size: 2rem;
+          font-weight: bold;
+          color: #ff3b3b;
+        }
+
+        .old-formula h3, .new-formula h3 {
+          margin-bottom: 20px;
+          font-size: 1.5rem;
+        }
+
+        .old-formula ul, .new-formula ul {
+          list-style: none;
+          padding: 0;
+          text-align: left;
+        }
+
+        .old-formula li, .new-formula li {
+          margin: 15px 0;
+          font-size: 1.1rem;
+        }
+
+        /* Guarantee Section */
+        .guarantee {
+          padding: 60px 20px;
+          background: linear-gradient(to bottom, #111, #000);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 40px;
+          flex-wrap: wrap;
+        }
+
+        .guarantee-badge {
+          background: #2ecc71;
+          width: 150px;
+          height: 150px;
+          border-radius: 50%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          box-shadow: 0 0 30px rgba(46, 204, 113, 0.3);
+        }
+
+        .guarantee-icon {
+          font-size: 2rem;
+          margin-bottom: 5px;
+        }
+
+        .guarantee-days {
+          font-size: 2.5rem;
+          font-weight: bold;
+          line-height: 1;
+        }
+
+        .guarantee-text {
+          font-size: 1.2rem;
+        }
+
+        .guarantee-content {
+          flex: 1;
+          max-width: 600px;
+        }
+
+        .guarantee-content h2 {
+          font-size: 2rem;
+          margin-bottom: 15px;
+          color: #2ecc71;
+        }
+
+        .guarantee-content p {
+          color: #888;
+          font-size: 1.1rem;
+          margin-bottom: 20px;
+        }
+
+        .guarantee-features {
+          display: flex;
+          gap: 30px;
+          flex-wrap: wrap;
+        }
+
+        .feature {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          color: #fff;
+        }
+
+        .feature i {
           color: #2ecc71;
         }
 
@@ -493,6 +705,26 @@ export default function LandingPage() {
 
           .hero-content {
             flex-direction: column;
+          }
+
+          .comparison-grid {
+            flex-direction: column;
+          }
+
+          .vs {
+            transform: rotate(90deg);
+          }
+
+          .new-formula {
+            transform: none;
+          }
+
+          .guarantee {
+            text-align: center;
+          }
+
+          .guarantee-features {
+            justify-content: center;
           }
         }
       `}</style>
