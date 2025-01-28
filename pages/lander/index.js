@@ -182,63 +182,77 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Packages Section */}
-        <section className="packages">
-          <div className="stock-warning">
-            ⚠️ Warning: Only {bottlesLeft} Bottles Left at This Price
+        {/* Replace the packages section with this */}
+        <section className="cta-sections">
+          <div className="cta-block">
+            <div className="power-badge">🔥 UNLEASH YOUR POWER</div>
+            <h2>Experience The Brazilian Secret That's Making Headlines</h2>
+            <div className="stats-grid">
+              <div className="stat-item">
+                <span className="stat-number">297%</span>
+                <span className="stat-label">Performance Boost</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">98.7%</span>
+                <span className="stat-label">Success Rate</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">30min</span>
+                <span className="stat-label">Fast Acting</span>
+              </div>
+            </div>
+            <button 
+              className="mega-cta-button" 
+              onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
+            >
+              CLAIM YOUR BRAZILIAN WOOD™ NOW
+              <span className="cta-sub">While Stock Lasts</span>
+            </button>
           </div>
 
-          <div className="package-grid">
-            <div className="package-card">
-              <div className="package-label">STARTER</div>
-              <img src="https://www.braziliansecretwood.com/images/BrazlilianWood_1Bottle.png" alt="1 Bottle Package" />
-              <div className="package-details">
-                <h3>1 Bottle</h3>
-                <div className="price">
-                  <span className="original">$99</span>
-                  <span className="current">$79</span>
-                </div>
-                <div className="savings">Save 20%</div>
-                <button className="buy-button" onClick={() => window.location.href = 'https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571'}>
-                  Buy Now
-                </button>
-                <div className="shipping">+ Free Shipping</div>
+          <div className="benefits-block">
+            <div className="benefit-grid">
+              <div className="mega-benefit">
+                <h3>🚀 INSTANT POWER</h3>
+                <p>Experience up to 297% boost in performance within 30 minutes</p>
+              </div>
+              <div className="mega-benefit">
+                <h3>💪 LASTING STAMINA</h3>
+                <p>Maintain peak performance for up to 12 hours straight</p>
+              </div>
+              <div className="mega-benefit">
+                <h3>📏 MAXIMUM GROWTH</h3>
+                <p>Users report significant size improvements within weeks</p>
+              </div>
+              <div className="mega-benefit">
+                <h3>🧬 PERMANENT RESULTS</h3>
+                <p>Unlike other solutions, effects compound over time</p>
               </div>
             </div>
+            <button 
+              className="mega-cta-button pulse" 
+              onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
+            >
+              GET YOUR BRAZILIAN WOOD™ TODAY
+              <span className="cta-sub">Limited Time Offer</span>
+            </button>
+          </div>
 
-            <div className="package-card popular">
-              <div className="package-label">MOST POPULAR</div>
-              <img src="https://www.braziliansecretwood.com/images/BrazlilianWood_3Bottles.png" alt="3 Bottle Package" />
-              <div className="package-details">
-                <h3>3 Bottles</h3>
-                <div className="price">
-                  <span className="original">$297</span>
-                  <span className="current">$177</span>
-                </div>
-                <div className="savings">Save 40%</div>
-                <button className="buy-button" onClick={() => window.location.href = 'https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571'}>
-                  Buy Now
-                </button>
-                <div className="shipping">+ Free Shipping</div>
+          <div className="urgency-block">
+            <div className="countdown-wrapper">
+              <div className="fire-badge">🔥 EXPLOSIVE DEAL</div>
+              <h3>Special Offer Ends In:</h3>
+              <div className="countdown">
+                {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
               </div>
             </div>
-
-            <div className="package-card best-value">
-              <div className="package-label">BEST VALUE</div>
-              <img src="https://www.braziliansecretwood.com/images/BrazlilianWood_6Bottles.png" alt="6 Bottle Package" />
-              <div className="package-details">
-                <h3>6 Bottles</h3>
-                <div className="price">
-                  <span className="original">$594</span>
-                  <span className="current">$294</span>
-                </div>
-                <div className="savings">Save 50%</div>
-                <button className="buy-button" onClick={() => window.location.href = 'https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571'}>
-                  Buy Now
-                </button>
-                <div className="shipping">+ Free Shipping</div>
-              </div>
-            </div>
+            <button 
+              className="mega-cta-button shake" 
+              onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
+            >
+              SECURE YOUR BRAZILIAN WOOD™ NOW
+              <span className="cta-sub">Only {bottlesLeft} Bottles Left!</span>
+            </button>
           </div>
         </section>
 
@@ -516,94 +530,136 @@ export default function LandingPage() {
           color: #2ecc71;
         }
 
-        /* Packages Section */
-        .packages {
+        /* cta-sections */
+        .cta-sections {
           padding: 40px 20px;
-          max-width: 1200px;
+          max-width: 1000px;
           margin: 0 auto;
         }
 
-        .stock-warning {
+        .cta-block {
+          margin-bottom: 60px;
+          text-align: center;
+        }
+
+        .power-badge, .fire-badge {
           background: #ff3b3b;
           color: white;
-          padding: 15px;
-          text-align: center;
-          font-size: 1.2rem;
-          margin-bottom: 30px;
-          border-radius: 8px;
-          animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite;
-        }
-
-        .package-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 30px;
-          margin-top: 30px;
-        }
-
-        .package-card {
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 12px;
-          padding: 20px;
-          text-align: center;
-          transition: transform 0.3s ease;
-        }
-
-        .package-card:hover {
-          transform: translateY(-5px);
-        }
-
-        .package-card.popular {
-          border: 2px solid #ff3b3b;
-        }
-
-        .package-label {
-          background: #ff3b3b;
-          color: white;
-          padding: 5px 15px;
-          border-radius: 20px;
+          padding: 8px 20px;
+          border-radius: 25px;
           display: inline-block;
           margin-bottom: 20px;
-        }
-
-        .package-card img {
-          max-width: 200px;
-          height: auto;
-          margin: 20px 0;
-        }
-
-        .price {
-          margin: 20px 0;
-        }
-
-        .original {
-          text-decoration: line-through;
-          color: #888;
-          margin-right: 10px;
-        }
-
-        .current {
-          color: #2ecc71;
-          font-size: 1.5rem;
           font-weight: bold;
+          animation: pulse 2s infinite;
         }
 
-        .buy-button {
-          background: #2ecc71;
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          margin: 30px 0;
+        }
+
+        .stat-item {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 20px;
+          border-radius: 10px;
+        }
+
+        .stat-number {
+          font-size: 2.5rem;
+          color: #ff3b3b;
+          font-weight: bold;
+          display: block;
+        }
+
+        .mega-cta-button {
+          background: linear-gradient(45deg, #2ecc71, #27ae60);
           color: white;
           border: none;
-          padding: 15px 30px;
-          border-radius: 25px;
-          font-size: 1.1rem;
+          padding: 25px 50px;
+          border-radius: 50px;
+          font-size: 1.5rem;
+          font-weight: bold;
           cursor: pointer;
           transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 30px auto;
           width: 100%;
-          margin: 20px 0;
+          max-width: 500px;
         }
 
-        .buy-button:hover {
-          background: #27ae60;
-          transform: scale(1.05);
+        .mega-cta-button:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .cta-sub {
+          font-size: 1rem;
+          opacity: 0.9;
+          margin-top: 5px;
+        }
+
+        .benefit-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+          margin: 30px 0;
+        }
+
+        .mega-benefit {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 20px;
+          border-radius: 10px;
+          text-align: center;
+        }
+
+        .mega-benefit h3 {
+          color: #2ecc71;
+          margin-bottom: 10px;
+        }
+
+        .mega-benefit p {
+          color: #888;
+          font-size: 0.9rem;
+        }
+
+        .countdown-wrapper {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+
+        .countdown {
+          font-size: 3rem;
+          font-weight: bold;
+          color: #ff3b3b;
+          font-family: monospace;
+          animation: blink 1s infinite;
+        }
+
+        .pulse {
+          animation: pulse 2s infinite;
+        }
+
+        .shake {
+          animation: shake 5s infinite;
+        }
+
+        @media (max-width: 768px) {
+          .stats-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .benefit-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .mega-cta-button {
+            padding: 20px 30px;
+            font-size: 1.2rem;
+          }
         }
 
         /* Purchase Notification */
@@ -611,29 +667,61 @@ export default function LandingPage() {
           position: fixed;
           bottom: 20px;
           left: 20px;
-          background: rgba(46, 204, 113, 0.1);
-          border-left: 4px solid #2ecc71;
-          padding: 15px;
-          border-radius: 4px;
-          animation: slideIn 0.5s ease-out;
+          background: rgba(0, 0, 0, 0.95);
+          border: 1px solid #2ecc71;
+          padding: 15px 20px;
+          border-radius: 8px;
+          animation: slideInUp 0.5s ease-out;
           z-index: 1000;
+          box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+          max-width: 300px;
         }
 
         .notification-content {
           display: flex;
-          align-items: center;
-          gap: 15px;
+          align-items: flex-start;
+          gap: 12px;
         }
 
         .notification-icon {
           background: #2ecc71;
           color: white;
-          width: 24px;
-          height: 24px;
+          width: 20px;
+          height: 20px;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
+          font-size: 12px;
+          flex-shrink: 0;
+        }
+
+        .notification-text {
+          font-size: 14px;
+          line-height: 1.4;
+        }
+
+        .buyer-name {
+          color: #2ecc71;
+          font-weight: 600;
+        }
+
+        .purchase-time {
+          color: #666;
+          font-size: 12px;
+          display: block;
+          margin-top: 4px;
+        }
+
+        @keyframes slideInUp {
+          from {
+            transform: translateY(100px);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
         }
 
         /* Footer */
@@ -679,9 +767,10 @@ export default function LandingPage() {
           40%, 60% { transform: translate3d(4px, 0, 0); }
         }
 
-        @keyframes slideIn {
-          from { opacity: 0; transform: translateX(-20px); }
-          to { opacity: 1; transform: translateX(0); }
+        @keyframes blink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
         }
 
         /* Responsive Design */
@@ -697,14 +786,6 @@ export default function LandingPage() {
           .top-bar {
             flex-direction: column;
             gap: 10px;
-          }
-
-          .package-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .hero-content {
-            flex-direction: column;
           }
 
           .comparison-grid {
