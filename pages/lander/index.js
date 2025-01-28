@@ -89,9 +89,17 @@ export default function LandingPage() {
             <span className="warning-icon">⚠️</span>
             <span className="warning-text">WARNING: This page may be taken down at any moment due to pressure from Big Pharma</span>
           </div>
-          <div className="live-counter">
-            <div className="pulse-dot"></div>
-            <span>{viewerCount} people viewing this forbidden solution</span>
+          <div className="top-bar-content">
+            <div className="live-counter">
+              <div className="pulse-dot"></div>
+              <span>{viewerCount} people viewing this forbidden solution</span>
+            </div>
+            <button 
+              className="top-cta-button" 
+              onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
+            >
+              GET IT NOW
+            </button>
           </div>
         </div>
 
@@ -125,6 +133,13 @@ export default function LandingPage() {
                 <i className="fas fa-check"></i>
                 <span>No Side Effects</span>
               </div>
+              <button 
+                className="hero-cta-button danger-pulse" 
+                onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
+              >
+                CLAIM YOUR SUPPLY NOW
+                <span className="cta-sub">Before They Ban It</span>
+              </button>
             </div>
           </div>
         </section>
@@ -410,6 +425,13 @@ export default function LandingPage() {
           font-size: 14px;
         }
 
+        .top-bar-content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          gap: 15px;
+        }
+
         .warning-banner {
           display: flex;
           align-items: center;
@@ -441,6 +463,26 @@ export default function LandingPage() {
           background: #2ecc71;
           border-radius: 50%;
           animation: pulse 2s infinite;
+        }
+
+        .top-cta-button {
+          background: #2ecc71;
+          color: white;
+          border: none;
+          padding: 8px 20px;
+          border-radius: 25px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 14px;
+          white-space: nowrap;
+          animation: pulse 2s infinite;
+          box-shadow: 0 2px 10px rgba(46, 204, 113, 0.3);
+        }
+
+        .top-cta-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
         }
 
         /* Hero Section */
@@ -503,7 +545,11 @@ export default function LandingPage() {
         .hero-benefits {
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 15px;
+          padding: 20px;
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 15px;
+          border: 1px solid rgba(255, 59, 59, 0.2);
         }
 
         .benefit-item {
@@ -515,6 +561,27 @@ export default function LandingPage() {
 
         .benefit-item i {
           color: #2ecc71;
+        }
+
+        .hero-cta-button {
+          background: linear-gradient(45deg, #ff3b3b, #ff5252);
+          color: white;
+          border: none;
+          padding: 15px 30px;
+          border-radius: 30px;
+          font-weight: bold;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          font-size: 18px;
+          margin-top: 20px;
+          width: 100%;
+          text-align: center;
+          box-shadow: 0 4px 15px rgba(255, 59, 59, 0.3);
+        }
+
+        .hero-cta-button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 6px 20px rgba(255, 59, 59, 0.4);
         }
 
         /* New Formula Section */
@@ -940,7 +1007,22 @@ export default function LandingPage() {
 
           .top-bar {
             padding: 5px 10px;
+          }
+
+          .top-bar-content {
+            flex-direction: column;
+            gap: 8px;
+          }
+
+          .top-cta-button {
+            width: 100%;
+            padding: 6px 15px;
             font-size: 12px;
+          }
+
+          .hero-cta-button {
+            padding: 12px 20px;
+            font-size: 16px;
           }
 
           .warning-banner {
