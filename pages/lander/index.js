@@ -85,19 +85,24 @@ export default function LandingPage() {
       <div className="landing-page">
         {/* Top Bar */}
         <div className="top-bar">
+          <div className="warning-banner">
+            <span className="warning-icon">⚠️</span>
+            WARNING: This page may be taken down at any moment due to pressure from Big Pharma
+          </div>
           <div className="live-counter">
             <div className="pulse-dot"></div>
-            <span>{viewerCount} people viewing this page</span>
-          </div>
-          <div className="timer">
-            Special Offer Ends In: {String(timeLeft.hours).padStart(2, '0')}:{String(timeLeft.minutes).padStart(2, '0')}:{String(timeLeft.seconds).padStart(2, '0')}
+            <span>{viewerCount} people viewing this forbidden solution</span>
           </div>
         </div>
 
         {/* Hero Section */}
         <section className="hero">
-          <h1>Unlock Your Natural Potential With <span className="highlight">Brazilian Wood™</span></h1>
-          <h2>The Ancient Brazilian Secret for Enhanced Male Vitality</h2>
+          <div className="alert-banner">
+            <span className="alert-icon">��</span>
+            EXPOSED: The Billion-Dollar Secret Big Pharma Doesn't Want You to Know About
+          </div>
+          <h1>The Underground Brazilian Formula That's Making ED Pills Obsolete</h1>
+          <h2>WARNING: This Natural Performance Enhancer Is So Powerful, They're Trying To Ban It</h2>
           
           <div className="hero-content">
             <div className="product-image">
@@ -120,6 +125,67 @@ export default function LandingPage() {
                 <i className="fas fa-check"></i>
                 <span>No Side Effects</span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Add Controversial Claims Section */}
+        <section className="exposed-truth">
+          <div className="secret-badge">🤫 LEAKED INFORMATION</div>
+          <h2>Why Big Pharma Wants This Page Shut Down</h2>
+          <div className="truth-grid">
+            <div className="truth-item">
+              <span className="truth-icon">💊</span>
+              <h3>Their Worst Nightmare</h3>
+              <p>This ancient Brazilian formula costs pennies to produce but outperforms $80/pill medications</p>
+            </div>
+            <div className="truth-item">
+              <span className="truth-icon">🔬</span>
+              <h3>Suppressed Research</h3>
+              <p>Clinical studies showing 312% better results were hidden from the public</p>
+            </div>
+            <div className="truth-item">
+              <span className="truth-icon">📈</span>
+              <h3>Natural Alternative</h3>
+              <p>Users permanently cancel their prescriptions after trying this solution</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Add Celebrity Testimonials */}
+        <section className="testimonials">
+          <div className="testimonial-badge">👑 ELITE TESTIMONIALS</div>
+          <h2>Why Professional Athletes & Celebrities Trust Brazilian Wood™</h2>
+          <div className="testimonial-grid">
+            <div className="testimonial-card">
+              <div className="testimonial-header">
+                <img src="/images/athlete-silhouette-1.png" alt="Professional Athlete" />
+                <div className="testimonial-meta">
+                  <h3>Professional MMA Fighter</h3>
+                  <span className="verified">✓ Verified Purchase</span>
+                </div>
+              </div>
+              <p>"I've tried everything for performance enhancement, but nothing comes close to this. It's like nature's secret weapon."</p>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-header">
+                <img src="/images/athlete-silhouette-2.png" alt="Olympic Athlete" />
+                <div className="testimonial-meta">
+                  <h3>Olympic Gold Medalist</h3>
+                  <span className="verified">✓ Verified Purchase</span>
+                </div>
+              </div>
+              <p>"My trainer recommended this to me. The results were so dramatic, I couldn't believe it was legal."</p>
+            </div>
+            <div className="testimonial-card">
+              <div className="testimonial-header">
+                <img src="/images/celebrity-silhouette.png" alt="Hollywood Actor" />
+                <div className="testimonial-meta">
+                  <h3>A-List Hollywood Actor</h3>
+                  <span className="verified">✓ Verified Purchase</span>
+                </div>
+              </div>
+              <p>"At 55, I feel better than I did at 25. This is the industry's best-kept secret."</p>
             </div>
           </div>
         </section>
@@ -271,6 +337,32 @@ export default function LandingPage() {
           </div>
         )}
 
+        {/* Add Leaked Document Section */}
+        <section className="leaked-document">
+          <div className="document-header">
+            <span className="confidential-stamp">CONFIDENTIAL</span>
+            <h2>LEAKED: Internal Memo from Leading ED Pill Manufacturer</h2>
+          </div>
+          <div className="document-content">
+            <div className="memo-text">
+              <p>"...the emergence of this Brazilian formula poses a significant threat to our market share. Initial tests show it outperforms our product by 312%. Immediate action required to prevent market distribution..."</p>
+              <div className="memo-date">Date: [REDACTED]</div>
+              <div className="memo-signature">Chief of Research, [REDACTED]</div>
+            </div>
+            <div className="action-required">
+              <h3>🚨 URGENT: Limited Time Access</h3>
+              <p>This page will be forced to shut down. Get your supply while you still can.</p>
+              <button 
+                className="mega-cta-button pulse" 
+                onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
+              >
+                SECURE YOUR SUPPLY NOW
+                <span className="cta-sub">Before It's Banned Forever</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
         {/* Footer */}
         <footer className="site-footer">
           <div className="footer-content">
@@ -309,6 +401,17 @@ export default function LandingPage() {
           z-index: 1000;
         }
 
+        .warning-banner {
+          background: #ff3b3b;
+          color: white;
+          padding: 10px 20px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-weight: bold;
+          animation: pulse 2s infinite;
+        }
+
         .live-counter {
           display: flex;
           align-items: center;
@@ -329,6 +432,20 @@ export default function LandingPage() {
           text-align: center;
           max-width: 1200px;
           margin: 0 auto;
+        }
+
+        .alert-banner {
+          background: rgba(255, 59, 59, 0.1);
+          border: 2px solid #ff3b3b;
+          color: #ff3b3b;
+          padding: 15px 30px;
+          border-radius: 8px;
+          margin-bottom: 30px;
+          font-weight: bold;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          animation: shake 5s infinite;
         }
 
         .hero h1 {
@@ -807,6 +924,132 @@ export default function LandingPage() {
           .guarantee-features {
             justify-content: center;
           }
+        }
+
+        .exposed-truth {
+          padding: 60px 20px;
+          background: rgba(0, 0, 0, 0.8);
+          margin: 40px 0;
+        }
+
+        .truth-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+          margin-top: 40px;
+        }
+
+        .truth-item {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 30px;
+          border-radius: 15px;
+          text-align: center;
+        }
+
+        .truth-icon {
+          font-size: 2.5rem;
+          margin-bottom: 20px;
+          display: block;
+        }
+
+        .testimonials {
+          padding: 60px 20px;
+          background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+        }
+
+        .testimonial-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
+          margin-top: 40px;
+        }
+
+        .testimonial-card {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 30px;
+          border-radius: 15px;
+        }
+
+        .testimonial-header {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          margin-bottom: 20px;
+        }
+
+        .testimonial-header img {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        .verified {
+          color: #2ecc71;
+          font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+          .truth-grid,
+          .testimonial-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .leaked-document {
+          padding: 60px 20px;
+          background: #111;
+          position: relative;
+          margin: 40px 0;
+          border: 2px solid #ff3b3b;
+        }
+
+        .document-header {
+          text-align: center;
+          margin-bottom: 40px;
+          position: relative;
+        }
+
+        .confidential-stamp {
+          background: #ff3b3b;
+          color: white;
+          padding: 5px 15px;
+          transform: rotate(-5deg);
+          position: absolute;
+          top: -30px;
+          right: 50px;
+          font-weight: bold;
+          font-family: monospace;
+          border: 2px solid white;
+        }
+
+        .memo-text {
+          background: rgba(255, 255, 255, 0.05);
+          padding: 30px;
+          border-radius: 15px;
+          font-family: monospace;
+          position: relative;
+          margin-bottom: 40px;
+        }
+
+        .memo-date, .memo-signature {
+          color: #666;
+          margin-top: 20px;
+          font-style: italic;
+        }
+
+        .action-required {
+          text-align: center;
+          background: rgba(255, 59, 59, 0.1);
+          padding: 30px;
+          border-radius: 15px;
+          margin-top: 40px;
+        }
+
+        .action-required h3 {
+          color: #ff3b3b;
+          margin-bottom: 20px;
+          animation: pulse 2s infinite;
         }
       `}</style>
     </>
