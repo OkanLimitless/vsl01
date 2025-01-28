@@ -3,233 +3,246 @@ import { useState, useEffect } from 'react';
 
 export default function PreLander() {
   const handleContinue = () => {
-    window.location.href = '/lander';  // Redirect to our main lander
+    window.location.href = '/lander';
   };
 
   return (
     <>
       <Head>
-        <title>Natural Health Guide | Men's Wellness Information</title>
-        <meta name="description" content="Discover natural approaches to men's health and wellness. Learn about traditional remedies and scientifically-backed natural solutions." />
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+        <title>The "Evening Routine" Hack for Men's Vitality</title>
+        <meta name="description" content="Discover a simple evening routine that naturally boosts male vitality and performance. Watch this free video guide to learn more." />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <div className="prelander">
-        <header className="header">
-          <div className="logo">Natural Health Guide</div>
-          <nav>
-            <button onClick={handleContinue}>Learn More</button>
-          </nav>
-        </header>
-
         <main className="main-content">
-          <section className="hero">
-            <h1>Traditional Brazilian Botanicals: A Natural Approach to Men's Health</h1>
-            <p className="subtitle">Discover how natural compounds from the Amazon rainforest are revolutionizing men's wellness</p>
-            <button onClick={handleContinue} className="cta-button">
-              Read the Full Article
-            </button>
-          </section>
+          <h1>The "Evening Routine" Hack for Men's Vitality:</h1>
+          
+          <div className="video-container">
+            <div className="video-placeholder">
+              <img src="/images/sound-icon.png" alt="Click to turn on sound" className="sound-icon" />
+              <div className="play-button">▶</div>
+            </div>
+          </div>
 
-          <section className="benefits">
-            <div className="benefit-item">
-              <div className="icon">🌿</div>
-              <h3>Natural Ingredients</h3>
-              <p>Sourced from pristine Amazon rainforest</p>
-            </div>
-            <div className="benefit-item">
-              <div className="icon">🧪</div>
-              <h3>Science-Backed</h3>
-              <p>Research-supported natural compounds</p>
-            </div>
-            <div className="benefit-item">
-              <div className="icon">⭐️</div>
-              <h3>Traditional Wisdom</h3>
-              <p>Centuries-old botanical knowledge</p>
-            </div>
-          </section>
+          <button onClick={handleContinue} className="cta-button pulse">
+            Watch FREE Video Guide Now
+          </button>
 
-          <section className="article-preview">
-            <div className="preview-content">
-              <h2>What You'll Discover:</h2>
-              <ul>
-                <li>How these natural compounds support men's health</li>
-                <li>Why traditional remedies are gaining scientific attention</li>
-                <li>The role of Amazon rainforest botanicals in modern wellness</li>
-                <li>Natural alternatives to synthetic solutions</li>
-              </ul>
-              <div className="blur-overlay"></div>
-            </div>
-            <button onClick={handleContinue} className="read-more">
-              Continue Reading
-            </button>
-          </section>
+          <div className="benefits">
+            <p>See how just one small adjustment to your nightly routine can reignite confidence, energy, and performance within days...</p>
+            
+            <p>Men of all ages following this simple, natural "evening ritual" are amazing their partners and boosting their self-assurance like never before.</p>
+            
+            <p>Scientists suggest this works so effectively because it targets what's now believed to be the underlying "root cause" of diminished male vitality— something no supplement or workout regimen alone can fix.</p>
+          </div>
+
+          <p className="action-text">
+            Tap the button below to learn more about this breakthrough and discover how you can start using this method tonight, with ease.
+          </p>
+
+          <button onClick={handleContinue} className="cta-button pulse">
+            Watch FREE Video Guide Now
+          </button>
         </main>
 
-        <footer className="footer">
-          <p>© 2024 Natural Health Guide - Educational Content Only</p>
+        <footer>
+          <div className="disclaimer">
+            <p>This site is not a part of Google, Inc. or Google.com, nor is it sponsored or endorsed by Google.</p>
+            <p>YouTube is a trademark of Google Inc.</p>
+          </div>
+          <div className="footer-links">
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+          </div>
+          <p className="copyright">© 2024 All rights reserved</p>
         </footer>
       </div>
 
       <style jsx>{`
         .prelander {
-          font-family: 'Inter', sans-serif;
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 20px;
-          color: #333;
-        }
-
-        .header {
+          font-family: 'Poppins', sans-serif;
+          background: #1a1a1a;
+          color: white;
+          min-height: 100vh;
           display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px 0;
-        }
-
-        .logo {
-          font-size: 24px;
-          font-weight: 600;
-          color: #2c5282;
+          flex-direction: column;
+          padding: 20px;
         }
 
         .main-content {
-          margin-top: 40px;
-        }
-
-        .hero {
+          max-width: 800px;
+          margin: 0 auto;
+          width: 100%;
           text-align: center;
-          padding: 60px 20px;
-          background: linear-gradient(to right, #f0f9ff, #e6f7ff);
-          border-radius: 15px;
+          padding: 40px 20px;
         }
 
-        .hero h1 {
-          font-size: 2.5rem;
-          color: #2c5282;
-          margin-bottom: 20px;
-          line-height: 1.2;
-        }
-
-        .subtitle {
-          font-size: 1.2rem;
-          color: #4a5568;
+        h1 {
+          font-size: 2.2rem;
+          font-weight: 600;
           margin-bottom: 30px;
+          line-height: 1.3;
+        }
+
+        .video-container {
+          width: 100%;
+          max-width: 640px;
+          margin: 0 auto 30px;
+          aspect-ratio: 16/9;
+          background: #000;
+          border-radius: 12px;
+          overflow: hidden;
+          position: relative;
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-placeholder {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: #111;
+          position: relative;
+          cursor: pointer;
+        }
+
+        .sound-icon {
+          position: absolute;
+          top: 20px;
+          left: 20px;
+          width: 120px;
+          height: auto;
+        }
+
+        .play-button {
+          width: 80px;
+          height: 80px;
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 32px;
+          color: white;
+          transition: all 0.3s ease;
+        }
+
+        .video-placeholder:hover .play-button {
+          background: rgba(255, 255, 255, 0.3);
+          transform: scale(1.1);
         }
 
         .cta-button {
-          background: #2c5282;
+          background: #00a651;
           color: white;
           border: none;
-          padding: 15px 30px;
-          border-radius: 30px;
-          font-size: 1.1rem;
+          padding: 20px 40px;
+          font-size: 1.2rem;
+          font-weight: 600;
+          border-radius: 50px;
           cursor: pointer;
           transition: all 0.3s ease;
+          margin: 20px 0;
+          width: 100%;
+          max-width: 400px;
         }
 
         .cta-button:hover {
-          background: #2d3748;
+          background: #008c44;
           transform: translateY(-2px);
         }
 
+        .pulse {
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0% {
+            box-shadow: 0 0 0 0 rgba(0, 166, 81, 0.4);
+          }
+          70% {
+            box-shadow: 0 0 0 15px rgba(0, 166, 81, 0);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(0, 166, 81, 0);
+          }
+        }
+
         .benefits {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 30px;
-          margin: 60px 0;
+          text-align: left;
+          margin: 40px auto;
+          max-width: 600px;
         }
 
-        .benefit-item {
-          text-align: center;
-          padding: 30px;
-          background: white;
-          border-radius: 10px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .icon {
-          font-size: 2rem;
-          margin-bottom: 15px;
-        }
-
-        .benefit-item h3 {
-          color: #2c5282;
-          margin-bottom: 10px;
-        }
-
-        .article-preview {
-          background: white;
-          border-radius: 10px;
-          padding: 30px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-          position: relative;
-        }
-
-        .preview-content {
-          position: relative;
-          max-height: 300px;
-          overflow: hidden;
-        }
-
-        .blur-overlay {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 100px;
-          background: linear-gradient(transparent, white);
-        }
-
-        .article-preview h2 {
-          color: #2c5282;
+        .benefits p {
           margin-bottom: 20px;
+          line-height: 1.6;
+          color: #e0e0e0;
         }
 
-        .article-preview ul {
-          padding-left: 20px;
+        .action-text {
+          color: #e0e0e0;
+          margin: 30px 0;
           line-height: 1.6;
         }
 
-        .article-preview li {
-          margin-bottom: 15px;
-          color: #4a5568;
-        }
-
-        .read-more {
-          display: block;
-          width: 100%;
-          background: #2c5282;
-          color: white;
-          border: none;
-          padding: 15px;
-          border-radius: 8px;
-          margin-top: 20px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .read-more:hover {
-          background: #2d3748;
-        }
-
-        .footer {
+        footer {
+          margin-top: auto;
           text-align: center;
-          padding: 40px 0;
-          color: #718096;
+          padding: 20px;
+          color: #666;
+          font-size: 0.9rem;
+        }
+
+        .disclaimer {
+          margin-bottom: 20px;
+          font-size: 0.8rem;
+        }
+
+        .footer-links {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin-bottom: 10px;
+        }
+
+        .footer-links a {
+          color: #666;
+          text-decoration: none;
+        }
+
+        .footer-links a:hover {
+          color: #999;
+        }
+
+        .copyright {
+          font-size: 0.8rem;
         }
 
         @media (max-width: 768px) {
-          .hero h1 {
-            font-size: 2rem;
+          h1 {
+            font-size: 1.8rem;
           }
 
-          .benefits {
-            grid-template-columns: 1fr;
+          .main-content {
+            padding: 20px 15px;
           }
 
-          .preview-content {
-            max-height: 250px;
+          .cta-button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+          }
+
+          .sound-icon {
+            width: 80px;
+          }
+
+          .play-button {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
           }
         }
       `}</style>
