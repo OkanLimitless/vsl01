@@ -96,7 +96,7 @@ export default function LandingPage() {
               
               <div className="product-comparison">
                 <div className="product old">
-                  <img src="https://www.braziliansecretwood.com/images/BrazlilianWood_1Bottle.png" alt="Original Formula" className="bottle-image" />
+                  <img src="/lander/img/BrazilianWood_1Bottle.png" alt="Original Formula" className="bottle-image" />
                   <div className="product-label">Original Formula</div>
                 </div>
                 <div className="transition-arrow">
@@ -104,7 +104,7 @@ export default function LandingPage() {
                   <span>UPGRADED</span>
                 </div>
                 <div className="product new">
-                  <img src="https://www.braziliansecretwood.com/images/BrazlilianWood_1Bottle.png" alt="Brazilian Wood 2.0" className="bottle-image" />
+                  <img src="/lander/img/BrazilianWood_2Bottle.png" alt="Brazilian Wood 2.0" className="bottle-image" />
                   <div className="product-label">NEW 2.0 Formula</div>
                 </div>
               </div>
@@ -626,7 +626,7 @@ export default function LandingPage() {
 
           .comparison-row {
             background: rgba(255,255,255,0.05);
-            padding: 20px;
+            padding: 20px 30px;
             border-radius: 10px;
             margin-bottom: 20px;
             display: flex;
@@ -639,26 +639,55 @@ export default function LandingPage() {
             align-items: center;
             gap: 15px;
             font-weight: 500;
+            font-size: 18px;
           }
 
           .metric i {
             font-size: 24px;
-            color: var(--dark-blue);
+            color: #ff4e03;
+            width: 24px;
+            text-align: center;
           }
 
           .values {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 30px;
+            min-width: 300px;
+            justify-content: flex-end;
           }
 
           .old-value, .new-value {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 120px;
+          }
+
+          .product {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+          }
+
+          .time {
+            font-size: 18px;
+            font-weight: 600;
+          }
+
+          .separator {
+            color: #ff4e03;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
           }
 
           .new-value {
             color: #ff4e03;
             font-weight: 600;
+          }
+
+          .new-value .time {
+            color: #ff4e03;
           }
 
           /* Quick Comparison */
@@ -838,13 +867,20 @@ export default function LandingPage() {
             }
 
             .values {
+              min-width: unset;
               width: 100%;
-              justify-content: space-around;
+              justify-content: space-between;
+              gap: 15px;
             }
 
-            .guarantee-content {
+            .old-value, .new-value {
+              min-width: unset;
               flex-direction: column;
-              text-align: center;
+              gap: 4px;
+            }
+
+            .comparison-row {
+              padding: 20px;
             }
           }
 
@@ -864,6 +900,22 @@ export default function LandingPage() {
 
             .evolution-card {
               padding: 20px;
+            }
+
+            .metric {
+              font-size: 16px;
+            }
+
+            .time {
+              font-size: 16px;
+            }
+
+            .values {
+              gap: 10px;
+            }
+
+            .separator {
+              font-size: 16px;
             }
           }
         `}</style>
