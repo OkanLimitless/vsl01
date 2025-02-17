@@ -56,22 +56,29 @@ export default function LandingPage() {
   return (
     <>
       <Head>
-        <title>Brazilian Wood™ | Premium Natural Performance Enhancement</title>
-        <meta name="description" content="Discover Brazilian Wood™ - A clinically tested natural solution for enhanced male vitality. Backed by science, trusted by professionals." />
+        <title>Brazilian Wood™ 2.0 | Next-Generation Male Enhancement Formula</title>
+        <meta name="description" content="Introducing Brazilian Wood™ 2.0 - The revolutionary upgrade to our best-selling formula. 3x more powerful than traditional solutions with breakthrough natural technology." />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
       </Head>
 
       <div className="landing-page">
+        {/* New Version Banner */}
+        <div className="version-banner">
+          <span className="new-badge">NEW</span>
+          <span className="version-text">Brazilian Wood™ 2.0</span>
+          <span className="launch-badge">Just Launched</span>
+        </div>
+
         {/* Top Bar */}
         <div className="top-bar">
           <div className="top-bar-content">
             <div className="live-counter">
               <div className="pulse-dot"></div>
-              <span>{viewerCount} people currently viewing</span>
+              <span>{viewerCount} people viewing the new formula</span>
             </div>
             <div className="stock-status">
-              <span>Limited Stock: {bottlesLeft} units remaining</span>
+              <span>Limited Launch Stock: {bottlesLeft} units remaining</span>
             </div>
           </div>
         </div>
@@ -80,92 +87,159 @@ export default function LandingPage() {
         <section className="hero">
           <div className="trust-badges">
             <div className="badge">
-              <i className="fas fa-certificate"></i>
-              <span>Clinically Tested</span>
+              <i className="fas fa-flask"></i>
+              <span>New 2024 Formula</span>
             </div>
             <div className="badge">
-              <i className="fas fa-leaf"></i>
-              <span>100% Natural</span>
+              <i className="fas fa-chart-line"></i>
+              <span>3x More Effective</span>
             </div>
             <div className="badge">
               <i className="fas fa-shield-alt"></i>
-              <span>Quality Guaranteed</span>
+              <span>Premium Quality</span>
             </div>
           </div>
 
-          <h1>Experience the Power of Nature's Premium Performance Enhancement</h1>
-          <h2>Clinically Tested Formula | Trusted by Professionals | 180-Day Money-Back Guarantee</h2>
+          <h1>Introducing The Next Evolution in Male Enhancement</h1>
+          <h2>Brazilian Wood™ 2.0 - Now 3x More Powerful Than Traditional Solutions</h2>
           
           <div className="hero-content">
-            <div className="product-image">
-              <img src="https://www.braziliansecretwood.com/images/BrazlilianWood_1Bottle.png" alt="Brazilian Wood Premium Formula" />
+            <div className="product-comparison">
+              <div className="old-product">
+                <img src="https://www.braziliansecretwood.com/images/BrazlilianWood_1Bottle.png" alt="Original Formula" className="faded" />
+                <span className="label">Original Formula</span>
+              </div>
+              <div className="upgrade-arrow">
+                <i className="fas fa-arrow-right"></i>
+                <span>UPGRADED</span>
+              </div>
+              <div className="new-product">
+                <img src="https://www.braziliansecretwood.com/images/BrazlilianWood_1Bottle.png" alt="Brazilian Wood 2.0" />
+                <span className="label">NEW 2.0 Formula</span>
+                <span className="new-badge">NEW</span>
+              </div>
             </div>
+
             <div className="hero-benefits">
+              <h3>Breakthrough Improvements in Version 2.0:</h3>
               <div className="benefit-item">
                 <i className="fas fa-check"></i>
-                <span>Clinically Proven Results</span>
+                <span>3x More Potent Formula</span>
               </div>
               <div className="benefit-item">
                 <i className="fas fa-check"></i>
-                <span>Premium Natural Ingredients</span>
+                <span>Faster Acting - Works in 30 Minutes</span>
               </div>
               <div className="benefit-item">
                 <i className="fas fa-check"></i>
-                <span>Doctor-Recommended Formula</span>
+                <span>Longer Lasting - Up to 72 Hours</span>
               </div>
               <div className="benefit-item">
                 <i className="fas fa-check"></i>
-                <span>Satisfaction Guaranteed</span>
+                <span>Enhanced Absorption Technology</span>
               </div>
               <button 
                 className="hero-cta-button" 
                 onClick={() => window.location.href = 'https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307'}
               >
-                Get Your Supply Now
-                <span className="guarantee-text">180-Day Money-Back Guarantee</span>
+                Try The New Formula Today
+                <span className="guarantee-text">Special Launch Price + 180-Day Guarantee</span>
               </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Comparison Section */}
+        <section className="comparison-section">
+          <h2>Why Brazilian Wood™ 2.0 Outperforms Everything Else</h2>
+          <div className="comparison-grid">
+            <div className="comparison-card traditional">
+              <h3>Traditional Solutions</h3>
+              <ul>
+                <li><i className="fas fa-times"></i> Expensive ($70+ per pill)</li>
+                <li><i className="fas fa-times"></i> Prescription Required</li>
+                <li><i className="fas fa-times"></i> Side Effects</li>
+                <li><i className="fas fa-times"></i> Short Duration</li>
+                <li><i className="fas fa-times"></i> Synthetic Ingredients</li>
+              </ul>
+              <div className="price">
+                <span className="amount">$70+</span>
+                <span className="unit">per dose</span>
+              </div>
+            </div>
+            <div className="comparison-card original">
+              <h3>Original Formula</h3>
+              <ul>
+                <li><i className="fas fa-check"></i> Natural Ingredients</li>
+                <li><i className="fas fa-check"></i> No Prescription</li>
+                <li><i className="fas fa-check"></i> No Side Effects</li>
+                <li><i className="fas fa-check"></i> 24hr Duration</li>
+                <li><i className="fas fa-check"></i> Affordable</li>
+              </ul>
+              <div className="price">
+                <span className="amount">$2.30</span>
+                <span className="unit">per dose</span>
+              </div>
+            </div>
+            <div className="comparison-card new-version">
+              <div className="best-value">BEST VALUE</div>
+              <h3>Brazilian Wood™ 2.0</h3>
+              <ul>
+                <li><i className="fas fa-check"></i> 3x More Potent</li>
+                <li><i className="fas fa-check"></i> Enhanced Formula</li>
+                <li><i className="fas fa-check"></i> 72hr Duration</li>
+                <li><i className="fas fa-check"></i> Faster Acting</li>
+                <li><i className="fas fa-check"></i> Premium Quality</li>
+              </ul>
+              <div className="price">
+                <span className="amount">$1.63</span>
+                <span className="unit">per dose</span>
+              </div>
             </div>
           </div>
         </section>
 
         {/* Scientific Backing Section */}
         <section className="science-section">
-          <h2>Backed by Science</h2>
+          <h2>Clinically Proven Results with New Formula</h2>
           <div className="research-grid">
             <div className="research-item">
-              <div className="stat">94%</div>
-              <p>of participants reported improved performance*</p>
+              <div className="stat">327%</div>
+              <p>More Effective Than Traditional Pills*</p>
             </div>
             <div className="research-item">
-              <div className="stat">89%</div>
-              <p>experienced results within the first week*</p>
+              <div className="stat">30min</div>
+              <p>Average Time to Take Effect*</p>
             </div>
             <div className="research-item">
-              <div className="stat">96%</div>
-              <p>would recommend to others*</p>
+              <div className="stat">72hr</div>
+              <p>Duration of Enhancement*</p>
             </div>
           </div>
-          <p className="study-note">*Based on a clinical study of 250 participants over 90 days</p>
+          <p className="study-note">*Based on clinical study comparing Brazilian Wood™ 2.0 vs leading prescription medications</p>
         </section>
 
         {/* Premium Ingredients Section */}
         <section className="ingredients-section">
-          <h2>Premium Natural Ingredients</h2>
+          <h2>Enhanced Premium Formula</h2>
           <div className="ingredients-grid">
             <div className="ingredient-card">
-              <img src="/images/ingredient1.jpg" alt="Ingredient 1" />
-              <h3>Tribulus Terrestris</h3>
-              <p>Clinically proven to support natural testosterone levels</p>
+              <div className="potency-badge">3x More Potent</div>
+              <img src="/images/ingredient1.jpg" alt="Enhanced Tribulus" />
+              <h3>Enhanced Tribulus Terrestris</h3>
+              <p>Now with 300% higher concentration for maximum effectiveness</p>
             </div>
             <div className="ingredient-card">
-              <img src="/images/ingredient2.jpg" alt="Ingredient 2" />
-              <h3>Maca Root</h3>
-              <p>Traditional performance enhancer backed by modern research</p>
+              <div className="potency-badge">New Addition</div>
+              <img src="/images/ingredient2.jpg" alt="Absorption Complex" />
+              <h3>Absorption Complex</h3>
+              <p>Revolutionary compound that increases bioavailability by 200%</p>
             </div>
             <div className="ingredient-card">
-              <img src="/images/ingredient3.jpg" alt="Ingredient 3" />
-              <h3>Tongkat Ali</h3>
-              <p>Supports healthy hormone balance and vitality</p>
+              <div className="potency-badge">Upgraded</div>
+              <img src="/images/ingredient3.jpg" alt="Premium Tongkat Ali" />
+              <h3>Premium Tongkat Ali</h3>
+              <p>Higher grade extract for longer-lasting results</p>
             </div>
           </div>
         </section>
@@ -268,50 +342,184 @@ export default function LandingPage() {
           z-index: -1;
         }
 
-        /* Top Bar */
-        .top-bar {
-          background: linear-gradient(90deg, #1a1a1a, #2c3e50);
-          padding: 12px 0;
+        /* New Version Banner */
+        .version-banner {
+          background: linear-gradient(90deg, #2c5282, #1a365d);
           color: white;
+          padding: 8px 0;
+          text-align: center;
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
-          z-index: 1000;
-          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+          z-index: 1001;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 15px;
         }
 
-        .top-bar-content {
+        .new-badge {
+          background: #ff3b3b;
+          padding: 2px 8px;
+          border-radius: 4px;
+          font-weight: bold;
+          font-size: 0.8rem;
+        }
+
+        .version-text {
+          font-weight: 600;
+          font-size: 1rem;
+        }
+
+        .launch-badge {
+          background: rgba(255, 255, 255, 0.1);
+          padding: 2px 8px;
+          border-radius: 4px;
+          font-size: 0.8rem;
+        }
+
+        /* Updated Top Bar */
+        .top-bar {
+          top: 36px;
+        }
+
+        /* Product Comparison */
+        .product-comparison {
           display: flex;
-          justify-content: space-between;
           align-items: center;
+          gap: 30px;
+          margin-bottom: 30px;
+        }
+
+        .old-product img {
+          opacity: 0.5;
+          filter: grayscale(1);
+        }
+
+        .upgrade-arrow {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          color: #2c5282;
+        }
+
+        .upgrade-arrow i {
+          font-size: 2rem;
+          margin-bottom: 5px;
+        }
+
+        .upgrade-arrow span {
+          font-size: 0.8rem;
+          font-weight: 600;
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+          padding: 80px 20px;
+          background: #f8f9fa;
+        }
+
+        .comparison-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 30px;
           max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 20px;
+          margin: 40px auto;
+        }
+
+        .comparison-card {
+          background: white;
+          padding: 30px;
+          border-radius: 15px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          position: relative;
+        }
+
+        .comparison-card.new-version {
+          transform: scale(1.05);
+          box-shadow: 0 10px 30px rgba(44, 82, 130, 0.1);
+          border: 2px solid #2c5282;
+        }
+
+        .best-value {
+          position: absolute;
+          top: -12px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #2c5282;
+          color: white;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 0.8rem;
+          font-weight: 600;
+        }
+
+        .comparison-card h3 {
+          color: #2c5282;
+          font-size: 1.3rem;
+          margin-bottom: 20px;
+          text-align: center;
+        }
+
+        .comparison-card ul {
+          list-style: none;
+          padding: 0;
+          margin-bottom: 20px;
+        }
+
+        .comparison-card li {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 15px;
+          color: #666;
+        }
+
+        .comparison-card .fa-times {
+          color: #ff3b3b;
+        }
+
+        .comparison-card .fa-check {
+          color: #2c5282;
+        }
+
+        .price {
+          text-align: center;
+          margin-top: 20px;
+          padding-top: 20px;
+          border-top: 1px solid #eee;
+        }
+
+        .price .amount {
+          font-size: 2rem;
+          color: #2c5282;
+          font-weight: 700;
+        }
+
+        .price .unit {
+          display: block;
+          color: #666;
           font-size: 0.9rem;
         }
 
-        .live-counter {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          background: rgba(255, 255, 255, 0.1);
-          padding: 6px 12px;
+        /* Ingredient Cards Update */
+        .ingredient-card {
+          position: relative;
+          padding-top: 50px;
+        }
+
+        .potency-badge {
+          position: absolute;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: #2c5282;
+          color: white;
+          padding: 4px 12px;
           border-radius: 20px;
-        }
-
-        .pulse-dot {
-          width: 8px;
-          height: 8px;
-          background: #4CAF50;
-          border-radius: 50%;
-          animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-          0% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.2); opacity: 0.7; }
-          100% { transform: scale(1); opacity: 1; }
+          font-size: 0.8rem;
+          font-weight: 600;
         }
 
         /* Hero Section */
@@ -831,6 +1039,22 @@ export default function LandingPage() {
 
           .footer-badges img {
             height: 40px;
+          }
+
+          .comparison-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .comparison-card.new-version {
+            transform: none;
+          }
+
+          .product-comparison {
+            flex-direction: column;
+          }
+
+          .upgrade-arrow {
+            transform: rotate(90deg);
           }
         }
 
