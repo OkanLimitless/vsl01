@@ -251,17 +251,21 @@ export default function LandingPage() {
           color: #333;
           font-family: 'Poppins', sans-serif;
           line-height: 1.6;
+          overflow-x: hidden;
+          width: 100%;
         }
 
         /* Top Bar */
         .top-bar {
           background: #1a1a1a;
-          padding: 10px;
+          padding: 12px 0;
           color: white;
           position: fixed;
           top: 0;
+          left: 0;
           width: 100%;
           z-index: 1000;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .top-bar-content {
@@ -271,20 +275,43 @@ export default function LandingPage() {
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 20px;
+          font-size: 0.9rem;
+        }
+
+        .live-counter {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .pulse-dot {
+          width: 8px;
+          height: 8px;
+          background: #4CAF50;
+          border-radius: 50%;
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0% { transform: scale(1); opacity: 1; }
+          50% { transform: scale(1.2); opacity: 0.7; }
+          100% { transform: scale(1); opacity: 1; }
         }
 
         /* Hero Section */
         .hero {
-          padding: 100px 20px 60px;
+          padding: 120px 20px 60px;
           text-align: center;
           background: linear-gradient(to bottom, #f8f9fa, #fff);
+          border-bottom: 1px solid #eee;
         }
 
         .trust-badges {
           display: flex;
           justify-content: center;
-          gap: 30px;
+          gap: 40px;
           margin-bottom: 40px;
+          flex-wrap: wrap;
         }
 
         .badge {
@@ -292,40 +319,77 @@ export default function LandingPage() {
           align-items: center;
           gap: 10px;
           color: #2c5282;
+          background: white;
+          padding: 12px 24px;
+          border-radius: 30px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          font-weight: 500;
+        }
+
+        .badge i {
+          font-size: 1.2rem;
+          color: #2c5282;
         }
 
         .hero h1 {
           font-size: 2.5rem;
           color: #2c5282;
-          margin-bottom: 20px;
-          max-width: 800px;
           margin: 0 auto 20px;
+          max-width: 800px;
+          line-height: 1.2;
+          font-weight: 700;
         }
 
         .hero h2 {
           color: #666;
           font-size: 1.2rem;
           margin-bottom: 40px;
+          font-weight: 500;
+        }
+
+        .hero-content {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 60px;
+          max-width: 1200px;
+          margin: 0 auto;
+          flex-wrap: wrap;
+        }
+
+        .product-image {
+          flex: 0 0 300px;
+        }
+
+        .product-image img {
+          width: 100%;
+          height: auto;
+          max-width: 300px;
+          filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
         }
 
         /* Benefits Section */
         .hero-benefits {
+          flex: 0 0 400px;
           background: #fff;
           padding: 30px;
-          border-radius: 10px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          border-radius: 15px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          border: 1px solid #eee;
         }
 
         .benefit-item {
           display: flex;
           align-items: center;
           gap: 15px;
-          margin-bottom: 15px;
+          margin-bottom: 20px;
           color: #333;
+          font-size: 1.1rem;
         }
 
         .benefit-item i {
           color: #2c5282;
+          font-size: 1.2rem;
         }
 
         /* CTA Buttons */
@@ -333,32 +397,42 @@ export default function LandingPage() {
           background: #2c5282;
           color: white;
           border: none;
-          padding: 15px 30px;
-          border-radius: 5px;
+          padding: 20px 30px;
+          border-radius: 8px;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
           width: 100%;
           margin-top: 20px;
+          font-size: 1.1rem;
+          box-shadow: 0 4px 6px rgba(44, 82, 130, 0.2);
         }
 
         .hero-cta-button:hover, .main-cta-button:hover {
           background: #1a365d;
           transform: translateY(-2px);
+          box-shadow: 0 6px 12px rgba(44, 82, 130, 0.3);
         }
 
         .guarantee-text {
           font-size: 0.9rem;
           opacity: 0.9;
           display: block;
-          margin-top: 5px;
+          margin-top: 8px;
         }
 
         /* Science Section */
         .science-section {
-          padding: 60px 20px;
+          padding: 80px 20px;
           background: #f8f9fa;
           text-align: center;
+        }
+
+        .science-section h2 {
+          color: #2c5282;
+          font-size: 2rem;
+          margin-bottom: 40px;
+          font-weight: 700;
         }
 
         .research-grid {
@@ -371,55 +445,108 @@ export default function LandingPage() {
 
         .research-item {
           background: white;
-          padding: 30px;
-          border-radius: 10px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          padding: 40px 30px;
+          border-radius: 15px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          border: 1px solid #eee;
         }
 
         .stat {
-          font-size: 2.5rem;
+          font-size: 3rem;
           color: #2c5282;
           font-weight: 700;
-          margin-bottom: 10px;
+          margin-bottom: 15px;
+          line-height: 1;
+        }
+
+        .research-item p {
+          color: #666;
+          font-size: 1.1rem;
+          line-height: 1.4;
+        }
+
+        .study-note {
+          color: #666;
+          font-size: 0.9rem;
+          margin-top: 20px;
         }
 
         /* Ingredients Section */
         .ingredients-section {
-          padding: 60px 20px;
+          padding: 80px 20px;
           background: white;
+        }
+
+        .ingredients-section h2 {
+          color: #2c5282;
+          font-size: 2rem;
+          margin-bottom: 40px;
+          text-align: center;
+          font-weight: 700;
         }
 
         .ingredients-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 30px;
+          gap: 40px;
           max-width: 1200px;
           margin: 40px auto;
         }
 
         .ingredient-card {
           text-align: center;
-          padding: 20px;
+          padding: 30px;
+          background: white;
+          border-radius: 15px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          border: 1px solid #eee;
+          transition: transform 0.3s ease;
+        }
+
+        .ingredient-card:hover {
+          transform: translateY(-5px);
         }
 
         .ingredient-card img {
-          width: 100px;
-          height: 100px;
+          width: 120px;
+          height: 120px;
           object-fit: cover;
           border-radius: 50%;
           margin-bottom: 20px;
+          border: 4px solid #f8f9fa;
+        }
+
+        .ingredient-card h3 {
+          color: #2c5282;
+          font-size: 1.3rem;
+          margin-bottom: 10px;
+          font-weight: 600;
+        }
+
+        .ingredient-card p {
+          color: #666;
+          font-size: 1rem;
+          line-height: 1.5;
         }
 
         /* Experts Section */
         .experts-section {
-          padding: 60px 20px;
+          padding: 80px 20px;
           background: #f8f9fa;
+        }
+
+        .experts-section h2 {
+          color: #2c5282;
+          font-size: 2rem;
+          margin-bottom: 40px;
+          text-align: center;
+          font-weight: 700;
         }
 
         .expert-testimonials {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 30px;
+          gap: 40px;
           max-width: 1000px;
           margin: 40px auto;
         }
@@ -427,29 +554,54 @@ export default function LandingPage() {
         .expert-card {
           background: white;
           padding: 30px;
-          border-radius: 10px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          border-radius: 15px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+          border: 1px solid #eee;
           display: flex;
           gap: 20px;
+          align-items: flex-start;
         }
 
         .expert-card img {
-          width: 80px;
-          height: 80px;
+          width: 100px;
+          height: 100px;
           border-radius: 50%;
           object-fit: cover;
+          border: 4px solid #f8f9fa;
+        }
+
+        .expert-info h3 {
+          color: #2c5282;
+          font-size: 1.2rem;
+          margin-bottom: 5px;
+          font-weight: 600;
+        }
+
+        .expert-info span {
+          color: #666;
+          font-size: 0.9rem;
+          display: block;
+          margin-bottom: 10px;
+        }
+
+        .expert-info p {
+          color: #333;
+          font-size: 1rem;
+          line-height: 1.6;
+          font-style: italic;
         }
 
         /* Guarantee Section */
         .guarantee-section {
-          padding: 60px 20px;
+          padding: 80px 20px;
           background: white;
           text-align: center;
+          border-top: 1px solid #eee;
         }
 
         .guarantee-content {
           max-width: 800px;
-          margin: 0 auto;
+          margin: 0 auto 40px;
           display: flex;
           align-items: center;
           gap: 40px;
@@ -460,44 +612,162 @@ export default function LandingPage() {
           color: white;
           padding: 20px;
           border-radius: 50%;
-          width: 120px;
-          height: 120px;
+          width: 140px;
+          height: 140px;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
           font-weight: 700;
+          flex-shrink: 0;
+          box-shadow: 0 4px 6px rgba(44, 82, 130, 0.2);
+        }
+
+        .guarantee-badge span:first-child {
+          font-size: 1.8rem;
+        }
+
+        .guarantee-text {
+          text-align: left;
+        }
+
+        .guarantee-text h2 {
+          color: #2c5282;
+          font-size: 2rem;
+          margin-bottom: 20px;
+          font-weight: 700;
+        }
+
+        .guarantee-text p {
+          color: #666;
+          font-size: 1.1rem;
+          margin-bottom: 20px;
+          line-height: 1.6;
+        }
+
+        .guarantee-text ul {
+          list-style: none;
+          padding: 0;
+        }
+
+        .guarantee-text ul li {
+          color: #333;
+          font-size: 1.1rem;
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .guarantee-text ul li:before {
+          content: "✓";
+          color: #2c5282;
+          font-weight: bold;
         }
 
         /* Footer */
         .site-footer {
           background: #1a1a1a;
           color: white;
-          padding: 40px 20px;
-          margin-top: 60px;
+          padding: 60px 20px;
+          margin-top: 0;
+        }
+
+        .footer-content {
+          max-width: 1200px;
+          margin: 0 auto;
+          text-align: center;
         }
 
         .footer-badges {
           display: flex;
           justify-content: center;
-          gap: 30px;
-          margin-bottom: 30px;
+          gap: 40px;
+          margin-bottom: 40px;
+          flex-wrap: wrap;
         }
 
         .footer-badges img {
-          height: 40px;
+          height: 50px;
+          filter: brightness(0.95);
+        }
+
+        .copyright {
+          color: #fff;
+          font-size: 1rem;
+          margin-bottom: 20px;
+        }
+
+        .footer-links {
+          margin: 20px 0;
+        }
+
+        .footer-links a {
+          color: #fff;
+          text-decoration: none;
+          font-size: 0.9rem;
+          transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+          color: #2c5282;
+        }
+
+        .divider {
+          color: #666;
+          margin: 0 15px;
+        }
+
+        .disclaimer {
+          color: #999;
+          font-size: 0.8rem;
+          max-width: 800px;
+          margin: 20px auto 0;
+          line-height: 1.6;
         }
 
         /* Responsive Design */
+        @media (max-width: 1024px) {
+          .hero-content {
+            gap: 40px;
+          }
+
+          .product-image {
+            flex: 0 0 250px;
+          }
+
+          .hero-benefits {
+            flex: 0 0 350px;
+          }
+        }
+
         @media (max-width: 768px) {
+          .hero {
+            padding: 100px 20px 40px;
+          }
+
           .hero h1 {
             font-size: 2rem;
+          }
+
+          .hero h2 {
+            font-size: 1.1rem;
+          }
+
+          .trust-badges {
+            gap: 20px;
+          }
+
+          .badge {
+            padding: 10px 20px;
+            font-size: 0.9rem;
           }
 
           .research-grid,
           .ingredients-grid,
           .expert-testimonials {
             grid-template-columns: 1fr;
+            gap: 20px;
           }
 
           .guarantee-content {
@@ -505,9 +775,60 @@ export default function LandingPage() {
             text-align: center;
           }
 
-          .trust-badges {
+          .guarantee-text {
+            text-align: center;
+          }
+
+          .guarantee-text ul li {
+            justify-content: center;
+          }
+
+          .expert-card {
             flex-direction: column;
             align-items: center;
+            text-align: center;
+          }
+
+          .footer-badges {
+            gap: 20px;
+          }
+
+          .footer-badges img {
+            height: 40px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero h1 {
+            font-size: 1.8rem;
+          }
+
+          .badge {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .product-image {
+            flex: 0 0 200px;
+          }
+
+          .stat {
+            font-size: 2.5rem;
+          }
+
+          .guarantee-badge {
+            width: 120px;
+            height: 120px;
+          }
+
+          .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+          }
+
+          .divider {
+            display: none;
           }
         }
       `}</style>
