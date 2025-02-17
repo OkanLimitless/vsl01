@@ -261,12 +261,10 @@ export default function LandingPage() {
           position: fixed;
           top: 0;
           left: 0;
-          width: 100%;
-          height: 100%;
+          right: 0;
+          bottom: 0;
           background: 
-            radial-gradient(circle at 0% 0%, rgba(44, 82, 130, 0.03) 20%, transparent 70%),
-            radial-gradient(circle at 100% 0%, rgba(0, 100, 200, 0.03) 20%, transparent 70%),
-            linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.95) 100%);
+            linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.97) 100%);
           z-index: -1;
         }
 
@@ -278,10 +276,9 @@ export default function LandingPage() {
           position: fixed;
           top: 0;
           left: 0;
-          width: 100%;
+          right: 0;
           z-index: 1000;
           box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(10px);
         }
 
         .top-bar-content {
@@ -301,7 +298,6 @@ export default function LandingPage() {
           background: rgba(255, 255, 255, 0.1);
           padding: 6px 12px;
           border-radius: 20px;
-          backdrop-filter: blur(5px);
         }
 
         .pulse-dot {
@@ -310,7 +306,6 @@ export default function LandingPage() {
           background: #4CAF50;
           border-radius: 50%;
           animation: pulse 2s infinite;
-          box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
         }
 
         @keyframes pulse {
@@ -323,38 +318,18 @@ export default function LandingPage() {
         .hero {
           padding: 120px 20px 60px;
           text-align: center;
-          background: 
-            linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.95) 100%),
-            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c5282' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
           position: relative;
           overflow: hidden;
-        }
-
-        .hero::before {
-          content: '';
-          position: absolute;
-          top: -50%;
-          left: -50%;
-          width: 200%;
-          height: 200%;
-          background: radial-gradient(circle at center, rgba(44, 82, 130, 0.03) 0%, transparent 70%);
-          animation: rotate 60s linear infinite;
-          z-index: 0;
-        }
-
-        @keyframes rotate {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
         }
 
         .trust-badges {
           display: flex;
           justify-content: center;
-          gap: 40px;
+          gap: 30px;
           margin-bottom: 40px;
           flex-wrap: wrap;
           position: relative;
-          z-index: 1;
         }
 
         .badge {
@@ -362,38 +337,60 @@ export default function LandingPage() {
           align-items: center;
           gap: 10px;
           color: #2c5282;
-          background: rgba(255, 255, 255, 0.9);
+          background: white;
           padding: 12px 24px;
           border-radius: 30px;
-          box-shadow: 
-            0 4px 6px rgba(0, 0, 0, 0.05),
-            0 1px 3px rgba(0, 0, 0, 0.1),
-            inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-          backdrop-filter: blur(5px);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          transition: transform 0.3s ease;
         }
 
         .badge:hover {
           transform: translateY(-2px);
-          box-shadow: 
-            0 6px 12px rgba(0, 0, 0, 0.07),
-            0 2px 4px rgba(0, 0, 0, 0.12),
-            inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        }
+
+        .badge i {
+          font-size: 1.2rem;
+          color: #2c5282;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+          color: #2c5282;
+          margin: 0 auto 20px;
+          max-width: 800px;
+          line-height: 1.2;
+          font-weight: 700;
+        }
+
+        .hero h2 {
+          color: #666;
+          font-size: 1.2rem;
+          margin-bottom: 40px;
+          font-weight: 500;
         }
 
         .hero-content {
-          position: relative;
-          z-index: 1;
-          background: rgba(255, 255, 255, 0.9);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 60px;
+          max-width: 1200px;
+          margin: 0 auto;
+          flex-wrap: wrap;
+          background: white;
           padding: 40px;
           border-radius: 20px;
-          box-shadow: 
-            0 10px 30px rgba(0, 0, 0, 0.05),
-            0 1px 3px rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(10px);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-image {
+          flex: 0 0 300px;
         }
 
         .product-image img {
+          width: 100%;
+          height: auto;
+          max-width: 300px;
           filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
           transition: transform 0.3s ease;
         }
@@ -405,11 +402,10 @@ export default function LandingPage() {
         /* Benefits Section */
         .hero-benefits {
           flex: 0 0 400px;
-          background: #fff;
+          background: white;
           padding: 30px;
           border-radius: 15px;
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-          border: 1px solid #eee;
         }
 
         .benefit-item {
@@ -436,28 +432,16 @@ export default function LandingPage() {
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
+          width: 100%;
+          margin-top: 20px;
+          font-size: 1.1rem;
           position: relative;
           overflow: hidden;
         }
 
-        .hero-cta-button::before, .main-cta-button::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgba(255, 255, 255, 0.2) 50%,
-            transparent 100%
-          );
-          transition: left 0.5s ease;
-        }
-
-        .hero-cta-button:hover::before, .main-cta-button:hover::before {
-          left: 100%;
+        .hero-cta-button:hover, .main-cta-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 12px rgba(44, 82, 130, 0.2);
         }
 
         .guarantee-text {
@@ -470,21 +454,8 @@ export default function LandingPage() {
         /* Science Section */
         .science-section {
           padding: 80px 20px;
-          background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .science-section::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: 
-            url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232c5282' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
-          opacity: 0.5;
+          background: #f8f9fa;
+          text-align: center;
         }
 
         .science-section h2 {
@@ -503,34 +474,15 @@ export default function LandingPage() {
         }
 
         .research-item {
-          background: rgba(255, 255, 255, 0.9);
+          background: white;
           padding: 40px 30px;
           border-radius: 15px;
-          box-shadow: 
-            0 10px 30px rgba(0, 0, 0, 0.05),
-            0 1px 3px rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(10px);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .research-item::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(135deg, rgba(44, 82, 130, 0.03) 0%, transparent 100%);
-          z-index: 0;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          transition: transform 0.3s ease;
         }
 
         .research-item:hover {
           transform: translateY(-5px);
-          box-shadow: 
-            0 15px 35px rgba(0, 0, 0, 0.1),
-            0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .stat {
@@ -547,30 +499,10 @@ export default function LandingPage() {
           line-height: 1.4;
         }
 
-        .study-note {
-          color: #666;
-          font-size: 0.9rem;
-          margin-top: 20px;
-        }
-
         /* Ingredients Section */
         .ingredients-section {
           padding: 80px 20px;
-          background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .ingredients-section::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: 
-            url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c5282' fill-opacity='0.03'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-          opacity: 0.5;
+          background: white;
         }
 
         .ingredients-section h2 {
@@ -590,34 +522,16 @@ export default function LandingPage() {
         }
 
         .ingredient-card {
-          background: rgba(255, 255, 255, 0.9);
+          background: white;
           padding: 30px;
           border-radius: 15px;
-          box-shadow: 
-            0 10px 30px rgba(0, 0, 0, 0.05),
-            0 1px 3px rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(10px);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .ingredient-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(135deg, rgba(44, 82, 130, 0.03) 0%, transparent 100%);
-          z-index: 0;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          transition: transform 0.3s ease;
+          text-align: center;
         }
 
         .ingredient-card:hover {
           transform: translateY(-5px);
-          box-shadow: 
-            0 15px 35px rgba(0, 0, 0, 0.1),
-            0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .ingredient-card img {
@@ -645,9 +559,7 @@ export default function LandingPage() {
         /* Experts Section */
         .experts-section {
           padding: 80px 20px;
-          background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
-          position: relative;
-          overflow: hidden;
+          background: #f8f9fa;
         }
 
         .experts-section h2 {
@@ -667,34 +579,17 @@ export default function LandingPage() {
         }
 
         .expert-card {
-          background: rgba(255, 255, 255, 0.9);
+          background: white;
           padding: 30px;
           border-radius: 15px;
-          box-shadow: 
-            0 10px 30px rgba(0, 0, 0, 0.05),
-            0 1px 3px rgba(0, 0, 0, 0.1);
-          backdrop-filter: blur(10px);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-          position: relative;
-          overflow: hidden;
-        }
-
-        .expert-card::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(135deg, rgba(44, 82, 130, 0.03) 0%, transparent 100%);
-          z-index: 0;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+          display: flex;
+          gap: 20px;
+          transition: transform 0.3s ease;
         }
 
         .expert-card:hover {
           transform: translateY(-5px);
-          box-shadow: 
-            0 15px 35px rgba(0, 0, 0, 0.1),
-            0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .expert-card img {
@@ -729,9 +624,8 @@ export default function LandingPage() {
         /* Guarantee Section */
         .guarantee-section {
           padding: 80px 20px;
-          background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
-          position: relative;
-          overflow: hidden;
+          background: white;
+          text-align: center;
         }
 
         .guarantee-content {
@@ -754,21 +648,7 @@ export default function LandingPage() {
           justify-content: center;
           align-items: center;
           font-weight: 700;
-          box-shadow: 
-            0 10px 30px rgba(44, 82, 130, 0.2),
-            0 1px 3px rgba(0, 0, 0, 0.1);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .guarantee-badge::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+          box-shadow: 0 10px 20px rgba(44, 82, 130, 0.2);
         }
 
         .guarantee-badge span:first-child {
@@ -819,24 +699,14 @@ export default function LandingPage() {
           color: white;
           padding: 60px 20px;
           position: relative;
-          overflow: hidden;
-        }
-
-        .site-footer::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: 
-            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .footer-content {
           max-width: 1200px;
           margin: 0 auto;
           text-align: center;
+          position: relative;
+          z-index: 1;
         }
 
         .footer-badges {
@@ -849,7 +719,7 @@ export default function LandingPage() {
 
         .footer-badges img {
           height: 50px;
-          filter: brightness(0.95) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+          filter: brightness(0.95);
           transition: transform 0.3s ease;
         }
 
@@ -895,6 +765,7 @@ export default function LandingPage() {
         @media (max-width: 1024px) {
           .hero-content {
             gap: 40px;
+            padding: 30px;
           }
 
           .product-image {
