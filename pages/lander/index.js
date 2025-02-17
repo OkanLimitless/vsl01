@@ -750,6 +750,7 @@ export default function LandingPage() {
             height: auto;
             display: block;
             margin: 0 auto;
+            filter: brightness(1) contrast(1);
           }
 
           .trust-seals {
@@ -769,12 +770,12 @@ export default function LandingPage() {
             max-width: 150px;
             height: auto;
             margin: 0 auto;
-            filter: grayscale(100%);
-            transition: filter 0.3s ease;
+            transition: transform 0.3s ease;
+            filter: brightness(1) contrast(1);
           }
 
           .seals-grid img:hover {
-            filter: grayscale(0%);
+            transform: scale(1.05);
           }
 
           /* Social Proof Popup */
@@ -878,6 +879,16 @@ export default function LandingPage() {
             
             .popup-inner {
               max-width: none;
+            }
+
+            .seals-grid {
+              grid-template-columns: repeat(2, 1fr);
+              gap: 20px;
+              padding: 0 20px;
+            }
+            
+            .seals-grid img {
+              max-width: 120px;
             }
           }
 
