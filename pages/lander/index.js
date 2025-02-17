@@ -68,20 +68,17 @@ export default function LandingPage() {
         <div className="announcement-bar">
           <div className="container">
             <div className="urgent-message">
-              <span className="alert-icon"><i className="fas fa-exclamation-circle"></i></span>
-              <span className="message">URGENT: Original Formula Being Discontinued</span>
-              <span className="divider">|</span>
-              <span className="date">{new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
-              <span className="divider">|</span>
+              <span className="alert-icon pulse-icon"><i className="fas fa-exclamation-triangle"></i></span>
+              <span className="message">Limited Time: Original Formula Being Discontinued</span>
+              <span className="divider">•</span>
               <span className="stock-status">
                 <span className="pulse-dot"></span>
-                <span className="live-label">LIVE:</span>
-                <strong>{bottlesLeft}</strong> Brazilian Wood™ 2.0 bottles remaining
-                <span className="divider">|</span>
-                <span className="visitors">
-                  <i className="fas fa-users"></i>
-                  <strong>{viewerCount}</strong> people viewing
-                </span>
+                Only <strong>{bottlesLeft}</strong> Brazilian Wood™ 2.0 Available
+              </span>
+              <span className="divider">•</span>
+              <span className="visitors">
+                <i className="fas fa-users"></i>
+                <strong>{viewerCount}</strong> people viewing this offer
               </span>
             </div>
           </div>
@@ -332,6 +329,33 @@ export default function LandingPage() {
           </div>
         )}
 
+        {/* Add CTA after Benefits Section */}
+        <div className="mid-page-cta">
+          <div className="container">
+            <div className="cta-wrapper">
+              <h3>Ready to Experience the Power of 2.0?</h3>
+              <a href="https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307" className="cta-button pulse">
+                Claim Your Brazilian Wood™ 2.0
+                <span className="guarantee-text">Limited Time Offer + 180-Day Guarantee</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Add Final CTA before Guarantee Section */}
+        <div className="final-cta">
+          <div className="container">
+            <div className="cta-wrapper">
+              <h3>Don't Miss Out on Brazilian Wood™ 2.0</h3>
+              <p className="urgency-text">Limited Stock Available at Special Launch Price</p>
+              <a href="https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307" className="cta-button pulse">
+                Get Brazilian Wood™ 2.0 Now
+                <span className="guarantee-text">Risk-Free with 180-Day Guarantee</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
         <style jsx>{`
           @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
@@ -369,48 +393,50 @@ export default function LandingPage() {
 
           /* Announcement Bar */
           .announcement-bar {
-            background: #ff3a3a;
+            background: linear-gradient(90deg, #ff3a3a, #ff4e03);
             color: white;
-            padding: 10px 0;
-            font-size: 14px;
+            padding: 12px 0;
+            font-size: 15px;
             font-weight: 600;
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
             z-index: 1000;
+            box-shadow: 0 2px 10px rgba(255, 62, 3, 0.3);
           }
 
           .urgent-message {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 15px;
             flex-wrap: wrap;
             text-align: center;
+          }
+
+          .alert-icon {
+            color: #fff;
+            animation: pulse 2s infinite;
+          }
+
+          .pulse-icon {
+            display: inline-block;
+            animation: pulse 1.5s infinite;
+          }
+
+          .divider {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 12px;
           }
 
           .stock-status {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            padding: 3px 8px;
-            background: rgba(0,0,0,0.2);
-            border-radius: 4px;
-          }
-
-          .pulse-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: var(--success-green);
-            border-radius: 50%;
-            animation: pulse 1.5s infinite;
-          }
-
-          @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.5); }
+            gap: 6px;
+            background: rgba(0,0,0,0.15);
+            padding: 4px 12px;
+            border-radius: 20px;
           }
 
           /* Hero Section */
@@ -476,12 +502,12 @@ export default function LandingPage() {
             width: auto;
             object-fit: contain;
             transition: transform 0.3s ease;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            filter: none !important;
           }
 
           /* CTA Button */
           .cta-button {
-            background: #ff4e03;
+            background: linear-gradient(45deg, #ff4e03, #ff6a2b);
             color: #fff;
             padding: 20px 40px;
             border-radius: 30px;
@@ -493,12 +519,12 @@ export default function LandingPage() {
             cursor: pointer;
             font-size: 18px;
             margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(255, 78, 3, 0.3);
           }
 
           .cta-button:hover {
-            background: #ff6a2b;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 78, 3, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 78, 3, 0.4);
           }
 
           .guarantee-text {
@@ -750,7 +776,7 @@ export default function LandingPage() {
             height: auto;
             display: block;
             margin: 0 auto;
-            filter: brightness(1) contrast(1);
+            filter: none !important;
           }
 
           .trust-seals {
@@ -771,7 +797,7 @@ export default function LandingPage() {
             height: auto;
             margin: 0 auto;
             transition: transform 0.3s ease;
-            filter: brightness(1) contrast(1);
+            filter: none !important;
           }
 
           .seals-grid img:hover {
@@ -812,6 +838,7 @@ export default function LandingPage() {
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
+            filter: none !important;
           }
 
           .popup-content {
@@ -838,6 +865,36 @@ export default function LandingPage() {
             margin-top: 4px;
           }
 
+          /* Add styles for new CTAs */
+          .mid-page-cta, .final-cta {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #1a1a1a, #2C3E50);
+            text-align: center;
+          }
+
+          .cta-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+          }
+
+          .cta-wrapper h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #fff;
+          }
+
+          .urgency-text {
+            color: #ff4e03;
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: 500;
+          }
+
+          /* Mobile Optimizations */
           @media (max-width: 768px) {
             .container {
               padding: 0 15px;
@@ -889,6 +946,32 @@ export default function LandingPage() {
             
             .seals-grid img {
               max-width: 120px;
+            }
+
+            .announcement-bar {
+              font-size: 13px;
+              padding: 8px 0;
+            }
+
+            .urgent-message {
+              gap: 8px;
+            }
+
+            .stock-status {
+              padding: 3px 8px;
+              font-size: 12px;
+            }
+
+            .cta-wrapper {
+              padding: 20px;
+            }
+
+            .cta-wrapper h3 {
+              font-size: 24px;
+            }
+
+            .urgency-text {
+              font-size: 16px;
             }
           }
 
