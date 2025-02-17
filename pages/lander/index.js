@@ -37,9 +37,11 @@ export default function LandingPage() {
   // Purchase notifications effect
   useEffect(() => {
     const buyers = [
-      { name: 'Michael R.', location: 'California', time: 'Just now' },
-      { name: 'James S.', location: 'New York', time: '2 minutes ago' },
-      { name: 'Robert K.', location: 'Texas', time: '4 minutes ago' }
+      { name: 'Michael R.', location: 'California', time: 'Just now', quantity: 3 },
+      { name: 'James S.', location: 'New York', time: '2 minutes ago', quantity: 1 },
+      { name: 'Robert K.', location: 'Texas', time: '4 minutes ago', quantity: 6 },
+      { name: 'David M.', location: 'Florida', time: '3 minutes ago', quantity: 3 },
+      { name: 'William P.', location: 'Arizona', time: '1 minute ago', quantity: 1 }
     ];
 
     const showRandomPurchase = () => {
@@ -50,6 +52,7 @@ export default function LandingPage() {
     };
 
     const interval = setInterval(showRandomPurchase, 45000);
+    showRandomPurchase(); // Show first notification immediately
     return () => clearInterval(interval);
   }, []);
 
@@ -321,8 +324,12 @@ export default function LandingPage() {
             <div className="popup-inner">
               <img src={`https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 50)}.jpg`} alt="Buyer" className="buyer-avatar" />
               <div className="popup-content">
-                <p className="buyer-name"><strong>{currentBuyer.name}</strong> from {currentBuyer.location}</p>
-                <p className="purchase-info">Just upgraded to Brazilian Wood™ 2.0</p>
+                <p className="buyer-name">
+                  <strong>{currentBuyer.name}</strong> from {currentBuyer.location}
+                </p>
+                <p className="purchase-info">
+                  Just purchased {currentBuyer.quantity} {currentBuyer.quantity === 1 ? 'bottle' : 'bottles'} of Brazilian Wood™ 2.0
+                </p>
                 <span className="time-ago">{currentBuyer.time}</span>
               </div>
             </div>
@@ -751,6 +758,7 @@ export default function LandingPage() {
             max-width: 800px;
             margin: 40px auto 0;
             padding: 20px;
+            background: transparent;
           }
 
           .seals-grid img {
@@ -759,10 +767,9 @@ export default function LandingPage() {
             height: auto;
             margin: 0 auto;
             transition: transform 0.3s ease;
-            filter: none !important;
-            -webkit-filter: none !important;
-            mix-blend-mode: normal;
-            opacity: 1;
+            filter: invert(1) !important;
+            -webkit-filter: invert(1) !important;
+            background: transparent !important;
           }
 
           .guarantee-seal {
@@ -775,10 +782,9 @@ export default function LandingPage() {
             height: auto;
             display: block;
             margin: 0 auto;
-            filter: none !important;
-            -webkit-filter: none !important;
-            mix-blend-mode: normal;
-            opacity: 1;
+            filter: invert(1) !important;
+            -webkit-filter: invert(1) !important;
+            background: transparent !important;
           }
 
           /* Guarantee Section */
@@ -805,6 +811,7 @@ export default function LandingPage() {
             margin-top: 60px;
             position: relative;
             z-index: 2;
+            background: transparent;
           }
 
           .guarantee-points {
@@ -824,7 +831,6 @@ export default function LandingPage() {
 
           .guarantee-points li i {
             color: #ff4e03;
-            font-size: 20px;
           }
 
           /* Social Proof Popup */
@@ -861,7 +867,6 @@ export default function LandingPage() {
             height: 50px;
             border-radius: 50%;
             object-fit: cover;
-            filter: none !important;
           }
 
           .popup-content {
@@ -876,9 +881,10 @@ export default function LandingPage() {
           }
 
           .purchase-info {
-            color: #666;
+            color: #ff4e03;
             font-size: 13px;
             margin: 2px 0;
+            font-weight: 500;
           }
 
           .time-ago {
