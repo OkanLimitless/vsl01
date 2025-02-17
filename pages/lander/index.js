@@ -96,7 +96,7 @@ export default function LandingPage() {
               
               <div className="product-comparison">
                 <div className="product new">
-                  <img src="/lander/img/BrazlilianWood_1Bottle.png" alt="Brazilian Wood 2.0" className="bottle-image" />
+                  <img src="/img/BrazlilianWood_1Bottle.png" alt="Brazilian Wood 2.0" className="bottle-image" />
                   <div className="product-label">NEW 2.0 Formula</div>
                 </div>
               </div>
@@ -296,7 +296,7 @@ export default function LandingPage() {
           <div className="container">
             <div className="guarantee-content">
               <div className="guarantee-seal">
-                <img src="/lander/img/180days.png" alt="180 Day Money Back Guarantee" />
+                <img src="/img/180days.png" alt="180 Day Money Back Guarantee" />
               </div>
               <div className="guarantee-text">
                 <h2>180-Day Money Back Guarantee</h2>
@@ -309,10 +309,10 @@ export default function LandingPage() {
             </div>
             <div className="trust-seals">
               <div className="seals-grid">
-                <img src="/lander/img/fda-registered.png" alt="FDA Registered Facility" />
-                <img src="/lander/img/gmp-certified.png" alt="GMP Certified" />
-                <img src="/lander/img/secure-payment.png" alt="Secure Payment" />
-                <img src="/lander/img/money-back.png" alt="Money Back Guarantee" />
+                <img src="/img/fda-registered.png" alt="FDA Registered Facility" />
+                <img src="/img/gmp-certified.png" alt="GMP Certified" />
+                <img src="/img/secure-payment.png" alt="Secure Payment" />
+                <img src="/img/money-back.png" alt="Money Back Guarantee" />
               </div>
             </div>
           </div>
@@ -321,11 +321,13 @@ export default function LandingPage() {
         {/* Purchase Notification Popup */}
         {showNotification && currentBuyer && (
           <div className="social-proof-popup show">
-            <img src={`https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 50)}.jpg`} alt="Buyer" className="buyer-avatar" />
-            <div className="popup-content">
-              <p><strong>{currentBuyer.name}</strong> from {currentBuyer.location}</p>
-              <p>Just upgraded to Brazilian Wood™ 2.0</p>
-              <span className="time-ago">Just now</span>
+            <div className="popup-inner">
+              <img src={`https://randomuser.me/api/portraits/men/${Math.floor(Math.random() * 50)}.jpg`} alt="Buyer" className="buyer-avatar" />
+              <div className="popup-content">
+                <p className="buyer-name"><strong>{currentBuyer.name}</strong> from {currentBuyer.location}</p>
+                <p className="purchase-info">Just upgraded to Brazilian Wood™ 2.0</p>
+                <span className="time-ago">{currentBuyer.time}</span>
+              </div>
             </div>
           </div>
         )}
@@ -780,29 +782,61 @@ export default function LandingPage() {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            gap: 15px;
             z-index: 1000;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
           }
 
           .social-proof-popup.show {
+            opacity: 1;
+            visibility: visible;
             transform: translateY(0);
+          }
+
+          .popup-inner {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 300px;
           }
 
           .buyer-avatar {
             width: 50px;
             height: 50px;
             border-radius: 50%;
+            object-fit: cover;
           }
 
-          /* Mobile Optimizations */
+          .popup-content {
+            flex: 1;
+          }
+
+          .buyer-name {
+            color: #333;
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.4;
+          }
+
+          .purchase-info {
+            color: #666;
+            font-size: 13px;
+            margin: 2px 0;
+          }
+
+          .time-ago {
+            color: #999;
+            font-size: 12px;
+            display: block;
+            margin-top: 4px;
+          }
+
           @media (max-width: 768px) {
             .container {
               padding: 0 15px;
@@ -834,6 +868,16 @@ export default function LandingPage() {
 
             .comparison-row {
               padding: 20px;
+            }
+
+            .social-proof-popup {
+              left: 10px;
+              right: 10px;
+              bottom: 10px;
+            }
+            
+            .popup-inner {
+              max-width: none;
             }
           }
 
