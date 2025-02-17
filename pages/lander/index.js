@@ -329,24 +329,11 @@ export default function LandingPage() {
           </div>
         )}
 
-        {/* Add CTA after Benefits Section */}
+        {/* Add single CTA after Benefits Section */}
         <div className="mid-page-cta">
           <div className="container">
             <div className="cta-wrapper">
               <h3>Ready to Experience the Power of 2.0?</h3>
-              <a href="https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307" className="cta-button pulse">
-                Claim Your Brazilian Wood™ 2.0
-                <span className="guarantee-text">Limited Time Offer + 180-Day Guarantee</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Add Final CTA before Guarantee Section */}
-        <div className="final-cta">
-          <div className="container">
-            <div className="cta-wrapper">
-              <h3>Don't Miss Out on Brazilian Wood™ 2.0</h3>
               <p className="urgency-text">Limited Stock Available at Special Launch Price</p>
               <a href="https://afflat3e1.com/lnk.asp?o=26286&c=918277&a=271469&k=FD40240F18D488603D3C98D218ED5998&l=32307" className="cta-button pulse">
                 Get Brazilian Wood™ 2.0 Now
@@ -756,10 +743,43 @@ export default function LandingPage() {
             font-weight: 600;
           }
 
+          /* Trust Seals Styling */
+          .seals-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+
+          .seals-grid img {
+            width: 100%;
+            max-width: 120px;
+            height: auto;
+            margin: 0 auto;
+            transition: transform 0.3s ease;
+            filter: brightness(1) !important;
+            -webkit-filter: brightness(1) !important;
+            background: transparent;
+          }
+
+          .guarantee-seal img {
+            width: 200px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: brightness(1) !important;
+            -webkit-filter: brightness(1) !important;
+            background: transparent;
+          }
+
           /* Guarantee Section */
           .guarantee-section {
             padding: 80px 0;
             background: #222;
+            position: relative;
+            z-index: 1;
           }
 
           .guarantee-content {
@@ -768,40 +788,30 @@ export default function LandingPage() {
             gap: 40px;
             max-width: 800px;
             margin: 0 auto;
-            flex-wrap: wrap;
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
           }
 
-          .guarantee-seal img {
-            width: 200px;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            filter: none !important;
+          .guarantee-points {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0;
           }
 
-          .trust-seals {
-            margin-top: 60px;
+          .guarantee-points li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #fff;
           }
 
-          .seals-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            max-width: 800px;
-            margin: 0 auto;
-          }
-
-          .seals-grid img {
-            width: 100%;
-            max-width: 150px;
-            height: auto;
-            margin: 0 auto;
-            transition: transform 0.3s ease;
-            filter: none !important;
-          }
-
-          .seals-grid img:hover {
-            transform: scale(1.05);
+          .guarantee-points li i {
+            color: #ff4e03;
+            font-size: 20px;
           }
 
           /* Social Proof Popup */
@@ -865,35 +875,6 @@ export default function LandingPage() {
             margin-top: 4px;
           }
 
-          /* Add styles for new CTAs */
-          .mid-page-cta, .final-cta {
-            padding: 60px 0;
-            background: linear-gradient(135deg, #1a1a1a, #2C3E50);
-            text-align: center;
-          }
-
-          .cta-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 40px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-          }
-
-          .cta-wrapper h3 {
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: #fff;
-          }
-
-          .urgency-text {
-            color: #ff4e03;
-            font-size: 18px;
-            margin-bottom: 30px;
-            font-weight: 500;
-          }
-
           /* Mobile Optimizations */
           @media (max-width: 768px) {
             .container {
@@ -941,11 +922,10 @@ export default function LandingPage() {
             .seals-grid {
               grid-template-columns: repeat(2, 1fr);
               gap: 20px;
-              padding: 0 20px;
             }
             
             .seals-grid img {
-              max-width: 120px;
+              max-width: 100px;
             }
 
             .announcement-bar {
