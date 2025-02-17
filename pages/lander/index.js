@@ -253,11 +253,26 @@ export default function LandingPage() {
           line-height: 1.6;
           overflow-x: hidden;
           width: 100%;
+          position: relative;
+        }
+
+        .landing-page::before {
+          content: '';
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: 
+            radial-gradient(circle at 0% 0%, rgba(44, 82, 130, 0.03) 20%, transparent 70%),
+            radial-gradient(circle at 100% 0%, rgba(0, 100, 200, 0.03) 20%, transparent 70%),
+            linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.95) 100%);
+          z-index: -1;
         }
 
         /* Top Bar */
         .top-bar {
-          background: #1a1a1a;
+          background: linear-gradient(90deg, #1a1a1a, #2c3e50);
           padding: 12px 0;
           color: white;
           position: fixed;
@@ -265,7 +280,8 @@ export default function LandingPage() {
           left: 0;
           width: 100%;
           z-index: 1000;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(10px);
         }
 
         .top-bar-content {
@@ -282,6 +298,10 @@ export default function LandingPage() {
           display: flex;
           align-items: center;
           gap: 8px;
+          background: rgba(255, 255, 255, 0.1);
+          padding: 6px 12px;
+          border-radius: 20px;
+          backdrop-filter: blur(5px);
         }
 
         .pulse-dot {
@@ -290,6 +310,7 @@ export default function LandingPage() {
           background: #4CAF50;
           border-radius: 50%;
           animation: pulse 2s infinite;
+          box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
         }
 
         @keyframes pulse {
@@ -302,8 +323,28 @@ export default function LandingPage() {
         .hero {
           padding: 120px 20px 60px;
           text-align: center;
-          background: linear-gradient(to bottom, #f8f9fa, #fff);
-          border-bottom: 1px solid #eee;
+          background: 
+            linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.95) 100%),
+            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c5282' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle at center, rgba(44, 82, 130, 0.03) 0%, transparent 70%);
+          animation: rotate 60s linear infinite;
+          z-index: 0;
+        }
+
+        @keyframes rotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
 
         .trust-badges {
@@ -312,6 +353,8 @@ export default function LandingPage() {
           gap: 40px;
           margin-bottom: 40px;
           flex-wrap: wrap;
+          position: relative;
+          z-index: 1;
         }
 
         .badge {
@@ -319,53 +362,44 @@ export default function LandingPage() {
           align-items: center;
           gap: 10px;
           color: #2c5282;
-          background: white;
+          background: rgba(255, 255, 255, 0.9);
           padding: 12px 24px;
           border-radius: 30px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-          font-weight: 500;
+          box-shadow: 
+            0 4px 6px rgba(0, 0, 0, 0.05),
+            0 1px 3px rgba(0, 0, 0, 0.1),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+          backdrop-filter: blur(5px);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .badge i {
-          font-size: 1.2rem;
-          color: #2c5282;
-        }
-
-        .hero h1 {
-          font-size: 2.5rem;
-          color: #2c5282;
-          margin: 0 auto 20px;
-          max-width: 800px;
-          line-height: 1.2;
-          font-weight: 700;
-        }
-
-        .hero h2 {
-          color: #666;
-          font-size: 1.2rem;
-          margin-bottom: 40px;
-          font-weight: 500;
+        .badge:hover {
+          transform: translateY(-2px);
+          box-shadow: 
+            0 6px 12px rgba(0, 0, 0, 0.07),
+            0 2px 4px rgba(0, 0, 0, 0.12),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.5);
         }
 
         .hero-content {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 60px;
-          max-width: 1200px;
-          margin: 0 auto;
-          flex-wrap: wrap;
-        }
-
-        .product-image {
-          flex: 0 0 300px;
+          position: relative;
+          z-index: 1;
+          background: rgba(255, 255, 255, 0.9);
+          padding: 40px;
+          border-radius: 20px;
+          box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.05),
+            0 1px 3px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(10px);
         }
 
         .product-image img {
-          width: 100%;
-          height: auto;
-          max-width: 300px;
-          filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+          filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.15));
+          transition: transform 0.3s ease;
+        }
+
+        .product-image:hover img {
+          transform: translateY(-10px);
         }
 
         /* Benefits Section */
@@ -394,7 +428,7 @@ export default function LandingPage() {
 
         /* CTA Buttons */
         .hero-cta-button, .main-cta-button {
-          background: #2c5282;
+          background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
           color: white;
           border: none;
           padding: 20px 30px;
@@ -402,16 +436,28 @@ export default function LandingPage() {
           font-weight: 600;
           cursor: pointer;
           transition: all 0.3s ease;
-          width: 100%;
-          margin-top: 20px;
-          font-size: 1.1rem;
-          box-shadow: 0 4px 6px rgba(44, 82, 130, 0.2);
+          position: relative;
+          overflow: hidden;
         }
 
-        .hero-cta-button:hover, .main-cta-button:hover {
-          background: #1a365d;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 12px rgba(44, 82, 130, 0.3);
+        .hero-cta-button::before, .main-cta-button::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.2) 50%,
+            transparent 100%
+          );
+          transition: left 0.5s ease;
+        }
+
+        .hero-cta-button:hover::before, .main-cta-button:hover::before {
+          left: 100%;
         }
 
         .guarantee-text {
@@ -424,8 +470,21 @@ export default function LandingPage() {
         /* Science Section */
         .science-section {
           padding: 80px 20px;
-          background: #f8f9fa;
-          text-align: center;
+          background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .science-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: 
+            url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232c5282' fill-opacity='0.03' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+          opacity: 0.5;
         }
 
         .science-section h2 {
@@ -444,11 +503,34 @@ export default function LandingPage() {
         }
 
         .research-item {
-          background: white;
+          background: rgba(255, 255, 255, 0.9);
           padding: 40px 30px;
           border-radius: 15px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-          border: 1px solid #eee;
+          box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.05),
+            0 1px 3px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(10px);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .research-item::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, rgba(44, 82, 130, 0.03) 0%, transparent 100%);
+          z-index: 0;
+        }
+
+        .research-item:hover {
+          transform: translateY(-5px);
+          box-shadow: 
+            0 15px 35px rgba(0, 0, 0, 0.1),
+            0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .stat {
@@ -474,7 +556,21 @@ export default function LandingPage() {
         /* Ingredients Section */
         .ingredients-section {
           padding: 80px 20px;
-          background: white;
+          background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .ingredients-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: 
+            url("data:image/svg+xml,%3Csvg width='52' height='26' viewBox='0 0 52 26' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232c5282' fill-opacity='0.03'%3E%3Cpath d='M10 10c0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6h2c0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4 3.314 0 6 2.686 6 6 0 2.21 1.79 4 4 4v2c-3.314 0-6-2.686-6-6 0-2.21-1.79-4-4-4-3.314 0-6-2.686-6-6zm25.464-1.95l8.486 8.486-1.414 1.414-8.486-8.486 1.414-1.414z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+          opacity: 0.5;
         }
 
         .ingredients-section h2 {
@@ -494,17 +590,34 @@ export default function LandingPage() {
         }
 
         .ingredient-card {
-          text-align: center;
+          background: rgba(255, 255, 255, 0.9);
           padding: 30px;
-          background: white;
           border-radius: 15px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-          border: 1px solid #eee;
-          transition: transform 0.3s ease;
+          box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.05),
+            0 1px 3px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(10px);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .ingredient-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, rgba(44, 82, 130, 0.03) 0%, transparent 100%);
+          z-index: 0;
         }
 
         .ingredient-card:hover {
           transform: translateY(-5px);
+          box-shadow: 
+            0 15px 35px rgba(0, 0, 0, 0.1),
+            0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .ingredient-card img {
@@ -532,7 +645,9 @@ export default function LandingPage() {
         /* Experts Section */
         .experts-section {
           padding: 80px 20px;
-          background: #f8f9fa;
+          background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+          position: relative;
+          overflow: hidden;
         }
 
         .experts-section h2 {
@@ -552,14 +667,34 @@ export default function LandingPage() {
         }
 
         .expert-card {
-          background: white;
+          background: rgba(255, 255, 255, 0.9);
           padding: 30px;
           border-radius: 15px;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-          border: 1px solid #eee;
-          display: flex;
-          gap: 20px;
-          align-items: flex-start;
+          box-shadow: 
+            0 10px 30px rgba(0, 0, 0, 0.05),
+            0 1px 3px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(10px);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .expert-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, rgba(44, 82, 130, 0.03) 0%, transparent 100%);
+          z-index: 0;
+        }
+
+        .expert-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 
+            0 15px 35px rgba(0, 0, 0, 0.1),
+            0 3px 10px rgba(0, 0, 0, 0.1);
         }
 
         .expert-card img {
@@ -594,9 +729,9 @@ export default function LandingPage() {
         /* Guarantee Section */
         .guarantee-section {
           padding: 80px 20px;
-          background: white;
-          text-align: center;
-          border-top: 1px solid #eee;
+          background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+          position: relative;
+          overflow: hidden;
         }
 
         .guarantee-content {
@@ -608,7 +743,7 @@ export default function LandingPage() {
         }
 
         .guarantee-badge {
-          background: #2c5282;
+          background: linear-gradient(135deg, #2c5282 0%, #1a365d 100%);
           color: white;
           padding: 20px;
           border-radius: 50%;
@@ -619,8 +754,21 @@ export default function LandingPage() {
           justify-content: center;
           align-items: center;
           font-weight: 700;
-          flex-shrink: 0;
-          box-shadow: 0 4px 6px rgba(44, 82, 130, 0.2);
+          box-shadow: 
+            0 10px 30px rgba(44, 82, 130, 0.2),
+            0 1px 3px rgba(0, 0, 0, 0.1);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .guarantee-badge::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
         }
 
         .guarantee-badge span:first-child {
@@ -667,10 +815,22 @@ export default function LandingPage() {
 
         /* Footer */
         .site-footer {
-          background: #1a1a1a;
+          background: linear-gradient(90deg, #1a1a1a, #2c3e50);
           color: white;
           padding: 60px 20px;
-          margin-top: 0;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .site-footer::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: 
+            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .footer-content {
@@ -689,7 +849,12 @@ export default function LandingPage() {
 
         .footer-badges img {
           height: 50px;
-          filter: brightness(0.95);
+          filter: brightness(0.95) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+          transition: transform 0.3s ease;
+        }
+
+        .footer-badges img:hover {
+          transform: translateY(-3px);
         }
 
         .copyright {
