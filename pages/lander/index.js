@@ -329,7 +329,7 @@ export default function LandingPage() {
           </div>
         )}
 
-        {/* Add single CTA after Benefits Section */}
+        {/* Mid-page CTA */}
         <div className="mid-page-cta">
           <div className="container">
             <div className="cta-wrapper">
@@ -749,7 +749,7 @@ export default function LandingPage() {
             grid-template-columns: repeat(4, 1fr);
             gap: 30px;
             max-width: 800px;
-            margin: 0 auto;
+            margin: 40px auto 0;
             padding: 20px;
           }
 
@@ -759,9 +759,15 @@ export default function LandingPage() {
             height: auto;
             margin: 0 auto;
             transition: transform 0.3s ease;
-            filter: brightness(1) !important;
-            -webkit-filter: brightness(1) !important;
-            background: transparent;
+            filter: none !important;
+            -webkit-filter: none !important;
+            mix-blend-mode: normal;
+            opacity: 1;
+          }
+
+          .guarantee-seal {
+            position: relative;
+            z-index: 2;
           }
 
           .guarantee-seal img {
@@ -769,9 +775,10 @@ export default function LandingPage() {
             height: auto;
             display: block;
             margin: 0 auto;
-            filter: brightness(1) !important;
-            -webkit-filter: brightness(1) !important;
-            background: transparent;
+            filter: none !important;
+            -webkit-filter: none !important;
+            mix-blend-mode: normal;
+            opacity: 1;
           }
 
           /* Guarantee Section */
@@ -788,10 +795,16 @@ export default function LandingPage() {
             gap: 40px;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 30px;
             background: rgba(255,255,255,0.03);
             border-radius: 20px;
             border: 1px solid rgba(255,255,255,0.1);
+          }
+
+          .trust-seals {
+            margin-top: 60px;
+            position: relative;
+            z-index: 2;
           }
 
           .guarantee-points {
@@ -875,6 +888,35 @@ export default function LandingPage() {
             margin-top: 4px;
           }
 
+          /* CTA Sections */
+          .mid-page-cta {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1a1a1a, #2C3E50);
+            text-align: center;
+          }
+
+          .cta-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+          }
+
+          .cta-wrapper h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #fff;
+          }
+
+          .urgency-text {
+            color: #ff4e03;
+            font-size: 18px;
+            margin-bottom: 30px;
+            font-weight: 500;
+          }
+
           /* Mobile Optimizations */
           @media (max-width: 768px) {
             .container {
@@ -922,6 +964,7 @@ export default function LandingPage() {
             .seals-grid {
               grid-template-columns: repeat(2, 1fr);
               gap: 20px;
+              padding: 15px;
             }
             
             .seals-grid img {
@@ -943,7 +986,8 @@ export default function LandingPage() {
             }
 
             .cta-wrapper {
-              padding: 20px;
+              padding: 30px 20px;
+              margin: 0 15px;
             }
 
             .cta-wrapper h3 {
