@@ -96,7 +96,7 @@ export default function LandingPage() {
               
               <div className="product-comparison">
                 <div className="product new">
-                  <img src="/img/BrazlilianWood_1Bottle.png" alt="Brazilian Wood 2.0" className="bottle-image" />
+                  <img src="/images/BrazlilianWood_1Bottle.png" alt="Brazilian Wood 2.0" className="bottle-image" />
                   <div className="product-label">NEW 2.0 Formula</div>
                 </div>
               </div>
@@ -296,7 +296,7 @@ export default function LandingPage() {
           <div className="container">
             <div className="guarantee-content">
               <div className="guarantee-seal">
-                <img src="/img/180days.png" alt="180 Day Money Back Guarantee" />
+                <img src="/images/180days.png" alt="180 Day Money Back Guarantee" />
               </div>
               <div className="guarantee-text">
                 <h2>180-Day Money Back Guarantee</h2>
@@ -309,10 +309,10 @@ export default function LandingPage() {
             </div>
             <div className="trust-seals">
               <div className="seals-grid">
-                <img src="/img/fda-registered.png" alt="FDA Registered Facility" />
-                <img src="/img/gmp-certified.png" alt="GMP Certified" />
-                <img src="/img/secure-payment.png" alt="Secure Payment" />
-                <img src="/img/money-back.png" alt="Money Back Guarantee" />
+                <img src="/images/fda-registered.png" alt="FDA Registered Facility" />
+                <img src="/images/gmp-certified.png" alt="GMP Certified" />
+                <img src="/images/secure-payment.png" alt="Secure Payment" />
+                <img src="/images/money-back.png" alt="Money Back Guarantee" />
               </div>
             </div>
           </div>
