@@ -361,36 +361,39 @@ export default function LandingPage() {
             overflow-x: hidden;
             width: 100%;
             position: relative;
-            padding-top: 36px;
+            background: #1a1a1a;
+            color: #fff;
+          }
+
+          .container {
+            width: 100%;
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 20px;
+            box-sizing: border-box;
           }
 
           /* Announcement Bar */
           .announcement-bar {
             background: #ff3a3a;
             color: white;
-            padding: 8px 0;
+            padding: 10px 0;
+            font-size: 14px;
             font-weight: 600;
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
             z-index: 1000;
-            box-sizing: border-box;
-          }
-
-          .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
           }
 
           .urgent-message {
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 12px;
             flex-wrap: wrap;
-            gap: 8px;
-            font-size: 13px;
+            text-align: center;
           }
 
           .stock-status {
@@ -418,25 +421,21 @@ export default function LandingPage() {
 
           /* Hero Section */
           .hero {
-            background: linear-gradient(135deg, #2C3E50, #1a1a1a);
-            color: #fff;
-            padding: 80px 0;
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, #1a1a1a, #2C3E50);
             text-align: center;
-            position: relative;
-            overflow: hidden;
           }
 
           .hero-content {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            position: relative;
-            z-index: 2;
           }
 
           .hero h1 {
-            font-size: 48px;
+            font-size: clamp(32px, 5vw, 48px);
             font-weight: 700;
             margin-bottom: 20px;
+            line-height: 1.2;
           }
 
           .highlight {
@@ -453,7 +452,7 @@ export default function LandingPage() {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
             margin: 40px auto;
             padding: 30px;
             background: rgba(255,255,255,0.05);
@@ -490,7 +489,7 @@ export default function LandingPage() {
           }
 
           .bottle-image {
-            height: 350px;
+            height: clamp(200px, 40vw, 350px);
             width: auto;
             object-fit: contain;
             transition: transform 0.3s ease;
@@ -560,7 +559,8 @@ export default function LandingPage() {
           /* Evolution Section */
           .upgrade-section {
             padding: 80px 0;
-            background: #fff;
+            background: #222;
+            color: #fff;
           }
 
           .section-header {
@@ -586,11 +586,10 @@ export default function LandingPage() {
           }
 
           .evolution-card {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 15px;
             text-align: center;
-            padding: 40px 20px;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             transition: transform 0.3s ease;
           }
 
@@ -617,7 +616,7 @@ export default function LandingPage() {
           /* Benefits Section */
           .benefits-section {
             padding: 80px 0;
-            background: var(--bg-light);
+            background: #1a1a1a;
           }
 
           .benefits-comparison {
@@ -626,14 +625,13 @@ export default function LandingPage() {
           }
 
           .comparison-row {
-            background: white;
+            background: rgba(255,255,255,0.05);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
           }
 
           .metric {
@@ -666,26 +664,26 @@ export default function LandingPage() {
           /* Quick Comparison */
           .quick-comparison {
             padding: 80px 0;
-            background: white;
+            background: #222;
           }
 
           .comparison-cards {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             max-width: 1000px;
             margin: 40px auto;
           }
 
           .comparison-card {
-            background: var(--bg-light);
+            background: rgba(255,255,255,0.05);
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 15px;
+            color: #fff;
           }
 
           .comparison-card.new {
-            background: white;
+            background: rgba(255,78,3,0.1);
             border: 2px solid #ff4e03;
           }
 
@@ -714,7 +712,7 @@ export default function LandingPage() {
           /* Testimonials */
           .testimonials {
             padding: 80px 0;
-            background: var(--bg-light);
+            background: #1a1a1a;
           }
 
           .testimonial-slider {
@@ -725,15 +723,16 @@ export default function LandingPage() {
 
           .testimonial-track {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
+            max-width: 1000px;
+            margin: 40px auto;
           }
 
           .testimonial-card {
-            background: white;
+            background: rgba(255,255,255,0.05);
             padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 15px;
             position: relative;
           }
 
@@ -752,7 +751,7 @@ export default function LandingPage() {
           /* Guarantee Section */
           .guarantee-section {
             padding: 80px 0;
-            background: white;
+            background: #222;
           }
 
           .guarantee-content {
@@ -761,6 +760,7 @@ export default function LandingPage() {
             gap: 40px;
             max-width: 800px;
             margin: 0 auto;
+            flex-wrap: wrap;
           }
 
           .guarantee-seal img {
@@ -822,61 +822,48 @@ export default function LandingPage() {
 
           /* Mobile Optimizations */
           @media (max-width: 768px) {
-            .hero h1 {
-              font-size: 32px;
+            .container {
+              padding: 0 15px;
             }
 
             .product-comparison {
               flex-direction: column;
+              padding: 20px;
             }
 
-            .bottle-image {
-              height: 250px;
+            .comparison-row {
+              flex-direction: column;
+              text-align: center;
+              gap: 15px;
             }
 
-            .comparison-cards {
-              grid-template-columns: 1fr;
-            }
-
-            .testimonial-track {
-              grid-template-columns: 1fr;
+            .values {
+              width: 100%;
+              justify-content: space-around;
             }
 
             .guarantee-content {
               flex-direction: column;
               text-align: center;
             }
-
-            .seals-grid {
-              grid-template-columns: repeat(2, 1fr);
-            }
           }
 
           @media (max-width: 480px) {
-            .hero h1 {
-              font-size: 28px;
-            }
-
-            .bottle-image {
-              height: 200px;
-            }
-
             .urgent-message {
-              font-size: 11px;
+              font-size: 12px;
+              gap: 8px;
             }
 
-            .stock-status {
-              padding: 2px 6px;
+            .hero {
+              padding: 100px 0 60px;
             }
 
-            .comparison-row {
-              flex-direction: column;
-              gap: 15px;
+            .product-comparison {
+              margin: 20px auto;
             }
 
-            .values {
-              width: 100%;
-              justify-content: space-between;
+            .evolution-card {
+              padding: 20px;
             }
           }
         `}</style>
