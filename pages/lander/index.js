@@ -95,16 +95,8 @@ export default function LandingPage() {
               <p className="hero-subtitle">The Evolution of Male Enhancement</p>
               
               <div className="product-comparison">
-                <div className="product old">
-                  <img src="/lander/img/BrazilianWood_1Bottle.png" alt="Original Formula" className="bottle-image" />
-                  <div className="product-label">Original Formula</div>
-                </div>
-                <div className="transition-arrow">
-                  <i className="fas fa-arrow-right"></i>
-                  <span>UPGRADED</span>
-                </div>
                 <div className="product new">
-                  <img src="/lander/img/BrazilianWood_2Bottle.png" alt="Brazilian Wood 2.0" className="bottle-image" />
+                  <img src="/lander/img/BrazlilianWood_1Bottle.png" alt="Brazilian Wood 2.0" className="bottle-image" />
                   <div className="product-label">NEW 2.0 Formula</div>
                 </div>
               </div>
@@ -304,7 +296,7 @@ export default function LandingPage() {
           <div className="container">
             <div className="guarantee-content">
               <div className="guarantee-seal">
-                <img src="/images/180-day-guarantee.png" alt="180 Day Money Back Guarantee" />
+                <img src="/lander/img/180days.png" alt="180 Day Money Back Guarantee" />
               </div>
               <div className="guarantee-text">
                 <h2>180-Day Money Back Guarantee</h2>
@@ -317,10 +309,10 @@ export default function LandingPage() {
             </div>
             <div className="trust-seals">
               <div className="seals-grid">
-                <img src="/images/fda-registered.png" alt="FDA Registered Facility" />
-                <img src="/images/gmp-certified.png" alt="GMP Certified" />
-                <img src="/images/secure-payment.png" alt="Secure Payment" />
-                <img src="/images/satisfaction-guaranteed.png" alt="Satisfaction Guaranteed" />
+                <img src="/lander/img/fda-registered.png" alt="FDA Registered Facility" />
+                <img src="/lander/img/gmp-certified.png" alt="GMP Certified" />
+                <img src="/lander/img/secure-payment.png" alt="Secure Payment" />
+                <img src="/lander/img/money-back.png" alt="Money Back Guarantee" />
               </div>
             </div>
           </div>
@@ -452,27 +444,16 @@ export default function LandingPage() {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 20px;
             margin: 40px auto;
             padding: 30px;
             background: rgba(255,255,255,0.05);
             border-radius: 20px;
-            max-width: 800px;
-          }
-
-          .product {
-            text-align: center;
-            position: relative;
-            flex: 0 0 auto;
-            width: auto;
-          }
-
-          .product.old {
-            opacity: 0.7;
+            max-width: 500px;
           }
 
           .product.new {
             position: relative;
+            text-align: center;
           }
 
           .product.new::after {
@@ -489,41 +470,11 @@ export default function LandingPage() {
           }
 
           .bottle-image {
-            height: clamp(200px, 40vw, 350px);
+            height: clamp(250px, 50vw, 400px);
             width: auto;
             object-fit: contain;
             transition: transform 0.3s ease;
             filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
-          }
-
-          .product.old .bottle-image {
-            opacity: 0.8;
-            transform: scale(0.85);
-          }
-
-          .product.new .bottle-image {
-            transform: scale(1);
-          }
-
-          .transition-arrow {
-            color: #ff4e03;
-            font-size: 28px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            animation: pulse 2s infinite;
-          }
-
-          .transition-arrow span {
-            font-size: 12px;
-            margin-top: 5px;
-            font-weight: 600;
-          }
-
-          .product-label {
-            margin-top: 15px;
-            font-size: 14px;
-            color: rgba(255,255,255,0.8);
           }
 
           /* CTA Button */
@@ -793,8 +744,10 @@ export default function LandingPage() {
           }
 
           .guarantee-seal img {
-            width: 150px;
+            width: 200px;
             height: auto;
+            display: block;
+            margin: 0 auto;
           }
 
           .trust-seals {
