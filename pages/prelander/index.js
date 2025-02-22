@@ -1,9 +1,20 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
+import Version1 from '../../components/prelander/Version1';
+import Version2 from '../../components/prelander/Version2';
+import Version3 from '../../components/prelander/Version3';
 
 export default function PreLander() {
   const [timeLeft, setTimeLeft] = useState(420); // 7 minutes in seconds
   const [viewerCount, setViewerCount] = useState(387);
+  const [version, setVersion] = useState(null);
+
+  // Select random version on load
+  useEffect(() => {
+    const versions = ['version1', 'version2', 'version3'];
+    const randomVersion = versions[Math.floor(Math.random() * versions.length)];
+    setVersion(randomVersion);
+  }, []);
 
   // Countdown timer effect
   useEffect(() => {
@@ -26,11 +37,40 @@ export default function PreLander() {
     return () => clearInterval(interval);
   }, []);
 
+  // Track events
+  const handleTrack = async (action) => {
+    try {
+      await fetch('/api/track', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ action, version }),
+      });
+    } catch (error) {
+      console.error('Tracking error:', error);
+    }
+  };
+
   // Format time left
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  // Render selected version
+  const renderVersion = () => {
+    switch (version) {
+      case 'version1':
+        return <Version1 onTrack={handleTrack} />;
+      case 'version2':
+        return <Version2 onTrack={handleTrack} />;
+      case 'version3':
+        return <Version3 onTrack={handleTrack} />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -58,54 +98,7 @@ export default function PreLander() {
 
         <main className="main-content">
           <div className="container">
-            <div className="content-wrapper">
-              <div className="headline">
-                <h1>
-                  "My Husband's Growth Shocked Me, But What Happened Next Left Me Speechless..."
-                </h1>
-                <div className="subtitle">
-                  Brazilian Discovery Challenges Everything We Thought We Knew About Male Enhancement
-                </div>
-              </div>
-
-              <div className="story-preview">
-                <p className="lead-text">
-                  "When my husband first told me about this Brazilian discovery, I was skeptical. But after seeing the results firsthand, I had to share this with other women..."
-                </p>
-                
-                <div className="key-points">
-                  <div className="point">
-                    <i className="fas fa-check-circle"></i>
-                    <span>Natural ingredients from Brazilian rainforest</span>
-                  </div>
-                  <div className="point">
-                    <i className="fas fa-check-circle"></i>
-                    <span>Results visible in just weeks</span>
-                  </div>
-                  <div className="point">
-                    <i className="fas fa-check-circle"></i>
-                    <span>Clinically tested formula</span>
-                  </div>
-                </div>
-
-                <div className="cta-section">
-                  <p className="urgency-text">
-                    <i className="fas fa-exclamation-circle"></i>
-                    Warning: Due to high demand, access to this page may be limited
-                  </p>
-                  
-                  <a href="/lander" className="cta-button">
-                    Learn The Full Story
-                    <i className="fas fa-arrow-right"></i>
-                  </a>
-
-                  <div className="guarantee">
-                    <i className="fas fa-shield-alt"></i>
-                    180-Day Satisfaction Guarantee
-                  </div>
-                </div>
-              </div>
-            </div>
+            {renderVersion()}
           </div>
         </main>
       </div>
