@@ -1,7 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-
-const TRACKING_FILE = path.join(process.cwd(), 'tracking.json');
+import redis from '../../lib/redis';
 
 // Initialize default tracking data
 const defaultTracking = {
@@ -27,14 +24,8 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Invalid action type' });
     }
 
-    // Initialize tracking file if it doesn't exist
-    if (!fs.existsSync(TRACKING_FILE)) {
-      fs.writeFileSync(TRACKING_FILE, JSON.stringify(defaultTracking, null, 2));
-    }
-
-    // Read current tracking data
-    const fileContent = fs.readFileSync(TRACKING_FILE, 'utf8');
-    const tracking = JSON.parse(fileContent);
+    // Get current tracking data
+    let tracking = await redis.get('tracking') || defaultTracking;
 
     // Ensure version exists in tracking data
     if (!tracking[version]) {
@@ -49,7 +40,7 @@ export default async function handler(req, res) {
     }
 
     // Save updated tracking data
-    await fs.promises.writeFile(TRACKING_FILE, JSON.stringify(tracking, null, 2));
+    await redis.set('tracking', tracking);
 
     res.status(200).json({ 
       success: true,
