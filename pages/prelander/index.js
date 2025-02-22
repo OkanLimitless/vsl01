@@ -1,210 +1,281 @@
 import Head from 'next/head';
+import { useState, useEffect } from 'react';
 
 export default function PreLander() {
-  const handleContinue = () => {
-    window.location.href = '/lander';
+  const [timeLeft, setTimeLeft] = useState(420); // 7 minutes in seconds
+  const [viewerCount, setViewerCount] = useState(387);
+
+  // Countdown timer effect
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Viewer count effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setViewerCount(prev => {
+        const change = Math.floor(Math.random() * 5) - 2; // -2 to +2
+        return Math.max(350, Math.min(450, prev + change));
+      });
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Format time left
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
 
   return (
     <>
       <Head>
-        <title>Breakthrough Discovery: Ancient Brazilian Secret Revealed</title>
-        <meta name="description" content="Discover the ancient Brazilian secret that's helping thousands of men naturally boost their performance and confidence." />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+        <title>Breaking News: Brazilian Discovery Shocks Medical Community</title>
+        <meta name="description" content="Discover the controversial Brazilian secret that's changing relationships across America." />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
       </Head>
 
       <div className="prelander">
-        <div className="content">
-          <div className="alert-bar">
-            ⚠️ Warning: This page will be removed at midnight tonight
-          </div>
-
-          <h1>
-            <span className="highlight">EXPOSED:</span> Ancient Brazilian Tribe's Secret Formula Making ED Pills Obsolete
-          </h1>
-
-          <div className="discovery-box">
-            <div className="badge">LEAKED RESEARCH</div>
-            <p>Recent studies show this natural compound is <span className="highlight">312% more effective</span> than traditional solutions</p>
-            <div className="arrow-down">↓</div>
-          </div>
-
-          <button onClick={handleContinue} className="cta-button">
-            See The Breakthrough →
-          </button>
-
-          <div className="stats">
-            <div className="stat-item">
-              <span className="number">13,847</span>
-              <span className="label">Men Already Using This</span>
+        <div className="top-bar">
+          <div className="container">
+            <div className="viewer-count">
+              <i className="fas fa-users"></i>
+              <strong>{viewerCount}</strong> people are reading this
             </div>
-            <div className="stat-item">
-              <span className="number">98.7%</span>
-              <span className="label">Success Rate</span>
+            <div className="timer">
+              <i className="fas fa-clock"></i>
+              Content available for: <strong>{formatTime(timeLeft)}</strong>
             </div>
           </div>
         </div>
 
-        <footer>
-          <p>Copyright © 2024 All Rights Reserved</p>
-          <div className="links">
-            <a href="/privacy">Privacy</a> | <a href="/terms">Terms</a>
+        <main className="main-content">
+          <div className="container">
+            <div className="content-wrapper">
+              <div className="headline">
+                <h1>
+                  "My Husband's Growth Shocked Me, But What Happened Next Left Me Speechless..."
+                </h1>
+                <div className="subtitle">
+                  Brazilian Discovery Challenges Everything We Thought We Knew About Male Enhancement
+                </div>
+              </div>
+
+              <div className="story-preview">
+                <p className="lead-text">
+                  "When my husband first told me about this Brazilian discovery, I was skeptical. But after seeing the results firsthand, I had to share this with other women..."
+                </p>
+                
+                <div className="key-points">
+                  <div className="point">
+                    <i className="fas fa-check-circle"></i>
+                    <span>Natural ingredients from Brazilian rainforest</span>
+                  </div>
+                  <div className="point">
+                    <i className="fas fa-check-circle"></i>
+                    <span>Results visible in just weeks</span>
+                  </div>
+                  <div className="point">
+                    <i className="fas fa-check-circle"></i>
+                    <span>Clinically tested formula</span>
+                  </div>
+                </div>
+
+                <div className="cta-section">
+                  <p className="urgency-text">
+                    <i className="fas fa-exclamation-circle"></i>
+                    Warning: Due to high demand, access to this page may be limited
+                  </p>
+                  
+                  <a href="/lander" className="cta-button">
+                    Learn The Full Story
+                    <i className="fas fa-arrow-right"></i>
+                  </a>
+
+                  <div className="guarantee">
+                    <i className="fas fa-shield-alt"></i>
+                    180-Day Satisfaction Guarantee
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </footer>
+        </main>
       </div>
 
       <style jsx>{`
         .prelander {
-          font-family: 'Poppins', sans-serif;
-          min-height: 100vh;
+          font-family: 'Montserrat', sans-serif;
           background: #1a1a1a;
-          color: white;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .content {
-          flex: 1;
-          max-width: 600px;
-          margin: 0 auto;
-          padding: 20px;
-          text-align: center;
-        }
-
-        .alert-bar {
-          background: #ff3b3b;
-          color: white;
-          padding: 12px;
-          border-radius: 8px;
-          margin-bottom: 30px;
-          font-weight: 600;
-          animation: pulse 2s infinite;
-        }
-
-        h1 {
-          font-size: 2.2rem;
-          line-height: 1.3;
-          margin-bottom: 30px;
-        }
-
-        .highlight {
-          color: #ff3b3b;
-        }
-
-        .discovery-box {
-          background: rgba(255, 255, 255, 0.05);
-          border: 2px solid #ff3b3b;
-          border-radius: 12px;
-          padding: 25px;
-          margin: 30px 0;
+          color: #fff;
+          min-height: 100vh;
           position: relative;
         }
 
-        .badge {
-          background: #ff3b3b;
-          color: white;
-          padding: 5px 15px;
-          border-radius: 20px;
-          font-size: 0.9rem;
-          font-weight: 600;
-          position: absolute;
-          top: -15px;
-          left: 50%;
-          transform: translateX(-50%);
+        .container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 0 20px;
         }
 
-        .arrow-down {
-          font-size: 2rem;
-          margin: 20px 0 0;
-          animation: bounce 2s infinite;
+        .top-bar {
+          background: rgba(255, 78, 3, 0.95);
+          padding: 12px 0;
+          position: fixed;
+          width: 100%;
+          top: 0;
+          z-index: 100;
+          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .top-bar .container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .viewer-count, .timer {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 14px;
+        }
+
+        .viewer-count i, .timer i {
+          font-size: 16px;
+        }
+
+        .main-content {
+          padding: 100px 0 60px;
+        }
+
+        .content-wrapper {
+          background: rgba(255, 255, 255, 0.03);
+          border-radius: 20px;
+          padding: 40px;
+          margin-top: 40px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .headline {
+          text-align: center;
+          margin-bottom: 40px;
+        }
+
+        h1 {
+          font-size: clamp(24px, 4vw, 36px);
+          line-height: 1.3;
+          margin-bottom: 20px;
+          color: #ff4e03;
+        }
+
+        .subtitle {
+          font-size: 18px;
+          color: rgba(255, 255, 255, 0.9);
+          font-weight: 500;
+        }
+
+        .lead-text {
+          font-size: 18px;
+          line-height: 1.6;
+          margin-bottom: 30px;
+          color: rgba(255, 255, 255, 0.9);
+          font-style: italic;
+        }
+
+        .key-points {
+          margin: 30px 0;
+          display: grid;
+          gap: 20px;
+        }
+
+        .point {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          font-size: 16px;
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .point i {
+          color: #ff4e03;
+          font-size: 20px;
+        }
+
+        .cta-section {
+          text-align: center;
+          margin-top: 40px;
+        }
+
+        .urgency-text {
+          color: #ff4e03;
+          font-size: 16px;
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
         }
 
         .cta-button {
-          background: #2ecc71;
+          background: linear-gradient(45deg, #ff4e03, #ff6a2b);
           color: white;
-          border: none;
+          text-decoration: none;
           padding: 20px 40px;
-          font-size: 1.2rem;
+          border-radius: 30px;
+          font-size: 18px;
           font-weight: 600;
-          border-radius: 8px;
-          cursor: pointer;
-          width: 100%;
-          max-width: 400px;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
           transition: all 0.3s ease;
-          animation: pulse 2s infinite;
+          box-shadow: 0 4px 15px rgba(255, 78, 3, 0.3);
         }
 
         .cta-button:hover {
           transform: translateY(-2px);
-          background: #27ae60;
+          box-shadow: 0 6px 20px rgba(255, 78, 3, 0.4);
         }
 
-        .stats {
+        .guarantee {
+          margin-top: 20px;
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 14px;
           display: flex;
+          align-items: center;
           justify-content: center;
-          gap: 40px;
-          margin-top: 30px;
-        }
-
-        .stat-item {
-          text-align: center;
-        }
-
-        .number {
-          display: block;
-          font-size: 1.8rem;
-          font-weight: 700;
-          color: #2ecc71;
-        }
-
-        .label {
-          font-size: 0.9rem;
-          color: #999;
-        }
-
-        footer {
-          text-align: center;
-          padding: 20px;
-          color: #666;
-          font-size: 0.9rem;
-        }
-
-        .links a {
-          color: #666;
-          text-decoration: none;
-        }
-
-        .links a:hover {
-          color: #999;
-        }
-
-        @keyframes pulse {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.02); }
-          100% { transform: scale(1); }
-        }
-
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-          40% { transform: translateY(-20px); }
-          60% { transform: translateY(-10px); }
+          gap: 8px;
         }
 
         @media (max-width: 768px) {
-          h1 {
-            font-size: 1.8rem;
+          .content-wrapper {
+            padding: 30px 20px;
+            margin-top: 20px;
           }
 
-          .content {
-            padding: 15px;
+          .top-bar {
+            font-size: 12px;
+            padding: 8px 0;
           }
 
-          .stats {
-            gap: 20px;
+          .lead-text {
+            font-size: 16px;
           }
 
-          .number {
-            font-size: 1.5rem;
+          .point {
+            font-size: 14px;
+          }
+
+          .cta-button {
+            padding: 15px 30px;
+            font-size: 16px;
           }
         }
       `}</style>
