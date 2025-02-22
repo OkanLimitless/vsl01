@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
+import styles from '../styles/Stats.module.css';
 
 export default function Stats() {
   const [stats, setStats] = useState(null);
@@ -43,7 +44,7 @@ export default function Stats() {
 
   const getVersionStyle = (version) => {
     const best = getBestVersion();
-    return best?.version === version ? 'best' : '';
+    return best?.version === version ? styles.best : '';
   };
 
   const formatNumber = (num) => {
@@ -58,33 +59,33 @@ export default function Stats() {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
       </Head>
 
-      <div className="stats-page">
-        <div className="container">
-          <header className="dashboard-header">
-            <div className="title-section">
+      <div className={styles['stats-page']}>
+        <div className={styles.container}>
+          <header className={styles['dashboard-header']}>
+            <div className={styles['title-section']}>
               <h1>A/B Testing Dashboard</h1>
-              <p className="subtitle">Track and analyze prelander performance</p>
+              <p className={styles.subtitle}>Track and analyze prelander performance</p>
             </div>
-            <div className="refresh-section">
+            <div className={styles['refresh-section']}>
               {lastUpdated && (
-                <p className="last-updated">
+                <p className={styles['last-updated']}>
                   <i className="fas fa-sync-alt"></i>
                   Last updated: {lastUpdated.toLocaleTimeString()}
                 </p>
               )}
-              <p className="auto-refresh">Auto-refreshes every 30 seconds</p>
+              <p className={styles['auto-refresh']}>Auto-refreshes every 30 seconds</p>
             </div>
           </header>
 
           {loading && (
-            <div className="loading-state">
+            <div className={styles['loading-state']}>
               <i className="fas fa-spinner fa-spin"></i>
               <p>Loading stats...</p>
             </div>
           )}
 
           {error && (
-            <div className="error-state">
+            <div className={styles['error-state']}>
               <i className="fas fa-exclamation-circle"></i>
               <p>Error: {error}</p>
             </div>
@@ -92,46 +93,46 @@ export default function Stats() {
 
           {stats && (
             <>
-              <div className="stats-grid">
+              <div className={styles['stats-grid']}>
                 {Object.entries(stats).map(([version, data]) => (
-                  <div key={version} className={`stats-card ${getVersionStyle(version)}`}>
-                    <div className="card-header">
+                  <div key={version} className={`${styles['stats-card']} ${getVersionStyle(version)}`}>
+                    <div className={styles['card-header']}>
                       <h2>{version.replace(/([A-Z])/g, ' $1').trim()}</h2>
-                      {getVersionStyle(version) === 'best' && (
-                        <span className="best-badge">
+                      {getVersionStyle(version) === styles.best && (
+                        <span className={styles['best-badge']}>
                           <i className="fas fa-crown"></i> Best Performer
                         </span>
                       )}
                     </div>
                     
-                    <div className="metrics">
-                      <div className="metric">
-                        <div className="metric-icon">
+                    <div className={styles.metrics}>
+                      <div className={styles.metric}>
+                        <div className={styles['metric-icon']}>
                           <i className="fas fa-eye"></i>
                         </div>
-                        <div className="metric-content">
-                          <span className="label">Total Visits</span>
-                          <span className="value">{formatNumber(data.visits)}</span>
+                        <div className={styles['metric-content']}>
+                          <span className={styles.label}>Total Visits</span>
+                          <span className={styles.value}>{formatNumber(data.visits)}</span>
                         </div>
                       </div>
 
-                      <div className="metric">
-                        <div className="metric-icon">
+                      <div className={styles.metric}>
+                        <div className={styles['metric-icon']}>
                           <i className="fas fa-mouse-pointer"></i>
                         </div>
-                        <div className="metric-content">
-                          <span className="label">Total Clicks</span>
-                          <span className="value">{formatNumber(data.clicks)}</span>
+                        <div className={styles['metric-content']}>
+                          <span className={styles.label}>Total Clicks</span>
+                          <span className={styles.value}>{formatNumber(data.clicks)}</span>
                         </div>
                       </div>
 
-                      <div className="metric highlight">
-                        <div className="metric-icon">
+                      <div className={`${styles.metric} ${styles.highlight}`}>
+                        <div className={styles['metric-icon']}>
                           <i className="fas fa-percentage"></i>
                         </div>
-                        <div className="metric-content">
-                          <span className="label">Click-Through Rate</span>
-                          <span className="value">{data.ctr}%</span>
+                        <div className={styles['metric-content']}>
+                          <span className={styles.label}>Click-Through Rate</span>
+                          <span className={styles.value}>{data.ctr}%</span>
                         </div>
                       </div>
                     </div>
@@ -139,14 +140,14 @@ export default function Stats() {
                 ))}
               </div>
 
-              <div className="insights-section">
+              <div className={styles['insights-section']}>
                 <h2>Performance Insights</h2>
                 {getBestVersion() && (
-                  <div className="insight-card">
-                    <div className="insight-icon">
+                  <div className={styles['insight-card']}>
+                    <div className={styles['insight-icon']}>
                       <i className="fas fa-chart-line"></i>
                     </div>
-                    <div className="insight-content">
+                    <div className={styles['insight-content']}>
                       <h3>Best Performing Version</h3>
                       <p>
                         <strong>{getBestVersion().version}</strong> is leading with a{' '}
