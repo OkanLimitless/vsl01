@@ -1,81 +1,162 @@
 import { useState, useEffect } from 'react';
+import Head from 'next/head';
 
 export default function Stats() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const response = await fetch('/api/stats');
+        if (!response.ok) {
+          throw new Error('Failed to fetch stats');
+        }
         const data = await response.json();
         setStats(data);
+        setLastUpdated(new Date());
+        setError(null);
       } catch (error) {
         console.error('Error fetching stats:', error);
+        setError(error.message);
       } finally {
         setLoading(false);
       }
     };
 
     fetchStats();
-    // Refresh stats every 30 seconds
     const interval = setInterval(fetchStats, 30000);
     return () => clearInterval(interval);
   }, []);
 
-  if (loading) {
-    return (
-      <div className="stats-page">
-        <div className="container">
-          <h1>Loading stats...</h1>
-        </div>
-      </div>
-    );
-  }
+  const getBestVersion = () => {
+    if (!stats) return null;
+    return Object.entries(stats).reduce((best, [version, data]) => {
+      if (!best || data.ctr > best.data.ctr) {
+        return { version, data };
+      }
+      return best;
+    }, null);
+  };
+
+  const getVersionStyle = (version) => {
+    const best = getBestVersion();
+    return best?.version === version ? 'best' : '';
+  };
+
+  const formatNumber = (num) => {
+    return new Intl.NumberFormat().format(num);
+  };
 
   return (
-    <div className="stats-page">
-      <div className="container">
-        <h1>A/B Testing Dashboard</h1>
-        <p className="last-updated">Last updated: {new Date().toLocaleString()}</p>
+    <>
+      <Head>
+        <title>A/B Testing Stats Dashboard</title>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+      </Head>
 
-        <div className="stats-grid">
-          {stats && Object.entries(stats).map(([version, data]) => (
-            <div key={version} className="stats-card">
-              <h2>{version.charAt(0).toUpperCase() + version.slice(1)}</h2>
-              <div className="metrics">
-                <div className="metric">
-                  <span className="label">Visits</span>
-                  <span className="value">{data.visits}</span>
-                </div>
-                <div className="metric">
-                  <span className="label">Clicks</span>
-                  <span className="value">{data.clicks}</span>
-                </div>
-                <div className="metric highlight">
-                  <span className="label">CTR</span>
-                  <span className="value">{data.ctr}%</span>
-                </div>
+      <div className="stats-page">
+        <div className="container">
+          <header className="dashboard-header">
+            <div className="title-section">
+              <h1>A/B Testing Dashboard</h1>
+              <p className="subtitle">Track and analyze prelander performance</p>
+            </div>
+            <div className="refresh-section">
+              {lastUpdated && (
+                <p className="last-updated">
+                  <i className="fas fa-sync-alt"></i>
+                  Last updated: {lastUpdated.toLocaleTimeString()}
+                </p>
+              )}
+              <p className="auto-refresh">Auto-refreshes every 30 seconds</p>
+            </div>
+          </header>
+
+          {loading && (
+            <div className="loading-state">
+              <i className="fas fa-spinner fa-spin"></i>
+              <p>Loading stats...</p>
+            </div>
+          )}
+
+          {error && (
+            <div className="error-state">
+              <i className="fas fa-exclamation-circle"></i>
+              <p>Error: {error}</p>
+            </div>
+          )}
+
+          {stats && (
+            <>
+              <div className="stats-grid">
+                {Object.entries(stats).map(([version, data]) => (
+                  <div key={version} className={`stats-card ${getVersionStyle(version)}`}>
+                    <div className="card-header">
+                      <h2>{version.replace(/([A-Z])/g, ' $1').trim()}</h2>
+                      {getVersionStyle(version) === 'best' && (
+                        <span className="best-badge">
+                          <i className="fas fa-crown"></i> Best Performer
+                        </span>
+                      )}
+                    </div>
+                    
+                    <div className="metrics">
+                      <div className="metric">
+                        <div className="metric-icon">
+                          <i className="fas fa-eye"></i>
+                        </div>
+                        <div className="metric-content">
+                          <span className="label">Total Visits</span>
+                          <span className="value">{formatNumber(data.visits)}</span>
+                        </div>
+                      </div>
+
+                      <div className="metric">
+                        <div className="metric-icon">
+                          <i className="fas fa-mouse-pointer"></i>
+                        </div>
+                        <div className="metric-content">
+                          <span className="label">Total Clicks</span>
+                          <span className="value">{formatNumber(data.clicks)}</span>
+                        </div>
+                      </div>
+
+                      <div className="metric highlight">
+                        <div className="metric-icon">
+                          <i className="fas fa-percentage"></i>
+                        </div>
+                        <div className="metric-content">
+                          <span className="label">Click-Through Rate</span>
+                          <span className="value">{data.ctr}%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </div>
-          ))}
-        </div>
 
-        <div className="best-performer">
-          {stats && Object.entries(stats).length > 0 && (
-            <div className="winner">
-              <h3>Best Performing Version</h3>
-              {(() => {
-                const sorted = Object.entries(stats).sort((a, b) => b[1].ctr - a[1].ctr);
-                const [bestVersion, bestData] = sorted[0];
-                return (
-                  <p>
-                    <strong>{bestVersion}</strong> with {bestData.ctr}% CTR
-                    ({bestData.clicks} clicks / {bestData.visits} visits)
-                  </p>
-                );
-              })()}
-            </div>
+              <div className="insights-section">
+                <h2>Performance Insights</h2>
+                {getBestVersion() && (
+                  <div className="insight-card">
+                    <div className="insight-icon">
+                      <i className="fas fa-chart-line"></i>
+                    </div>
+                    <div className="insight-content">
+                      <h3>Best Performing Version</h3>
+                      <p>
+                        <strong>{getBestVersion().version}</strong> is leading with a{' '}
+                        <strong>{getBestVersion().data.ctr}% CTR</strong>
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </>
           )}
         </div>
       </div>
@@ -86,7 +167,7 @@ export default function Stats() {
           background: #1a1a1a;
           color: #fff;
           padding: 40px 0;
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Inter', sans-serif;
         }
 
         .container {
@@ -95,21 +176,49 @@ export default function Stats() {
           padding: 0 20px;
         }
 
+        .dashboard-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          margin-bottom: 40px;
+          padding-bottom: 20px;
+          border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
         h1 {
           font-size: 32px;
-          margin-bottom: 10px;
+          margin: 0;
           color: #ff4e03;
+        }
+
+        .subtitle {
+          color: rgba(255,255,255,0.6);
+          margin: 8px 0 0;
+        }
+
+        .refresh-section {
+          text-align: right;
         }
 
         .last-updated {
           color: rgba(255,255,255,0.6);
-          margin-bottom: 30px;
           font-size: 14px;
+          margin: 0;
+        }
+
+        .last-updated i {
+          margin-right: 8px;
+        }
+
+        .auto-refresh {
+          color: rgba(255,255,255,0.4);
+          font-size: 12px;
+          margin: 4px 0 0;
         }
 
         .stats-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
           gap: 20px;
           margin-bottom: 40px;
         }
@@ -119,12 +228,37 @@ export default function Stats() {
           border-radius: 15px;
           padding: 25px;
           border: 1px solid rgba(255,255,255,0.1);
+          transition: all 0.3s ease;
         }
 
-        .stats-card h2 {
-          color: #ff4e03;
+        .stats-card.best {
+          background: rgba(255,78,3,0.1);
+          border-color: rgba(255,78,3,0.3);
+        }
+
+        .card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           margin-bottom: 20px;
-          font-size: 24px;
+        }
+
+        .card-header h2 {
+          font-size: 20px;
+          margin: 0;
+          color: #fff;
+        }
+
+        .best-badge {
+          background: #ff4e03;
+          color: white;
+          padding: 4px 12px;
+          border-radius: 20px;
+          font-size: 12px;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 6px;
         }
 
         .metrics {
@@ -134,45 +268,112 @@ export default function Stats() {
 
         .metric {
           display: flex;
-          justify-content: space-between;
           align-items: center;
-          padding: 10px;
+          gap: 15px;
+          padding: 15px;
           background: rgba(255,255,255,0.03);
-          border-radius: 8px;
+          border-radius: 10px;
         }
 
-        .metric.highlight {
-          background: rgba(255,78,3,0.1);
-          border: 1px solid rgba(255,78,3,0.2);
+        .metric-icon {
+          width: 40px;
+          height: 40px;
+          background: rgba(255,255,255,0.1);
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          color: #ff4e03;
+        }
+
+        .metric-content {
+          flex: 1;
         }
 
         .label {
-          color: rgba(255,255,255,0.8);
+          display: block;
+          color: rgba(255,255,255,0.6);
           font-size: 14px;
+          margin-bottom: 4px;
         }
 
         .value {
-          font-size: 18px;
+          font-size: 20px;
           font-weight: 600;
           color: #fff;
         }
 
-        .highlight .value {
+        .metric.highlight {
+          background: rgba(255,78,3,0.1);
+        }
+
+        .metric.highlight .value {
           color: #ff4e03;
         }
 
-        .best-performer {
+        .insights-section {
+          margin-top: 40px;
+          padding-top: 40px;
+          border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .insights-section h2 {
+          font-size: 24px;
+          margin-bottom: 20px;
+          color: #ff4e03;
+        }
+
+        .insight-card {
           background: rgba(255,255,255,0.05);
           border-radius: 15px;
           padding: 25px;
-          margin-top: 40px;
-          border: 1px solid rgba(255,255,255,0.1);
+          display: flex;
+          align-items: center;
+          gap: 20px;
         }
 
-        .winner h3 {
+        .insight-icon {
+          width: 50px;
+          height: 50px;
+          background: rgba(255,78,3,0.1);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 24px;
           color: #ff4e03;
-          margin-bottom: 15px;
-          font-size: 20px;
+        }
+
+        .insight-content h3 {
+          margin: 0 0 8px;
+          font-size: 18px;
+          color: #fff;
+        }
+
+        .insight-content p {
+          margin: 0;
+          color: rgba(255,255,255,0.8);
+        }
+
+        .loading-state,
+        .error-state {
+          text-align: center;
+          padding: 40px;
+          background: rgba(255,255,255,0.05);
+          border-radius: 15px;
+          margin: 20px 0;
+        }
+
+        .loading-state i,
+        .error-state i {
+          font-size: 24px;
+          margin-bottom: 10px;
+          color: #ff4e03;
+        }
+
+        .error-state {
+          background: rgba(255,59,59,0.1);
         }
 
         @media (max-width: 768px) {
@@ -180,15 +381,31 @@ export default function Stats() {
             padding: 20px 0;
           }
 
-          h1 {
-            font-size: 24px;
+          .dashboard-header {
+            flex-direction: column;
+            gap: 20px;
           }
 
-          .stats-card {
-            padding: 20px;
+          .refresh-section {
+            text-align: left;
+          }
+
+          .stats-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .insight-card {
+            flex-direction: column;
+            text-align: center;
+          }
+
+          .card-header {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
           }
         }
       `}</style>
-    </div>
+    </>
   );
 } 
