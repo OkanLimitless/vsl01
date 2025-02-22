@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Version1 from '../../components/prelander/Version1';
 import Version2 from '../../components/prelander/Version2';
 import Version3 from '../../components/prelander/Version3';
+import '../../styles/prelander.css';
 
 export default function PreLander() {
   const [timeLeft, setTimeLeft] = useState(420); // 7 minutes in seconds
@@ -39,14 +40,20 @@ export default function PreLander() {
 
   // Track events
   const handleTrack = async (action) => {
+    if (!version) return;
+    
     try {
-      await fetch('/api/track', {
+      const response = await fetch('/api/track', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ action, version }),
       });
+
+      if (!response.ok) {
+        throw new Error('Tracking failed');
+      }
     } catch (error) {
       console.error('Tracking error:', error);
     }
