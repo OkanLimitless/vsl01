@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import Version1 from '../../components/prelander/Version1';
 import Version2 from '../../components/prelander/Version2';
 import Version3 from '../../components/prelander/Version3';
-import '../../styles/prelander.css';
 
 export default function PreLander() {
   const [timeLeft, setTimeLeft] = useState(420); // 7 minutes in seconds

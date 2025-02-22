@@ -1,6 +1,7 @@
 import '../styles/globals.css'
 import { Component } from 'react'
 import Script from 'next/script'
+import '../styles/prelander.css'
 
 class ErrorBoundary extends Component {
   constructor(props) {
