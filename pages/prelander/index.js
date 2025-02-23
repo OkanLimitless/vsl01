@@ -42,7 +42,8 @@ export default function PreLander() {
     if (!version) return;
     
     try {
-      const response = await fetch('/api/track', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const response = await fetch(`${apiUrl}/api/track`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

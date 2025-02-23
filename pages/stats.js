@@ -11,7 +11,8 @@ export default function Stats() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await fetch('/api/stats');
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+        const response = await fetch(`${apiUrl}/api/stats`);
         if (!response.ok) {
           throw new Error('Failed to fetch stats');
         }
