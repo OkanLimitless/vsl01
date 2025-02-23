@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Stats.module.css';
 
+// Use the same API URL as in prelander
+const DEFAULT_API_URL = 'https://vsl01.vercel.app';
+
 export default function Stats() {
   const [stats, setStats] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -11,11 +14,11 @@ export default function Stats() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_URL;
+        // Since we're already on the API domain, we can use relative URLs
         const pageId = new URLSearchParams(window.location.search).get('pageId');
         const url = pageId 
-          ? `${apiUrl}/api/stats?pageId=${pageId}`
-          : `${apiUrl}/api/stats`;
+          ? `/api/stats?pageId=${pageId}`
+          : `/api/stats`;
 
         const response = await fetch(url);
         if (!response.ok) {
