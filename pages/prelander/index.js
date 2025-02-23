@@ -1,13 +1,27 @@
 import Head from 'next/head';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Version1 from '../../components/prelander/Version1';
 import Version2 from '../../components/prelander/Version2';
 import Version3 from '../../components/prelander/Version3';
 
+// Update to use the deployed tracking API
+const DEFAULT_API_URL = 'https://vsl01.vercel.app';
+
 export default function PreLander() {
+  const router = useRouter();
   const [timeLeft, setTimeLeft] = useState(420); // 7 minutes in seconds
   const [viewerCount, setViewerCount] = useState(387);
   const [version, setVersion] = useState(null);
+
+  // Get page ID from the URL path
+  const getPageId = () => {
+    if (typeof window === 'undefined') return '';
+    // Extract the last part of the path as page ID
+    const path = window.location.pathname;
+    const segments = path.split('/').filter(Boolean);
+    return segments[segments.length - 1] || '';
+  };
 
   // Select random version on load
   useEffect(() => {
@@ -42,13 +56,19 @@ export default function PreLander() {
     if (!version) return;
     
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || DEFAULT_API_URL;
+      const pageId = getPageId();
+
       const response = await fetch(`${apiUrl}/api/track`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ action, version }),
+        body: JSON.stringify({ 
+          action, 
+          version,
+          pageId // Include page ID in tracking
+        }),
       });
 
       if (!response.ok) {
