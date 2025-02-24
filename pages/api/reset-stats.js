@@ -3,9 +3,9 @@ import Cors from 'cors';
 
 // Initialize CORS middleware
 const cors = Cors({
-  methods: ['POST', 'HEAD'],
+  methods: ['POST', 'OPTIONS', 'HEAD'],
   origin: (origin, callback) => {
-    // Allow requests from Cloudflare Pages domains
+    // Allow requests from Cloudflare Pages domains and same origin
     if (!origin || origin.endsWith('.pages.dev') || process.env.NODE_ENV === 'development') {
       callback(null, true);
     } else {
@@ -38,8 +38,21 @@ export default async function handler(req, res) {
   // Run the CORS middleware
   await runMiddleware(req, res, cors);
 
+  // Set CORS headers
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+    return res.status(405).json({ 
+      success: false,
+      message: 'Method not allowed. Use POST instead.' 
+    });
   }
 
   try {
@@ -54,6 +67,7 @@ export default async function handler(req, res) {
   } catch (error) {
     console.error('Reset error:', error);
     res.status(500).json({ 
+      success: false,
       message: 'Internal server error',
       error: error.message 
     });

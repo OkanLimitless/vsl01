@@ -45,6 +45,8 @@ export default function Stats() {
   const handleReset = async () => {
     if (!showResetConfirm) {
       setShowResetConfirm(true);
+      // Auto-hide confirmation after 3 seconds
+      setTimeout(() => setShowResetConfirm(false), 3000);
       return;
     }
 
@@ -54,15 +56,23 @@ export default function Stats() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
+        body: JSON.stringify({}), // Send empty object as body
       });
 
       if (!response.ok) {
-        throw new Error('Failed to reset stats');
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to reset stats');
       }
 
-      await fetchStats();
-      setShowResetConfirm(false);
+      const result = await response.json();
+      if (result.success) {
+        await fetchStats(); // Refresh stats after successful reset
+        setShowResetConfirm(false);
+      } else {
+        throw new Error(result.message || 'Failed to reset stats');
+      }
     } catch (error) {
       console.error('Error resetting stats:', error);
       setError(error.message);
