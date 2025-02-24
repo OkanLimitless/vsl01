@@ -87,7 +87,7 @@ export default function Lead2() {
   useEffect(() => {
     if (showCTA) {
       const purchases = [
-        { location: 'New York, US', product: 'Single Bottle', time: '5 minutes ago', verified: true },
+        { location: 'New York, US', product: 'Single Bottle', time: '6 minutes ago', verified: true },
         { location: 'London, UK', product: '6 Bottle Pack', time: 'Just now', verified: true },
         { location: 'Toronto, CA', product: '3 Bottle Pack', time: '1 minute ago', verified: true },
         { location: 'Sydney, AU', product: 'Single Bottle', time: '3 minutes ago', verified: true }
