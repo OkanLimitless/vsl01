@@ -10,36 +10,66 @@ export default function Stats() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
+  const [resetting, setResetting] = useState(false);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
+
+  const fetchStats = async () => {
+    try {
+      const pageId = new URLSearchParams(window.location.search).get('pageId');
+      const url = pageId 
+        ? `/api/stats?pageId=${pageId}`
+        : `/api/stats`;
+
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Failed to fetch stats');
+      }
+      const data = await response.json();
+      setStats(data);
+      setLastUpdated(new Date());
+      setError(null);
+    } catch (error) {
+      console.error('Error fetching stats:', error);
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        // Since we're already on the API domain, we can use relative URLs
-        const pageId = new URLSearchParams(window.location.search).get('pageId');
-        const url = pageId 
-          ? `/api/stats?pageId=${pageId}`
-          : `/api/stats`;
-
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Failed to fetch stats');
-        }
-        const data = await response.json();
-        setStats(data);
-        setLastUpdated(new Date());
-        setError(null);
-      } catch (error) {
-        console.error('Error fetching stats:', error);
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchStats();
     const interval = setInterval(fetchStats, 30000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleReset = async () => {
+    if (!showResetConfirm) {
+      setShowResetConfirm(true);
+      return;
+    }
+
+    try {
+      setResetting(true);
+      const response = await fetch('/api/reset-stats', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to reset stats');
+      }
+
+      await fetchStats();
+      setShowResetConfirm(false);
+    } catch (error) {
+      console.error('Error resetting stats:', error);
+      setError(error.message);
+    } finally {
+      setResetting(false);
+    }
+  };
 
   const getBestVersion = () => {
     if (!stats) return null;
@@ -83,6 +113,28 @@ export default function Stats() {
                 </p>
               )}
               <p className={styles['auto-refresh']}>Auto-refreshes every 30 seconds</p>
+              <button 
+                onClick={handleReset}
+                className={`${styles['reset-button']} ${showResetConfirm ? styles.confirm : ''} ${resetting ? styles.resetting : ''}`}
+                disabled={resetting}
+              >
+                {resetting ? (
+                  <>
+                    <i className="fas fa-spinner fa-spin"></i>
+                    Resetting...
+                  </>
+                ) : showResetConfirm ? (
+                  <>
+                    <i className="fas fa-exclamation-triangle"></i>
+                    Click again to confirm
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-redo-alt"></i>
+                    Reset All Stats
+                  </>
+                )}
+              </button>
             </div>
           </header>
 
