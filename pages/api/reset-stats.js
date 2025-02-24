@@ -3,15 +3,8 @@ import Cors from 'cors';
 
 // Initialize CORS middleware
 const cors = Cors({
-  methods: ['POST', 'OPTIONS', 'HEAD'],
-  origin: (origin, callback) => {
-    // Allow requests from Cloudflare Pages domains and same origin
-    if (!origin || origin.endsWith('.pages.dev') || process.env.NODE_ENV === 'development') {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  methods: ['POST', 'OPTIONS'],
+  origin: '*', // Allow all origins for now
   credentials: true,
 });
 
@@ -35,38 +28,35 @@ const defaultTracking = {
 };
 
 export default async function handler(req, res) {
-  // Run the CORS middleware
-  await runMiddleware(req, res, cors);
-
-  // Set CORS headers
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
-  // Handle preflight request
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ 
-      success: false,
-      message: 'Method not allowed. Use POST instead.' 
-    });
-  }
-
   try {
+    // Run the CORS middleware
+    await runMiddleware(req, res, cors);
+
+    // Handle preflight request
+    if (req.method === 'OPTIONS') {
+      return res.status(200).json({ success: true });
+    }
+
+    // Only allow POST method
+    if (req.method !== 'POST') {
+      return res.status(405).json({ 
+        success: false,
+        message: 'Method not allowed. Use POST instead.'
+      });
+    }
+
     // Reset tracking data to default values
     await redis.set('tracking', defaultTracking);
 
-    res.status(200).json({ 
+    // Return success response
+    return res.status(200).json({ 
       success: true,
       message: 'Stats reset successfully',
       data: defaultTracking
     });
   } catch (error) {
     console.error('Reset error:', error);
-    res.status(500).json({ 
+    return res.status(500).json({ 
       success: false,
       message: 'Internal server error',
       error: error.message 

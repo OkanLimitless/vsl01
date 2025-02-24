@@ -56,22 +56,20 @@ export default function Stats() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
         },
-        body: JSON.stringify({}), // Send empty object as body
       });
 
+      const data = await response.json();
+      
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to reset stats');
+        throw new Error(data.message || 'Failed to reset stats');
       }
 
-      const result = await response.json();
-      if (result.success) {
+      if (data.success) {
         await fetchStats(); // Refresh stats after successful reset
         setShowResetConfirm(false);
       } else {
-        throw new Error(result.message || 'Failed to reset stats');
+        throw new Error(data.message || 'Failed to reset stats');
       }
     } catch (error) {
       console.error('Error resetting stats:', error);
