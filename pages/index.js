@@ -97,32 +97,26 @@ export default function Home() {
 
         <div className="product-options">
           <div className="product-option">
-            <div className="product-container">
-              <p className="product-title">BEST VALUE - 6 BOTTLES</p>
-              <div className="product-image">
-                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/oHyrlA2811229.png" alt="6 bottles" />
-              </div>
-              <h3 className="product-price">$49/ Bottle</h3>
+            <div className="product-label">
+              <p className="value-label">BEST VALUE</p>
+              <p className="bottle-count">6 BOTTLES</p>
+              <p className="price-label">$49/ Bottle</p>
             </div>
           </div>
 
           <div className="product-option">
-            <div className="product-container">
-              <p className="product-title">GOOD VALUE - 3 BOTTLES</p>
-              <div className="product-image">
-                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/kCErml4113188.png" alt="3 bottles" />
-              </div>
-              <h3 className="product-price">$69/ Bottle</h3>
+            <div className="product-label">
+              <p className="value-label">GOOD VALUE</p>
+              <p className="bottle-count">3 BOTTLES</p>
+              <p className="price-label">$69/ Bottle</p>
             </div>
           </div>
 
           <div className="product-option">
-            <div className="product-container">
-              <p className="product-title">BASIC - 2 BOTTLES</p>
-              <div className="product-image">
-                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/HBzclW1579379.png" alt="2 bottles" />
-              </div>
-              <h3 className="product-price">$79/ Bottle</h3>
+            <div className="product-label">
+              <p className="value-label">BASIC</p>
+              <p className="bottle-count">2 BOTTLES</p>
+              <p className="price-label">$79/ Bottle</p>
             </div>
           </div>
         </div>
@@ -142,13 +136,15 @@ export default function Home() {
 
       {/* Guarantee Section */}
       <div className="guarantee-section hidden-initially">
-        <div className="guarantee-image">
-          <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/mXREBX9929515.webp" alt="Money Back Guarantee" />
-        </div>
-        <div className="guarantee-text">
-          <p>
-            Still not sure? Remember, Alpha Bites comes with a 100% Money-Back Guarantee for a full 180 days! That means if you don't get the results we promise or you change your mind for any reason at all, just call or email our support team within the next 6 months and quickly get every penny back. What do you have to lose? Your success is virtually guaranteed!
-          </p>
+        <div className="guarantee-content">
+          <div className="guarantee-image">
+            <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/mXREBX9929515.webp" alt="Money Back Guarantee" />
+          </div>
+          <div className="guarantee-text">
+            <p>
+              Still not sure? Remember, Alpha Bites comes with a 100% Money-Back Guarantee for a full 180 days! That means if you don't get the results we promise or you change your mind for any reason at all, just call or email our support team within the next 6 months and quickly get every penny back. What do you have to lose? Your success is virtually guaranteed!
+            </p>
+          </div>
         </div>
       </div>
 
@@ -165,139 +161,134 @@ export default function Home() {
         </footer>
       </ClientSideOnly>
 
-      <style jsx>{`
+      <style jsx global>{`
         /* Global Styles */
-        :global(html) {
-          scroll-behavior: smooth;
-          -webkit-touch-callout: none;
-          -webkit-user-select: none;
-          -khtml-user-select: none;
-          -moz-user-select: none;
-          -ms-user-select: none;
-          user-select: none;
-          -webkit-tap-highlight-color: transparent;
-          overflow-x: hidden;
-        }
-
-        :global(body) {
-          background-color: #000000;
+        body {
+          font-family: 'Roboto', sans-serif;
           margin: 0;
           padding: 0;
-          font-family: 'Roboto', sans-serif;
-          line-height: 1;
-          overflow-x: hidden;
+          background-color: #000000;
+          color: #ffffff;
+        }
+
+        /* Hidden Initially Class */
+        .hidden-initially {
+          display: none;
         }
 
         /* Headline Section */
         .headline-section {
-          border: none;
-          margin: 0;
-          position: relative;
-          padding: 1vh 12vw 0.01vh 12vw;
+          text-align: center;
+          padding: 20px 10px;
           background-color: #000000;
         }
 
         .headline-section h1 {
-          font-size: 3.30vw;
-          text-align: center;
-          padding-top: 2vh;
-          padding-bottom: 2vh;
-          color: #ffffff;
-          line-height: 1.2;
-          font-weight: 500;
+          font-size: 28px;
+          font-weight: 700;
+          margin: 0;
+          line-height: 1.3;
           font-family: 'Ubuntu', sans-serif;
         }
 
         .blue-highlight {
-          background-color: #0000ff;
-          padding: 0 4px;
+          color: #0070f3;
         }
 
         /* Video Container */
         .video-container {
-          border: none;
-          margin: 0 0 4vh 0;
-          position: relative;
-          padding: 0.01vh 5vw 5vh 5vw;
-          background-color: #000000;
+          max-width: 800px;
+          margin: 0 auto 30px;
+          padding: 0 10px;
         }
 
         /* Product Options Section */
         .product-options-section {
           border: none;
-          border-radius: 32px;
-          margin: 0 10vw 0 10vw;
-          position: relative;
-          padding: 3vh 20vw 3vh 20vw;
-          background-color: #c6890c;
+          border-radius: 0;
+          margin: 0;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          padding: 0;
+          background-color: rgba(198, 137, 12, 0.95);
+          z-index: 1000;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .instruction-text {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 20px;
         }
 
         .instruction-text h3 {
-          font-size: 1.98vw;
+          font-size: 24px;
           text-align: center;
-          padding-top: 0vh;
-          padding-bottom: 0vh;
           color: #ffffff;
-          line-height: 1.1;
+          line-height: 1.3;
           font-weight: 600;
           font-family: 'Ubuntu', sans-serif;
+          margin: 0 auto 20px;
+          max-width: 80%;
         }
 
         .product-options {
-          border: none;
-          margin: 2vh 10vw 0 10vw;
-          position: relative;
-          padding: 2vh 15vw 1vh 15vw;
           background-color: #231F20;
-        }
-
-        .product-container {
-          border: 4px solid #000000;
-          box-shadow: none;
-          background-color: #ffffff;
-          border-radius: 32px;
-          padding: 16px 5px 16px 5px;
-          text-align: center;
-          margin: 0 auto 20px auto;
-          box-sizing: border-box;
-          max-width: 100%;
-        }
-
-        .product-title {
-          font-size: 1.65vw;
-          text-align: center;
-          padding-top: 2vh;
-          padding-bottom: 2vh;
-          color: #9c7600;
-          line-height: 1.1;
-          font-weight: 700;
-        }
-
-        .product-image img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 0.25vh;
-          margin-top: 0.25vh;
-          max-width: 40%;
+          width: 400px;
+          max-width: 90%;
+          padding: 0;
+          margin: 0 auto;
           border-radius: 0;
-          border: none;
+          display: flex;
+          flex-direction: column;
         }
 
-        .product-price {
-          font-size: 1.98vw;
+        .product-option {
+          padding: 15px 0;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .product-option:last-child {
+          border-bottom: none;
+        }
+
+        .product-label {
+          color: #ffffff;
           text-align: center;
-          padding-top: 2vh;
-          padding-bottom: 2vh;
-          color: #000000;
-          line-height: 1.1;
-          font-weight: 600;
-          font-family: 'Ubuntu', sans-serif;
+          padding: 0 20px;
+        }
+
+        .value-label {
+          font-size: 18px;
+          color: #c6890c;
+          font-weight: 700;
+          margin: 0 0 5px 0;
+        }
+
+        .bottle-count {
+          font-size: 22px;
+          color: #ffffff;
+          font-weight: 700;
+          margin: 0 0 5px 0;
+        }
+
+        .price-label {
+          font-size: 20px;
+          color: #ffffff;
+          font-weight: 500;
+          margin: 5px 0 0 0;
         }
 
         /* CTA Button */
         .cta-button-container {
           text-align: center;
+          margin-top: 30px;
         }
 
         .cta-button {
@@ -305,63 +296,68 @@ export default function Home() {
           border-radius: 8px;
           border: none;
           color: #ffffff;
-          padding: 16px 32px 16px 32px;
+          padding: 16px 32px;
           font-weight: 600;
           display: inline-block;
-          width: fit-content;
           text-align: center;
-          margin: 7vh auto 3vh auto;
-          font-size: 1.82vw;
-          box-sizing: border-box;
-          max-width: 100%;
-          transition: all 0.5s ease-in-out;
+          font-size: 20px;
           text-decoration: none;
           font-family: 'Montserrat', sans-serif;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: transform 0.3s ease-in-out;
         }
 
         .cta-button:hover {
-          filter: brightness(1.2);
+          transform: scale(1.05);
         }
 
         .zooming {
-          animation: zooming 1.25s ease infinite;
+          animation: zoom 1.5s infinite alternate;
         }
 
-        @keyframes zooming {
-          0% { transform: scale(1, 1); }
-          50% { transform: scale(1.1, 1.1); }
-          100% { transform: scale(1, 1); }
+        @keyframes zoom {
+          0% {
+            transform: scale(1);
+          }
+          100% {
+            transform: scale(1.1);
+          }
         }
 
         /* Guarantee Section */
         .guarantee-section {
-          border: none;
-          border-radius: 4px;
-          margin: 2vh 0 0 0;
-          position: relative;
-          padding: 8vh 20vw 8vh 20vw;
-          background-color: #f1f1f1;
+          background-color: #000000;
+          padding: 30px 20px;
+          max-width: 800px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .guarantee-content {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .guarantee-image {
+          margin-bottom: 20px;
         }
 
         .guarantee-image img {
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-          margin-bottom: 1.25vh;
-          margin-top: 1.25vh;
-          max-width: 60%;
-          border-radius: 0;
-          border: none;
+          max-width: 200px;
+          height: auto;
+        }
+
+        .guarantee-text {
+          max-width: 600px;
         }
 
         .guarantee-text p {
-          font-size: 1.65vw;
+          font-size: 16px;
+          line-height: 1.5;
+          color: #ffffff;
           text-align: center;
-          padding-top: 2vh;
-          padding-bottom: 2vh;
-          color: #000000;
-          line-height: 1.2;
-          font-weight: 400;
         }
 
         /* Social Proof Popup */
@@ -438,11 +434,6 @@ export default function Home() {
           color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Initially hidden elements */
-        .hidden-initially {
-          display: none;
-        }
-
         /* Responsive Styles */
         @media (max-width: 1200px) {
           .headline-section {
@@ -465,38 +456,24 @@ export default function Home() {
           }
 
           .instruction-text h3 {
-            font-size: 3.00vw;
+            font-size: 22px;
           }
 
-          .product-options {
-            padding: 1.5vh 11.25vw 0.75vh 11.25vw;
-            margin: 2vh 5vw 0 5vw;
+          .value-label {
+            font-size: 16px;
           }
-
-          .product-container {
-            padding: 0.8vh 0.8vw 0.8vh 0.8vw;
+          
+          .bottle-count {
+            font-size: 20px;
           }
-
-          .product-title {
-            font-size: 2.50vw;
-            padding-top: 1.5vh;
-            padding-bottom: 1.5vh;
-          }
-
-          .product-image img {
-            max-width: 36%;
-          }
-
-          .product-price {
-            font-size: 3.00vw;
-            padding-top: 1.5vh;
-            padding-bottom: 1.5vh;
+          
+          .price-label {
+            font-size: 18px;
           }
 
           .cta-button {
-            font-size: 1.92vw;
-            margin: 4.62vh auto 2.25vh auto;
-            padding: 8px 16px 8px 16px;
+            font-size: 16px;
+            padding: 12px 24px;
           }
 
           .guarantee-section {
@@ -537,40 +514,25 @@ export default function Home() {
           }
 
           .instruction-text h3 {
-            font-size: 4.50vw;
-            padding-top: 1.5vh;
-            padding-bottom: 1.5vh;
+            font-size: 18px;
+            max-width: 90%;
           }
 
-          .product-options {
-            margin: 0;
-            padding: 0.001vh 0vw 3.75vh 0vw;
+          .value-label {
+            font-size: 14px;
           }
-
-          .product-container {
-            padding: 0.001vh 3vw 0.001vh 3vw;
+          
+          .bottle-count {
+            font-size: 18px;
           }
-
-          .product-title {
-            font-size: 4.00vw;
-            padding-top: 1.5vh;
-            padding-bottom: 1.5vh;
-          }
-
-          .product-image img {
-            max-width: 40%;
-          }
-
-          .product-price {
-            font-size: 4.00vw;
-            padding-top: 1.5vh;
-            padding-bottom: 1.5vh;
+          
+          .price-label {
+            font-size: 16px;
           }
 
           .cta-button {
-            font-size: 4.13vw;
-            padding: 12px 24px 12px 24px;
-            margin: 3.5vh auto 1.5vh auto;
+            font-size: 16px;
+            padding: 12px 24px;
           }
 
           .guarantee-section {
@@ -594,6 +556,11 @@ export default function Home() {
       <script dangerouslySetInnerHTML={{
         __html: `
           document.addEventListener('DOMContentLoaded', function() {
+            // Initially hide the product options section
+            document.querySelectorAll('.hidden-initially').forEach(function(el) {
+              el.style.display = 'none';
+            });
+            
             // Function to check if smartplayer is loaded
             function checkSmartPlayer() {
               if (window.smartplayer && window.smartplayer.instances && window.smartplayer.instances.length > 0) {
@@ -603,14 +570,14 @@ export default function Home() {
                 player.on('ended', function() {
                   // Show the product options and guarantee sections
                   document.querySelectorAll('.hidden-initially').forEach(function(el) {
-                    el.style.display = 'block';
+                    el.style.display = 'flex';
                   });
                 });
 
                 // Also show after a certain time (fallback)
                 setTimeout(function() {
                   document.querySelectorAll('.hidden-initially').forEach(function(el) {
-                    el.style.display = 'block';
+                    el.style.display = 'flex';
                   });
                 }, 180000); // 3 minutes
               } else {
