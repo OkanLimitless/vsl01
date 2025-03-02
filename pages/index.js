@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
+import VideoPlayer from '../components/VideoPlayer';
 
 const ClientSideOnly = dynamic(
   () => Promise.resolve(({ children }) => <>{children}</>),
@@ -10,6 +11,7 @@ const ClientSideOnly = dynamic(
 export default function Home() {
   const [showNotification, setShowNotification] = useState(false);
   const [currentBuyer, setCurrentBuyer] = useState(null);
+  const [showProducts, setShowProducts] = useState(false);
 
   useEffect(() => {
     // Buy notifications logic
@@ -35,10 +37,53 @@ export default function Home() {
       setInterval(showRandomPurchase, 40000 + Math.random() * 50000);
     }, 15000 + Math.random() * 15000);
 
+    // Video progress watcher
+    const watchVideoProgress = () => {
+      if (typeof window !== 'undefined' && typeof window.smartplayer === 'undefined') {
+        setTimeout(watchVideoProgress, 500);
+        return;
+      }
+
+      if (typeof window !== 'undefined' && window.smartplayer && window.smartplayer.instances && window.smartplayer.instances.length > 0) {
+        window.smartplayer.instances[0].on('timeupdate', () => {
+          if (window.smartplayer.instances[0].video.currentTime >= 180) { // 3 minutes
+            setShowProducts(true);
+          }
+        });
+
+        // Also listen for video end event
+        window.smartplayer.instances[0].on('ended', () => {
+          setShowProducts(true);
+        });
+      }
+    };
+
+    // Check if products should be shown
+    if (localStorage && localStorage.getItem('alreadyProductsDisplayed') === 'true') {
+      setShowProducts(true);
+    } else {
+      watchVideoProgress();
+      
+      // Fallback: Show products after 3 minutes regardless of video progress
+      setTimeout(() => {
+        setShowProducts(true);
+        if (localStorage) {
+          localStorage.setItem('alreadyProductsDisplayed', true);
+        }
+      }, 180000); // 3 minutes
+    }
+
     return () => {
       clearTimeout(initialNotification);
     };
   }, []);
+
+  // Save to localStorage when products are shown
+  useEffect(() => {
+    if (showProducts && localStorage) {
+      localStorage.setItem('alreadyProductsDisplayed', true);
+    }
+  }, [showProducts]);
 
   return (
     <>
@@ -61,6 +106,7 @@ export default function Home() {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
         <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
       </Head>
       
       {/* Buy Notification Popup */}
@@ -83,25 +129,15 @@ export default function Home() {
       
       {/* Video Section */}
       <div className="video-container">
-        <div id="vid_67c42af2aedb9697b81c45ce" style={{ position: 'relative', width: '100%', padding: '56.25% 0 0' }}>
-          <img 
-            id="thumb_67c42af2aedb9697b81c45ce" 
-            src="https://images.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/thumbnail.jpg" 
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
-            alt="thumbnail"
-          />
-          <div 
-            id="backdrop_67c42af2aedb9697b81c45ce" 
-            style={{ WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%' }}
-          ></div>
+        <VideoPlayer />
+        <div className="sound-check">
+          <i className="fas fa-volume-up volume-icon"></i>
+          Please check if the sound is on.
         </div>
-        <script type="text/javascript" id="scr_67c42af2aedb9697b81c45ce">
-          {`var s=document.createElement("script"); s.src="https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/player.js", s.async=!0,document.head.appendChild(s);`}
-        </script>
       </div>
       
-      {/* Product Options Section - Hidden on initial load, shown after video ends or after 3 minutes */}
-      <div className="product-reveal-container hidden-product">
+      {/* Product Options Section - Shown after video plays for 3 minutes or ends */}
+      <div className={`product-reveal-container ${!showProducts ? 'hidden-product' : ''}`}>
         <div className="instruction-text">
           <h3>
             Click on the green button to be directed to choose the bottle quantity
@@ -207,7 +243,7 @@ export default function Home() {
         
         /* Hidden Product Class */
         .hidden-product {
-          display: none;
+          display: none !important;
         }
         
         /* Product Reveal Container */
@@ -545,12 +581,37 @@ export default function Home() {
             padding: 12px 24px;
           }
         }
+
+        /* Sound Check */
+        .sound-check {
+          background: rgba(255, 255, 255, 0.1);
+          color: white;
+          padding: 12px;
+          margin: 10px 0;
+          text-align: center;
+          border-radius: 4px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          font-size: 16px;
+        }
+
+        .volume-icon {
+          font-size: 20px;
+          animation: pulse 2s infinite;
+          color: #2ecc71;
+        }
+        
+        @keyframes pulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.2); }
+          100% { transform: scale(1); }
+        }
       `}</style>
 
       {/* Script to show product options after video plays */}
       <ClientSideOnly>
-        <script src="/reveal.js"></script>
-
         {/* Additional script to prevent right-click and other interactions */}
         <script dangerouslySetInnerHTML={{
           __html: `
