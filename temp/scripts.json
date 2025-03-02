@@ -1,0 +1,68 @@
+[
+  {
+    "src": "https://connect.facebook.net/signals/config/1756081204938711?v=2.9.184&r=stable&domain=getalphabites.fun&hme=93c44828b638838a88daf3a14a90ff297f7fc4ade758f21de5500c9f17542765&ex_m=70%2C122%2C107%2C111%2C61%2C4%2C100%2C69%2C16%2C97%2C89%2C51%2C54%2C173%2C176%2C188%2C184%2C185%2C187%2C29%2C101%2C53%2C77%2C186%2C168%2C171%2C181%2C182%2C189%2C132%2C41%2C194%2C191%2C192%2C34%2C144%2C15%2C50%2C198%2C197%2C134%2C18%2C40%2C1%2C43%2C65%2C66%2C67%2C71%2C93%2C17%2C14%2C96%2C92%2C91%2C108%2C52%2C110%2C39%2C109%2C30%2C94%2C26%2C169%2C172%2C141%2C86%2C56%2C84%2C33%2C73%2C0%2C95%2C32%2C28%2C82%2C83%2C88%2C47%2C46%2C87%2C37%2C11%2C12%2C13%2C6%2C7%2C25%2C22%2C23%2C57%2C62%2C64%2C75%2C102%2C27%2C76%2C9%2C8%2C80%2C48%2C21%2C104%2C103%2C105%2C98%2C10%2C20%2C3%2C38%2C74%2C19%2C5%2C90%2C81%2C44%2C35%2C85%2C2%2C36%2C63%2C42%2C106%2C45%2C79%2C68%2C112%2C60%2C59%2C31%2C99%2C58%2C55%2C49%2C78%2C72%2C24%2C113",
+    "content": "",
+    "type": "",
+    "id": ""
+  },
+  {
+    "src": "https://connect.facebook.net/en_US/fbevents.js",
+    "content": "",
+    "type": "",
+    "id": ""
+  },
+  {
+    "src": "",
+    "content": "\n  function moveCTA(container) {\n   const cta = container.querySelector(\".smartplay + .smartplayer-call-action\");\n\n   if (!cta) return;\n\n   container.parentNode.insertBefore(cta, container.nextSibling);\n  }\n\n  function insertBeforePlayer(instance, prefix) {\n   if(!instance) return;\n\n   const player = instance.mobileContainer || instance.container;\n\n   const container = document.createElement(\"div\");\n\n   container.id = `${prefix}-${instance.options.id}`\n   container.classList.add(prefix);\n\n   player.parentNode.insertBefore(container, player);\n\n   container.appendChild(player);\n\n   return container;\n  }\n\n  function mountContainers() {\n   const instances = window.smartplayer.instances;\n\n   instances.forEach(instance => {\n    const container = insertBeforePlayer(instance, `player-fake-fs`)\n\n    if(!container) return;\n\n    moveCTA(container)\n\n    let firstClick = instance.resume?.inResume === undefined;\n   });\n\n   instances.forEach(instance => insertBeforePlayer(instance, `player-auto-height`));\n  }\n\n  function mountStyles() {\n   const styles = document.createElement(\"style\");\n\n   styles.innerHTML = `\n    .player-fake-fs[data-fullscreen='true'] {\n     display: flex !important;\n     align-items: center !important;\n     background-color: #000 !important;\n     height: 100vh !important;\n     width: 100vw !important;\n     cursor: pointer;\n    }\n\n    .player-fake-fs[data-fullscreen='true'] .player-auto-height .smartplayer-mobile-container {\n     max-width: 100% !important;\n    }\n\n    .player-fake-fs[data-fullscreen='false'] .player-auto-height {\n     width: 100% !important;\n    }\n\n    .player-fake-fs[data-fullscreen='false'] {\n     margin-left: 0 !important;\n    }\n\n    .player-auto-height {\n     margin: 0 auto;\n     width: 100%;\n    }\n   `;\n\n   document.head.appendChild(styles);\n  }\n\n  function adjustXPositionFs() {\n   const currentFs = document.querySelectorAll(\".player-fake-fs[data-fullscreen='true']\");\n\n   currentFs.forEach(container => {\n    container.style.marginLeft = \"0\";\n\n    const position = container.getBoundingClientRect()\n\n    if(position.left <= 0) return;\n\n    container.style.marginLeft = `-${position.left}px`;\n   });\n  }\n\n  function changeWidthByHeight() {\n   const containers = document.querySelectorAll(\".player-auto-height\");\n\n   containers.forEach(container => {\n    const video = container.querySelector(\"video\");\n\n    if (!video) return;\n\n    const aspectRatio = video.clientWidth / video.clientHeight;\n\n    const windowHeight = window.innerHeight;\n    const newWidth = windowHeight * aspectRatio;\n\n    const width = (newWidth / window.innerWidth) * 100;\n\n    container.style.width = `${width >= 100 ? 100 : width}%`;\n   });\n  }\n\n  function scrollToFS(container) {\n   const position = container.getBoundingClientRect();\n\n   window.scrollTo({\n    top: position.top + window.scrollY,\n    left: position.left + window.scrollX,\n   });\n  }\n\n  function toggleFs(id, inFullscreen = false) {\n   const container = document.getElementById(`player-fake-fs-${id}`);\n   if (smartplayer.instances[0].smartAutoPlay || !container) return;\n\n   container.dataset.fullscreen = inFullscreen.toString()\n\n   var el = document.querySelector(\".player-fake-fs\");\n   var elDistanceToTop = window.pageYOffset + el.getBoundingClientRect().top\n   var html = document.querySelector(\"html\");\n\n   if(!inFullscreen){\n    html.style.marginTop = `${elDistanceToTop}px`;\n   }\n\n   if (inFullscreen) {\n    html.style.marginTop = `-${elDistanceToTop}px`;\n    console.log(el);\n    window.addEventListener(\"resize\", changeWidthByHeight);\n\n    changeWidthByHeight();\n    adjustXPositionFs();\n\n    return scrollToFS(container);\n   }\n\n   window.removeEventListener(\"resize\", changeWidthByHeight);\n  }\n\n  function mountFakeFsEvents() {\n   const instances = window.smartplayer.instances;\n\n   window.addEventListener(\"resize\", adjustXPositionFs);\n\n   instances.forEach(instance => {\n    instance.on(\"play\", () => toggleFs(instance.options.id, true));\n\n    instance.on(\"pause\", () => toggleFs(instance.options.id, false));\n   });\n  }\n\n  function customEvents() {\n   mountContainers();\n   mountStyles();\n   mountFakeFsEvents()\n  }\n\n  function checkPlayerLoaded() {\n   if (window.smartplayer && window.smartplayer.instances) return customEvents()\n\n   return setTimeout(checkPlayerLoaded, 100)\n  }\n\n  window.addEventListener(\"load\", () => checkPlayerLoaded())\n",
+    "type": "",
+    "id": ""
+  },
+  {
+    "src": "https://scripts.converteai.net/e81a0116-897b-46b5-837a-de87b10b3154/players/67a0ddf37c8bb30f958482f2/player.js",
+    "content": "",
+    "type": "",
+    "id": ""
+  },
+  {
+    "src": "https://scripts.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js",
+    "content": "",
+    "type": "",
+    "id": ""
+  },
+  {
+    "src": "",
+    "content": " var s=document.createElement(\"script\"); s.src=\"https://scripts.converteai.net/e81a0116-897b-46b5-837a-de87b10b3154/players/67a0ddf37c8bb30f958482f2/player.js\", s.async=!0,document.head.appendChild(s);",
+    "type": "text/javascript",
+    "id": "scr_67a0ddf37c8bb30f958482f2"
+  },
+  {
+    "src": "",
+    "content": "\n!function(f,b,e,v,n,t,s)\n{if(f.fbq)return;n=f.fbq=function(){n.callMethod?\nn.callMethod.apply(n,arguments):n.queue.push(arguments)};\nif(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\nn.queue=[];t=b.createElement(e);t.async=!0;\nt.src=v;s=b.getElementsByTagName(e)[0];\ns.parentNode.insertBefore(t,s)}(window, document,'script',\n'https://connect.facebook.net/en_US/fbevents.js');\nfbq('init', '1756081204938711');\nfbq('track', 'PageView');\n",
+    "type": "",
+    "id": ""
+  },
+  {
+    "src": "https://getalphabites.fun/video-fb/js/Amupyb7664227.js",
+    "content": "",
+    "type": "",
+    "id": ""
+  },
+  {
+    "src": "",
+    "content": "document.addEventListener(\"DOMContentLoaded\",(()=>{document.querySelectorAll(\"a\").forEach((e=>{e.getAttribute(\"href\")?.includes(\"#\")||(e.getAttribute(\"href\")?.includes(\"?\")?e.setAttribute(\"href\",e.getAttribute(\"href\")+window.location.search.replace(\"?\",\"&\")):e.getAttribute(\"href\")?e.setAttribute(\"href\",e.getAttribute(\"href\")+window.location.search):\"\")}))}));",
+    "type": "",
+    "id": ""
+  },
+  {
+    "src": "",
+    "content": "document.body.appendChild(Object.assign(document.createElement(\"script\"), {src: \"https://cdn.atomicatpages.net/cdn/a.js?cache=\" + Math.floor((Math.random() * 100000)),async: true}));",
+    "type": "text/javascript",
+    "id": ""
+  },
+  {
+    "src": "https://cdn.atomicatpages.net/cdn/a.js?cache=47659",
+    "content": "",
+    "type": "",
+    "id": ""
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "href": "data:",
+    "rel": "shortcut icon",
+    "type": ""
+  },
+  {
+    "href": "https://scripts.converteai.net/e81a0116-897b-46b5-837a-de87b10b3154/players/67a0ddf37c8bb30f958482f2/player.js",
+    "rel": "preload",
+    "type": ""
+  },
+  {
+    "href": "https://scripts.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js",
+    "rel": "preload",
+    "type": ""
+  },
+  {
+    "href": "https://images.converteai.net/e81a0116-897b-46b5-837a-de87b10b3154/players/67a0ddf37c8bb30f958482f2/thumbnail.jpg",
+    "rel": "preload",
+    "type": ""
+  },
+  {
+    "href": "https://cdn.converteai.net/e81a0116-897b-46b5-837a-de87b10b3154/67a0ddd97c8bb30f958482d4/main.m3u8",
+    "rel": "preload",
+    "type": ""
+  },
+  {
+    "href": "https://cdn.converteai.net/",
+    "rel": "dns-prefetch",
+    "type": ""
+  },
+  {
+    "href": "https://scripts.converteai.net/",
+    "rel": "dns-prefetch",
+    "type": ""
+  },
+  {
+    "href": "https://images.converteai.net/",
+    "rel": "dns-prefetch",
+    "type": ""
+  },
+  {
+    "href": "https://api.vturb.com.br/",
+    "rel": "dns-prefetch",
+    "type": ""
+  },
+  {
+    "href": "https://fonts.googleapis.com/",
+    "rel": "preconnect",
+    "type": ""
+  },
+  {
+    "href": "https://fonts.gstatic.com/",
+    "rel": "preconnect",
+    "type": ""
+  },
+  {
+    "href": "https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700;800&display=swap",
+    "rel": "stylesheet",
+    "type": ""
+  }
+]
