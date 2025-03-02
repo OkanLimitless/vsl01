@@ -1,7 +1,11 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import VideoPlayer from '../components/VideoPlayer';
 import { useState, useEffect } from 'react';
+
+const VideoPlayer = dynamic(
+  () => import('../components/VideoPlayer'),
+  { ssr: false }
+);
 
 const ClientSideOnly = dynamic(
   () => Promise.resolve(({ children }) => <>{children}</>),
@@ -499,58 +503,60 @@ export default function Home() {
       `}</style>
 
       {/* Script to show product options after video plays */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          document.addEventListener('DOMContentLoaded', function() {
-            // Initially hide the product options section
-            document.querySelectorAll('.hidden-initially').forEach(function(el) {
-              el.style.display = 'none';
+      <ClientSideOnly>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            document.addEventListener('DOMContentLoaded', function() {
+              // Initially hide the product options section
+              document.querySelectorAll('.hidden-initially').forEach(function(el) {
+                el.style.display = 'none';
+              });
+              
+              // Function to check if smartplayer is loaded
+              function checkSmartPlayer() {
+                if (window.smartplayer && window.smartplayer.instances && window.smartplayer.instances.length > 0) {
+                  const player = window.smartplayer.instances[0];
+                  
+                  // Listen for video end event
+                  player.on('ended', function() {
+                    // Show the product options and guarantee sections
+                    document.querySelectorAll('.hidden-initially').forEach(function(el) {
+                      el.style.display = 'flex';
+                    });
+                  });
+
+                  // Also show after a certain time (fallback)
+                  setTimeout(function() {
+                    document.querySelectorAll('.hidden-initially').forEach(function(el) {
+                      el.style.display = 'flex';
+                    });
+                  }, 180000); // 3 minutes
+                } else {
+                  setTimeout(checkSmartPlayer, 1000);
+                }
+              }
+              
+              // Start checking for smartplayer
+              setTimeout(checkSmartPlayer, 2000);
+            });
+          `
+        }} />
+
+        {/* Additional script to prevent right-click and other interactions */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            document.addEventListener('contextmenu', function(e) {
+              e.preventDefault();
             });
             
-            // Function to check if smartplayer is loaded
-            function checkSmartPlayer() {
-              if (window.smartplayer && window.smartplayer.instances && window.smartplayer.instances.length > 0) {
-                const player = window.smartplayer.instances[0];
-                
-                // Listen for video end event
-                player.on('ended', function() {
-                  // Show the product options and guarantee sections
-                  document.querySelectorAll('.hidden-initially').forEach(function(el) {
-                    el.style.display = 'flex';
-                  });
-                });
-
-                // Also show after a certain time (fallback)
-                setTimeout(function() {
-                  document.querySelectorAll('.hidden-initially').forEach(function(el) {
-                    el.style.display = 'flex';
-                  });
-                }, 180000); // 3 minutes
-              } else {
-                setTimeout(checkSmartPlayer, 1000);
-              }
-            }
+            document.onkeydown = function(e) {
+              if (e.keyCode == 123) return false;
+            };
             
-            // Start checking for smartplayer
-            setTimeout(checkSmartPlayer, 2000);
-          });
-        `
-      }} />
-
-      {/* Additional script to prevent right-click and other interactions */}
-      <script dangerouslySetInnerHTML={{
-        __html: `
-          document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-          });
-          
-          document.onkeydown = function(e) {
-            if (e.keyCode == 123) return false;
-          };
-          
-          document.addEventListener('selectstart', e => e.preventDefault());
-        `
-      }} />
+            document.addEventListener('selectstart', e => e.preventDefault());
+          `
+        }} />
+      </ClientSideOnly>
     </>
   );
 }
