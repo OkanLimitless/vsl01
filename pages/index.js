@@ -677,7 +677,7 @@ export default function Home() {
                     debugToggle.style.cursor = 'pointer';
                     debugToggle.style.opacity = '0.7';
                     
-                    debugToggle.addEventListener('click', () => {
+                    debugToggle.addEventListener('click', function() {
                       if (debugOverlay.style.display === 'none') {
                         debugOverlay.style.display = 'block';
                         // Start updating debug info
@@ -699,13 +699,14 @@ export default function Home() {
                           paused: videoElement.paused,
                           readyState: videoElement.readyState,
                           networkState: videoElement.networkState,
-                          buffered: videoElement.buffered.length > 0 ? 
-                            `${videoElement.buffered.start(0).toFixed(2)}-${videoElement.buffered.end(0).toFixed(2)}` : 'none'
+                          buffered: videoElement.buffered.length > 0 
+                            ? videoElement.buffered.start(0).toFixed(2) + '-' + videoElement.buffered.end(0).toFixed(2) 
+                            : 'none'
                         };
                         
                         let debugText = '';
-                        for (const [key, value] of Object.entries(info)) {
-                          debugText += `${key}: ${value}<br>`;
+                        for (const key in info) {
+                          debugText += key + ': ' + info[key] + '<br>';
                         }
                         debugOverlay.innerHTML = debugText;
                         
@@ -730,7 +731,7 @@ export default function Home() {
                     resyncButton.style.opacity = '0.7';
                     
                     // More aggressive resync on button click
-                    resyncButton.addEventListener('click', () => {
+                    resyncButton.addEventListener('click', function() {
                       if (videoElement && !videoElement.paused) {
                         const currentTime = videoElement.currentTime;
                         
@@ -742,7 +743,7 @@ export default function Home() {
                           try {
                             // Try to force HLS to reload current segment
                             player.hls.trigger('hlsMediaDetached');
-                            setTimeout(() => {
+                            setTimeout(function() {
                               player.hls.trigger('hlsMediaAttached');
                             }, 50);
                           } catch (e) {
@@ -750,16 +751,16 @@ export default function Home() {
                           }
                         }
                         
-                        setTimeout(() => {
+                        setTimeout(function() {
                           // Seek to slightly different position to force buffers to reset
                           videoElement.currentTime = currentTime + 0.1;
                           
-                          setTimeout(() => {
-                            videoElement.play().catch(e => {
+                          setTimeout(function() {
+                            videoElement.play().catch(function(e) {
                               console.log('Play error:', e);
                               // Try again with user interaction
                               resyncButton.textContent = 'Click to Play';
-                              const clickHandler = () => {
+                              const clickHandler = function() {
                                 videoElement.play();
                                 resyncButton.textContent = 'Fix Audio Sync';
                                 resyncButton.removeEventListener('click', clickHandler);
@@ -780,7 +781,7 @@ export default function Home() {
                     }
                     
                     // Add a keyboard shortcut for resyncing (press 'r')
-                    document.addEventListener('keydown', (e) => {
+                    document.addEventListener('keydown', function(e) {
                       if (e.key === 'r' && videoElement && !videoElement.paused) {
                         const currentTime = videoElement.currentTime;
                         videoElement.currentTime = currentTime + 0.1;
