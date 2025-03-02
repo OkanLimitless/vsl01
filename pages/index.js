@@ -52,9 +52,9 @@ export default function Home() {
         <meta property="og:title" content="Discovery" />
         <meta property="og:description" content="Watch Now" />
         <meta property="og:image" content="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/pWoEyG4191889.png" />
-        <link rel="preload" href="https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c33f335c0ec5383526aee6/player.js" as="script" />
+        <link rel="preload" href="https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/player.js" as="script" />
         <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" as="script" />
-        <link rel="preload" href="https://images.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c33f335c0ec5383526aee6/thumbnail.jpg" as="image" />
+        <link rel="preload" href="https://images.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/thumbnail.jpg" as="image" />
         <link rel="dns-prefetch" href="https://cdn.converteai.net" />
         <link rel="dns-prefetch" href="https://scripts.converteai.net" />
         <link rel="dns-prefetch" href="https://images.converteai.net" />
@@ -163,12 +163,26 @@ export default function Home() {
 
       <style jsx global>{`
         /* Global Styles */
+        html {
+          scroll-behavior: smooth;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
+          overflow-x: hidden;
+        }
+        
         body {
           font-family: 'Roboto', sans-serif;
           margin: 0;
           padding: 0;
           background-color: #000000;
           color: #ffffff;
+          line-height: 1;
+          overflow-x: hidden;
         }
 
         /* Hidden Initially Class */
@@ -193,6 +207,8 @@ export default function Home() {
 
         .blue-highlight {
           color: #0070f3;
+          background-color: #0000ff;
+          padding: 0 4px;
         }
 
         /* Video Container */
@@ -436,29 +452,10 @@ export default function Home() {
 
         /* Responsive Styles */
         @media (max-width: 1200px) {
-          .headline-section {
-            padding: 0.75vh 9vw 0.001vh 9vw;
-          }
-
-          .headline-section h1 {
-            font-size: 3.50vw;
-            padding-top: 1.5vh;
-            padding-bottom: 1.5vh;
-          }
-
-          .video-container {
-            padding: 0.001vh 3.75vw 3.75vh 3.75vw;
-          }
-
-          .product-options-section {
-            padding: 2.25vh 15vw 2.25vh 15vw;
-            margin: 0 5vw 0 5vw;
-          }
-
           .instruction-text h3 {
             font-size: 22px;
           }
-
+          
           .value-label {
             font-size: 16px;
           }
@@ -470,54 +467,18 @@ export default function Home() {
           .price-label {
             font-size: 18px;
           }
-
-          .cta-button {
-            font-size: 16px;
-            padding: 12px 24px;
-          }
-
-          .guarantee-section {
-            padding: 6vh 15vw 6vh 15vw;
-          }
-
-          .guarantee-image img {
-            max-width: 54%;
-          }
-
-          .guarantee-text p {
-            font-size: 2.50vw;
-            padding-top: 1.5vh;
-            padding-bottom: 1.5vh;
-          }
         }
 
         @media (max-width: 640px) {
-          .headline-section {
-            margin: 0 0 0.75vh 0;
-            padding: 0.75vh 1.5vw 0.001vh 1.5vw;
+          .product-options {
+            width: 300px;
           }
-
-          .headline-section h1 {
-            font-size: 7.50vw;
-            padding-top: 3.75vh;
-            padding-bottom: 0.75vh;
-          }
-
-          .video-container {
-            margin: 0 0 1.5vh 0;
-            padding: 1.5vh 0.75vw 1.5vh 0.75vw;
-          }
-
-          .product-options-section {
-            margin: 0 0 3.75vh 0;
-            padding: 1.5vh 1.5vw 1.5vh 1.5vw;
-          }
-
+          
           .instruction-text h3 {
             font-size: 18px;
             max-width: 90%;
           }
-
+          
           .value-label {
             font-size: 14px;
           }
@@ -529,25 +490,10 @@ export default function Home() {
           .price-label {
             font-size: 16px;
           }
-
+          
           .cta-button {
             font-size: 16px;
             padding: 12px 24px;
-          }
-
-          .guarantee-section {
-            margin: 0 0 3vh 0;
-            padding: 3.75vh 0vw 3.75vh 0vw;
-          }
-
-          .guarantee-image img {
-            max-width: 100%;
-          }
-
-          .guarantee-text p {
-            font-size: 4.00vw;
-            padding-top: 3.75vh;
-            padding-bottom: 2.25vh;
           }
         }
       `}</style>
@@ -588,6 +534,21 @@ export default function Home() {
             // Start checking for smartplayer
             setTimeout(checkSmartPlayer, 2000);
           });
+        `
+      }} />
+
+      {/* Additional script to prevent right-click and other interactions */}
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+          });
+          
+          document.onkeydown = function(e) {
+            if (e.keyCode == 123) return false;
+          };
+          
+          document.addEventListener('selectstart', e => e.preventDefault());
         `
       }} />
     </>
