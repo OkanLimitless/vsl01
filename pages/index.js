@@ -158,8 +158,9 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Footer should only be visible when not in video-only mode */}
       <ClientSideOnly>
-        <footer className="site-footer">
+        <footer className="site-footer hidden-initially" style={{ display: 'none' }}>
           <div className="footer-content">
             <p className="copyright">&copy; 2025 Alpha Bites ® - All Rights Reserved</p>
             <div className="footer-links">
@@ -193,6 +194,8 @@ export default function Home() {
           color: #ffffff;
           line-height: 1;
           overflow-x: hidden;
+          min-height: 100vh;
+          position: relative;
         }
 
         /* Hidden Initially Class */
@@ -227,6 +230,8 @@ export default function Home() {
           max-width: 800px;
           margin: 0 auto 30px;
           padding: 0 10px;
+          position: relative;
+          z-index: 1;
         }
 
         /* Product Options Section */
@@ -243,6 +248,7 @@ export default function Home() {
           justify-content: center;
           align-items: center;
           padding: 20px;
+          overflow-y: auto;
         }
 
         .instruction-text {
@@ -419,11 +425,14 @@ export default function Home() {
 
         /* Footer */
         .site-footer {
-          margin-top: 4rem;
+          width: 100%;
           padding: 2rem 1rem;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
           background-color: rgba(0, 0, 0, 0.8);
           backdrop-filter: blur(4px);
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          z-index: 10;
         }
 
         .footer-content {
@@ -442,7 +451,7 @@ export default function Home() {
           display: flex;
           justify-content: center;
           gap: 1rem;
-          margin-bottom: 1.5rem;
+          margin-bottom: 0;
         }
 
         .footer-links a {
@@ -525,6 +534,13 @@ export default function Home() {
                       guaranteeSection.style.display = 'block';
                       guaranteeSection.classList.remove('hidden-initially');
                     }
+                    
+                    // Show the footer
+                    const footer = document.querySelector('.site-footer');
+                    if (footer) {
+                      footer.style.display = 'block';
+                      footer.classList.remove('hidden-initially');
+                    }
                   });
 
                   // Also show after a certain time (fallback)
@@ -542,6 +558,13 @@ export default function Home() {
                     if (guaranteeSection) {
                       guaranteeSection.style.display = 'block';
                       guaranteeSection.classList.remove('hidden-initially');
+                    }
+                    
+                    // Show the footer
+                    const footer = document.querySelector('.site-footer');
+                    if (footer) {
+                      footer.style.display = 'block';
+                      footer.classList.remove('hidden-initially');
                     }
                   }, 180000); // 3 minutes
                 } else {
