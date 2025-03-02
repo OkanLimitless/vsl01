@@ -192,7 +192,7 @@ export default function Lead2() {
         {/* CTA Button */}
         <div className="cta-button-container">
           <a 
-            href="https://hop.clickbank.net/?affiliate=die97&vendor=alphabites&pg=dtc" 
+            href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
             target="_blank" 
             className="cta-button zooming"
             rel="noopener noreferrer"
