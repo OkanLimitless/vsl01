@@ -8,6 +8,53 @@ export default function VideoPlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(true);
+  const [videoDuration, setVideoDuration] = useState(0);
+  
+  // Function to calculate deceptive progress
+  // This creates a non-linear progress that moves faster at the beginning
+  // and slows down towards the end to make a long video appear shorter
+  const calculateDeceptiveProgress = (currentTime, duration) => {
+    // If we don't have duration yet, return 0
+    if (!duration) return 0;
+    
+    // Actual linear progress (0-1)
+    const actualProgress = currentTime / duration;
+    
+    // Apply a non-linear transformation to make progress appear faster at the beginning
+    // and slower towards the end
+    // This formula uses a power function where:
+    // - Values < 0.3 will progress much faster than reality
+    // - Values between 0.3-0.7 will progress slightly faster than reality
+    // - Values > 0.7 will progress much slower than reality
+    
+    // For a 45-minute video, this will make it initially appear like a 5-minute video
+    
+    // Parameters to tune the deception curve
+    const initialSpeedFactor = 3.5;  // How much faster it appears at the beginning
+    const midpointSlowdown = 0.35;   // Where it starts to slow down (0-1)
+    const endSlowFactor = 0.2;       // How much slower it appears at the end
+    
+    let deceptiveProgress;
+    
+    if (actualProgress < midpointSlowdown) {
+      // Beginning: Move much faster
+      deceptiveProgress = actualProgress * initialSpeedFactor;
+    } else {
+      // After midpoint: Start slowing down progressively
+      const remainingProgress = actualProgress - midpointSlowdown;
+      const remainingScale = 1 - midpointSlowdown;
+      
+      // Calculate how much to slow down based on how far we are past midpoint
+      const slowdownFactor = 1 - (remainingProgress / remainingScale) * (1 - endSlowFactor);
+      
+      // Apply slowdown and add to the progress we already showed at midpoint
+      deceptiveProgress = midpointSlowdown * initialSpeedFactor + 
+                         (remainingProgress * slowdownFactor * (1 - midpointSlowdown * (initialSpeedFactor - 1)));
+    }
+    
+    // Ensure we don't exceed 100% progress
+    return Math.min(deceptiveProgress, 1) * 100;
+  };
   
   useEffect(() => {
     // Add event listeners and initialize video when component mounts
@@ -21,9 +68,16 @@ export default function VideoPlayer() {
       // Set playback rate to exactly 1.0
       videoElement.playbackRate = 1.0;
       
+      // Store video duration once metadata is loaded
+      videoElement.addEventListener('loadedmetadata', () => {
+        setVideoDuration(videoElement.duration);
+      });
+      
       // Update progress bar on timeupdate
       const handleTimeUpdate = () => {
-        const progress = (videoElement.currentTime / videoElement.duration) * 100;
+        // Calculate deceptive progress percentage
+        const progress = calculateDeceptiveProgress(videoElement.currentTime, videoElement.duration);
+        
         if (progressBarRef.current) {
           progressBarRef.current.style.width = `${progress}%`;
         }
@@ -82,7 +136,37 @@ export default function VideoPlayer() {
         if (progressContainerRef.current && videoElement) {
           const rect = progressContainerRef.current.getBoundingClientRect();
           const pos = (e.clientX - rect.left) / rect.width;
-          videoElement.currentTime = pos * videoElement.duration;
+          
+          // Convert the deceptive position back to actual video position
+          // This is a rough inverse of the deceptive progress calculation
+          let actualPos;
+          
+          const midpointSlowdown = 0.35;
+          const initialSpeedFactor = 3.5;
+          const endSlowFactor = 0.2;
+          
+          if (pos < midpointSlowdown * initialSpeedFactor) {
+            // Beginning section
+            actualPos = pos / initialSpeedFactor;
+          } else {
+            // After midpoint section - more complex inverse calculation
+            const deceptiveMidpoint = midpointSlowdown * initialSpeedFactor;
+            const remainingDeceptiveScale = 1 - deceptiveMidpoint;
+            const deceptiveRemainder = pos - deceptiveMidpoint;
+            
+            // Approximate inverse calculation
+            const remainingActualProgress = deceptiveRemainder / 
+              ((1 - midpointSlowdown * (initialSpeedFactor - 1)) * 
+               (1 - (deceptiveRemainder / remainingDeceptiveScale) * (1 - endSlowFactor)));
+            
+            actualPos = midpointSlowdown + remainingActualProgress;
+          }
+          
+          // Ensure we stay within bounds
+          actualPos = Math.max(0, Math.min(1, actualPos));
+          
+          // Set the video time based on the actual position
+          videoElement.currentTime = actualPos * videoElement.duration;
         }
       };
       
@@ -114,6 +198,9 @@ export default function VideoPlayer() {
           videoElement.removeEventListener('timeupdate', handleTimeUpdate);
           videoElement.removeEventListener('play', handlePlay);
           videoElement.removeEventListener('pause', handlePause);
+          videoElement.removeEventListener('loadedmetadata', () => {
+            setVideoDuration(videoElement.duration);
+          });
         }
         
         if (progressContainerRef.current) {
