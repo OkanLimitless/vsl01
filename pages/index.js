@@ -100,7 +100,7 @@ export default function Home() {
         </script>
       </div>
       
-      {/* Product Options Section - Hidden on initial load, shown after video */}
+      {/* Product Options Section - Hidden on initial load, shown after video ends or after 3 minutes */}
       <div className="product-reveal-container hidden-product">
         <div className="instruction-text">
           <h3>
@@ -212,19 +212,19 @@ export default function Home() {
         
         /* Product Reveal Container */
         .product-reveal-container {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(198, 137, 12, 0.95);
-          z-index: 1000;
+          position: relative;
+          width: 100%;
+          max-width: 800px;
+          margin: 20px auto 0;
+          background-color: #c6890c;
+          z-index: 100;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
           align-items: center;
-          padding: 20px;
-          overflow-y: auto;
+          padding: 0 0 30px 0;
+          border-radius: 10px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         /* Headline Section */
@@ -252,7 +252,7 @@ export default function Home() {
         /* Video Container */
         .video-container {
           max-width: 800px;
-          margin: 0 auto 30px;
+          margin: 0 auto;
           padding: 0 10px;
         }
 
@@ -260,12 +260,11 @@ export default function Home() {
         .instruction-text {
           width: 100%;
           text-align: center;
-          margin: 20px auto 30px;
+          margin: 0 0 30px 0;
           padding: 20px 0;
           background-color: #c6890c;
-          border-radius: 8px;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-          border: 2px solid #ffffff;
+          border-bottom: 2px solid #ffffff;
         }
 
         .instruction-text h3 {
@@ -288,7 +287,7 @@ export default function Home() {
           justify-content: center;
           gap: 20px;
           width: 100%;
-          max-width: 1000px;
+          max-width: 760px;
           margin: 20px auto;
           padding: 0 20px;
         }
@@ -298,13 +297,19 @@ export default function Home() {
           min-width: 250px;
           margin-bottom: 20px;
         }
-
+        
         .product-container {
           background-color: #ffffff;
           border-radius: 8px;
           padding: 20px;
           text-align: center;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          height: 100%;
+          transition: transform 0.3s ease;
+        }
+        
+        .product-container:hover {
+          transform: translateY(-5px);
         }
         
         .product-title {
@@ -337,6 +342,7 @@ export default function Home() {
           text-align: center;
           margin: 30px auto;
           width: 100%;
+          max-width: 760px;
         }
         
         .cta-button {
@@ -379,8 +385,8 @@ export default function Home() {
         /* Guarantee Section */
         .guarantee-section {
           background-color: transparent;
-          padding: 30px 20px;
-          max-width: 800px;
+          padding: 20px;
+          max-width: 760px;
           margin: 0 auto;
           text-align: center;
         }
@@ -390,7 +396,7 @@ export default function Home() {
           flex-direction: row;
           align-items: center;
           justify-content: center;
-          background-color: rgba(255, 255, 255, 0.1);
+          background-color: rgba(255, 255, 255, 0.15);
           border-radius: 10px;
           padding: 20px;
         }
