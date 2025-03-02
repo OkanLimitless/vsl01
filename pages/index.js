@@ -258,7 +258,7 @@ export default function Home() {
         .product-reveal-container {
           width: 100%;
           max-width: 800px;
-          margin: 80px auto 0; /* Increased top margin to ensure separation from video */
+          margin: 20px auto 0; /* Reduced from 80px to 20px for tighter spacing */
           background-color: #c6890c;
           display: flex;
           flex-direction: column;
@@ -299,7 +299,7 @@ export default function Home() {
           padding: 0 10px;
           position: relative;
           height: auto;
-          margin-bottom: 20px;
+          margin-bottom: 0; /* Reduced from 20px to 0 */
         }
 
         /* Instruction Text */
@@ -599,7 +599,7 @@ export default function Home() {
           background: rgba(255, 255, 255, 0.1);
           color: white;
           padding: 12px;
-          margin: 10px 0 30px 0; /* Added bottom margin */
+          margin: 10px 0 10px 0; /* Reduced bottom margin from 30px to 10px */
           text-align: center;
           border-radius: 4px;
           display: flex;
