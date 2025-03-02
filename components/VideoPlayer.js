@@ -273,60 +273,42 @@ export default function VideoPlayer() {
         </div>
       )}
       
-      {/* Simple Progress Bar - Similar to VTurb's fake-bar */}
-      <div 
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          width: '100%',
-          height: '5px',
-          backgroundColor: 'rgba(255,255,255,0.3)',
-          cursor: 'pointer',
-          zIndex: 5
-        }}
-        ref={progressContainerRef}
-        onClick={(e) => {
-          if (progressContainerRef.current && videoRef.current) {
-            const rect = progressContainerRef.current.getBoundingClientRect();
-            const pos = (e.clientX - rect.left) / rect.width;
-            const actualPos = deceptiveToActualPosition(pos * 100);
-            videoRef.current.currentTime = actualPos * videoRef.current.duration;
-          }
-        }}
-      >
-        <div 
-          className="smartplayer-fake-bar"
-          ref={progressBarRef}
-          style={{
-            height: '100%',
-            backgroundColor: '#8A2BE2', // Purple color similar to the image
-            width: '0%'
-          }}
-        />
-      </div>
-      
-      {/* Sound Check Overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '15px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          color: 'white',
-          padding: '8px 12px',
-          borderRadius: '4px',
-          fontSize: '14px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '8px',
-          zIndex: 5,
-          pointerEvents: 'none'
-        }}
-      >
-        <span style={{ color: '#4CAF50' }}>🔊</span>
-        Please check if the sound is on.
+      {/* VTurb-style fake progress bar */}
+      <div className="smartplayer-controller-mask" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40px', zIndex: 1 }}></div>
+      <div className="smartplayer-controller" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', zIndex: 2 }}>
+        <div className="smartplayer-bar-wrap" style={{ position: 'relative', height: '8px' }}>
+          <div className="smartplayer-bar-time" style={{ display: 'none' }}></div>
+          <div className="smartplayer-bar" style={{ position: 'absolute', left: 0, top: 0, right: 0, height: '100%', width: '100%' }}>
+            <div className="smartplayer-loaded" style={{ position: 'absolute', left: 0, top: 0, height: '100%', width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.2)' }}></div>
+            <div 
+              ref={progressContainerRef}
+              className="smartplayer-played" 
+              style={{ position: 'absolute', left: 0, top: 0, height: '100%', width: '100%', zIndex: 2 }}
+              onClick={(e) => {
+                if (progressContainerRef.current && videoRef.current) {
+                  const rect = progressContainerRef.current.getBoundingClientRect();
+                  const pos = (e.clientX - rect.left) / rect.width;
+                  const actualPos = deceptiveToActualPosition(pos * 100);
+                  videoRef.current.currentTime = actualPos * videoRef.current.duration;
+                }
+              }}
+            >
+              <div 
+                ref={progressBarRef}
+                className="smartplayer-fake-bar" 
+                style={{ 
+                  position: 'absolute', 
+                  left: 0, 
+                  top: 0, 
+                  height: '100%', 
+                  backgroundColor: '#8A2BE2', 
+                  width: '0%',
+                  transition: 'width 0.1s' 
+                }}
+              ></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
