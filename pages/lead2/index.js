@@ -149,70 +149,72 @@ export default function Lead2() {
             Please check if the sound is on.
           </div>
 
-          {showCTA && (
-            <>
-              <div className="live-stats">
-                <div className="attention-container">
-                  <div className="attention-arrows">
-                    <div className="arrow-wrapper">
-                      <div className="arrow-down"></div>
-                      <div className="arrow-down"></div>
-                      <div className="arrow-down"></div>
-                    </div>
-                  </div>
-                  <div className="stock-alert">
-                    ⚠️ Warning: Only <span className="highlight">{bottlesLeft}</span> bottles left in stock
-                    <div className="scroll-text">Scroll Down To Secure Your Bottle</div>
-                  </div>
-                </div>
-                
-                <div className="viewers-bar">
-                  <div className="pulse-dot"></div>
-                  <span className="highlight">{viewerCount}</span> people watching right now
-                </div>
-
-                <div className="guarantee-countdown">
-                  <div className="guarantee-icon">🔒</div>
-                  <div className="guarantee-content">
-                    <div className="guarantee-title">100% Money-Back Guarantee!</div>
-                    <div className="guarantee-timer">
-                      Special Deal Expires In: {Math.floor(guaranteeTime / 60)}:{(guaranteeTime % 60).toString().padStart(2, '0')}
-                    </div>
-                  </div>
-                </div>
+ {/* Product Options Section - Hidden on initial load, shown after video */}
+ <div className="product-reveal-container hidden-product">
+        <div className="instruction-text">
+          <h3>
+            Click on the green button to be directed to choose the bottle quantity
+          </h3>
+        </div>
+        
+        <div className="product-options">
+          <div className="product-option">
+            <div className="product-container">
+              <p className="product-title">BEST VALUE - 6 BOTTLES</p>
+              <div className="product-image">
+                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/oHyrlA2811229.png" alt="6 bottles" />
               </div>
-
-              <a 
-                href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
-                className="cta-button pulse"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                CLICK HERE TO GET YOUR BOTTLE
-                <div className="sub-text">While Supplies Last</div>
-              </a>
-
-              <div className="trust-badges">
-                <div className="secure-badge">🔒 Secure 256-bit SSL Encryption</div>
-                <div className="guarantee">✓ 180-Day Money Back Guarantee</div>
-              </div>
-            </>
-          )}
-
-          {currentPurchase && (
-            <div className="purchase-notification">
-              <div className="notification-content">
-                <div className="notification-icon">✓</div>
-                <div className="notification-text">
-                  <span className="verified-text">Verified Purchase</span>
-                  <span className="purchase-details">
-                    {currentPurchase.location} • {currentPurchase.time}
-                  </span>
-                  <span className="product-name">{currentPurchase.product}</span>
-                </div>
-              </div>
+              <h3 className="product-price">$49/ Bottle</h3>
             </div>
-          )}
+          </div>
+          
+          <div className="product-option">
+            <div className="product-container">
+              <p className="product-title">GOOD VALUE - 3 BOTTLES</p>
+              <div className="product-image">
+                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/kCErml4113188.png" alt="3 bottles" />
+              </div>
+              <h3 className="product-price">$69/ Bottle</h3>
+            </div>
+          </div>
+          
+          <div className="product-option">
+            <div className="product-container">
+              <p className="product-title">BASIC - 2 BOTTLES</p>
+              <div className="product-image">
+                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/HBzclW1579379.png" alt="2 bottles" />
+              </div>
+              <h3 className="product-price">$79/ Bottle</h3>
+            </div>
+          </div>
+        </div>
+        
+        {/* CTA Button */}
+        <div className="cta-button-container">
+          <a 
+            href="https://hop.clickbank.net/?affiliate=die97&vendor=alphabites&pg=dtc" 
+            target="_blank" 
+            className="cta-button zooming"
+            rel="noopener noreferrer"
+          >
+            CLICK HERE TO BUY
+          </a>
+        </div>
+        
+        {/* Guarantee Section */}
+        <div className="guarantee-section">
+          <div className="guarantee-content">
+            <div className="guarantee-image">
+              <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/mXREBX9929515.webp" alt="Money Back Guarantee" />
+            </div>
+            <div className="guarantee-text">
+              <p>
+                Still not sure? Remember, Alpha Bites comes with a 100% Money-Back Guarantee for a full 180 days! That means if you don't get the results we promise or you change your mind for any reason at all, just call or email our support team within the next 6 months and quickly get every penny back. What do you have to lose? Your success is virtually guaranteed!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
 
           <div className="featured-section">
             <h2>AS FEATURED IN</h2>
