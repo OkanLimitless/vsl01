@@ -120,102 +120,106 @@ export default function Home() {
         </div>
       )}
 
-      {/* Main Headline */}
-      <div className="headline-section">
-        <h1>
-          DO THIS <span className="blue-highlight">"BLUE SALT HACK"</span> TO GET UP WHENEVER YOU WANT
-        </h1>
-      </div>
-      
-      {/* Video Section */}
-      <div className="video-container">
-        <VideoPlayer />
-        <div className="sound-check">
-          <i className="fas fa-volume-up volume-icon"></i>
-          Please check if the sound is on.
-        </div>
-      </div>
-      
-      {/* Product Options Section - Shown after video plays for 3 minutes or ends */}
-      <div className={`product-reveal-container ${!showProducts ? 'hidden-product' : ''}`}>
-        <div className="instruction-text">
-          <h3>
-            Click on the green button to be directed to choose the bottle quantity
-          </h3>
+      <div className="page-container">
+        {/* Main Headline */}
+        <div className="headline-section">
+          <h1>
+            DO THIS <span className="blue-highlight">"BLUE SALT HACK"</span> TO GET UP WHENEVER YOU WANT
+          </h1>
         </div>
         
-        <div className="product-options">
-          <div className="product-option">
-            <div className="product-container">
-              <p className="product-title">BEST VALUE - 6 BOTTLES</p>
-              <div className="product-image">
-                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/oHyrlA2811229.png" alt="6 bottles" />
-              </div>
-              <h3 className="product-price">$49/ Bottle</h3>
-            </div>
-          </div>
-          
-          <div className="product-option">
-            <div className="product-container">
-              <p className="product-title">GOOD VALUE - 3 BOTTLES</p>
-              <div className="product-image">
-                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/kCErml4113188.png" alt="3 bottles" />
-              </div>
-              <h3 className="product-price">$69/ Bottle</h3>
-            </div>
-          </div>
-          
-          <div className="product-option">
-            <div className="product-container">
-              <p className="product-title">BASIC - 2 BOTTLES</p>
-              <div className="product-image">
-                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/HBzclW1579379.png" alt="2 bottles" />
-              </div>
-              <h3 className="product-price">$79/ Bottle</h3>
-            </div>
+        {/* Video Section */}
+        <div className="video-container">
+          <VideoPlayer />
+          <div className="sound-check">
+            <i className="fas fa-volume-up volume-icon"></i>
+            Please check if the sound is on.
           </div>
         </div>
         
-        {/* CTA Button */}
-        <div className="cta-button-container">
-          <a 
-            href="https://hop.clickbank.net/?affiliate=die97&vendor=alphabites&pg=dtc" 
-            target="_blank" 
-            className="cta-button zooming"
-            rel="noopener noreferrer"
-          >
-            CLICK HERE TO BUY
-          </a>
-        </div>
+        {/* Product Options Section - Shown after video plays for 3 minutes or ends */}
+        {showProducts && (
+          <div className="product-reveal-container">
+            <div className="instruction-text">
+              <h3>
+                Click on the green button to be directed to choose the bottle quantity
+              </h3>
+            </div>
+            
+            <div className="product-options">
+              <div className="product-option">
+                <div className="product-container">
+                  <p className="product-title">BEST VALUE - 6 BOTTLES</p>
+                  <div className="product-image">
+                    <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/oHyrlA2811229.png" alt="6 bottles" />
+                  </div>
+                  <h3 className="product-price">$49/ Bottle</h3>
+                </div>
+              </div>
+              
+              <div className="product-option">
+                <div className="product-container">
+                  <p className="product-title">GOOD VALUE - 3 BOTTLES</p>
+                  <div className="product-image">
+                    <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/kCErml4113188.png" alt="3 bottles" />
+                  </div>
+                  <h3 className="product-price">$69/ Bottle</h3>
+                </div>
+              </div>
+              
+              <div className="product-option">
+                <div className="product-container">
+                  <p className="product-title">BASIC - 2 BOTTLES</p>
+                  <div className="product-image">
+                    <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/HBzclW1579379.png" alt="2 bottles" />
+                  </div>
+                  <h3 className="product-price">$79/ Bottle</h3>
+                </div>
+              </div>
+            </div>
+            
+            {/* CTA Button */}
+            <div className="cta-button-container">
+              <a 
+                href="https://hop.clickbank.net/?affiliate=die97&vendor=alphabites&pg=dtc" 
+                target="_blank" 
+                className="cta-button zooming"
+                rel="noopener noreferrer"
+              >
+                CLICK HERE TO BUY
+              </a>
+            </div>
+            
+            {/* Guarantee Section */}
+            <div className="guarantee-section">
+              <div className="guarantee-content">
+                <div className="guarantee-image">
+                  <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/mXREBX9929515.webp" alt="Money Back Guarantee" />
+                </div>
+                <div className="guarantee-text">
+                  <p>
+                    Still not sure? Remember, Alpha Bites comes with a 100% Money-Back Guarantee for a full 180 days! That means if you don't get the results we promise or you change your mind for any reason at all, just call or email our support team within the next 6 months and quickly get every penny back. What do you have to lose? Your success is virtually guaranteed!
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
         
-        {/* Guarantee Section */}
-        <div className="guarantee-section">
-          <div className="guarantee-content">
-            <div className="guarantee-image">
-              <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/mXREBX9929515.webp" alt="Money Back Guarantee" />
+        {/* Footer */}
+        <ClientSideOnly>
+          <footer className="site-footer">
+            <div className="footer-content">
+              <p className="copyright">&copy; 2025 Alpha Bites ® - All Rights Reserved</p>
+              <div className="footer-links">
+                <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a>
+                <span className="divider">|</span>
+                <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+              </div>
             </div>
-            <div className="guarantee-text">
-              <p>
-                Still not sure? Remember, Alpha Bites comes with a 100% Money-Back Guarantee for a full 180 days! That means if you don't get the results we promise or you change your mind for any reason at all, just call or email our support team within the next 6 months and quickly get every penny back. What do you have to lose? Your success is virtually guaranteed!
-              </p>
-            </div>
-          </div>
-        </div>
+          </footer>
+        </ClientSideOnly>
       </div>
-      
-      {/* Footer */}
-      <ClientSideOnly>
-        <footer className="site-footer">
-          <div className="footer-content">
-            <p className="copyright">&copy; 2025 Alpha Bites ® - All Rights Reserved</p>
-            <div className="footer-links">
-              <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a>
-              <span className="divider">|</span>
-              <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-            </div>
-          </div>
-        </footer>
-      </ClientSideOnly>
       
       <style jsx global>{`
         /* Global Styles */
@@ -241,19 +245,21 @@ export default function Home() {
           overflow-x: hidden;
         }
         
-        /* Hidden Product Class */
-        .hidden-product {
-          display: none !important;
+        /* Page Container */
+        .page-container {
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
+          width: 100%;
+          position: relative;
         }
         
         /* Product Reveal Container */
         .product-reveal-container {
-          position: relative;
           width: 100%;
           max-width: 800px;
-          margin: 50px auto 0; /* Increased top margin to ensure separation from video */
+          margin: 80px auto 0; /* Increased top margin to ensure separation from video */
           background-color: #c6890c;
-          z-index: 1;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
@@ -261,7 +267,6 @@ export default function Home() {
           padding: 0 0 30px 0;
           border-radius: 10px;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-          clear: both; /* Ensure it clears any floated elements */
         }
         
         /* Headline Section */
@@ -289,12 +294,12 @@ export default function Home() {
         /* Video Container */
         .video-container {
           max-width: 800px;
+          width: 100%;
           margin: 0 auto;
           padding: 0 10px;
-          position: relative; /* Add position relative */
-          z-index: 2; /* Higher z-index than product reveal */
-          display: block; /* Ensure it's a block element */
-          overflow: visible; /* Allow content to be visible outside */
+          position: relative;
+          height: auto;
+          margin-bottom: 20px;
         }
 
         /* Instruction Text */
@@ -516,10 +521,8 @@ export default function Home() {
           padding: 2rem 1rem;
           background-color: rgba(0, 0, 0, 0.8);
           backdrop-filter: blur(4px);
-          position: relative;
-          z-index: 1;
-          margin-top: 50px; /* Increased margin to ensure separation */
-          clear: both; /* Ensure it clears any floated elements */
+          margin-top: auto; /* Push to bottom */
+          width: 100%;
         }
 
         .footer-content {
@@ -596,7 +599,7 @@ export default function Home() {
           background: rgba(255, 255, 255, 0.1);
           color: white;
           padding: 12px;
-          margin: 10px 0;
+          margin: 10px 0 30px 0; /* Added bottom margin */
           text-align: center;
           border-radius: 4px;
           display: flex;
