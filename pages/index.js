@@ -253,7 +253,7 @@ export default function Home() {
           max-width: 800px;
           margin: 20px auto 0;
           background-color: #c6890c;
-          z-index: 100;
+          z-index: 1;
           display: flex;
           flex-direction: column;
           justify-content: flex-start;
@@ -511,6 +511,9 @@ export default function Home() {
           padding: 2rem 1rem;
           background-color: rgba(0, 0, 0, 0.8);
           backdrop-filter: blur(4px);
+          position: relative;
+          z-index: 1;
+          margin-top: 30px;
         }
 
         .footer-content {
