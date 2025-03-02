@@ -6,8 +6,6 @@ export default function VideoPlayer() {
   const progressContainerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [isMuted, setIsMuted] = useState(false);
-  const [showControls, setShowControls] = useState(true);
   const [videoDuration, setVideoDuration] = useState(0);
   
   // Function to calculate deceptive progress
@@ -174,24 +172,6 @@ export default function VideoPlayer() {
         progressContainerRef.current.addEventListener('click', handleProgressBarClick);
       }
       
-      // Auto-hide controls after 3 seconds of inactivity
-      let controlsTimeout;
-      const resetControlsTimeout = () => {
-        clearTimeout(controlsTimeout);
-        setShowControls(true);
-        controlsTimeout = setTimeout(() => {
-          if (isPlaying) {
-            setShowControls(false);
-          }
-        }, 3000);
-      };
-      
-      const handleMouseMove = () => {
-        resetControlsTimeout();
-      };
-      
-      document.addEventListener('mousemove', handleMouseMove);
-      
       // Clean up on unmount
       return () => {
         if (videoElement) {
@@ -206,19 +186,9 @@ export default function VideoPlayer() {
         if (progressContainerRef.current) {
           progressContainerRef.current.removeEventListener('click', handleProgressBarClick);
         }
-        
-        document.removeEventListener('mousemove', handleMouseMove);
-        clearTimeout(controlsTimeout);
       };
     }
   }, [isPlaying]);
-  
-  // Format time to MM:SS
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60);
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-  };
   
   // Handle play/pause toggle
   const togglePlay = () => {
@@ -229,15 +199,6 @@ export default function VideoPlayer() {
       } else {
         video.pause();
       }
-    }
-  };
-  
-  // Handle mute toggle
-  const toggleMute = () => {
-    const video = videoRef.current;
-    if (video) {
-      video.muted = !video.muted;
-      setIsMuted(video.muted);
     }
   };
 
@@ -255,7 +216,6 @@ export default function VideoPlayer() {
         borderRadius: '8px',
         boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
       }}
-      onMouseEnter={() => setShowControls(true)}
     >
       <video
         ref={videoRef}
@@ -313,89 +273,60 @@ export default function VideoPlayer() {
         </div>
       )}
       
-      {/* Custom Controls - similar to VTurb */}
+      {/* Simple Progress Bar - Similar to VTurb's fake-bar */}
       <div 
         style={{
           position: 'absolute',
           bottom: 0,
           left: 0,
           width: '100%',
-          padding: '10px',
-          background: 'linear-gradient(transparent, rgba(0,0,0,0.7))',
-          display: 'flex',
-          flexDirection: 'column',
-          opacity: showControls ? 1 : 0,
-          transition: 'opacity 0.3s ease',
+          height: '5px',
+          backgroundColor: 'rgba(255,255,255,0.3)',
+          cursor: 'pointer',
           zIndex: 5
         }}
+        ref={progressContainerRef}
+        onClick={(e) => {
+          if (progressContainerRef.current && videoRef.current) {
+            const rect = progressContainerRef.current.getBoundingClientRect();
+            const pos = (e.clientX - rect.left) / rect.width;
+            const actualPos = deceptiveToActualPosition(pos * 100);
+            videoRef.current.currentTime = actualPos * videoRef.current.duration;
+          }
+        }}
       >
-        {/* Progress Bar */}
         <div 
-          ref={progressContainerRef}
+          className="smartplayer-fake-bar"
+          ref={progressBarRef}
           style={{
-            width: '100%',
-            height: '4px',
-            backgroundColor: 'rgba(255,255,255,0.3)',
-            borderRadius: '2px',
-            cursor: 'pointer',
-            marginBottom: '10px'
+            height: '100%',
+            backgroundColor: '#8A2BE2', // Purple color similar to the image
+            width: '0%'
           }}
-        >
-          <div 
-            ref={progressBarRef}
-            style={{
-              height: '100%',
-              backgroundColor: '#ff0000',
-              borderRadius: '2px',
-              width: '0%'
-            }}
-          />
-        </div>
-        
-        {/* Controls Row */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          {/* Left Controls */}
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            {/* Play/Pause Button */}
-            <button 
-              onClick={togglePlay}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'white',
-                fontSize: '16px',
-                cursor: 'pointer',
-                padding: '5px 10px',
-                marginRight: '10px'
-              }}
-            >
-              {isPlaying ? '❚❚' : '▶'}
-            </button>
-            
-            {/* Current Time */}
-            <span style={{ color: 'white', fontSize: '14px' }}>
-              {formatTime(currentTime)}
-            </span>
-          </div>
-          
-          {/* Right Controls */}
-          <div>
-            {/* Volume Button */}
-            <button 
-              onClick={toggleMute}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: 'white',
-                fontSize: '16px',
-                cursor: 'pointer',
-                padding: '5px 10px'
-              }}
-            >
-              {isMuted ? '🔇' : '🔊'}
-            </button>
-          </div>
-        </div>
+        />
+      </div>
+      
+      {/* Sound Check Overlay */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '15px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          color: 'white',
+          padding: '8px 12px',
+          borderRadius: '4px',
+          fontSize: '14px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          zIndex: 5,
+          pointerEvents: 'none'
+        }}
+      >
+        <span style={{ color: '#4CAF50' }}>🔊</span>
+        Please check if the sound is on.
       </div>
     </div>
   );
