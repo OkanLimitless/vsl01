@@ -101,26 +101,32 @@ export default function Home() {
 
         <div className="product-options">
           <div className="product-option">
-            <div className="product-label">
-              <p className="value-label">BEST VALUE</p>
-              <p className="bottle-count">6 BOTTLES</p>
-              <p className="price-label">$49/ Bottle</p>
+            <div className="product-container">
+              <p className="product-title">BEST VALUE - 6 BOTTLES</p>
+              <div className="product-image">
+                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/oHyrlA2811229.png" alt="6 bottles" />
+              </div>
+              <h3 className="product-price">$49/ Bottle</h3>
             </div>
           </div>
 
           <div className="product-option">
-            <div className="product-label">
-              <p className="value-label">GOOD VALUE</p>
-              <p className="bottle-count">3 BOTTLES</p>
-              <p className="price-label">$69/ Bottle</p>
+            <div className="product-container">
+              <p className="product-title">GOOD VALUE - 3 BOTTLES</p>
+              <div className="product-image">
+                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/kCErml4113188.png" alt="3 bottles" />
+              </div>
+              <h3 className="product-price">$69/ Bottle</h3>
             </div>
           </div>
 
           <div className="product-option">
-            <div className="product-label">
-              <p className="value-label">BASIC</p>
-              <p className="bottle-count">2 BOTTLES</p>
-              <p className="price-label">$79/ Bottle</p>
+            <div className="product-container">
+              <p className="product-title">BASIC - 2 BOTTLES</p>
+              <div className="product-image">
+                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/HBzclW1579379.png" alt="2 bottles" />
+              </div>
+              <h3 className="product-price">$79/ Bottle</h3>
             </div>
           </div>
         </div>
@@ -210,9 +216,10 @@ export default function Home() {
         }
 
         .blue-highlight {
-          color: #0070f3;
+          color: #ffffff;
           background-color: #0000ff;
           padding: 0 4px;
+          font-weight: bold;
         }
 
         /* Video Container */
@@ -224,27 +231,27 @@ export default function Home() {
 
         /* Product Options Section */
         .product-options-section {
-          border: none;
-          border-radius: 0;
-          margin: 0;
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          padding: 0;
           background-color: rgba(198, 137, 12, 0.95);
           z-index: 1000;
           display: flex;
           flex-direction: column;
           justify-content: center;
           align-items: center;
+          padding: 20px;
         }
 
         .instruction-text {
           width: 100%;
           text-align: center;
           margin-bottom: 20px;
+          background-color: rgba(198, 137, 12, 0.8);
+          padding: 15px;
+          border-radius: 8px;
         }
 
         .instruction-text h3 {
@@ -254,61 +261,59 @@ export default function Home() {
           line-height: 1.3;
           font-weight: 600;
           font-family: 'Ubuntu', sans-serif;
-          margin: 0 auto 20px;
-          max-width: 80%;
+          margin: 0;
         }
 
         .product-options {
-          background-color: #231F20;
-          width: 400px;
-          max-width: 90%;
-          padding: 0;
-          margin: 0 auto;
-          border-radius: 0;
           display: flex;
           flex-direction: column;
+          gap: 15px;
+          width: 100%;
+          max-width: 500px;
+          margin: 0 auto 30px;
         }
 
         .product-option {
-          padding: 15px 0;
-          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          width: 100%;
         }
 
-        .product-option:last-child {
-          border-bottom: none;
-        }
-
-        .product-label {
-          color: #ffffff;
+        .product-container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 15px;
           text-align: center;
-          padding: 0 20px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .value-label {
+        .product-title {
           font-size: 18px;
           color: #c6890c;
           font-weight: 700;
-          margin: 0 0 5px 0;
+          margin: 0 0 10px 0;
         }
 
-        .bottle-count {
+        .product-image {
+          margin: 10px 0;
+        }
+
+        .product-image img {
+          max-width: 200px;
+          height: auto;
+          margin: 0 auto;
+          display: block;
+        }
+
+        .product-price {
           font-size: 22px;
-          color: #ffffff;
+          color: #000000;
           font-weight: 700;
-          margin: 0 0 5px 0;
-        }
-
-        .price-label {
-          font-size: 20px;
-          color: #ffffff;
-          font-weight: 500;
-          margin: 5px 0 0 0;
+          margin: 10px 0 0 0;
         }
 
         /* CTA Button */
         .cta-button-container {
           text-align: center;
-          margin-top: 30px;
+          margin-top: 20px;
         }
 
         .cta-button {
@@ -317,14 +322,15 @@ export default function Home() {
           border: none;
           color: #ffffff;
           padding: 16px 32px;
-          font-weight: 600;
+          font-weight: 700;
           display: inline-block;
           text-align: center;
-          font-size: 20px;
+          font-size: 24px;
           text-decoration: none;
           font-family: 'Montserrat', sans-serif;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
           transition: transform 0.3s ease-in-out;
+          text-transform: uppercase;
         }
 
         .cta-button:hover {
@@ -365,7 +371,7 @@ export default function Home() {
         }
 
         .guarantee-image img {
-          max-width: 200px;
+          max-width: 300px;
           height: auto;
         }
 
@@ -460,16 +466,13 @@ export default function Home() {
             font-size: 22px;
           }
           
-          .value-label {
-            font-size: 16px;
+          .product-options {
+            width: 300px;
           }
           
-          .bottle-count {
-            font-size: 20px;
-          }
-          
-          .price-label {
+          .instruction-text h3 {
             font-size: 18px;
+            max-width: 90%;
           }
         }
 
@@ -481,18 +484,6 @@ export default function Home() {
           .instruction-text h3 {
             font-size: 18px;
             max-width: 90%;
-          }
-          
-          .value-label {
-            font-size: 14px;
-          }
-          
-          .bottle-count {
-            font-size: 18px;
-          }
-          
-          .price-label {
-            font-size: 16px;
           }
           
           .cta-button {
@@ -507,7 +498,7 @@ export default function Home() {
         <script dangerouslySetInnerHTML={{
           __html: `
             document.addEventListener('DOMContentLoaded', function() {
-              // Initially hide the product options section
+              // Initially hide the product options section and guarantee section
               document.querySelectorAll('.hidden-initially').forEach(function(el) {
                 el.style.display = 'none';
               });
@@ -519,17 +510,32 @@ export default function Home() {
                   
                   // Listen for video end event
                   player.on('ended', function() {
-                    // Show the product options and guarantee sections
-                    document.querySelectorAll('.hidden-initially').forEach(function(el) {
-                      el.style.display = 'flex';
-                    });
+                    // Show the product options section
+                    const productSection = document.querySelector('.product-options-section');
+                    if (productSection) {
+                      productSection.style.display = 'flex';
+                    }
+                    
+                    // Show the guarantee section
+                    const guaranteeSection = document.querySelector('.guarantee-section');
+                    if (guaranteeSection) {
+                      guaranteeSection.style.display = 'block';
+                    }
                   });
 
                   // Also show after a certain time (fallback)
                   setTimeout(function() {
-                    document.querySelectorAll('.hidden-initially').forEach(function(el) {
-                      el.style.display = 'flex';
-                    });
+                    // Show the product options section
+                    const productSection = document.querySelector('.product-options-section');
+                    if (productSection) {
+                      productSection.style.display = 'flex';
+                    }
+                    
+                    // Show the guarantee section
+                    const guaranteeSection = document.querySelector('.guarantee-section');
+                    if (guaranteeSection) {
+                      guaranteeSection.style.display = 'block';
+                    }
                   }, 180000); // 3 minutes
                 } else {
                   setTimeout(checkSmartPlayer, 1000);
