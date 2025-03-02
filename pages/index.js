@@ -649,34 +649,143 @@ export default function Home() {
                   const videoElement = player.video;
                   
                   if (videoElement) {
-                    // Apply settings that can help with A/V sync
-                    videoElement.addEventListener('playing', function() {
-                      // These settings can help force the browser to resync audio/video
-                      setTimeout(function() {
-                        // Small pause and play can help resync in some browsers
-                        const currentTime = videoElement.currentTime;
-                        if (currentTime > 0.5) {
-                          videoElement.pause();
-                          setTimeout(function() {
-                            videoElement.play();
-                          }, 50);
-                        }
-                      }, 1000);
+                    // Add a debug overlay to help diagnose sync issues
+                    const debugOverlay = document.createElement('div');
+                    debugOverlay.style.position = 'absolute';
+                    debugOverlay.style.bottom = '40px';
+                    debugOverlay.style.right = '10px';
+                    debugOverlay.style.backgroundColor = 'rgba(0,0,0,0.5)';
+                    debugOverlay.style.color = 'white';
+                    debugOverlay.style.padding = '5px';
+                    debugOverlay.style.fontSize = '10px';
+                    debugOverlay.style.zIndex = '100';
+                    debugOverlay.style.display = 'none'; // Hidden by default
+                    
+                    // Create a toggle button for the debug overlay
+                    const debugToggle = document.createElement('button');
+                    debugToggle.textContent = 'Debug Info';
+                    debugToggle.style.position = 'absolute';
+                    debugToggle.style.bottom = '10px';
+                    debugToggle.style.left = '10px';
+                    debugToggle.style.zIndex = '100';
+                    debugToggle.style.background = 'rgba(0,0,0,0.5)';
+                    debugToggle.style.color = 'white';
+                    debugToggle.style.border = 'none';
+                    debugToggle.style.borderRadius = '4px';
+                    debugToggle.style.padding = '5px 10px';
+                    debugToggle.style.fontSize = '12px';
+                    debugToggle.style.cursor = 'pointer';
+                    debugToggle.style.opacity = '0.7';
+                    
+                    debugToggle.addEventListener('click', () => {
+                      if (debugOverlay.style.display === 'none') {
+                        debugOverlay.style.display = 'block';
+                        // Start updating debug info
+                        updateDebugInfo();
+                      } else {
+                        debugOverlay.style.display = 'none';
+                      }
                     });
                     
-                    // Monitor for sync issues
-                    let lastCheckTime = 0;
-                    setInterval(function() {
-                      if (videoElement.paused || !videoElement.duration) return;
+                    // Function to update debug info
+                    function updateDebugInfo() {
+                      if (debugOverlay.style.display === 'none') return;
                       
-                      // Only check every 10 seconds
-                      if (videoElement.currentTime - lastCheckTime < 10) return;
-                      lastCheckTime = videoElement.currentTime;
-                      
-                      // Force a small seek which can help resync audio/video
-                      const currentTime = videoElement.currentTime;
-                      videoElement.currentTime = currentTime + 0.01;
-                    }, 10000);
+                      if (videoElement) {
+                        const info = {
+                          currentTime: videoElement.currentTime.toFixed(2),
+                          duration: videoElement.duration.toFixed(2),
+                          playbackRate: videoElement.playbackRate,
+                          paused: videoElement.paused,
+                          readyState: videoElement.readyState,
+                          networkState: videoElement.networkState,
+                          buffered: videoElement.buffered.length > 0 ? 
+                            `${videoElement.buffered.start(0).toFixed(2)}-${videoElement.buffered.end(0).toFixed(2)}` : 'none'
+                        };
+                        
+                        let debugText = '';
+                        for (const [key, value] of Object.entries(info)) {
+                          debugText += `${key}: ${value}<br>`;
+                        }
+                        debugOverlay.innerHTML = debugText;
+                        
+                        requestAnimationFrame(updateDebugInfo);
+                      }
+                    }
+                    
+                    // Create a manual resync button
+                    const resyncButton = document.createElement('button');
+                    resyncButton.textContent = 'Fix Audio Sync';
+                    resyncButton.style.position = 'absolute';
+                    resyncButton.style.bottom = '10px';
+                    resyncButton.style.right = '10px';
+                    resyncButton.style.zIndex = '100';
+                    resyncButton.style.background = 'rgba(0,0,0,0.5)';
+                    resyncButton.style.color = 'white';
+                    resyncButton.style.border = 'none';
+                    resyncButton.style.borderRadius = '4px';
+                    resyncButton.style.padding = '5px 10px';
+                    resyncButton.style.fontSize = '12px';
+                    resyncButton.style.cursor = 'pointer';
+                    resyncButton.style.opacity = '0.7';
+                    
+                    // More aggressive resync on button click
+                    resyncButton.addEventListener('click', () => {
+                      if (videoElement && !videoElement.paused) {
+                        const currentTime = videoElement.currentTime;
+                        
+                        // Try a more aggressive resync approach
+                        videoElement.pause();
+                        
+                        // Force a reload of media segments
+                        if (player.hls && typeof player.hls.trigger === 'function') {
+                          try {
+                            // Try to force HLS to reload current segment
+                            player.hls.trigger('hlsMediaDetached');
+                            setTimeout(() => {
+                              player.hls.trigger('hlsMediaAttached');
+                            }, 50);
+                          } catch (e) {
+                            console.log('HLS reload error:', e);
+                          }
+                        }
+                        
+                        setTimeout(() => {
+                          // Seek to slightly different position to force buffers to reset
+                          videoElement.currentTime = currentTime + 0.1;
+                          
+                          setTimeout(() => {
+                            videoElement.play().catch(e => {
+                              console.log('Play error:', e);
+                              // Try again with user interaction
+                              resyncButton.textContent = 'Click to Play';
+                              const clickHandler = () => {
+                                videoElement.play();
+                                resyncButton.textContent = 'Fix Audio Sync';
+                                resyncButton.removeEventListener('click', clickHandler);
+                              };
+                              resyncButton.addEventListener('click', clickHandler);
+                            });
+                          }, 100);
+                        }, 100);
+                      }
+                    });
+                    
+                    // Add the elements to the video container
+                    const videoContainer = document.querySelector('.video-container');
+                    if (videoContainer) {
+                      videoContainer.appendChild(resyncButton);
+                      videoContainer.appendChild(debugToggle);
+                      videoContainer.appendChild(debugOverlay);
+                    }
+                    
+                    // Add a keyboard shortcut for resyncing (press 'r')
+                    document.addEventListener('keydown', (e) => {
+                      if (e.key === 'r' && videoElement && !videoElement.paused) {
+                        const currentTime = videoElement.currentTime;
+                        videoElement.currentTime = currentTime + 0.1;
+                      }
+                    });
                   }
                 }
               }, 500);
