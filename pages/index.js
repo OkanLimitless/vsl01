@@ -251,7 +251,7 @@ export default function Home() {
           position: relative;
           width: 100%;
           max-width: 800px;
-          margin: 20px auto 0;
+          margin: 50px auto 0; /* Increased top margin to ensure separation from video */
           background-color: #c6890c;
           z-index: 1;
           display: flex;
@@ -261,6 +261,7 @@ export default function Home() {
           padding: 0 0 30px 0;
           border-radius: 10px;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          clear: both; /* Ensure it clears any floated elements */
         }
         
         /* Headline Section */
@@ -290,6 +291,10 @@ export default function Home() {
           max-width: 800px;
           margin: 0 auto;
           padding: 0 10px;
+          position: relative; /* Add position relative */
+          z-index: 2; /* Higher z-index than product reveal */
+          display: block; /* Ensure it's a block element */
+          overflow: visible; /* Allow content to be visible outside */
         }
 
         /* Instruction Text */
@@ -513,7 +518,8 @@ export default function Home() {
           backdrop-filter: blur(4px);
           position: relative;
           z-index: 1;
-          margin-top: 30px;
+          margin-top: 50px; /* Increased margin to ensure separation */
+          clear: both; /* Ensure it clears any floated elements */
         }
 
         .footer-content {
