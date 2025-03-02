@@ -2,11 +2,6 @@ import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
 
-const VideoPlayer = dynamic(
-  () => import('../components/VideoPlayer'),
-  { ssr: false }
-);
-
 const ClientSideOnly = dynamic(
   () => Promise.resolve(({ children }) => <>{children}</>),
   { ssr: false }
@@ -56,9 +51,9 @@ export default function Home() {
         <meta property="og:title" content="DO THIS &quot;BLUE SALT HACK&quot; TO GET UP WHENEVER YOU WANT" />
         <meta property="og:description" content="Watch Now" />
         <meta property="og:image" content="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/pWoEyG4191889.png" />
-        <link rel="preload" href="https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c33f335c0ec5383526aee6/player.js" as="script" />
+        <link rel="preload" href="https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/player.js" as="script" />
         <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" as="script" />
-        <link rel="preload" href="https://images.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c33f335c0ec5383526aee6/thumbnail.jpg" as="image" />
+        <link rel="preload" href="https://images.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/thumbnail.jpg" as="image" />
         <link rel="dns-prefetch" href="https://cdn.converteai.net" />
         <link rel="dns-prefetch" href="https://scripts.converteai.net" />
         <link rel="dns-prefetch" href="https://images.converteai.net" />
@@ -88,7 +83,21 @@ export default function Home() {
       
       {/* Video Section */}
       <div className="video-container">
-        <VideoPlayer />
+        <div id="vid_67c42af2aedb9697b81c45ce" style={{ position: 'relative', width: '100%', padding: '56.25% 0 0' }}>
+          <img 
+            id="thumb_67c42af2aedb9697b81c45ce" 
+            src="https://images.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/thumbnail.jpg" 
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
+            alt="thumbnail"
+          />
+          <div 
+            id="backdrop_67c42af2aedb9697b81c45ce" 
+            style={{ WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%' }}
+          ></div>
+        </div>
+        <script type="text/javascript" id="scr_67c42af2aedb9697b81c45ce">
+          {`var s=document.createElement("script"); s.src="https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/player.js", s.async=!0,document.head.appendChild(s);`}
+        </script>
       </div>
       
       {/* Product Options Section - Hidden on initial load, shown after video */}
@@ -134,7 +143,7 @@ export default function Home() {
         {/* CTA Button */}
         <div className="cta-button-container">
           <a 
-            href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
+            href="https://hop.clickbank.net/?affiliate=die97&vendor=alphabites&pg=dtc" 
             target="_blank" 
             className="cta-button zooming"
             rel="noopener noreferrer"
