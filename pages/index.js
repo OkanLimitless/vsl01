@@ -46,7 +46,7 @@ export default function Home() {
 
       if (typeof window !== 'undefined' && window.smartplayer && window.smartplayer.instances && window.smartplayer.instances.length > 0) {
         window.smartplayer.instances[0].on('timeupdate', () => {
-          if (window.smartplayer.instances[0].video.currentTime >= 180) { // 3 minutes
+          if (window.smartplayer.instances[0].video.currentTime >= 2078) { // Changed from 180 to 2078 seconds
             setShowProducts(true);
           }
         });
@@ -64,13 +64,13 @@ export default function Home() {
     } else {
       watchVideoProgress();
       
-      // Fallback: Show products after 3 minutes regardless of video progress
+      // Fallback: Show products after 2078 seconds regardless of video progress
       setTimeout(() => {
         setShowProducts(true);
         if (localStorage) {
           localStorage.setItem('alreadyProductsDisplayed', true);
         }
-      }, 180000); // 3 minutes
+      }, 2078000); // Changed from 180000 to 2078000 (2078 seconds)
     }
 
     return () => {
@@ -636,6 +636,51 @@ export default function Home() {
             };
             
             document.addEventListener('selectstart', e => e.preventDefault());
+            
+            // Audio/Video Sync Helper
+            window.addEventListener('load', function() {
+              // Wait for smartplayer to be available
+              const checkSmartPlayer = setInterval(function() {
+                if (window.smartplayer && window.smartplayer.instances && window.smartplayer.instances.length > 0) {
+                  clearInterval(checkSmartPlayer);
+                  
+                  // Get the player instance
+                  const player = window.smartplayer.instances[0];
+                  const videoElement = player.video;
+                  
+                  if (videoElement) {
+                    // Apply settings that can help with A/V sync
+                    videoElement.addEventListener('playing', function() {
+                      // These settings can help force the browser to resync audio/video
+                      setTimeout(function() {
+                        // Small pause and play can help resync in some browsers
+                        const currentTime = videoElement.currentTime;
+                        if (currentTime > 0.5) {
+                          videoElement.pause();
+                          setTimeout(function() {
+                            videoElement.play();
+                          }, 50);
+                        }
+                      }, 1000);
+                    });
+                    
+                    // Monitor for sync issues
+                    let lastCheckTime = 0;
+                    setInterval(function() {
+                      if (videoElement.paused || !videoElement.duration) return;
+                      
+                      // Only check every 10 seconds
+                      if (videoElement.currentTime - lastCheckTime < 10) return;
+                      lastCheckTime = videoElement.currentTime;
+                      
+                      // Force a small seek which can help resync audio/video
+                      const currentTime = videoElement.currentTime;
+                      videoElement.currentTime = currentTime + 0.01;
+                    }, 10000);
+                  }
+                }
+              }, 500);
+            });
           `
         }} />
       </ClientSideOnly>
