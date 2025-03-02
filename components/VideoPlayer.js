@@ -222,7 +222,7 @@ export default function VideoPlayer() {
 
   return (
     <div>
-      {/* Title in the style shown in the image - with responsive font sizes */}
+      {/* Single title with orange text and blue highlight for "BLUE SALT HACK" */}
       <div style={{ 
         width: '100%', 
         textAlign: 'center', 
@@ -230,8 +230,8 @@ export default function VideoPlayer() {
         backgroundColor: '#000',
         padding: '10px 0'
       }}>
-        <h1 style={{ 
-          color: 'white', 
+        <div style={{ 
+          color: '#FF5722', // Orange color for the text
           fontFamily: 'Arial, sans-serif', 
           fontWeight: 'bold',
           fontSize: 'clamp(1.2rem, 4vw, 2.2rem)', // Responsive font size
@@ -244,20 +244,8 @@ export default function VideoPlayer() {
             backgroundColor: '#0000FF', 
             color: 'white',
             padding: '0 10px'
-          }}>"BLUE SALT HACK"</span> TO GET UP
-        </h1>
-        <h1 style={{ 
-          color: 'white', 
-          fontFamily: 'Arial, sans-serif', 
-          fontWeight: 'bold',
-          fontSize: 'clamp(1.2rem, 4vw, 2.2rem)', // Responsive font size
-          margin: 0,
-          padding: '0 10px',
-          textTransform: 'uppercase',
-          lineHeight: '1.2'
-        }}>
-          WHENEVER YOU WANT
-        </h1>
+          }}>"BLUE SALT HACK"</span> TO GET UP WHENEVER YOU WANT
+        </div>
       </div>
       
       <div 
