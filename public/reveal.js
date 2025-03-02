@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Revealing product sections');
     const productContainer = document.querySelector('.product-reveal-container');
     if (productContainer) {
-      productContainer.style.display = 'flex';
+      productContainer.classList.remove('hidden-product');
     }
   }
   

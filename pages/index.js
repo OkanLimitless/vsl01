@@ -1,7 +1,6 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 
 const VideoPlayer = dynamic(
   () => import('../components/VideoPlayer'),
@@ -49,12 +48,12 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Discovery</title>
+        <title>DO THIS "BLUE SALT HACK" TO GET UP WHENEVER YOU WANT</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://getalphabites.fun/video-fb" />
-        <meta property="og:title" content="Discovery" />
+        <meta property="og:title" content="DO THIS &quot;BLUE SALT HACK&quot; TO GET UP WHENEVER YOU WANT" />
         <meta property="og:description" content="Watch Now" />
         <meta property="og:image" content="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/pWoEyG4191889.png" />
         <link rel="preload" href="https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c33f335c0ec5383526aee6/player.js" as="script" />
@@ -80,283 +79,431 @@ export default function Home() {
         </div>
       )}
 
-      <main className="main-container">
-        <div className="headline">
-          <h1>BLUE SALT HACK</h1>
+      {/* Main Headline */}
+      <div className="headline-section">
+        <h1>
+          DO THIS <span className="blue-highlight">"BLUE SALT HACK"</span> TO GET UP WHENEVER YOU WANT
+        </h1>
+      </div>
+      
+      {/* Video Section */}
+      <div className="video-container">
+        <VideoPlayer />
+      </div>
+      
+      {/* Product Options Section - Hidden on initial load, shown after video */}
+      <div className="product-reveal-container hidden-product">
+        <div className="instruction-text">
+          <h3>
+            Click on the green button to be directed to choose the bottle quantity
+          </h3>
         </div>
         
-        <div className="video-container">
-          <VideoPlayer />
+        <div className="product-options">
+          <div className="product-option">
+            <div className="product-container">
+              <p className="product-title">BEST VALUE - 6 BOTTLES</p>
+              <div className="product-image">
+                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/oHyrlA2811229.png" alt="6 bottles" />
+              </div>
+              <h3 className="product-price">$49/ Bottle</h3>
+            </div>
+          </div>
+          
+          <div className="product-option">
+            <div className="product-container">
+              <p className="product-title">GOOD VALUE - 3 BOTTLES</p>
+              <div className="product-image">
+                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/kCErml4113188.png" alt="3 bottles" />
+              </div>
+              <h3 className="product-price">$69/ Bottle</h3>
+            </div>
+          </div>
+          
+          <div className="product-option">
+            <div className="product-container">
+              <p className="product-title">BASIC - 2 BOTTLES</p>
+              <div className="product-image">
+                <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/HBzclW1579379.png" alt="2 bottles" />
+              </div>
+              <h3 className="product-price">$79/ Bottle</h3>
+            </div>
+          </div>
         </div>
         
-        <div className="product-reveal-container" style={{ display: 'none' }}>
-          <div className="instruction-text">
-            <p>👇 TAP THE BUTTON BELOW TO GET YOUR BOTTLES 👇</p>
-          </div>
-          
-          <div className="product-options">
-            <div className="product-option">
-              <h3>BEST VALUE</h3>
-              <div className="product-image">
-                <Image src="/images/BrazlilianWood_1Bottle.png" alt="6 Bottles" width={150} height={150} />
-              </div>
-              <div className="product-price">
-                <p>6 Bottles</p>
-                <p>$39 Each</p>
-                <p>$234 Total</p>
-              </div>
-            </div>
-            
-            <div className="product-option">
-              <h3>MOST POPULAR</h3>
-              <div className="product-image">
-                <Image src="/images/BrazlilianWood_1Bottle.png" alt="3 Bottles" width={150} height={150} />
-              </div>
-              <div className="product-price">
-                <p>3 Bottles</p>
-                <p>$49 Each</p>
-                <p>$147 Total</p>
-              </div>
-            </div>
-            
-            <div className="product-option">
-              <h3>BASIC</h3>
-              <div className="product-image">
-                <Image src="/images/BrazlilianWood_1Bottle.png" alt="1 Bottle" width={150} height={150} />
-              </div>
-              <div className="product-price">
-                <p>1 Bottle</p>
-                <p>$69 Each</p>
-                <p>$69 Total</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="cta-button-container">
-            <a href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" className="cta-button">
-              <span>YES, I WANT MY BOTTLES!</span>
-            </a>
-          </div>
-          
-          <div className="guarantee-section">
+        {/* CTA Button */}
+        <div className="cta-button-container">
+          <a 
+            href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
+            target="_blank" 
+            className="cta-button zooming"
+            rel="noopener noreferrer"
+          >
+            CLICK HERE TO BUY
+          </a>
+        </div>
+        
+        {/* Guarantee Section */}
+        <div className="guarantee-section">
+          <div className="guarantee-content">
             <div className="guarantee-image">
-              <Image src="/images/180days.png" alt="Money Back Guarantee" width={100} height={100} />
+              <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/mXREBX9929515.webp" alt="Money Back Guarantee" />
             </div>
             <div className="guarantee-text">
-              <p>60-DAY MONEY BACK GUARANTEE</p>
+              <p>
+                Still not sure? Remember, Alpha Bites comes with a 100% Money-Back Guarantee for a full 180 days! That means if you don't get the results we promise or you change your mind for any reason at all, just call or email our support team within the next 6 months and quickly get every penny back. What do you have to lose? Your success is virtually guaranteed!
+              </p>
             </div>
           </div>
         </div>
-        
-        <div className="footer">
-          <p>Copyright © {new Date().getFullYear()} All Rights Reserved</p>
-        </div>
-      </main>
+      </div>
       
+      {/* Footer */}
       <ClientSideOnly>
-        <script src="/reveal.js"></script>
+        <footer className="site-footer">
+          <div className="footer-content">
+            <p className="copyright">&copy; 2025 Alpha Bites ® - All Rights Reserved</p>
+            <div className="footer-links">
+              <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a>
+              <span className="divider">|</span>
+              <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            </div>
+          </div>
+        </footer>
       </ClientSideOnly>
       
       <style jsx global>{`
-        html, body {
+        /* Global Styles */
+        html {
+          scroll-behavior: smooth;
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: none;
+          -ms-user-select: none;
+          user-select: none;
+          -webkit-tap-highlight-color: transparent;
+          overflow-x: hidden;
+        }
+        
+        body {
+          font-family: 'Roboto', sans-serif;
           margin: 0;
           padding: 0;
-          font-family: Arial, sans-serif;
-          background-color: #000;
-          color: #fff;
-          scroll-behavior: smooth;
+          background-color: #000000;
+          color: #ffffff;
+          line-height: 1;
           overflow-x: hidden;
         }
         
-        .main-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          width: 100%;
-          max-width: 100vw;
-          overflow-x: hidden;
+        /* Hidden Product Class */
+        .hidden-product {
+          display: none;
         }
         
-        .headline {
-          text-align: center;
-          margin: 20px 0;
-          width: 100%;
-        }
-        
-        .headline h1 {
-          font-size: 2.5rem;
-          margin: 0;
-          color: #fff;
-          text-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
-        }
-        
-        .video-container {
-          width: 100%;
-          max-width: 800px;
-          margin: 0 auto;
-          position: relative;
-        }
-        
+        /* Product Reveal Container */
         .product-reveal-container {
           position: fixed;
           top: 0;
           left: 0;
-          width: 100%;
-          height: 100%;
+          right: 0;
+          bottom: 0;
           background-color: rgba(198, 137, 12, 0.95);
           z-index: 1000;
           display: flex;
           flex-direction: column;
+          justify-content: flex-start;
           align-items: center;
-          justify-content: center;
           padding: 20px;
           overflow-y: auto;
         }
         
-        .instruction-text {
+        /* Headline Section */
+        .headline-section {
           text-align: center;
-          margin: 20px 0;
-          font-size: 1.2rem;
+          padding: 20px 10px;
+          background-color: #000000;
+        }
+
+        .headline-section h1 {
+          font-size: 28px;
+          font-weight: 700;
+          margin: 0;
+          line-height: 1.3;
+          font-family: 'Ubuntu', sans-serif;
+        }
+
+        .blue-highlight {
+          color: #ffffff;
+          background-color: #0000ff;
+          padding: 0 4px;
           font-weight: bold;
-          color: #fff;
+        }
+
+        /* Video Container */
+        .video-container {
+          max-width: 800px;
+          margin: 0 auto 30px;
+          padding: 0 10px;
+        }
+
+        /* Instruction Text */
+        .instruction-text {
+          width: 100%;
+          text-align: center;
+          margin: 20px auto;
+          padding: 15px 0;
+          background-color: #c6890c;
+        }
+
+        .instruction-text h3 {
+          font-size: 22px;
+          text-align: center;
+          color: #ffffff;
+          line-height: 1.3;
+          font-weight: 600;
+          font-family: 'Ubuntu', sans-serif;
+          margin: 0;
+          padding: 0 20px;
         }
         
+        /* Product Options */
         .product-options {
           display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-          margin: 20px 0;
+          flex-direction: column;
+          gap: 15px;
           width: 100%;
-          max-width: 1000px;
+          max-width: 500px;
+          margin: 0 auto 30px;
+          padding: 0 20px;
         }
         
         .product-option {
-          background-color: #fff;
-          border-radius: 10px;
-          padding: 15px;
-          width: 250px;
+          width: 100%;
+        }
+
+        .product-container {
+          background-color: #ffffff;
+          border-radius: 8px;
+          padding: 20px;
           text-align: center;
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-          transition: transform 0.3s ease;
         }
         
-        .product-option:hover {
-          transform: scale(1.05);
-        }
-        
-        .product-option h3 {
+        .product-title {
+          font-size: 18px;
           color: #c6890c;
-          margin-top: 0;
+          font-weight: 700;
+          margin: 0 0 15px 0;
         }
         
         .product-image {
-          margin: 10px 0;
+          margin: 15px 0;
+        }
+
+        .product-image img {
+          max-width: 200px;
+          height: auto;
+          margin: 0 auto;
+          display: block;
         }
         
         .product-price {
-          color: #000;
-          font-weight: bold;
+          font-size: 24px;
+          color: #000000;
+          font-weight: 700;
+          margin: 15px 0 0 0;
         }
         
-        .product-price p {
-          margin: 5px 0;
-        }
-        
+        /* CTA Button */
         .cta-button-container {
-          margin: 20px 0;
           text-align: center;
+          margin: 30px auto;
         }
         
         .cta-button {
+          background: #00b800;
+          border-radius: 8px;
+          border: none;
+          color: #ffffff;
+          padding: 16px 32px;
+          font-weight: 700;
           display: inline-block;
-          background-color: #ff0000;
-          color: #fff;
-          font-size: 1.2rem;
-          font-weight: bold;
-          padding: 15px 30px;
-          border-radius: 50px;
-          text-decoration: none;
           text-align: center;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-          transition: transform 0.3s ease;
-          animation: pulse 2s infinite;
+          font-size: 24px;
+          text-decoration: none;
+          font-family: 'Montserrat', sans-serif;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+          text-transform: uppercase;
+        }
+
+        .zooming {
+          animation: zoom 1.5s infinite alternate;
         }
         
-        .cta-button:hover {
-          transform: scale(1.05);
-        }
-        
-        @keyframes pulse {
+        @keyframes zoom {
           0% {
             transform: scale(1);
           }
-          50% {
-            transform: scale(1.05);
-          }
           100% {
-            transform: scale(1);
+            transform: scale(1.1);
           }
         }
         
+        /* Guarantee Section */
         .guarantee-section {
+          background-color: #000000;
+          padding: 30px 20px;
+          max-width: 800px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .guarantee-content {
           display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
-          margin: 20px 0;
-          gap: 15px;
+        }
+
+        .guarantee-image {
+          margin-bottom: 20px;
+        }
+
+        .guarantee-image img {
+          max-width: 300px;
+          height: auto;
         }
         
         .guarantee-text {
-          color: #fff;
-          font-weight: bold;
-          font-size: 1.1rem;
+          max-width: 600px;
         }
-        
-        .footer {
-          margin-top: 30px;
+
+        .guarantee-text p {
+          font-size: 16px;
+          line-height: 1.5;
+          color: #ffffff;
           text-align: center;
-          color: #888;
-          font-size: 0.8rem;
-          padding: 10px;
-          width: 100%;
+        }
+
+        /* Social Proof Popup */
+        .social-proof-popup {
+          position: fixed;
+          bottom: 20px;
+          left: 20px;
+          background: rgba(0, 0, 0, 0.9);
+          color: white;
+          padding: 1rem;
+          border-radius: 8px;
+          z-index: 1000;
+          transform: translateY(100%);
+          transition: transform 0.3s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-proof-popup.show {
+          transform: translateY(0);
+        }
+
+        .popup-content {
+          font-size: 0.9rem;
+        }
+
+        .popup-content p {
+          margin: 0;
+        }
+
+        .popup-content small {
+          color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Footer */
+        .site-footer {
+          padding: 2rem 1rem;
+          background-color: rgba(0, 0, 0, 0.8);
+          backdrop-filter: blur(4px);
+        }
+
+        .footer-content {
+          max-width: 800px;
+          margin: 0 auto;
+          text-align: center;
+        }
+
+        .copyright {
+          color: rgba(255, 255, 255, 0.7);
+          font-size: 0.9rem;
+          margin-bottom: 1rem;
+        }
+
+        .footer-links {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          margin-bottom: 0;
+        }
+
+        .footer-links a {
+          color: #00b800;
+          text-decoration: none;
+          font-size: 0.9rem;
+          transition: color 0.3s ease;
         }
         
-        @media (max-width: 768px) {
-          .headline h1 {
-            font-size: 2rem;
+        .footer-links a:hover {
+          color: #ffffff;
+        }
+
+        .divider {
+          color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+          .instruction-text h3 {
+            font-size: 22px;
           }
           
           .product-options {
-            flex-direction: column;
-            align-items: center;
+            width: 90%;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .product-options {
+            width: 90%;
           }
           
-          .product-option {
-            width: 80%;
-            max-width: 300px;
+          .instruction-text h3 {
+            font-size: 18px;
           }
           
           .cta-button {
-            font-size: 1rem;
+            font-size: 16px;
             padding: 12px 24px;
           }
         }
-        
-        @media (max-width: 480px) {
-          .headline h1 {
-            font-size: 1.8rem;
-          }
-          
-          .instruction-text {
-            font-size: 1rem;
-          }
-          
-          .guarantee-text {
-            font-size: 0.9rem;
-          }
-        }
       `}</style>
+
+      {/* Script to show product options after video plays */}
+      <ClientSideOnly>
+        <script src="/reveal.js"></script>
+
+        {/* Additional script to prevent right-click and other interactions */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            document.addEventListener('contextmenu', function(e) {
+              e.preventDefault();
+            });
+            
+            document.onkeydown = function(e) {
+              if (e.keyCode == 123) return false;
+            };
+            
+            document.addEventListener('selectstart', e => e.preventDefault());
+          `
+        }} />
+      </ClientSideOnly>
     </>
   );
 }
