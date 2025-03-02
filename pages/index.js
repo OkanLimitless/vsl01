@@ -507,73 +507,101 @@ export default function Home() {
         <script dangerouslySetInnerHTML={{
           __html: `
             document.addEventListener('DOMContentLoaded', function() {
+              console.log('DOM loaded, initializing video reveal logic');
+              
               // Force hide the product options section and guarantee section on page load
               const hiddenElements = document.querySelectorAll('.hidden-initially');
               hiddenElements.forEach(function(el) {
                 el.style.display = 'none';
               });
               
-              // Function to check if smartplayer is loaded
+              // Function to reveal all hidden sections
+              function revealSections() {
+                console.log('Revealing all sections now');
+                
+                // Show the product options section
+                const productSection = document.querySelector('.product-options-section');
+                if (productSection) {
+                  productSection.style.display = 'flex';
+                  productSection.classList.remove('hidden-initially');
+                  console.log('Product section revealed');
+                } else {
+                  console.log('Product section not found');
+                }
+                
+                // Show the guarantee section
+                const guaranteeSection = document.querySelector('.guarantee-section');
+                if (guaranteeSection) {
+                  guaranteeSection.style.display = 'block';
+                  guaranteeSection.classList.remove('hidden-initially');
+                  console.log('Guarantee section revealed');
+                } else {
+                  console.log('Guarantee section not found');
+                }
+                
+                // Show the footer
+                const footer = document.querySelector('.site-footer');
+                if (footer) {
+                  footer.style.display = 'block';
+                  footer.classList.remove('hidden-initially');
+                  console.log('Footer revealed');
+                } else {
+                  console.log('Footer not found');
+                }
+              }
+              
+              // Fallback timer - show sections after 3 minutes regardless
+              console.log('Setting fallback timer for 3 minutes');
+              setTimeout(revealSections, 180000); // 3 minutes
+              
+              // Also set a shorter fallback for testing
+              console.log('Setting short fallback timer for 30 seconds');
+              setTimeout(revealSections, 30000); // 30 seconds for testing
+              
+              // Function to check if smartplayer is loaded and attach event listener
               function checkSmartPlayer() {
+                console.log('Checking if smartplayer is loaded...');
+                
                 if (window.smartplayer && window.smartplayer.instances && window.smartplayer.instances.length > 0) {
+                  console.log('Smartplayer found, attaching ended event listener');
                   const player = window.smartplayer.instances[0];
                   
                   // Listen for video end event
                   player.on('ended', function() {
-                    console.log('Video ended, showing product options');
-                    // Show the product options section
-                    const productSection = document.querySelector('.product-options-section');
-                    if (productSection) {
-                      productSection.style.display = 'flex';
-                      productSection.classList.remove('hidden-initially');
-                    }
-                    
-                    // Show the guarantee section
-                    const guaranteeSection = document.querySelector('.guarantee-section');
-                    if (guaranteeSection) {
-                      guaranteeSection.style.display = 'block';
-                      guaranteeSection.classList.remove('hidden-initially');
-                    }
-                    
-                    // Show the footer
-                    const footer = document.querySelector('.site-footer');
-                    if (footer) {
-                      footer.style.display = 'block';
-                      footer.classList.remove('hidden-initially');
-                    }
+                    console.log('Video ended event triggered');
+                    revealSections();
                   });
-
-                  // Also show after a certain time (fallback)
-                  setTimeout(function() {
-                    console.log('Timeout reached, showing product options');
-                    // Show the product options section
-                    const productSection = document.querySelector('.product-options-section');
-                    if (productSection) {
-                      productSection.style.display = 'flex';
-                      productSection.classList.remove('hidden-initially');
-                    }
-                    
-                    // Show the guarantee section
-                    const guaranteeSection = document.querySelector('.guarantee-section');
-                    if (guaranteeSection) {
-                      guaranteeSection.style.display = 'block';
-                      guaranteeSection.classList.remove('hidden-initially');
-                    }
-                    
-                    // Show the footer
-                    const footer = document.querySelector('.site-footer');
-                    if (footer) {
-                      footer.style.display = 'block';
-                      footer.classList.remove('hidden-initially');
-                    }
-                  }, 180000); // 3 minutes
+                  
+                  // Also listen for play event to confirm player is working
+                  player.on('play', function() {
+                    console.log('Video started playing');
+                  });
+                  
                 } else {
+                  console.log('Smartplayer not found yet, checking again in 1 second');
                   setTimeout(checkSmartPlayer, 1000);
                 }
               }
               
-              // Start checking for smartplayer
+              // Start checking for smartplayer after a short delay
+              console.log('Starting smartplayer check in 2 seconds');
               setTimeout(checkSmartPlayer, 2000);
+              
+              // Direct DOM check as an alternative approach
+              function checkVideoElement() {
+                console.log('Checking for video element directly');
+                const videoElement = document.querySelector('video');
+                if (videoElement) {
+                  console.log('Video element found, attaching ended event listener directly');
+                  videoElement.addEventListener('ended', revealSections);
+                } else {
+                  console.log('Video element not found, checking again in 2 seconds');
+                  setTimeout(checkVideoElement, 2000);
+                }
+              }
+              
+              // Start direct video element check
+              setTimeout(checkVideoElement, 3000);
             });
           `
         }} />
