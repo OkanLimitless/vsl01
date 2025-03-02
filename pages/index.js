@@ -260,35 +260,43 @@ export default function Home() {
         .instruction-text {
           width: 100%;
           text-align: center;
-          margin: 20px auto;
-          padding: 15px 0;
+          margin: 20px auto 30px;
+          padding: 20px 0;
           background-color: #c6890c;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          border: 2px solid #ffffff;
         }
 
         .instruction-text h3 {
-          font-size: 22px;
+          font-size: 24px;
           text-align: center;
           color: #ffffff;
           line-height: 1.3;
-          font-weight: 600;
+          font-weight: 700;
           font-family: 'Ubuntu', sans-serif;
           margin: 0;
           padding: 0 20px;
+          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         /* Product Options */
         .product-options {
           display: flex;
-          flex-direction: column;
-          gap: 15px;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 20px;
           width: 100%;
-          max-width: 500px;
-          margin: 0 auto 30px;
+          max-width: 1000px;
+          margin: 20px auto;
           padding: 0 20px;
         }
         
         .product-option {
-          width: 100%;
+          width: calc(33.33% - 20px);
+          min-width: 250px;
+          margin-bottom: 20px;
         }
 
         .product-container {
@@ -328,6 +336,7 @@ export default function Home() {
         .cta-button-container {
           text-align: center;
           margin: 30px auto;
+          width: 100%;
         }
         
         .cta-button {
@@ -335,15 +344,23 @@ export default function Home() {
           border-radius: 8px;
           border: none;
           color: #ffffff;
-          padding: 16px 32px;
+          padding: 20px 40px;
           font-weight: 700;
           display: inline-block;
           text-align: center;
-          font-size: 24px;
+          font-size: 28px;
           text-decoration: none;
           font-family: 'Montserrat', sans-serif;
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
           text-transform: uppercase;
+          cursor: pointer;
+          transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+          background: #00a000;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
         }
 
         .zooming {
@@ -361,7 +378,7 @@ export default function Home() {
         
         /* Guarantee Section */
         .guarantee-section {
-          background-color: #000000;
+          background-color: transparent;
           padding: 30px 20px;
           max-width: 800px;
           margin: 0 auto;
@@ -370,29 +387,50 @@ export default function Home() {
 
         .guarantee-content {
           display: flex;
-          flex-direction: column;
+          flex-direction: row;
           align-items: center;
           justify-content: center;
+          background-color: rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          padding: 20px;
         }
 
         .guarantee-image {
-          margin-bottom: 20px;
+          margin-right: 20px;
+          flex: 0 0 auto;
         }
 
         .guarantee-image img {
-          max-width: 300px;
+          max-width: 150px;
           height: auto;
         }
         
         .guarantee-text {
           max-width: 600px;
+          text-align: left;
+          flex: 1 1 auto;
         }
 
         .guarantee-text p {
           font-size: 16px;
           line-height: 1.5;
           color: #ffffff;
-          text-align: center;
+          text-align: left;
+        }
+        
+        @media (max-width: 768px) {
+          .guarantee-content {
+            flex-direction: column;
+          }
+          
+          .guarantee-image {
+            margin-right: 0;
+            margin-bottom: 20px;
+          }
+          
+          .guarantee-text p {
+            text-align: center;
+          }
         }
 
         /* Social Proof Popup */
@@ -476,11 +514,20 @@ export default function Home() {
           .product-options {
             width: 90%;
           }
+          
+          .product-option {
+            width: calc(50% - 20px);
+          }
         }
 
         @media (max-width: 640px) {
           .product-options {
             width: 90%;
+            flex-direction: column;
+          }
+          
+          .product-option {
+            width: 100%;
           }
           
           .instruction-text h3 {
