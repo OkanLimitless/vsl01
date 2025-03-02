@@ -10,8 +10,8 @@ export default function VideoPlayer() {
   const [showThumbnail, setShowThumbnail] = useState(true);
   
   // Function to calculate deceptive progress
-  // This creates a non-linear progress that moves faster at the beginning
-  // and gradually slows down throughout the video to make a long video appear shorter
+  // This creates a non-linear progress that moves VERY fast at the beginning
+  // and dramatically slows down later to make a long video appear shorter
   const calculateDeceptiveProgress = (currentTime, duration) => {
     // If we don't have duration yet, return 0
     if (!duration) return 0;
@@ -19,65 +19,78 @@ export default function VideoPlayer() {
     // Actual linear progress (0-1)
     const actualProgress = currentTime / duration;
     
-    // Apply a logarithmic transformation to make progress appear faster at the beginning
-    // and gradually slow down throughout the entire video
-    // This creates a more believable progression that doesn't reach 99% too quickly
+    // VTurb-style progress calculation:
+    // - First 15 seconds should reach ~10-15% progress
+    // - By 5 minutes (300 seconds) should reach ~60-70% progress
+    // - Then dramatically slow down for the remainder
     
-    // For a 45-minute video, this will make it initially appear faster but maintain
-    // a more realistic progression throughout
+    // Constants for our calculation
+    const initialBoostSeconds = 15;  // First 15 seconds get a massive boost
+    const midPointSeconds = 300;     // At 5 minutes (300 seconds), we should be at ~65% progress
+    const initialBoostTarget = 0.15; // Target progress after initial 15 seconds (15%)
+    const midPointTarget = 0.70;     // Target progress at 5 minutes (70%)
     
-    // Parameters to tune the deception curve
-    const initialBoost = 1.8;      // Initial speed boost (lower than before for more gradual start)
-    const curveFactor = 0.6;       // Controls how quickly the curve flattens (higher = more gradual)
-    
-    // Logarithmic curve formula: creates a curve that starts fast and gradually slows down
-    // The formula is designed to:
-    // 1. Start with a boost (initialBoost) from the very beginning
-    // 2. Gradually slow down throughout the entire video
-    // 3. Reach exactly 100% at the end of the video
-    
-    // Calculate deceptive progress using a modified logarithmic function
-    const logBase = 1 + curveFactor;
-    const scaleFactor = 1 / Math.log(1 + curveFactor);
-    
-    // This formula creates a curve that:
-    // - Starts faster than linear (but not too fast)
-    // - Continuously slows down throughout the video
-    // - Reaches exactly 100% when actualProgress = 1
-    const deceptiveProgress = Math.log(1 + (actualProgress * curveFactor)) * scaleFactor;
-    
-    // Apply initial boost but ensure it gradually diminishes
-    // This makes the beginning faster but prevents it from reaching 99% too quickly
-    const boostedProgress = deceptiveProgress * (1 + (initialBoost - 1) * (1 - actualProgress));
-    
-    // Ensure we don't exceed 100% progress
-    return Math.min(boostedProgress, 1) * 100;
+    // Calculate progress based on which phase we're in
+    if (currentTime <= initialBoostSeconds) {
+      // Phase 1: Initial boost (first 15 seconds)
+      // Linear mapping from 0-15 seconds to 0-15% progress
+      return (currentTime / initialBoostSeconds) * initialBoostTarget * 100;
+    } 
+    else if (currentTime <= midPointSeconds) {
+      // Phase 2: Fast progress (15 seconds to 5 minutes)
+      // Linear mapping from 15-300 seconds to 15-70% progress
+      const phaseProgress = (currentTime - initialBoostSeconds) / (midPointSeconds - initialBoostSeconds);
+      return (initialBoostTarget + phaseProgress * (midPointTarget - initialBoostTarget)) * 100;
+    } 
+    else {
+      // Phase 3: Slow down dramatically (after 5 minutes)
+      // Use a curve that ensures we reach 100% exactly at the end
+      // but progresses very slowly
+      const remainingProgress = 1 - midPointTarget;
+      const remainingTime = duration - midPointSeconds;
+      const timeAfterMidpoint = currentTime - midPointSeconds;
+      
+      // Use a square root function to create a curve that starts faster and slows down
+      // This ensures we reach exactly 100% at the end
+      const slowProgress = Math.sqrt(timeAfterMidpoint / remainingTime);
+      
+      return (midPointTarget + (slowProgress * remainingProgress)) * 100;
+    }
   };
   
   // Function to convert from deceptive progress position back to actual video position
   // This is used when the user clicks on the progress bar
   const deceptiveToActualPosition = (deceptivePos) => {
-    // Parameters should match those in calculateDeceptiveProgress
-    const initialBoost = 1.8;
-    const curveFactor = 0.6;
-    
     // Normalize to 0-1 range
     deceptivePos = deceptivePos / 100;
     
-    // Inverse of the logarithmic function used in calculateDeceptiveProgress
-    const logBase = 1 + curveFactor;
-    const scaleFactor = 1 / Math.log(1 + curveFactor);
+    // Constants (must match those in calculateDeceptiveProgress)
+    const initialBoostSeconds = 15;
+    const midPointSeconds = 300;
+    const initialBoostTarget = 0.15;
+    const midPointTarget = 0.70;
     
-    // First remove the boost effect (approximate inverse)
-    // This is an approximation that works reasonably well
-    let unboostedPos = deceptivePos;
-    
-    // Then apply inverse of logarithmic function
-    // exp(deceptivePos / scaleFactor) - 1) / curveFactor
-    const actualPos = (Math.exp(unboostedPos / scaleFactor) - 1) / curveFactor;
-    
-    // Ensure we stay within bounds
-    return Math.max(0, Math.min(1, actualPos));
+    // Determine which phase the deceptive position falls into
+    if (deceptivePos <= initialBoostTarget) {
+      // Phase 1: Initial boost
+      return (deceptivePos / initialBoostTarget) * initialBoostSeconds;
+    } 
+    else if (deceptivePos <= midPointTarget) {
+      // Phase 2: Fast progress
+      const phaseProgress = (deceptivePos - initialBoostTarget) / (midPointTarget - initialBoostTarget);
+      return initialBoostSeconds + phaseProgress * (midPointSeconds - initialBoostSeconds);
+    } 
+    else {
+      // Phase 3: Slow down dramatically
+      const remainingProgress = 1 - midPointTarget;
+      const remainingTime = videoDuration - midPointSeconds;
+      const progressAfterMidpoint = deceptivePos - midPointTarget;
+      
+      // Inverse of the square root function
+      const slowProgress = Math.pow(progressAfterMidpoint / remainingProgress, 2);
+      
+      return midPointSeconds + (slowProgress * remainingTime);
+    }
   };
   
   useEffect(() => {
@@ -165,10 +178,10 @@ export default function VideoPlayer() {
           const pos = (e.clientX - rect.left) / rect.width;
           
           // Convert the deceptive position back to actual video position
-          const actualPos = deceptiveToActualPosition(pos * 100);
+          const actualTime = deceptiveToActualPosition(pos * 100);
           
           // Set the video time based on the actual position
-          videoElement.currentTime = actualPos * videoElement.duration;
+          videoElement.currentTime = actualTime;
         }
       };
       
@@ -270,7 +283,7 @@ export default function VideoPlayer() {
               height: '100%',
               zIndex: 20,
               cursor: 'pointer',
-              backgroundImage: 'url(/thumbnail.png)',
+              backgroundImage: 'url(/thumbnail1.png)',
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               display: 'flex',
@@ -372,8 +385,8 @@ export default function VideoPlayer() {
                   if (progressContainerRef.current && videoRef.current) {
                     const rect = progressContainerRef.current.getBoundingClientRect();
                     const pos = (e.clientX - rect.left) / rect.width;
-                    const actualPos = deceptiveToActualPosition(pos * 100);
-                    videoRef.current.currentTime = actualPos * videoRef.current.duration;
+                    const actualTime = deceptiveToActualPosition(pos * 100);
+                    videoRef.current.currentTime = actualTime;
                   }
                 }}
               >
