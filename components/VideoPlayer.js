@@ -222,7 +222,7 @@ export default function VideoPlayer() {
 
   return (
     <div>
-      {/* Title in the style shown in the image */}
+      {/* Title in the style shown in the image - with responsive font sizes */}
       <div style={{ 
         width: '100%', 
         textAlign: 'center', 
@@ -234,10 +234,11 @@ export default function VideoPlayer() {
           color: 'white', 
           fontFamily: 'Arial, sans-serif', 
           fontWeight: 'bold',
-          fontSize: '2.5rem',
+          fontSize: 'clamp(1.2rem, 4vw, 2.2rem)', // Responsive font size
           margin: 0,
           padding: '0 10px',
-          textTransform: 'uppercase'
+          textTransform: 'uppercase',
+          lineHeight: '1.2'
         }}>
           DO THIS <span style={{ 
             backgroundColor: '#0000FF', 
@@ -249,10 +250,11 @@ export default function VideoPlayer() {
           color: 'white', 
           fontFamily: 'Arial, sans-serif', 
           fontWeight: 'bold',
-          fontSize: '2.5rem',
+          fontSize: 'clamp(1.2rem, 4vw, 2.2rem)', // Responsive font size
           margin: 0,
           padding: '0 10px',
-          textTransform: 'uppercase'
+          textTransform: 'uppercase',
+          lineHeight: '1.2'
         }}>
           WHENEVER YOU WANT
         </h1>
@@ -317,7 +319,6 @@ export default function VideoPlayer() {
         <video
           ref={videoRef}
           preload="auto"
-          poster="https://images.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/thumbnail.jpg"
           style={{
             position: 'absolute',
             top: 0,
@@ -370,10 +371,10 @@ export default function VideoPlayer() {
           </div>
         )}
         
-        {/* VTurb-style fake progress bar */}
+        {/* VTurb-style fake progress bar with increased height */}
         <div className="smartplayer-controller-mask" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40px', zIndex: 1 }}></div>
         <div className="smartplayer-controller" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', zIndex: 2 }}>
-          <div className="smartplayer-bar-wrap" style={{ position: 'relative', height: '8px' }}>
+          <div className="smartplayer-bar-wrap" style={{ position: 'relative', height: '12px' }}>
             <div className="smartplayer-bar-time" style={{ display: 'none' }}></div>
             <div className="smartplayer-bar" style={{ position: 'absolute', left: 0, top: 0, right: 0, height: '100%', width: '100%' }}>
               <div className="smartplayer-loaded" style={{ position: 'absolute', left: 0, top: 0, height: '100%', width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.2)' }}></div>
