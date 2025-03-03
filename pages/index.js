@@ -20,17 +20,30 @@ export default function Home() {
     const gclid = urlParams.get('gclid');
 
     if (gtagId) {
+      console.log('Google Tag Parameters:', { gtagId, gtagLabel, gclid });
+
       // Load Google Tag Manager script
       const script = document.createElement('script');
       script.async = true;
       script.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}`;
-      document.head.appendChild(script);
+      
+      script.onload = () => {
+        console.log('Google Tag Manager script loaded successfully');
+        
+        // Initialize gtag
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', gtagId);
+        
+        console.log('Google Tag Manager initialized');
+      };
 
-      // Initialize gtag
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', gtagId);
+      script.onerror = (error) => {
+        console.error('Error loading Google Tag Manager script:', error);
+      };
+
+      document.head.appendChild(script);
 
       // Store parameters for conversion tracking
       window.gtagParams = {
@@ -38,50 +51,100 @@ export default function Home() {
         label: gtagLabel,
         gclid: gclid
       };
+    } else {
+      console.warn('No Google Tag parameters found in URL');
     }
   }, []);
 
   // Video progress and conversion tracking
   useEffect(() => {
     let hasTrackedConversion = false;
+    let conversionCheckInterval;
 
     const watchVideoProgress = () => {
       const videoElement = document.querySelector('video');
       if (!videoElement) {
+        console.log('Video element not found, retrying...');
         setTimeout(watchVideoProgress, 500);
         return;
       }
 
+      console.log('Video element found and monitoring started');
+
       // Track video progress
       const handleTimeUpdate = () => {
+        // Log current time every 30 seconds
+        if (Math.floor(videoElement.currentTime) % 30 === 0) {
+          console.log('Current video time:', Math.floor(videoElement.currentTime));
+        }
+
         // Check for 10-minute conversion (600 seconds)
         if (!hasTrackedConversion && videoElement.currentTime >= 600 && window.gtagParams) {
-          // Send conversion to Google Ads
-          if (typeof gtag === 'function') {
-            gtag('event', 'conversion', {
-              'send_to': `${window.gtagParams.id}/${window.gtagParams.label}`,
-              'gclid': window.gtagParams.gclid
-            });
+          try {
+            console.log('10-minute mark reached, firing conversion...');
+            console.log('Conversion parameters:', window.gtagParams);
+
+            if (typeof gtag === 'function') {
+              gtag('event', 'conversion', {
+                'send_to': `${window.gtagParams.id}/${window.gtagParams.label}`,
+                'gclid': window.gtagParams.gclid
+              });
+              console.log('Conversion event fired successfully');
+              hasTrackedConversion = true;
+
+              // Double-check after 1 second that gtag was called
+              setTimeout(() => {
+                if (window.dataLayer) {
+                  console.log('DataLayer contents:', window.dataLayer);
+                }
+              }, 1000);
+            } else {
+              console.error('gtag function not found');
+            }
+          } catch (error) {
+            console.error('Error firing conversion:', error);
           }
-          hasTrackedConversion = true;
         }
 
         // Check for product reveal (2078 seconds)
         if (videoElement.currentTime >= 2078) {
           setShowProducts(true);
+          console.log('Products revealed at:', Math.floor(videoElement.currentTime));
         }
       };
 
       // Add event listeners
       videoElement.addEventListener('timeupdate', handleTimeUpdate);
+      videoElement.addEventListener('play', () => console.log('Video started playing'));
+      videoElement.addEventListener('pause', () => console.log('Video paused'));
+
+      // Additional safety check every 5 seconds
+      conversionCheckInterval = setInterval(() => {
+        if (!hasTrackedConversion && videoElement.currentTime >= 600) {
+          console.log('Backup check: Video time is', Math.floor(videoElement.currentTime));
+          handleTimeUpdate();
+        }
+      }, 5000);
 
       // Cleanup
       return () => {
         videoElement.removeEventListener('timeupdate', handleTimeUpdate);
+        videoElement.removeEventListener('play', () => console.log('Video started playing'));
+        videoElement.removeEventListener('pause', () => console.log('Video paused'));
+        if (conversionCheckInterval) {
+          clearInterval(conversionCheckInterval);
+        }
       };
     };
 
     watchVideoProgress();
+
+    // Cleanup interval on unmount
+    return () => {
+      if (conversionCheckInterval) {
+        clearInterval(conversionCheckInterval);
+      }
+    };
   }, []);
 
   // Function to randomly fluctuate viewer count
