@@ -15,23 +15,23 @@ export default function Home() {
   useEffect(() => {
     // Video progress watcher
     const watchVideoProgress = () => {
-      if (typeof window !== 'undefined' && typeof window.smartplayer === 'undefined') {
+      const videoElement = document.querySelector('video');
+      if (!videoElement) {
         setTimeout(watchVideoProgress, 500);
         return;
       }
 
-      if (typeof window !== 'undefined' && window.smartplayer && window.smartplayer.instances && window.smartplayer.instances.length > 0) {
-        window.smartplayer.instances[0].on('timeupdate', () => {
-          if (window.smartplayer.instances[0].video.currentTime >= 2078) {
-            setShowProducts(true);
-          }
-        });
-
-        // Also listen for video end event
-        window.smartplayer.instances[0].on('ended', () => {
+      // Listen to timeupdate event
+      videoElement.addEventListener('timeupdate', () => {
+        if (videoElement.currentTime >= 2078) {
           setShowProducts(true);
-        });
-      }
+        }
+      });
+
+      // Listen to video end event
+      videoElement.addEventListener('ended', () => {
+        setShowProducts(true);
+      });
     };
 
     // Start watching video progress
