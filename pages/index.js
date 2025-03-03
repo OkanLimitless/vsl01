@@ -12,6 +12,7 @@ export default function Home() {
   const [showNotification, setShowNotification] = useState(false);
   const [currentBuyer, setCurrentBuyer] = useState(null);
   const [showProducts, setShowProducts] = useState(false);
+  const [watchCount, setWatchCount] = useState(574);
 
   useEffect(() => {
     // Buy notifications logic
@@ -85,10 +86,25 @@ export default function Home() {
     }
   }, [showProducts]);
 
+  // Function to randomly fluctuate viewer count
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Random fluctuation between -3 and +5 viewers
+      const fluctuation = Math.floor(Math.random() * 9) - 3;
+      setWatchCount(prevCount => {
+        // Keep count between 550 and 650
+        const newCount = prevCount + fluctuation;
+        return Math.min(Math.max(newCount, 550), 650);
+      });
+    }, 3000); // Update every 3 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
       <Head>
-        <title>DO THIS "BLUE SALT HACK" TO GET UP WHENEVER YOU WANT</title>
+        <title>Blue Salt Hack - Limited Time Presentation</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta property="og:type" content="website" />
@@ -120,105 +136,149 @@ export default function Home() {
         </div>
       )}
 
-      <div className="page-container">
-        {/* Main Headline */}
-        <div className="headline-section">
-          <h1>
-            DO THIS <span className="blue-highlight">"BLUE SALT HACK"</span> TO GET UP WHENEVER YOU WANT
-          </h1>
+      <div style={{ 
+        backgroundColor: '#fff',
+        minHeight: '100vh',
+        width: '100%',
+        margin: 0,
+        padding: 0
+      }}>
+        {/* Attention Bar */}
+        <div style={{
+          backgroundColor: '#B71C1C',
+          color: '#fff',
+          textAlign: 'center',
+          padding: '10px 0',
+          width: '100%',
+          fontFamily: 'Arial, sans-serif',
+          fontWeight: 'bold'
+        }}>
+          <span style={{ color: '#FFD700' }}>Attention:</span> This presentation will be available only until today
         </div>
-        
-        {/* Video Section */}
-        <div className="video-container">
+
+        {/* Main Content Container */}
+        <div style={{
+          maxWidth: '960px',
+          margin: '0 auto',
+          padding: '20px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center'
+        }}>
+          {/* Video Player */}
           <VideoPlayer />
-          <div className="sound-check">
-            <i className="fas fa-volume-up volume-icon"></i>
-            Please check if the sound is on.
+
+          {/* Watch Count */}
+          <div style={{
+            marginTop: '15px',
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '16px',
+            color: '#333',
+            fontWeight: 'bold'
+          }}>
+            {watchCount} People watching now...
+          </div>
+
+          {/* Scientific References Section */}
+          <div style={{
+            marginTop: '50px',
+            width: '100%',
+            textAlign: 'center'
+          }}>
+            <h2 style={{
+              fontSize: '24px',
+              color: '#333',
+              marginBottom: '30px',
+              fontFamily: 'Arial, sans-serif'
+            }}>
+              Scientific References
+            </h2>
+
+            {/* Logos Container */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: '30px',
+              marginBottom: '20px',
+              padding: '20px'
+            }}>
+              {[1, 2, 3, 4, 5].map((num) => (
+                <div key={num} style={{
+                  width: '160px',
+                  height: '60px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '10px'
+                }}>
+                  <img 
+                    src={`/images/logo${num}.png`}
+                    alt={`Scientific Reference ${num}`}
+                    style={{
+                      maxWidth: '100%',
+                      height: 'auto',
+                      objectFit: 'contain'
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Disclaimer */}
+            <p style={{
+              fontSize: '12px',
+              color: '#666',
+              maxWidth: '800px',
+              margin: '20px auto',
+              textAlign: 'center'
+            }}>
+              The company is not endorsed by, sponsored by, or affiliated with any of these organizations
+            </p>
+          </div>
+
+          {/* Footer Disclaimers */}
+          <div style={{
+            marginTop: '50px',
+            borderTop: '1px solid #eee',
+            paddingTop: '20px',
+            width: '100%'
+          }}>
+            <p style={{
+              fontSize: '11px',
+              color: '#666',
+              textAlign: 'center',
+              margin: '10px 0'
+            }}>
+              Disclaimer: These statements have not been evaluated by the Food and Drug Administration.
+            </p>
+            <p style={{
+              fontSize: '11px',
+              color: '#666',
+              textAlign: 'center',
+              margin: '10px 0'
+            }}>
+              This material is an advertising piece intended to market our product and supplements. This product is not intended to diagnose, treat, cure, or prevent any disease. The statements regarding these products have not been evaluated by the Food and Drug Administration. The testimonials presented are from actual customers. Results may vary.
+            </p>
+            <p style={{
+              fontSize: '11px',
+              color: '#666',
+              textAlign: 'center',
+              margin: '10px 0'
+            }}>
+              This site is not affiliated with Google or any Google entity. Once you leave Google, it is no longer their responsibility but that of our site. We make every effort to clearly indicate and show all the real proofs of the product and use actual results. We do not sell your email or any information to third parties. We never engage in any kind of spam. If you have any questions, feel free to use the contact link to reach us during business hours from Monday to Friday.
+            </p>
+            <p style={{
+              fontSize: '11px',
+              color: '#666',
+              textAlign: 'center',
+              margin: '10px 0'
+            }}>
+              © Nerve Alive Research 2025. All Rights Reserved.
+            </p>
           </div>
         </div>
-        
-        {/* Product Options Section - Shown after video plays for 3 minutes or ends */}
-        {showProducts && (
-          <div className="product-reveal-container">
-            <div className="instruction-text">
-              <h3>
-                Click on the green button to be directed to choose the bottle quantity
-              </h3>
-            </div>
-            
-            <div className="product-options">
-              <div className="product-option">
-                <div className="product-container">
-                  <p className="product-title">BEST VALUE - 6 BOTTLES</p>
-                  <div className="product-image">
-                    <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/oHyrlA2811229.png" alt="6 bottles" />
-                  </div>
-                  <h3 className="product-price">$49/ Bottle</h3>
-                </div>
-              </div>
-              
-              <div className="product-option">
-                <div className="product-container">
-                  <p className="product-title">GOOD VALUE - 3 BOTTLES</p>
-                  <div className="product-image">
-                    <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/kCErml4113188.png" alt="3 bottles" />
-                  </div>
-                  <h3 className="product-price">$69/ Bottle</h3>
-                </div>
-              </div>
-              
-              <div className="product-option">
-                <div className="product-container">
-                  <p className="product-title">BASIC - 2 BOTTLES</p>
-                  <div className="product-image">
-                    <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/HBzclW1579379.png" alt="2 bottles" />
-                  </div>
-                  <h3 className="product-price">$79/ Bottle</h3>
-                </div>
-              </div>
-            </div>
-            
-            {/* CTA Button */}
-            <div className="cta-button-container">
-              <a 
-                href="https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571" 
-                target="_blank" 
-                className="cta-button zooming"
-                rel="noopener noreferrer"
-              >
-                CLICK HERE TO BUY
-              </a>
-            </div>
-            
-            {/* Guarantee Section */}
-            <div className="guarantee-section">
-              <div className="guarantee-content">
-                <div className="guarantee-image">
-                  <img src="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/mXREBX9929515.webp" alt="Money Back Guarantee" />
-                </div>
-                <div className="guarantee-text">
-                  <p>
-                    Still not sure? Remember, Alpha Bites comes with a 100% Money-Back Guarantee for a full 180 days! That means if you don't get the results we promise or you change your mind for any reason at all, just call or email our support team within the next 6 months and quickly get every penny back. What do you have to lose? Your success is virtually guaranteed!
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-        
-        {/* Footer */}
-        <ClientSideOnly>
-          <footer className="site-footer">
-            <div className="footer-content">
-              <p className="copyright">&copy; 2025 Alpha Bites ® - All Rights Reserved</p>
-              <div className="footer-links">
-                <a href="/terms" target="_blank" rel="noopener noreferrer">Terms of Use</a>
-                <span className="divider">|</span>
-                <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-              </div>
-            </div>
-          </footer>
-        </ClientSideOnly>
       </div>
       
       <style jsx global>{`
