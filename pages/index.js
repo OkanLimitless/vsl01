@@ -12,8 +12,39 @@ export default function Home() {
   const [showProducts, setShowProducts] = useState(false);
   const [watchCount, setWatchCount] = useState(574);
 
+  // Initialize Google Tag Manager with URL parameters
   useEffect(() => {
-    // Video progress watcher
+    const urlParams = new URLSearchParams(window.location.search);
+    const gtagId = urlParams.get('gtag_id');
+    const gtagLabel = urlParams.get('gtag_label');
+    const gclid = urlParams.get('gclid');
+
+    if (gtagId) {
+      // Load Google Tag Manager script
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${gtagId}`;
+      document.head.appendChild(script);
+
+      // Initialize gtag
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gtagId);
+
+      // Store parameters for conversion tracking
+      window.gtagParams = {
+        id: gtagId,
+        label: gtagLabel,
+        gclid: gclid
+      };
+    }
+  }, []);
+
+  // Video progress and conversion tracking
+  useEffect(() => {
+    let hasTrackedConversion = false;
+
     const watchVideoProgress = () => {
       const videoElement = document.querySelector('video');
       if (!videoElement) {
@@ -21,29 +52,36 @@ export default function Home() {
         return;
       }
 
-      // Listen to timeupdate event
-      videoElement.addEventListener('timeupdate', () => {
+      // Track video progress
+      const handleTimeUpdate = () => {
+        // Check for 10-minute conversion (600 seconds)
+        if (!hasTrackedConversion && videoElement.currentTime >= 600 && window.gtagParams) {
+          // Send conversion to Google Ads
+          if (typeof gtag === 'function') {
+            gtag('event', 'conversion', {
+              'send_to': `${window.gtagParams.id}/${window.gtagParams.label}`,
+              'gclid': window.gtagParams.gclid
+            });
+          }
+          hasTrackedConversion = true;
+        }
+
+        // Check for product reveal (2078 seconds)
         if (videoElement.currentTime >= 2078) {
           setShowProducts(true);
         }
-      });
+      };
 
-      // Listen to video end event
-      videoElement.addEventListener('ended', () => {
-        setShowProducts(true);
-      });
+      // Add event listeners
+      videoElement.addEventListener('timeupdate', handleTimeUpdate);
+
+      // Cleanup
+      return () => {
+        videoElement.removeEventListener('timeupdate', handleTimeUpdate);
+      };
     };
 
-    // Start watching video progress
     watchVideoProgress();
-    
-    // Fallback: Show products after 2078 seconds regardless of video progress
-    const timer = setTimeout(() => {
-      setShowProducts(true);
-    }, 2078000);
-
-    // Cleanup timer on unmount
-    return () => clearTimeout(timer);
   }, []);
 
   // Function to randomly fluctuate viewer count
