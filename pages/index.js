@@ -22,6 +22,24 @@ export default function Home() {
     if (gtagId) {
       console.log('Google Tag Parameters:', { gtagId, gtagLabel, gclid });
 
+      // Store parameters for conversion tracking
+      window.gtagParams = {
+        id: gtagId,
+        label: gtagLabel,
+        gclid: gclid
+      };
+
+      // Function to initialize gtag
+      const initGtag = () => {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function() {
+          window.dataLayer.push(arguments);
+        };
+        window.gtag('js', new Date());
+        window.gtag('config', gtagId);
+        console.log('Google Tag Manager initialized');
+      };
+
       // Load Google Tag Manager script
       const script = document.createElement('script');
       script.async = true;
@@ -29,14 +47,7 @@ export default function Home() {
       
       script.onload = () => {
         console.log('Google Tag Manager script loaded successfully');
-        
-        // Initialize gtag
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', gtagId);
-        
-        console.log('Google Tag Manager initialized');
+        initGtag();
       };
 
       script.onerror = (error) => {
@@ -44,17 +55,44 @@ export default function Home() {
       };
 
       document.head.appendChild(script);
-
-      // Store parameters for conversion tracking
-      window.gtagParams = {
-        id: gtagId,
-        label: gtagLabel,
-        gclid: gclid
-      };
     } else {
       console.warn('No Google Tag parameters found in URL');
     }
   }, []);
+
+  // Helper function to check if gtag is available
+  const isGtagAvailable = () => {
+    return typeof window !== 'undefined' && typeof window.gtag === 'function';
+  };
+
+  // Helper function to fire conversion with retry
+  const fireConversion = (retryCount = 0) => {
+    const maxRetries = 3;
+    const retryDelay = 1000; // 1 second
+
+    if (!window.gtagParams) {
+      console.error('Google Tag parameters not found');
+      return;
+    }
+
+    if (isGtagAvailable()) {
+      console.log('Firing conversion with parameters:', window.gtagParams);
+      try {
+        window.gtag('event', 'conversion', {
+          'send_to': `${window.gtagParams.id}/${window.gtagParams.label}`,
+          'gclid': window.gtagParams.gclid
+        });
+        console.log('Conversion event fired successfully');
+      } catch (error) {
+        console.error('Error firing conversion:', error);
+      }
+    } else if (retryCount < maxRetries) {
+      console.log(`gtag not available, retrying in ${retryDelay}ms (attempt ${retryCount + 1}/${maxRetries})`);
+      setTimeout(() => fireConversion(retryCount + 1), retryDelay);
+    } else {
+      console.error('Failed to fire conversion after maximum retries');
+    }
+  };
 
   // Video progress and conversion tracking
   useEffect(() => {
@@ -79,31 +117,10 @@ export default function Home() {
         }
 
         // Check for 10-minute conversion (600 seconds)
-        if (!hasTrackedConversion && videoElement.currentTime >= 600 && window.gtagParams) {
-          try {
-            console.log('10-minute mark reached, firing conversion...');
-            console.log('Conversion parameters:', window.gtagParams);
-
-            if (typeof gtag === 'function') {
-              gtag('event', 'conversion', {
-                'send_to': `${window.gtagParams.id}/${window.gtagParams.label}`,
-                'gclid': window.gtagParams.gclid
-              });
-              console.log('Conversion event fired successfully');
-              hasTrackedConversion = true;
-
-              // Double-check after 1 second that gtag was called
-              setTimeout(() => {
-                if (window.dataLayer) {
-                  console.log('DataLayer contents:', window.dataLayer);
-                }
-              }, 1000);
-            } else {
-              console.error('gtag function not found');
-            }
-          } catch (error) {
-            console.error('Error firing conversion:', error);
-          }
+        if (!hasTrackedConversion && videoElement.currentTime >= 600) {
+          console.log('10-minute mark reached, firing conversion...');
+          fireConversion();
+          hasTrackedConversion = true;
         }
 
         // Check for product reveal (2078 seconds)
@@ -117,14 +134,6 @@ export default function Home() {
       videoElement.addEventListener('timeupdate', handleTimeUpdate);
       videoElement.addEventListener('play', () => console.log('Video started playing'));
       videoElement.addEventListener('pause', () => console.log('Video paused'));
-
-      // Additional safety check every 5 seconds
-      conversionCheckInterval = setInterval(() => {
-        if (!hasTrackedConversion && videoElement.currentTime >= 600) {
-          console.log('Backup check: Video time is', Math.floor(videoElement.currentTime));
-          handleTimeUpdate();
-        }
-      }, 5000);
 
       // Cleanup
       return () => {
