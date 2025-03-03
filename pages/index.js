@@ -9,35 +9,10 @@ const ClientSideOnly = dynamic(
 );
 
 export default function Home() {
-  const [showNotification, setShowNotification] = useState(false);
-  const [currentBuyer, setCurrentBuyer] = useState(null);
   const [showProducts, setShowProducts] = useState(false);
   const [watchCount, setWatchCount] = useState(574);
 
   useEffect(() => {
-    // Buy notifications logic
-    const buyers = [
-      { name: 'Michael R.', location: 'Los Angeles, CA' },
-      { name: 'James S.', location: 'Houston, TX' },
-      { name: 'William D.', location: 'Chicago, IL' },
-      { name: 'Robert K.', location: 'Miami, FL' },
-      { name: 'Thomas B.', location: 'Phoenix, AZ' }
-    ];
-
-    const showRandomPurchase = () => {
-      const buyer = buyers[Math.floor(Math.random() * buyers.length)];
-      setCurrentBuyer(buyer);
-      setShowNotification(true);
-      setTimeout(() => setShowNotification(false), 4000);
-    };
-
-    // Show first notification after 15-30 seconds
-    const initialNotification = setTimeout(() => {
-      showRandomPurchase();
-      // Then show subsequent notifications every 40-90 seconds
-      setInterval(showRandomPurchase, 40000 + Math.random() * 50000);
-    }, 15000 + Math.random() * 15000);
-
     // Video progress watcher
     const watchVideoProgress = () => {
       if (typeof window !== 'undefined' && typeof window.smartplayer === 'undefined') {
@@ -47,7 +22,7 @@ export default function Home() {
 
       if (typeof window !== 'undefined' && window.smartplayer && window.smartplayer.instances && window.smartplayer.instances.length > 0) {
         window.smartplayer.instances[0].on('timeupdate', () => {
-          if (window.smartplayer.instances[0].video.currentTime >= 2078) { // Changed from 180 to 2078 seconds
+          if (window.smartplayer.instances[0].video.currentTime >= 2078) {
             setShowProducts(true);
           }
         });
@@ -71,12 +46,8 @@ export default function Home() {
         if (localStorage) {
           localStorage.setItem('alreadyProductsDisplayed', true);
         }
-      }, 2078000); // Changed from 180000 to 2078000 (2078 seconds)
+      }, 2078000);
     }
-
-    return () => {
-      clearTimeout(initialNotification);
-    };
   }, []);
 
   // Save to localStorage when products are shown
@@ -104,7 +75,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Alpha Bites - Limited Time Presentation</title>
+        <title>Watch Now - Limited Time Presentation</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta property="og:type" content="website" />
@@ -125,17 +96,6 @@ export default function Home() {
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" />
       </Head>
       
-      {/* Buy Notification Popup */}
-      {showNotification && currentBuyer && (
-        <div className="social-proof-popup show">
-          <div className="popup-content">
-            <p><strong>{currentBuyer.name}</strong> from <span>{currentBuyer.location}</span></p>
-            <p>Just purchased</p>
-            <small>a moment ago</small>
-          </div>
-        </div>
-      )}
-
       <div style={{ 
         backgroundColor: '#fff',
         minHeight: '100vh',
