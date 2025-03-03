@@ -104,7 +104,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Blue Salt Hack - Limited Time Presentation</title>
+        <title>Alpha Bites - Limited Time Presentation</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta property="og:type" content="website" />
@@ -178,6 +178,207 @@ export default function Home() {
           }}>
             {watchCount} People watching now...
           </div>
+
+          {/* Product Reveal Section */}
+          {showProducts && (
+            <>
+              {/* Green Bar with Text */}
+              <div style={{
+                width: '100%',
+                backgroundColor: '#4CAF50',
+                color: 'white',
+                padding: '15px 0',
+                textAlign: 'center',
+                marginTop: '20px',
+                fontFamily: 'Arial, sans-serif',
+                fontWeight: 'bold'
+              }}>
+                Claim Your Discounted Alpha Bites Below While Stock Lasts
+              </div>
+
+              {/* Product Options */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'center',
+                gap: '20px',
+                flexWrap: 'wrap',
+                padding: '20px',
+                width: '100%',
+                maxWidth: '960px'
+              }}>
+                {/* Try One Option */}
+                <div style={{
+                  flex: '1',
+                  minWidth: '280px',
+                  maxWidth: '300px',
+                  backgroundColor: 'white',
+                  borderRadius: '10px',
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                  overflow: 'hidden'
+                }}>
+                  <div style={{
+                    backgroundColor: '#f8f8f8',
+                    padding: '15px',
+                    textAlign: 'center',
+                    borderBottom: '1px solid #eee'
+                  }}>
+                    <h3 style={{ margin: 0, color: '#333' }}>Try One</h3>
+                    <p style={{ margin: '5px 0 0', color: '#666' }}>30 Days Supply</p>
+                  </div>
+                  <div style={{ padding: '20px', textAlign: 'center' }}>
+                    <img src="/images/1bottle.png" alt="1 Bottle" style={{ maxWidth: '200px', height: 'auto' }} />
+                    <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
+                      $69
+                    </div>
+                    <p style={{ margin: '10px 0', color: '#666' }}>Only $69 / Bottle</p>
+                    <p style={{ margin: '10px 0', color: '#666' }}>180 Days Guarantee</p>
+                    <a href="https://pay.hotmart.com/" style={{
+                      display: 'block',
+                      backgroundColor: '#ff9800',
+                      color: 'white',
+                      padding: '15px',
+                      textDecoration: 'none',
+                      borderRadius: '5px',
+                      fontWeight: 'bold',
+                      marginTop: '15px'
+                    }}>
+                      BUY NOW!
+                    </a>
+                    <div style={{ marginTop: '15px' }}>
+                      <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Good Value Option */}
+                <div style={{
+                  flex: '1',
+                  minWidth: '280px',
+                  maxWidth: '300px',
+                  backgroundColor: 'white',
+                  borderRadius: '10px',
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                  overflow: 'hidden'
+                }}>
+                  <div style={{
+                    backgroundColor: '#ffc107',
+                    padding: '15px',
+                    textAlign: 'center',
+                    color: 'white'
+                  }}>
+                    <h3 style={{ margin: 0 }}>Good Value</h3>
+                    <p style={{ margin: '5px 0 0' }}>180 Days Supply</p>
+                  </div>
+                  <div style={{ padding: '20px', textAlign: 'center' }}>
+                    <img src="/images/3bottles.png" alt="3 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
+                    <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
+                      $49
+                    </div>
+                    <p style={{ margin: '10px 0', color: '#666' }}>Only $49 / Bottle</p>
+                    <p style={{ margin: '10px 0', color: '#4CAF50' }}>BIGGEST DISCOUNT</p>
+                    <p style={{ margin: '10px 0', color: '#666' }}>180 Days Guarantee</p>
+                    <a href="https://pay.hotmart.com/" style={{
+                      display: 'block',
+                      backgroundColor: '#ff9800',
+                      color: 'white',
+                      padding: '15px',
+                      textDecoration: 'none',
+                      borderRadius: '5px',
+                      fontWeight: 'bold',
+                      marginTop: '15px'
+                    }}>
+                      BUY NOW!
+                    </a>
+                    <div style={{ marginTop: '15px' }}>
+                      <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
+                    </div>
+                    <div style={{
+                      backgroundColor: '#4CAF50',
+                      color: 'white',
+                      padding: '5px',
+                      marginTop: '10px',
+                      borderRadius: '3px',
+                      fontSize: '14px'
+                    }}>
+                      FREE SHIPPING
+                    </div>
+                  </div>
+                </div>
+
+                {/* Most Popular Option */}
+                <div style={{
+                  flex: '1',
+                  minWidth: '280px',
+                  maxWidth: '300px',
+                  backgroundColor: 'white',
+                  borderRadius: '10px',
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                  overflow: 'hidden'
+                }}>
+                  <div style={{
+                    backgroundColor: '#2196F3',
+                    padding: '15px',
+                    textAlign: 'center',
+                    color: 'white'
+                  }}>
+                    <h3 style={{ margin: 0 }}>Most Popular</h3>
+                    <p style={{ margin: '5px 0 0' }}>90 Days Supply</p>
+                  </div>
+                  <div style={{ padding: '20px', textAlign: 'center' }}>
+                    <img src="/images/6bottles.png" alt="6 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
+                    <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
+                      $59
+                    </div>
+                    <p style={{ margin: '10px 0', color: '#666' }}>Only $59 / Bottle</p>
+                    <p style={{ margin: '10px 0', color: '#666' }}>180 Days Guarantee</p>
+                    <a href="https://pay.hotmart.com/" style={{
+                      display: 'block',
+                      backgroundColor: '#ff9800',
+                      color: 'white',
+                      padding: '15px',
+                      textDecoration: 'none',
+                      borderRadius: '5px',
+                      fontWeight: 'bold',
+                      marginTop: '15px'
+                    }}>
+                      BUY NOW!
+                    </a>
+                    <div style={{ marginTop: '15px' }}>
+                      <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
+                    </div>
+                    <div style={{
+                      backgroundColor: '#4CAF50',
+                      color: 'white',
+                      padding: '5px',
+                      marginTop: '10px',
+                      borderRadius: '3px',
+                      fontSize: '14px'
+                    }}>
+                      FREE SHIPPING
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Money Back Guarantee Section */}
+              <div style={{
+                maxWidth: '800px',
+                margin: '40px auto',
+                padding: '20px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                textAlign: 'center'
+              }}>
+                <img src="/images/guarantee.png" alt="180 Days Money Back Guarantee" style={{ maxWidth: '150px' }} />
+                <h3 style={{ color: '#333', marginTop: '20px' }}>100% Satisfaction 180-Day Money Back Guarantee</h3>
+                <p style={{ color: '#666', lineHeight: '1.6' }}>
+                  Your success is our success! If you are not absolutely thrilled with your transformation, 
+                  just let us know within 180 days and we'll refund every penny of your investment. No questions asked!
+                </p>
+              </div>
+            </>
+          )}
 
           {/* Scientific References Section */}
           <div style={{
@@ -275,7 +476,7 @@ export default function Home() {
               textAlign: 'center',
               margin: '10px 0'
             }}>
-              © Nerve Alive Research 2025. All Rights Reserved.
+              © Alpha Bites Male Enhancement 2025. All Rights Reserved.
             </p>
           </div>
         </div>
