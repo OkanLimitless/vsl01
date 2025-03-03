@@ -34,28 +34,17 @@ export default function Home() {
       }
     };
 
-    // Check if products should be shown
-    if (localStorage && localStorage.getItem('alreadyProductsDisplayed') === 'true') {
+    // Start watching video progress
+    watchVideoProgress();
+    
+    // Fallback: Show products after 2078 seconds regardless of video progress
+    const timer = setTimeout(() => {
       setShowProducts(true);
-    } else {
-      watchVideoProgress();
-      
-      // Fallback: Show products after 2078 seconds regardless of video progress
-      setTimeout(() => {
-        setShowProducts(true);
-        if (localStorage) {
-          localStorage.setItem('alreadyProductsDisplayed', true);
-        }
-      }, 2078000);
-    }
-  }, []);
+    }, 2078000);
 
-  // Save to localStorage when products are shown
-  useEffect(() => {
-    if (showProducts && localStorage) {
-      localStorage.setItem('alreadyProductsDisplayed', true);
-    }
-  }, [showProducts]);
+    // Cleanup timer on unmount
+    return () => clearTimeout(timer);
+  }, []);
 
   // Function to randomly fluctuate viewer count
   useEffect(() => {
