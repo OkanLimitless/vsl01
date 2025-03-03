@@ -206,7 +206,7 @@ export default function Home() {
                 width: '100%',
                 maxWidth: '960px'
               }}>
-                {/* Try One Option */}
+                {/* Try Two Option */}
                 <div style={{
                   flex: '1',
                   minWidth: '280px',
@@ -217,35 +217,100 @@ export default function Home() {
                   overflow: 'hidden'
                 }}>
                   <div style={{
-                    backgroundColor: '#f8f8f8',
+                    backgroundColor: '#FFF8E7',
                     padding: '15px',
-                    textAlign: 'center',
-                    borderBottom: '1px solid #eee'
+                    textAlign: 'center'
                   }}>
-                    <h3 style={{ margin: 0, color: '#333' }}>Try One</h3>
-                    <p style={{ margin: '5px 0 0', color: '#666' }}>30 Days Supply</p>
+                    <h3 style={{ margin: 0, color: '#333', fontSize: '24px' }}>Try Two</h3>
+                    <p style={{ margin: '5px 0 0', color: '#666' }}>60 Days, 2 Bottles</p>
                   </div>
                   <div style={{ padding: '20px', textAlign: 'center' }}>
-                    <img src="/images/1bottle.png" alt="1 Bottle" style={{ maxWidth: '200px', height: 'auto' }} />
-                    <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
-                      $69
+                    <img src="/images/2bottles.png" alt="2 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
+                    <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
+                      <span style={{ fontSize: '30px' }}>$</span>79<span style={{ fontSize: '24px', color: '#666' }}> PER BOTTLE</span>
                     </div>
-                    <p style={{ margin: '10px 0', color: '#666' }}>Only $69 / Bottle</p>
-                    <p style={{ margin: '10px 0', color: '#666' }}>180 Days Guarantee</p>
+                    <div style={{ color: '#D32F2F', fontWeight: 'bold', margin: '10px 0' }}>
+                      YOU SAVE $436!
+                    </div>
+                    <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                      <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
+                    </div>
                     <a href="https://pay.hotmart.com/" style={{
                       display: 'block',
-                      backgroundColor: '#ff9800',
-                      color: 'white',
+                      backgroundColor: '#FFD700',
+                      color: '#000',
                       padding: '15px',
                       textDecoration: 'none',
                       borderRadius: '5px',
                       fontWeight: 'bold',
-                      marginTop: '15px'
+                      marginTop: '15px',
+                      fontSize: '20px'
                     }}>
-                      BUY NOW!
+                      BUY NOW
                     </a>
                     <div style={{ marginTop: '15px' }}>
                       <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
+                    </div>
+                    <div style={{ marginTop: '15px', fontSize: '16px' }}>
+                      <div>Total: <span style={{ textDecoration: 'line-through', color: '#999' }}>$594</span> <strong>$158</strong></div>
+                      <div>+9.99 SHIPPING</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Best Value Option */}
+                <div style={{
+                  flex: '1',
+                  minWidth: '280px',
+                  maxWidth: '300px',
+                  backgroundColor: 'white',
+                  borderRadius: '10px',
+                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                  overflow: 'hidden',
+                  border: '2px solid #DAA520'
+                }}>
+                  <div style={{
+                    background: 'linear-gradient(to bottom, #DAA520, #FFD700)',
+                    padding: '15px',
+                    textAlign: 'center',
+                    color: '#000'
+                  }}>
+                    <h3 style={{ margin: 0, fontSize: '24px' }}>Best Value!</h3>
+                    <p style={{ margin: '5px 0 0' }}>180 Days, 6 Bottles</p>
+                  </div>
+                  <div style={{ padding: '20px', textAlign: 'center' }}>
+                    <img src="/images/6bottles.png" alt="6 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
+                    <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
+                      <span style={{ fontSize: '30px' }}>$</span>49<span style={{ fontSize: '24px', color: '#666' }}> PER BOTTLE</span>
+                    </div>
+                    <div style={{ color: '#D32F2F', fontWeight: 'bold', margin: '10px 0' }}>
+                      YOU SAVE $1488!
+                    </div>
+                    <div style={{ backgroundColor: '#000', color: '#fff', padding: '5px', margin: '10px 0', fontWeight: 'bold' }}>
+                      BIGGEST DISCOUNT
+                    </div>
+                    <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                      <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
+                    </div>
+                    <a href="https://pay.hotmart.com/" style={{
+                      display: 'block',
+                      backgroundColor: '#FFD700',
+                      color: '#000',
+                      padding: '15px',
+                      textDecoration: 'none',
+                      borderRadius: '5px',
+                      fontWeight: 'bold',
+                      marginTop: '15px',
+                      fontSize: '20px'
+                    }}>
+                      BUY NOW
+                    </a>
+                    <div style={{ marginTop: '15px' }}>
+                      <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
+                    </div>
+                    <div style={{ marginTop: '15px', fontSize: '16px' }}>
+                      <div>Total: <span style={{ textDecoration: 'line-through', color: '#999' }}>$1782</span> <strong>$294</strong></div>
+                      <div style={{ color: '#4CAF50', fontWeight: 'bold' }}>+ FREE SHIPPING</div>
                     </div>
                   </div>
                 </div>
@@ -261,100 +326,43 @@ export default function Home() {
                   overflow: 'hidden'
                 }}>
                   <div style={{
-                    backgroundColor: '#ffc107',
+                    backgroundColor: '#FFF8E7',
                     padding: '15px',
-                    textAlign: 'center',
-                    color: 'white'
+                    textAlign: 'center'
                   }}>
-                    <h3 style={{ margin: 0 }}>Good Value</h3>
-                    <p style={{ margin: '5px 0 0' }}>180 Days Supply</p>
+                    <h3 style={{ margin: 0, color: '#333', fontSize: '24px' }}>Good Value</h3>
+                    <p style={{ margin: '5px 0 0', color: '#666' }}>90 Days, 3 Bottles</p>
                   </div>
                   <div style={{ padding: '20px', textAlign: 'center' }}>
                     <img src="/images/3bottles.png" alt="3 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
-                    <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
-                      $49
+                    <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
+                      <span style={{ fontSize: '30px' }}>$</span>69<span style={{ fontSize: '24px', color: '#666' }}> PER BOTTLE</span>
                     </div>
-                    <p style={{ margin: '10px 0', color: '#666' }}>Only $49 / Bottle</p>
-                    <p style={{ margin: '10px 0', color: '#4CAF50' }}>BIGGEST DISCOUNT</p>
-                    <p style={{ margin: '10px 0', color: '#666' }}>180 Days Guarantee</p>
+                    <div style={{ color: '#D32F2F', fontWeight: 'bold', margin: '10px 0' }}>
+                      YOU SAVE $684!
+                    </div>
+                    <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                      <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
+                    </div>
                     <a href="https://pay.hotmart.com/" style={{
                       display: 'block',
-                      backgroundColor: '#ff9800',
-                      color: 'white',
+                      backgroundColor: '#FFD700',
+                      color: '#000',
                       padding: '15px',
                       textDecoration: 'none',
                       borderRadius: '5px',
                       fontWeight: 'bold',
-                      marginTop: '15px'
+                      marginTop: '15px',
+                      fontSize: '20px'
                     }}>
-                      BUY NOW!
+                      BUY NOW
                     </a>
                     <div style={{ marginTop: '15px' }}>
                       <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
                     </div>
-                    <div style={{
-                      backgroundColor: '#4CAF50',
-                      color: 'white',
-                      padding: '5px',
-                      marginTop: '10px',
-                      borderRadius: '3px',
-                      fontSize: '14px'
-                    }}>
-                      FREE SHIPPING
-                    </div>
-                  </div>
-                </div>
-
-                {/* Most Popular Option */}
-                <div style={{
-                  flex: '1',
-                  minWidth: '280px',
-                  maxWidth: '300px',
-                  backgroundColor: 'white',
-                  borderRadius: '10px',
-                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                  overflow: 'hidden'
-                }}>
-                  <div style={{
-                    backgroundColor: '#2196F3',
-                    padding: '15px',
-                    textAlign: 'center',
-                    color: 'white'
-                  }}>
-                    <h3 style={{ margin: 0 }}>Most Popular</h3>
-                    <p style={{ margin: '5px 0 0' }}>90 Days Supply</p>
-                  </div>
-                  <div style={{ padding: '20px', textAlign: 'center' }}>
-                    <img src="/images/6bottles.png" alt="6 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
-                    <div style={{ fontSize: '32px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
-                      $59
-                    </div>
-                    <p style={{ margin: '10px 0', color: '#666' }}>Only $59 / Bottle</p>
-                    <p style={{ margin: '10px 0', color: '#666' }}>180 Days Guarantee</p>
-                    <a href="https://pay.hotmart.com/" style={{
-                      display: 'block',
-                      backgroundColor: '#ff9800',
-                      color: 'white',
-                      padding: '15px',
-                      textDecoration: 'none',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      marginTop: '15px'
-                    }}>
-                      BUY NOW!
-                    </a>
-                    <div style={{ marginTop: '15px' }}>
-                      <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
-                    </div>
-                    <div style={{
-                      backgroundColor: '#4CAF50',
-                      color: 'white',
-                      padding: '5px',
-                      marginTop: '10px',
-                      borderRadius: '3px',
-                      fontSize: '14px'
-                    }}>
-                      FREE SHIPPING
+                    <div style={{ marginTop: '15px', fontSize: '16px' }}>
+                      <div>Total: <span style={{ textDecoration: 'line-through', color: '#999' }}>$891</span> <strong>$207</strong></div>
+                      <div style={{ color: '#4CAF50', fontWeight: 'bold' }}>+ FREE SHIPPING</div>
                     </div>
                   </div>
                 </div>
