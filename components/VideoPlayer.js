@@ -233,7 +233,7 @@ export default function VideoPlayer() {
             }}
           >
             <img 
-              src="/images/thumbnail1.png"
+              src="@thumbnail1.png"
               alt="Video Thumbnail"
               style={{
                 width: '100%',

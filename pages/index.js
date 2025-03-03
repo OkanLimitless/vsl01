@@ -140,213 +140,211 @@ export default function Home() {
           </div>
 
           {/* Product Reveal Section */}
-          {showProducts && (
-            <>
-              {/* Green Bar with Text */}
+          <div className={`product-reveal-container ${!showProducts ? 'hidden' : ''}`}>
+            {/* Green Bar with Text */}
+            <div style={{
+              width: '100%',
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              padding: '15px 0',
+              textAlign: 'center',
+              marginTop: '20px',
+              fontFamily: 'Arial, sans-serif',
+              fontWeight: 'bold'
+            }}>
+              Claim Your Discounted Alpha Bites Below While Stock Lasts
+            </div>
+
+            {/* Product Options */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: '20px',
+              flexWrap: 'wrap',
+              padding: '20px',
+              width: '100%',
+              maxWidth: '960px'
+            }}>
+              {/* Try Two Option */}
               <div style={{
-                width: '100%',
-                backgroundColor: '#4CAF50',
-                color: 'white',
-                padding: '15px 0',
-                textAlign: 'center',
-                marginTop: '20px',
-                fontFamily: 'Arial, sans-serif',
-                fontWeight: 'bold'
-              }}>
-                Claim Your Discounted Alpha Bites Below While Stock Lasts
-              </div>
-
-              {/* Product Options */}
-              <div style={{
-                display: 'flex',
-                justifyContent: 'center',
-                gap: '20px',
-                flexWrap: 'wrap',
-                padding: '20px',
-                width: '100%',
-                maxWidth: '960px'
-              }}>
-                {/* Try Two Option */}
-                <div style={{
-                  flex: '1',
-                  minWidth: '280px',
-                  maxWidth: '300px',
-                  backgroundColor: 'white',
-                  borderRadius: '10px',
-                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                  overflow: 'hidden'
-                }}>
-                  <div style={{
-                    backgroundColor: '#FFF8E7',
-                    padding: '15px',
-                    textAlign: 'center'
-                  }}>
-                    <h3 style={{ margin: 0, color: '#333', fontSize: '24px' }}>Try Two</h3>
-                    <p style={{ margin: '5px 0 0', color: '#666' }}>60 Days, 2 Bottles</p>
-                  </div>
-                  <div style={{ padding: '20px', textAlign: 'center' }}>
-                    <img src="/images/2bottles.png" alt="2 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
-                    <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
-                      <span style={{ fontSize: '30px' }}>$</span>79<span style={{ fontSize: '24px', color: '#666' }}> PER BOTTLE</span>
-                    </div>
-                    <div style={{ color: '#D32F2F', fontWeight: 'bold', margin: '10px 0' }}>
-                      YOU SAVE $436!
-                    </div>
-                    <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-                      <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
-                    </div>
-                    <a href="https://afflat3e1.com/lnk.asp?o=28584&c=918277&a=271469&k=7AAF2B3495F0AA69D812039F5822E7A3&l=31571" style={{
-                      display: 'block',
-                      backgroundColor: '#FFD700',
-                      color: '#000',
-                      padding: '15px',
-                      textDecoration: 'none',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      marginTop: '15px',
-                      fontSize: '20px'
-                    }}>
-                      BUY NOW
-                    </a>
-                    <div style={{ marginTop: '15px' }}>
-                      <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
-                    </div>
-                    <div style={{ marginTop: '15px', fontSize: '16px' }}>
-                      <div>Total: <span style={{ textDecoration: 'line-through', color: '#999' }}>$594</span> <strong>$158</strong></div>
-                      <div>+9.99 SHIPPING</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Best Value Option */}
-                <div style={{
-                  flex: '1',
-                  minWidth: '280px',
-                  maxWidth: '300px',
-                  backgroundColor: 'white',
-                  borderRadius: '10px',
-                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                  overflow: 'hidden',
-                  border: '2px solid #DAA520'
-                }}>
-                  <div style={{
-                    background: 'linear-gradient(to bottom, #DAA520, #FFD700)',
-                    padding: '15px',
-                    textAlign: 'center',
-                    color: '#000'
-                  }}>
-                    <h3 style={{ margin: 0, fontSize: '24px' }}>Best Value!</h3>
-                    <p style={{ margin: '5px 0 0' }}>180 Days, 6 Bottles</p>
-                  </div>
-                  <div style={{ padding: '20px', textAlign: 'center' }}>
-                    <img src="/images/6bottles.png" alt="6 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
-                    <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
-                      <span style={{ fontSize: '30px' }}>$</span>49<span style={{ fontSize: '24px', color: '#666' }}> PER BOTTLE</span>
-                    </div>
-                    <div style={{ color: '#D32F2F', fontWeight: 'bold', margin: '10px 0' }}>
-                      YOU SAVE $1488!
-                    </div>
-                    <div style={{ backgroundColor: '#000', color: '#fff', padding: '5px', margin: '10px 0', fontWeight: 'bold' }}>
-                      BIGGEST DISCOUNT
-                    </div>
-                    <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-                      <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
-                    </div>
-                    <a href="https://afflat3e1.com/lnk.asp?o=28584&c=918277&a=271469&k=7AAF2B3495F0AA69D812039F5822E7A3&l=31571" style={{
-                      display: 'block',
-                      backgroundColor: '#FFD700',
-                      color: '#000',
-                      padding: '15px',
-                      textDecoration: 'none',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      marginTop: '15px',
-                      fontSize: '20px'
-                    }}>
-                      BUY NOW
-                    </a>
-                    <div style={{ marginTop: '15px' }}>
-                      <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
-                    </div>
-                    <div style={{ marginTop: '15px', fontSize: '16px' }}>
-                      <div>Total: <span style={{ textDecoration: 'line-through', color: '#999' }}>$1782</span> <strong>$294</strong></div>
-                      <div style={{ color: '#4CAF50', fontWeight: 'bold' }}>+ FREE SHIPPING</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Good Value Option */}
-                <div style={{
-                  flex: '1',
-                  minWidth: '280px',
-                  maxWidth: '300px',
-                  backgroundColor: 'white',
-                  borderRadius: '10px',
-                  boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                  overflow: 'hidden'
-                }}>
-                  <div style={{
-                    backgroundColor: '#FFF8E7',
-                    padding: '15px',
-                    textAlign: 'center'
-                  }}>
-                    <h3 style={{ margin: 0, color: '#333', fontSize: '24px' }}>Good Value</h3>
-                    <p style={{ margin: '5px 0 0', color: '#666' }}>90 Days, 3 Bottles</p>
-                  </div>
-                  <div style={{ padding: '20px', textAlign: 'center' }}>
-                    <img src="/images/3bottles.png" alt="3 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
-                    <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
-                      <span style={{ fontSize: '30px' }}>$</span>69<span style={{ fontSize: '24px', color: '#666' }}> PER BOTTLE</span>
-                    </div>
-                    <div style={{ color: '#D32F2F', fontWeight: 'bold', margin: '10px 0' }}>
-                      YOU SAVE $684!
-                    </div>
-                    <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
-                      <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
-                    </div>
-                    <a href="https://afflat3e1.com/lnk.asp?o=28584&c=918277&a=271469&k=7AAF2B3495F0AA69D812039F5822E7A3&l=31571" style={{
-                      display: 'block',
-                      backgroundColor: '#FFD700',
-                      color: '#000',
-                      padding: '15px',
-                      textDecoration: 'none',
-                      borderRadius: '5px',
-                      fontWeight: 'bold',
-                      marginTop: '15px',
-                      fontSize: '20px'
-                    }}>
-                      BUY NOW
-                    </a>
-                    <div style={{ marginTop: '15px' }}>
-                      <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
-                    </div>
-                    <div style={{ marginTop: '15px', fontSize: '16px' }}>
-                      <div>Total: <span style={{ textDecoration: 'line-through', color: '#999' }}>$891</span> <strong>$207</strong></div>
-                      <div style={{ color: '#4CAF50', fontWeight: 'bold' }}>+ FREE SHIPPING</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Money Back Guarantee Section */}
-              <div style={{
-                maxWidth: '800px',
-                margin: '40px auto',
-                padding: '20px',
+                flex: '1',
+                minWidth: '280px',
+                maxWidth: '300px',
                 backgroundColor: 'white',
                 borderRadius: '10px',
                 boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
-                textAlign: 'center'
+                overflow: 'hidden'
               }}>
-                <img src="/images/guarantee.png" alt="180 Days Money Back Guarantee" style={{ maxWidth: '150px' }} />
-                <h3 style={{ color: '#333', marginTop: '20px' }}>100% Satisfaction 180-Day Money Back Guarantee</h3>
-                <p style={{ color: '#666', lineHeight: '1.6' }}>
-                  Your success is our success! If you are not absolutely thrilled with your transformation, 
-                  just let us know within 180 days and we'll refund every penny of your investment. No questions asked!
-                </p>
+                <div style={{
+                  backgroundColor: '#FFF8E7',
+                  padding: '15px',
+                  textAlign: 'center'
+                }}>
+                  <h3 style={{ margin: 0, color: '#333', fontSize: '24px' }}>Try Two</h3>
+                  <p style={{ margin: '5px 0 0', color: '#666' }}>60 Days, 2 Bottles</p>
+                </div>
+                <div style={{ padding: '20px', textAlign: 'center' }}>
+                  <img src="/images/2bottles.png" alt="2 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
+                  <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
+                    <span style={{ fontSize: '30px' }}>$</span>79<span style={{ fontSize: '24px', color: '#666' }}> PER BOTTLE</span>
+                  </div>
+                  <div style={{ color: '#D32F2F', fontWeight: 'bold', margin: '10px 0' }}>
+                    YOU SAVE $436!
+                  </div>
+                  <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
+                  </div>
+                  <a href="https://afflat3e1.com/lnk.asp?o=28584&c=918277&a=271469&k=7AAF2B3495F0AA69D812039F5822E7A3&l=31571" style={{
+                    display: 'block',
+                    backgroundColor: '#FFD700',
+                    color: '#000',
+                    padding: '15px',
+                    textDecoration: 'none',
+                    borderRadius: '5px',
+                    fontWeight: 'bold',
+                    marginTop: '15px',
+                    fontSize: '20px'
+                  }}>
+                    BUY NOW
+                  </a>
+                  <div style={{ marginTop: '15px' }}>
+                    <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
+                  </div>
+                  <div style={{ marginTop: '15px', fontSize: '16px' }}>
+                    <div>Total: <span style={{ textDecoration: 'line-through', color: '#999' }}>$594</span> <strong>$158</strong></div>
+                    <div>+9.99 SHIPPING</div>
+                  </div>
+                </div>
               </div>
-            </>
-          )}
+
+              {/* Best Value Option */}
+              <div style={{
+                flex: '1',
+                minWidth: '280px',
+                maxWidth: '300px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                overflow: 'hidden',
+                border: '2px solid #DAA520'
+              }}>
+                <div style={{
+                  background: 'linear-gradient(to bottom, #DAA520, #FFD700)',
+                  padding: '15px',
+                  textAlign: 'center',
+                  color: '#000'
+                }}>
+                  <h3 style={{ margin: 0, fontSize: '24px' }}>Best Value!</h3>
+                  <p style={{ margin: '5px 0 0' }}>180 Days, 6 Bottles</p>
+                </div>
+                <div style={{ padding: '20px', textAlign: 'center' }}>
+                  <img src="/images/6bottles.png" alt="6 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
+                  <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
+                    <span style={{ fontSize: '30px' }}>$</span>49<span style={{ fontSize: '24px', color: '#666' }}> PER BOTTLE</span>
+                  </div>
+                  <div style={{ color: '#D32F2F', fontWeight: 'bold', margin: '10px 0' }}>
+                    YOU SAVE $1488!
+                  </div>
+                  <div style={{ backgroundColor: '#000', color: '#fff', padding: '5px', margin: '10px 0', fontWeight: 'bold' }}>
+                    BIGGEST DISCOUNT
+                  </div>
+                  <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
+                  </div>
+                  <a href="https://afflat3e1.com/lnk.asp?o=28584&c=918277&a=271469&k=7AAF2B3495F0AA69D812039F5822E7A3&l=31571" style={{
+                    display: 'block',
+                    backgroundColor: '#FFD700',
+                    color: '#000',
+                    padding: '15px',
+                    textDecoration: 'none',
+                    borderRadius: '5px',
+                    fontWeight: 'bold',
+                    marginTop: '15px',
+                    fontSize: '20px'
+                  }}>
+                    BUY NOW
+                  </a>
+                  <div style={{ marginTop: '15px' }}>
+                    <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
+                  </div>
+                  <div style={{ marginTop: '15px', fontSize: '16px' }}>
+                    <div>Total: <span style={{ textDecoration: 'line-through', color: '#999' }}>$1782</span> <strong>$294</strong></div>
+                    <div style={{ color: '#4CAF50', fontWeight: 'bold' }}>+ FREE SHIPPING</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Good Value Option */}
+              <div style={{
+                flex: '1',
+                minWidth: '280px',
+                maxWidth: '300px',
+                backgroundColor: 'white',
+                borderRadius: '10px',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                overflow: 'hidden'
+              }}>
+                <div style={{
+                  backgroundColor: '#FFF8E7',
+                  padding: '15px',
+                  textAlign: 'center'
+                }}>
+                  <h3 style={{ margin: 0, color: '#333', fontSize: '24px' }}>Good Value</h3>
+                  <p style={{ margin: '5px 0 0', color: '#666' }}>90 Days, 3 Bottles</p>
+                </div>
+                <div style={{ padding: '20px', textAlign: 'center' }}>
+                  <img src="/images/3bottles.png" alt="3 Bottles" style={{ maxWidth: '200px', height: 'auto' }} />
+                  <div style={{ fontSize: '48px', fontWeight: 'bold', color: '#333', margin: '15px 0' }}>
+                    <span style={{ fontSize: '30px' }}>$</span>69<span style={{ fontSize: '24px', color: '#666' }}> PER BOTTLE</span>
+                  </div>
+                  <div style={{ color: '#D32F2F', fontWeight: 'bold', margin: '10px 0' }}>
+                    YOU SAVE $684!
+                  </div>
+                  <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
+                    <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
+                  </div>
+                  <a href="https://afflat3e1.com/lnk.asp?o=28584&c=918277&a=271469&k=7AAF2B3495F0AA69D812039F5822E7A3&l=31571" style={{
+                    display: 'block',
+                    backgroundColor: '#FFD700',
+                    color: '#000',
+                    padding: '15px',
+                    textDecoration: 'none',
+                    borderRadius: '5px',
+                    fontWeight: 'bold',
+                    marginTop: '15px',
+                    fontSize: '20px'
+                  }}>
+                    BUY NOW
+                  </a>
+                  <div style={{ marginTop: '15px' }}>
+                    <img src="/images/cards.png" alt="Payment Methods" style={{ maxWidth: '200px' }} />
+                  </div>
+                  <div style={{ marginTop: '15px', fontSize: '16px' }}>
+                    <div>Total: <span style={{ textDecoration: 'line-through', color: '#999' }}>$891</span> <strong>$207</strong></div>
+                    <div style={{ color: '#4CAF50', fontWeight: 'bold' }}>+ FREE SHIPPING</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Money Back Guarantee Section */}
+            <div style={{
+              maxWidth: '800px',
+              margin: '40px auto',
+              padding: '20px',
+              backgroundColor: 'white',
+              borderRadius: '10px',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+              textAlign: 'center'
+            }}>
+              <img src="/images/guarantee.png" alt="180 Days Money Back Guarantee" style={{ maxWidth: '150px' }} />
+              <h3 style={{ color: '#333', marginTop: '20px' }}>100% Satisfaction 180-Day Money Back Guarantee</h3>
+              <p style={{ color: '#666', lineHeight: '1.6' }}>
+                Your success is our success! If you are not absolutely thrilled with your transformation, 
+                just let us know within 180 days and we'll refund every penny of your investment. No questions asked!
+              </p>
+            </div>
+          </div>
 
           {/* Scientific References Section */}
           <div style={{
@@ -487,7 +485,7 @@ export default function Home() {
         .product-reveal-container {
           width: 100%;
           max-width: 800px;
-          margin: 20px auto 0; /* Reduced from 80px to 20px for tighter spacing */
+          margin: 20px auto 0;
           background-color: #c6890c;
           display: flex;
           flex-direction: column;
@@ -496,6 +494,15 @@ export default function Home() {
           padding: 0 0 30px 0;
           border-radius: 10px;
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .product-reveal-container.hidden {
+          opacity: 0;
+          transform: translateY(20px);
+          pointer-events: none;
+          position: absolute;
+          visibility: hidden;
         }
         
         /* Headline Section */
