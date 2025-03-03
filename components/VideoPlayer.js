@@ -256,7 +256,7 @@ export default function VideoPlayer() {
             backgroundColor: '#000'
           }}
           playsInline
-          src="/video/main.mp4"
+          src="https://dalrnrpokeqkc.cloudfront.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/67c42ac6c8f32f34895f6035/original.mp4"
         />
         
         {/* Custom Progress Bar */}
