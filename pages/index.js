@@ -109,12 +109,12 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://getalphabites.fun/video-fb" />
-        <meta property="og:title" content="DO THIS &quot;BLUE SALT HACK&quot; TO GET UP WHENEVER YOU WANT" />
+        <meta property="og:title" content="Watch Now" />
         <meta property="og:description" content="Watch Now" />
-        <meta property="og:image" content="https://media.atomicatpages.net/u/DY8cVjx7EoOjljlxdJtxyFSKa7o2/Pictures/pWoEyG4191889.png" />
+        <meta property="og:image" content="/images/thumbnail1.png" />
         <link rel="preload" href="https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/player.js" as="script" />
         <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer/v1/smartplayer.min.js" as="script" />
-        <link rel="preload" href="https://images.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/thumbnail.jpg" as="image" />
+        <link rel="preload" href="/images/thumbnail1.png" as="image" />
         <link rel="dns-prefetch" href="https://cdn.converteai.net" />
         <link rel="dns-prefetch" href="https://scripts.converteai.net" />
         <link rel="dns-prefetch" href="https://images.converteai.net" />
@@ -235,7 +235,7 @@ export default function Home() {
                     <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
                       <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
                     </div>
-                    <a href="https://pay.hotmart.com/" style={{
+                    <a href="https://afflat3e1.com/lnk.asp?o=28584&c=918277&a=271469&k=7AAF2B3495F0AA69D812039F5822E7A3&l=31571" style={{
                       display: 'block',
                       backgroundColor: '#FFD700',
                       color: '#000',
@@ -292,7 +292,7 @@ export default function Home() {
                     <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
                       <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
                     </div>
-                    <a href="https://pay.hotmart.com/" style={{
+                    <a href="https://afflat3e1.com/lnk.asp?o=28584&c=918277&a=271469&k=7AAF2B3495F0AA69D812039F5822E7A3&l=31571" style={{
                       display: 'block',
                       backgroundColor: '#FFD700',
                       color: '#000',
@@ -344,7 +344,7 @@ export default function Home() {
                     <div style={{ margin: '10px 0', color: '#666', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
                       <span style={{ fontSize: '20px' }}>✓</span> 180 DAYS GUARANTEE
                     </div>
-                    <a href="https://pay.hotmart.com/" style={{
+                    <a href="https://afflat3e1.com/lnk.asp?o=28584&c=918277&a=271469&k=7AAF2B3495F0AA69D812039F5822E7A3&l=31571" style={{
                       display: 'block',
                       backgroundColor: '#FFD700',
                       color: '#000',

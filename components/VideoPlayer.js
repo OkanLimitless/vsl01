@@ -207,6 +207,32 @@ export default function VideoPlayer() {
     }
   }, [isPlaying]);
   
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/player.js';
+    script.async = true;
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      if (window.smartplayer) {
+        window.smartplayer.instances[0].on('ready', () => {
+          // Disable pause functionality
+          const videoElement = window.smartplayer.instances[0].video;
+          if (videoElement) {
+            videoElement.addEventListener('pause', (e) => {
+              e.preventDefault();
+              videoElement.play();
+            });
+          }
+        });
+      }
+    };
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+  
   // Handle play/pause toggle
   const togglePlay = () => {
     const video = videoRef.current;
@@ -221,181 +247,14 @@ export default function VideoPlayer() {
   };
 
   return (
-    <div>
-      {/* Single title with orange text and blue highlight for "BLUE SALT HACK" */}
-      <div style={{ 
-        width: '100%', 
-        textAlign: 'center', 
-        marginBottom: '15px',
-        backgroundColor: '#000',
-        padding: '10px 0'
-      }}>
-        <div style={{ 
-          color: '#FF5722', // Orange color for the text
-          fontFamily: 'Arial, sans-serif', 
-          fontWeight: 'bold',
-          fontSize: 'clamp(1.2rem, 4vw, 2.2rem)', // Responsive font size
-          margin: 0,
-          padding: '0 10px',
-          textTransform: 'uppercase',
-          lineHeight: '1.2'
-        }}>
-          DO THIS <span style={{ 
-            backgroundColor: '#0000FF', 
-            color: 'white',
-            padding: '0 10px'
-          }}>"BLUE SALT HACK"</span> TO GET UP WHENEVER YOU WANT
-        </div>
-      </div>
-      
-      <div 
-        style={{ 
-          position: 'relative', 
-          width: '100%', 
-          paddingTop: '56.25%',
-          willChange: 'transform',
-          transform: 'translateZ(0)',
-          isolation: 'isolate',
-          backgroundColor: '#000',
-          overflow: 'hidden',
-          borderRadius: '8px',
-          boxShadow: '0 4px 12px rgba(0,0,0,0.2)'
-        }}
-      >
-        {/* Custom Thumbnail */}
-        {showThumbnail && (
-          <div 
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              zIndex: 20,
-              cursor: 'pointer',
-              backgroundImage: 'url(/thumbnail1.png)',
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}
-            onClick={togglePlay}
-          >
-            {/* Play button overlay on thumbnail */}
-            <div style={{
-              width: '80px',
-              height: '80px',
-              backgroundColor: 'rgba(255, 0, 0, 0.8)',
-              borderRadius: '15px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
-            }}>
-              <div style={{
-                width: 0,
-                height: 0,
-                borderTop: '20px solid transparent',
-                borderBottom: '20px solid transparent',
-                borderLeft: '30px solid white',
-                marginLeft: '8px'
-              }} />
-            </div>
-          </div>
-        )}
-        
-        <video
-          ref={videoRef}
-          preload="auto"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'contain',
-            backgroundColor: '#000',
-            cursor: 'pointer'
-          }}
-          onClick={togglePlay}
-        >
-          <source 
-            src="https://dalrnrpokeqkc.cloudfront.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/67c42ac6c8f32f34895f6035/original.mp4" 
-            type="video/mp4" 
-          />
-          Your browser does not support the video tag.
-        </video>
-        
-        {/* Play/Pause Overlay Button (shows only when paused and thumbnail is not showing) */}
-        {!isPlaying && !showThumbnail && (
-          <div 
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '80px',
-              height: '80px',
-              backgroundColor: 'rgba(0,0,0,0.6)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              cursor: 'pointer',
-              zIndex: 10
-            }}
-            onClick={togglePlay}
-          >
-            <div
-              style={{
-                width: 0,
-                height: 0,
-                borderTop: '20px solid transparent',
-                borderBottom: '20px solid transparent',
-                borderLeft: '30px solid white',
-                marginLeft: '8px'
-              }}
-            />
-          </div>
-        )}
-        
-        {/* VTurb-style fake progress bar with increased height */}
-        <div className="smartplayer-controller-mask" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '40px', zIndex: 1 }}></div>
-        <div className="smartplayer-controller" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', zIndex: 2 }}>
-          <div className="smartplayer-bar-wrap" style={{ position: 'relative', height: '12px' }}>
-            <div className="smartplayer-bar-time" style={{ display: 'none' }}></div>
-            <div className="smartplayer-bar" style={{ position: 'absolute', left: 0, top: 0, right: 0, height: '100%', width: '100%' }}>
-              <div className="smartplayer-loaded" style={{ position: 'absolute', left: 0, top: 0, height: '100%', width: '100%', backgroundColor: 'rgba(255, 255, 255, 0.2)' }}></div>
-              <div 
-                ref={progressContainerRef}
-                className="smartplayer-played" 
-                style={{ position: 'absolute', left: 0, top: 0, height: '100%', width: '100%', zIndex: 2 }}
-                onClick={(e) => {
-                  if (progressContainerRef.current && videoRef.current) {
-                    const rect = progressContainerRef.current.getBoundingClientRect();
-                    const pos = (e.clientX - rect.left) / rect.width;
-                    const actualTime = deceptiveToActualPosition(pos * 100);
-                    videoRef.current.currentTime = actualTime;
-                  }
-                }}
-              >
-                <div 
-                  ref={progressBarRef}
-                  className="smartplayer-fake-bar" 
-                  style={{ 
-                    position: 'absolute', 
-                    left: 0, 
-                    top: 0, 
-                    height: '100%', 
-                    backgroundColor: '#8A2BE2', 
-                    width: '0%',
-                    transition: 'width 0.1s' 
-                  }}
-                ></div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto', position: 'relative' }}>
+      <div id="vid_67c42af2aedb9697b81c45ce" style={{ position: 'relative', width: '100%', height: '100%' }}>
+        <img 
+          id="thumb_67c42af2aedb9697b81c45ce" 
+          src="/images/thumbnail1.png" 
+          style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }} 
+          alt="Video Thumbnail"
+        />
       </div>
     </div>
   );
