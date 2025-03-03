@@ -119,6 +119,15 @@ export default function VideoPlayer() {
           progressBarRef.current.style.width = `${progress}%`;
         }
         setCurrentTime(videoElement.currentTime);
+
+        // Expose video time for product reveal functionality
+        if (typeof window !== 'undefined' && !window.smartplayer) {
+          window.smartplayer = {
+            instances: [{
+              video: videoElement
+            }]
+          };
+        }
       };
       
       // Handle play/pause state
@@ -126,7 +135,12 @@ export default function VideoPlayer() {
         setIsPlaying(true);
         setShowThumbnail(false);
       };
-      const handlePause = () => setIsPlaying(false);
+      
+      const handlePause = (e) => {
+        // Prevent pausing
+        e.preventDefault();
+        videoElement.play();
+      };
       
       // Add event listeners
       videoElement.addEventListener('timeupdate', handleTimeUpdate);
@@ -153,23 +167,6 @@ export default function VideoPlayer() {
           }
         }, 1000);
       });
-      
-      // Expose video element to window for product reveal functionality
-      if (typeof window !== 'undefined') {
-        // Create a mock smartplayer interface for compatibility with existing code
-        window.smartplayer = {
-          instances: [{
-            video: videoElement,
-            on: (eventName, callback) => {
-              if (eventName === 'timeupdate') {
-                videoElement.addEventListener('timeupdate', callback);
-              } else if (eventName === 'ended') {
-                videoElement.addEventListener('ended', callback);
-              }
-            }
-          }]
-        };
-      }
       
       // Handle clicks on progress bar for seeking
       const handleProgressBarClick = (e) => {
@@ -207,32 +204,6 @@ export default function VideoPlayer() {
     }
   }, [isPlaying]);
   
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://scripts.converteai.net/e9bad9e6-04bd-4183-b4a5-0ab5b677316f/players/67c42af2aedb9697b81c45ce/player.js';
-    script.async = true;
-    document.head.appendChild(script);
-
-    script.onload = () => {
-      if (window.smartplayer) {
-        window.smartplayer.instances[0].on('ready', () => {
-          // Disable pause functionality
-          const videoElement = window.smartplayer.instances[0].video;
-          if (videoElement) {
-            videoElement.addEventListener('pause', (e) => {
-              e.preventDefault();
-              videoElement.play();
-            });
-          }
-        });
-      }
-    };
-
-    return () => {
-      document.head.removeChild(script);
-    };
-  }, []);
-  
   // Handle play/pause toggle
   const togglePlay = () => {
     const video = videoRef.current;
@@ -240,21 +211,78 @@ export default function VideoPlayer() {
       if (video.paused) {
         video.play();
         setShowThumbnail(false);
-      } else {
-        video.pause();
       }
     }
   };
 
   return (
     <div style={{ width: '100%', maxWidth: '800px', margin: '0 auto', position: 'relative' }}>
-      <div id="vid_67c42af2aedb9697b81c45ce" style={{ position: 'relative', width: '100%', height: '100%' }}>
-        <img 
-          id="thumb_67c42af2aedb9697b81c45ce" 
-          src="/images/thumbnail1.png" 
-          style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }} 
-          alt="Video Thumbnail"
+      <div style={{ position: 'relative', width: '100%', paddingBottom: '56.25%' }}>
+        {/* Thumbnail */}
+        {showThumbnail && (
+          <div 
+            onClick={togglePlay}
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              cursor: 'pointer',
+              zIndex: 2
+            }}
+          >
+            <img 
+              src="/images/thumbnail1.png"
+              alt="Video Thumbnail"
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover'
+              }}
+            />
+          </div>
+        )}
+        
+        {/* Video Player */}
+        <video
+          ref={videoRef}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: '#000'
+          }}
+          playsInline
+          src="/video/main.mp4"
         />
+        
+        {/* Custom Progress Bar */}
+        <div 
+          ref={progressContainerRef}
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            height: '5px',
+            backgroundColor: 'rgba(255, 255, 255, 0.2)',
+            cursor: 'pointer',
+            zIndex: 3
+          }}
+        >
+          <div
+            ref={progressBarRef}
+            style={{
+              height: '100%',
+              backgroundColor: '#ff0000',
+              width: '0%',
+              transition: 'width 0.1s linear'
+            }}
+          />
+        </div>
       </div>
     </div>
   );
