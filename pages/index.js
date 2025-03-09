@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
 import VideoPlayer from '../components/VideoPlayer';
+import TestimonialVideo from '../components/TestimonialVideo';
 import { useState, useEffect } from 'react';
 
 const ClientSideOnly = dynamic(
@@ -10,6 +11,13 @@ const ClientSideOnly = dynamic(
 
 export default function Home() {
   const [videoRevealed, setVideoRevealed] = useState(false);
+  
+  // Product package links
+  const productLinks = {
+    sixBottle: "https://pay.hotmart.com/X86267910X?off=qqvnwvxl",
+    threeBottle: "https://pay.hotmart.com/X86267910X?off=qqvnwvxl",
+    oneBottle: "https://pay.hotmart.com/X86267910X?off=qqvnwvxl"
+  };
 
   useEffect(() => {
     // Check if the content should be revealed
@@ -117,48 +125,27 @@ export default function Home() {
           <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
           
           <div className="product-options">
-            <div className="product-option">
-              <div className="product-header">
-                <img src="/images/six.png" alt="6 Bottle Package" className="product-image" />
-                <div className="product-details">
-                  <h3>6 Bottle Package</h3>
-                  <p className="product-price"><span className="original-price">$594</span> <span className="sale-price">$294</span></p>
-                  <p className="price-per-bottle">($49 per bottle)</p>
-                </div>
-              </div>
-              <button className="buy-button">BUY NOW</button>
-            </div>
+            <a href={productLinks.sixBottle} target="_blank" rel="noopener noreferrer" className="product-link">
+              <img src="/images/six.png" alt="6 Bottle Package" className="product-full-image" />
+            </a>
             
-            <div className="product-option best-value">
+            <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="product-link best-value">
               <div className="best-value-tag">BEST VALUE</div>
-              <div className="product-header">
-                <img src="/images/three.png" alt="3 Bottle Package" className="product-image" />
-                <div className="product-details">
-                  <h3>3 Bottle Package</h3>
-                  <p className="product-price"><span className="original-price">$297</span> <span className="sale-price">$177</span></p>
-                  <p className="price-per-bottle">($59 per bottle)</p>
-                </div>
-              </div>
-              <button className="buy-button">BUY NOW</button>
-            </div>
+              <img src="/images/three.png" alt="3 Bottle Package" className="product-full-image" />
+            </a>
             
-            <div className="product-option">
-              <div className="product-header">
-                <img src="/images/two.png" alt="1 Bottle Package" className="product-image" />
-                <div className="product-details">
-                  <h3>1 Bottle Package</h3>
-                  <p className="product-price"><span className="original-price">$99</span> <span className="sale-price">$79</span></p>
-                  <p className="price-per-bottle">($79 per bottle)</p>
-                </div>
-              </div>
-              <button className="buy-button">BUY NOW</button>
-            </div>
+            <a href={productLinks.oneBottle} target="_blank" rel="noopener noreferrer" className="product-link">
+              <img src="/images/two.png" alt="1 Bottle Package" className="product-full-image" />
+            </a>
           </div>
         </div>
         
         {/* Testimonials Section - Hidden until video reveal */}
         <div className={`testimonials-section ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
           <h2 className="section-heading">What they're saying about AlphaBites</h2>
+          
+          {/* Testimonial Video */}
+          <TestimonialVideo />
           
           <div className="testimonials-container">
             <img src="/images/ytcomments.png" alt="Customer Testimonials" className="testimonials-image" />
@@ -210,42 +197,18 @@ export default function Home() {
           <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
           
           <div className="product-options">
-            <div className="product-option">
-              <div className="product-header">
-                <img src="/images/six.png" alt="6 Bottle Package" className="product-image" />
-                <div className="product-details">
-                  <h3>6 Bottle Package</h3>
-                  <p className="product-price"><span className="original-price">$594</span> <span className="sale-price">$294</span></p>
-                  <p className="price-per-bottle">($49 per bottle)</p>
-                </div>
-              </div>
-              <button className="buy-button">BUY NOW</button>
-            </div>
+            <a href={productLinks.sixBottle} target="_blank" rel="noopener noreferrer" className="product-link">
+              <img src="/images/six.png" alt="6 Bottle Package" className="product-full-image" />
+            </a>
             
-            <div className="product-option best-value">
+            <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="product-link best-value">
               <div className="best-value-tag">BEST VALUE</div>
-              <div className="product-header">
-                <img src="/images/three.png" alt="3 Bottle Package" className="product-image" />
-                <div className="product-details">
-                  <h3>3 Bottle Package</h3>
-                  <p className="product-price"><span className="original-price">$297</span> <span className="sale-price">$177</span></p>
-                  <p className="price-per-bottle">($59 per bottle)</p>
-                </div>
-              </div>
-              <button className="buy-button">BUY NOW</button>
-            </div>
+              <img src="/images/three.png" alt="3 Bottle Package" className="product-full-image" />
+            </a>
             
-            <div className="product-option">
-              <div className="product-header">
-                <img src="/images/two.png" alt="1 Bottle Package" className="product-image" />
-                <div className="product-details">
-                  <h3>1 Bottle Package</h3>
-                  <p className="product-price"><span className="original-price">$99</span> <span className="sale-price">$79</span></p>
-                  <p className="price-per-bottle">($79 per bottle)</p>
-                </div>
-              </div>
-              <button className="buy-button">BUY NOW</button>
-            </div>
+            <a href={productLinks.oneBottle} target="_blank" rel="noopener noreferrer" className="product-link">
+              <img src="/images/two.png" alt="1 Bottle Package" className="product-full-image" />
+            </a>
           </div>
         </div>
 
@@ -413,24 +376,36 @@ export default function Home() {
           margin-top: 30px;
         }
         
-        .product-option {
-          background-color: #fff;
-          border-radius: 8px;
-          padding: 20px;
+        .product-link {
+          display: block;
           width: 300px;
-          color: #333;
           position: relative;
+          border-radius: 8px;
+          overflow: hidden;
+          transition: transform 0.3s ease;
           box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         
+        .product-link:hover {
+          transform: translateY(-5px);
+        }
+        
+        .product-full-image {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+        
         .best-value {
-          border: 2px solid #6c5ce7;
+          position: relative;
           transform: scale(1.05);
+          z-index: 1;
+          box-shadow: 0 6px 12px rgba(108, 92, 231, 0.3);
         }
         
         .best-value-tag {
           position: absolute;
-          top: -15px;
+          top: 10px;
           left: 50%;
           transform: translateX(-50%);
           background-color: #6c5ce7;
@@ -439,61 +414,7 @@ export default function Home() {
           border-radius: 20px;
           font-weight: bold;
           font-size: 14px;
-        }
-        
-        .product-header {
-          display: flex;
-          align-items: center;
-          margin-bottom: 15px;
-        }
-        
-        .product-image {
-          width: 80px;
-          height: auto;
-          margin-right: 15px;
-        }
-        
-        .product-details h3 {
-          margin: 0 0 5px 0;
-          font-size: 18px;
-        }
-        
-        .product-price {
-          font-size: 20px;
-          font-weight: bold;
-          margin: 5px 0;
-        }
-        
-        .original-price {
-          text-decoration: line-through;
-          color: #999;
-          margin-right: 10px;
-        }
-        
-        .sale-price {
-          color: #6c5ce7;
-        }
-        
-        .price-per-bottle {
-          font-size: 14px;
-          color: #666;
-          margin: 0;
-        }
-        
-        .buy-button {
-          background-color: #00b894;
-          color: white;
-          border: none;
-          padding: 12px 0;
-          width: 100%;
-          border-radius: 4px;
-          font-weight: bold;
-          font-size: 16px;
-          transition: background-color 0.3s;
-        }
-        
-        .buy-button:hover {
-          background-color: #00a884;
+          z-index: 2;
         }
         
         /* Testimonials Section */
@@ -513,6 +434,7 @@ export default function Home() {
           border-radius: 8px;
           padding: 20px;
           color: #333;
+          margin-top: 30px;
         }
         
         .testimonials-image {
@@ -679,7 +601,7 @@ export default function Home() {
             align-items: center;
           }
           
-          .product-option {
+          .product-link {
             width: 100%;
             max-width: 350px;
           }
