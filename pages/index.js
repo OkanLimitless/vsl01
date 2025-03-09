@@ -9,92 +9,69 @@ const ClientSideOnly = dynamic(
 );
 
 export default function Home() {
-  const [viewerCount, setViewerCount] = useState(8);
-  const [stockLeft, setStockLeft] = useState(37);
-  const [showNotification, setShowNotification] = useState(false);
-  const [currentBuyer, setCurrentBuyer] = useState(null);
+  const [videoRevealed, setVideoRevealed] = useState(false);
 
   useEffect(() => {
-    // Viewer counter logic
-    const viewerInterval = setInterval(() => {
-      setViewerCount(prev => {
-        if (Math.random() < 0.3) { // 30% chance to change
-          const increase = Math.random() < 0.7; // 70% chance to increase
-          if (increase && prev < 15) return prev + 1;
-          if (!increase && prev > 8) return prev - 1;
-        }
-        return prev;
-      });
-    }, 5000 + Math.random() * 7000); // Random interval between 5-12 seconds
-
-    // Stock counter logic
-    const stockInterval = setInterval(() => {
-      setStockLeft(prev => {
-        if (prev > 15 && Math.random() < 0.4) return prev - 1;
-        return prev;
-      });
-    }, 8000 + Math.random() * 7000); // Random interval between 8-15 seconds
-
-    // Buy notifications logic
-    const buyers = [
-      { name: 'Michael R.', location: 'Los Angeles, CA' },
-      { name: 'James S.', location: 'Houston, TX' },
-      { name: 'William D.', location: 'Chicago, IL' },
-      { name: 'Robert K.', location: 'Miami, FL' },
-      { name: 'Thomas B.', location: 'Phoenix, AZ' }
-    ];
-
-    const showRandomPurchase = () => {
-      const buyer = buyers[Math.floor(Math.random() * buyers.length)];
-      setCurrentBuyer(buyer);
-      setShowNotification(true);
-      setTimeout(() => setShowNotification(false), 4000);
+    // Check if the content should be revealed
+    const checkReveal = () => {
+      if (window.isVideoRevealed && window.isVideoRevealed()) {
+        setVideoRevealed(true);
+      }
     };
 
-    // Show first notification after 15-30 seconds
-    const initialNotification = setTimeout(() => {
-      showRandomPurchase();
-      // Then show subsequent notifications every 40-90 seconds
-      setInterval(showRandomPurchase, 40000 + Math.random() * 50000);
-    }, 15000 + Math.random() * 15000);
+    // Set up interval to check for reveal
+    const revealInterval = setInterval(checkReveal, 1000);
 
+    // Clean up
     return () => {
-      clearInterval(viewerInterval);
-      clearInterval(stockInterval);
-      clearTimeout(initialNotification);
+      clearInterval(revealInterval);
     };
   }, []);
 
   return (
     <>
       <Head>
-        <title>Discovery</title>
+        <title>AlphaBites - Natural Male Enhancement</title>
         <link rel="icon" href="/favicon.ico" />
+        <meta name="description" content="Discover the natural secret for long-lasting, rock-solid erections they're afraid to reveal." />
         <style>{`
           :root {
-            --primary-color: #00dd00;
-            --secondary-color: #ff0000;
-            --font-primary: 'Roboto', sans-serif;
-            --font-secondary: 'Oswald', sans-serif;
-            --font-tertiary: 'Montserrat', sans-serif;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 3rem;
-            --border-radius: 12px;
+            --primary-color: #6c5ce7;
+            --secondary-color: #ff3333;
+            --accent-color: #00b894;
+            --text-color: #333;
+            --light-text: #777;
+            --background: #000;
+            --card-bg: #fff;
+            --border-radius: 8px;
           }
+          
+          * {
+            box-sizing: border-box;
+          }
+          
           body {
-            background-color: #000;
+            background-color: var(--background);
             color: #fff;
-            font-family: var(--font-primary);
+            font-family: 'Roboto', 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
+            line-height: 1.6;
+          }
+          
+          img {
+            max-width: 100%;
+          }
+          
+          button {
+            cursor: pointer;
           }
         `}</style>
       </Head>
       
       {/* Urgent Notification Bar */}
       <div className="notification-bar">
-        <p>⚠️ URGENT ⚠️</p>
+        <p>⚠️ URGENT! ⚠️</p>
         <p>What Big Pharma Doesn't Want You to Know About Male Health.</p>
       </div>
 
@@ -112,6 +89,143 @@ export default function Home() {
           <span className="lock-icon">🔒</span>
           <p>YOUR ACCESS WILL BE RELEASED</p>
           <p>AT THE END OF THE VIDEO</p>
+        </div>
+        
+        {/* Special Offer Section - Hidden until video reveal */}
+        <div className={`special-offer ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+          <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
+          
+          <div className="product-options">
+            <div className="product-option">
+              <div className="product-header">
+                <img src="/images/six.png" alt="6 Bottle Package" className="product-image" />
+                <div className="product-details">
+                  <h3>6 Bottle Package</h3>
+                  <p className="product-price"><span className="original-price">$594</span> <span className="sale-price">$294</span></p>
+                  <p className="price-per-bottle">($49 per bottle)</p>
+                </div>
+              </div>
+              <button className="buy-button">BUY NOW</button>
+            </div>
+            
+            <div className="product-option best-value">
+              <div className="best-value-tag">BEST VALUE</div>
+              <div className="product-header">
+                <img src="/images/three.png" alt="3 Bottle Package" className="product-image" />
+                <div className="product-details">
+                  <h3>3 Bottle Package</h3>
+                  <p className="product-price"><span className="original-price">$297</span> <span className="sale-price">$177</span></p>
+                  <p className="price-per-bottle">($59 per bottle)</p>
+                </div>
+              </div>
+              <button className="buy-button">BUY NOW</button>
+            </div>
+            
+            <div className="product-option">
+              <div className="product-header">
+                <img src="/images/two.png" alt="1 Bottle Package" className="product-image" />
+                <div className="product-details">
+                  <h3>1 Bottle Package</h3>
+                  <p className="product-price"><span className="original-price">$99</span> <span className="sale-price">$79</span></p>
+                  <p className="price-per-bottle">($79 per bottle)</p>
+                </div>
+              </div>
+              <button className="buy-button">BUY NOW</button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Testimonials Section - Hidden until video reveal */}
+        <div className={`testimonials-section ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+          <h2 className="section-heading">What they're saying about AlphaBites</h2>
+          
+          <div className="testimonials-container">
+            <img src="/images/ytcomments.png" alt="Customer Testimonials" className="testimonials-image" />
+          </div>
+        </div>
+        
+        {/* Money Back Guarantee - Hidden until video reveal */}
+        <div className={`guarantee-section ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+          <img src="/images/moneyback.png" alt="60-Day Money Back Guarantee" className="guarantee-image" />
+          
+          <div className="certification-badges">
+            <div className="badge-row">
+              <div className="badge">
+                <img src="/images/productlogos.png" alt="Product Certifications" />
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* FAQ Section - Hidden until video reveal */}
+        <div className={`faq-section ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+          <h2 className="section-heading">Frequently Asked Questions</h2>
+          
+          <div className="faq-container">
+            <div className="faq-item">
+              <h3 className="faq-question">How does AlphaBites work?</h3>
+              <p className="faq-answer">AlphaBites works by naturally increasing blood flow to the penile chambers, supporting healthy testosterone levels, and enhancing nitric oxide production - the three key factors for strong, lasting erections.</p>
+            </div>
+            
+            <div className="faq-item">
+              <h3 className="faq-question">When will I receive my order?</h3>
+              <p className="faq-answer">Orders are typically processed within 24 hours and shipped via expedited shipping. Domestic orders arrive in 3-5 business days, while international orders may take 7-14 business days.</p>
+            </div>
+            
+            <div className="faq-item">
+              <h3 className="faq-question">Is AlphaBites safe to take?</h3>
+              <p className="faq-answer">Yes, AlphaBites is made with 100% natural ingredients in an FDA-registered, GMP-certified facility. It contains no harmful stimulants or additives and has no reported side effects.</p>
+            </div>
+            
+            <div className="faq-item">
+              <h3 className="faq-question">What if it doesn't work for me?</h3>
+              <p className="faq-answer">We're so confident in AlphaBites that we offer a 60-day, 100% money-back guarantee. If you're not completely satisfied, simply return the bottles (even empty ones) for a full refund.</p>
+            </div>
+          </div>
+        </div>
+        
+        {/* Final CTA - Hidden until video reveal */}
+        <div className={`final-cta ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+          <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
+          
+          <div className="product-options">
+            <div className="product-option">
+              <div className="product-header">
+                <img src="/images/six.png" alt="6 Bottle Package" className="product-image" />
+                <div className="product-details">
+                  <h3>6 Bottle Package</h3>
+                  <p className="product-price"><span className="original-price">$594</span> <span className="sale-price">$294</span></p>
+                  <p className="price-per-bottle">($49 per bottle)</p>
+                </div>
+              </div>
+              <button className="buy-button">BUY NOW</button>
+            </div>
+            
+            <div className="product-option best-value">
+              <div className="best-value-tag">BEST VALUE</div>
+              <div className="product-header">
+                <img src="/images/three.png" alt="3 Bottle Package" className="product-image" />
+                <div className="product-details">
+                  <h3>3 Bottle Package</h3>
+                  <p className="product-price"><span className="original-price">$297</span> <span className="sale-price">$177</span></p>
+                  <p className="price-per-bottle">($59 per bottle)</p>
+                </div>
+              </div>
+              <button className="buy-button">BUY NOW</button>
+            </div>
+            
+            <div className="product-option">
+              <div className="product-header">
+                <img src="/images/two.png" alt="1 Bottle Package" className="product-image" />
+                <div className="product-details">
+                  <h3>1 Bottle Package</h3>
+                  <p className="product-price"><span className="original-price">$99</span> <span className="sale-price">$79</span></p>
+                  <p className="price-per-bottle">($79 per bottle)</p>
+                </div>
+              </div>
+              <button className="buy-button">BUY NOW</button>
+            </div>
+          </div>
         </div>
 
         {/* Scientific References Section */}
@@ -242,6 +356,215 @@ export default function Home() {
           font-weight: bold;
           font-size: 14px;
         }
+        
+        /* Hidden sections until reveal */
+        .hidden-until-reveal {
+          display: none;
+        }
+        
+        .revealed {
+          animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
+        /* Special Offer Section */
+        .special-offer, .final-cta {
+          margin: 40px auto;
+          max-width: 1000px;
+        }
+        
+        .offer-heading {
+          color: #fff;
+          font-size: 24px;
+          margin-bottom: 30px;
+          line-height: 1.4;
+        }
+        
+        .product-options {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 20px;
+          margin-top: 30px;
+        }
+        
+        .product-option {
+          background-color: #fff;
+          border-radius: 8px;
+          padding: 20px;
+          width: 300px;
+          color: #333;
+          position: relative;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .best-value {
+          border: 2px solid #6c5ce7;
+          transform: scale(1.05);
+        }
+        
+        .best-value-tag {
+          position: absolute;
+          top: -15px;
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #6c5ce7;
+          color: white;
+          padding: 5px 15px;
+          border-radius: 20px;
+          font-weight: bold;
+          font-size: 14px;
+        }
+        
+        .product-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+        }
+        
+        .product-image {
+          width: 80px;
+          height: auto;
+          margin-right: 15px;
+        }
+        
+        .product-details h3 {
+          margin: 0 0 5px 0;
+          font-size: 18px;
+        }
+        
+        .product-price {
+          font-size: 20px;
+          font-weight: bold;
+          margin: 5px 0;
+        }
+        
+        .original-price {
+          text-decoration: line-through;
+          color: #999;
+          margin-right: 10px;
+        }
+        
+        .sale-price {
+          color: #6c5ce7;
+        }
+        
+        .price-per-bottle {
+          font-size: 14px;
+          color: #666;
+          margin: 0;
+        }
+        
+        .buy-button {
+          background-color: #00b894;
+          color: white;
+          border: none;
+          padding: 12px 0;
+          width: 100%;
+          border-radius: 4px;
+          font-weight: bold;
+          font-size: 16px;
+          transition: background-color 0.3s;
+        }
+        
+        .buy-button:hover {
+          background-color: #00a884;
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+          margin: 60px auto;
+          max-width: 800px;
+        }
+        
+        .section-heading {
+          color: #fff;
+          font-size: 28px;
+          margin-bottom: 30px;
+        }
+        
+        .testimonials-container {
+          background-color: #fff;
+          border-radius: 8px;
+          padding: 20px;
+          color: #333;
+        }
+        
+        .testimonials-image {
+          max-width: 100%;
+          height: auto;
+        }
+        
+        /* Guarantee Section */
+        .guarantee-section {
+          margin: 60px auto;
+          max-width: 800px;
+        }
+        
+        .guarantee-image {
+          max-width: 100%;
+          height: auto;
+          margin-bottom: 30px;
+        }
+        
+        .certification-badges {
+          margin: 30px auto;
+        }
+        
+        .badge-row {
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 20px;
+          margin-bottom: 20px;
+        }
+        
+        .badge img {
+          height: 80px;
+          width: auto;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+          margin: 60px auto;
+          max-width: 800px;
+        }
+        
+        .faq-container {
+          background-color: #fff;
+          border-radius: 8px;
+          padding: 30px;
+          color: #333;
+          text-align: left;
+        }
+        
+        .faq-item {
+          margin-bottom: 25px;
+          border-bottom: 1px solid #eee;
+          padding-bottom: 20px;
+        }
+        
+        .faq-item:last-child {
+          border-bottom: none;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+        
+        .faq-question {
+          font-size: 18px;
+          margin: 0 0 10px 0;
+          color: #6c5ce7;
+        }
+        
+        .faq-answer {
+          margin: 0;
+          color: #555;
+          line-height: 1.6;
+        }
 
         .references-section {
           margin: 40px auto;
@@ -330,6 +653,21 @@ export default function Home() {
         }
 
         @media (max-width: 768px) {
+          .product-options {
+            flex-direction: column;
+            align-items: center;
+          }
+          
+          .product-option {
+            width: 100%;
+            max-width: 350px;
+          }
+          
+          .best-value {
+            transform: scale(1);
+            order: -1;
+          }
+          
           .references-section {
             padding: 20px;
           }
@@ -340,6 +678,10 @@ export default function Home() {
 
           .references-list li {
             font-size: 14px;
+          }
+          
+          .section-heading, .offer-heading {
+            font-size: 22px;
           }
         }
       `}</style>
