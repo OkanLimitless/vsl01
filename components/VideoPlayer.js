@@ -5,6 +5,7 @@ export default function VideoPlayer() {
   const videoId = "67cdb02e18de859a97b2c80b";
   const playerRef = useRef(null);
   const checkIntervalRef = useRef(null);
+  const timeDisplayRef = useRef(null);
   
   // For testing in development, set to true to reveal after a shorter time
   const DEBUG_MODE = process.env.NODE_ENV === 'development';
@@ -14,24 +15,25 @@ export default function VideoPlayer() {
   const revealContent = () => {
     if (videoRevealed) return; // Prevent multiple reveals
     
-    console.log("Revealing content");
+    console.log("REVEALING CONTENT NOW!");
     setVideoRevealed(true);
     
-    // Show the hidden sections
-    const hiddenSections = document.querySelectorAll('.hidden-until-reveal');
-    hiddenSections.forEach(section => {
-      section.classList.remove('hidden-until-reveal');
-      section.classList.add('revealed');
+    // Show the hidden sections by directly removing the class
+    document.querySelectorAll('.hidden-until-reveal').forEach(el => {
+      el.classList.remove('hidden-until-reveal');
+      el.style.display = 'block';
+      el.classList.add('revealed');
     });
     
-    // Also update any React state that needs to know about the reveal
+    // Hide the lock message
+    const lockMessage = document.querySelector('.access-message');
+    if (lockMessage) {
+      lockMessage.style.display = 'none';
+    }
+    
+    // Store in localStorage that content has been revealed
     if (typeof window !== 'undefined') {
-      // Set a flag in localStorage to remember that content has been revealed
       localStorage.setItem('contentRevealed', 'true');
-      
-      // Dispatch a custom event that other components can listen for
-      const revealEvent = new CustomEvent('contentRevealed');
-      window.dispatchEvent(revealEvent);
     }
   };
 
@@ -39,61 +41,103 @@ export default function VideoPlayer() {
     console.log(`Video player initialized. Debug mode: ${DEBUG_MODE ? 'ON' : 'OFF'}`);
     console.log(`Content will be revealed after ${REVEAL_TIME} seconds`);
     
+    // Create a time display element for debugging
+    if (DEBUG_MODE) {
+      timeDisplayRef.current = document.createElement('div');
+      timeDisplayRef.current.style.position = 'fixed';
+      timeDisplayRef.current.style.top = '10px';
+      timeDisplayRef.current.style.right = '10px';
+      timeDisplayRef.current.style.background = 'rgba(0,0,0,0.7)';
+      timeDisplayRef.current.style.color = 'white';
+      timeDisplayRef.current.style.padding = '5px 10px';
+      timeDisplayRef.current.style.borderRadius = '5px';
+      timeDisplayRef.current.style.zIndex = '9999';
+      timeDisplayRef.current.textContent = 'Video Time: 0s';
+      document.body.appendChild(timeDisplayRef.current);
+    }
+    
     // Check if content was already revealed in a previous session
     if (typeof window !== 'undefined' && localStorage.getItem('contentRevealed') === 'true') {
       console.log("Content was previously revealed, showing content immediately");
-      revealContent();
+      setTimeout(revealContent, 500); // Small delay to ensure DOM is ready
       return;
     }
     
-    // Create a direct script injection to hook into the video player
-    const setupVideoHook = () => {
-      // Try to find the video element directly
-      const findVideoElement = () => {
-        const videoElement = document.querySelector(`#vid_${videoId} video`);
-        if (videoElement) {
-          console.log("Found video element, setting up timeupdate listener");
-          
-          // Add timeupdate event listener
-          videoElement.addEventListener('timeupdate', () => {
-            const currentTime = videoElement.currentTime;
+    // Direct approach to monitor the video element
+    const monitorVideoElement = () => {
+      // Try to find the iframe that contains the video
+      const iframe = document.querySelector(`iframe[src*="${videoId}"]`);
+      
+      if (iframe) {
+        console.log("Found video iframe, setting up monitoring");
+        
+        // Set up a polling interval to check video time
+        const videoCheckInterval = setInterval(() => {
+          try {
+            // Try to access the video element inside the iframe
+            // This might not work due to cross-origin restrictions
+            const video = iframe.contentWindow.document.querySelector('video');
             
-            // Log every 10 seconds in debug mode
-            if (DEBUG_MODE && Math.floor(currentTime) % 10 === 0) {
+            if (video) {
+              const currentTime = video.currentTime;
               console.log(`Video time: ${currentTime.toFixed(1)}s`);
+              
+              if (DEBUG_MODE && timeDisplayRef.current) {
+                timeDisplayRef.current.textContent = `Video Time: ${currentTime.toFixed(1)}s`;
+              }
+              
+              if (currentTime >= REVEAL_TIME && !videoRevealed) {
+                console.log(`Video reached ${REVEAL_TIME} seconds, revealing content`);
+                clearInterval(videoCheckInterval);
+                revealContent();
+              }
             }
-            
-            // Check if we've reached the reveal time
-            if (currentTime >= REVEAL_TIME && !videoRevealed) {
-              console.log(`Video reached ${REVEAL_TIME} seconds, revealing content`);
-              revealContent();
-            }
-          });
-          
-          return true;
+          } catch (e) {
+            // Cross-origin restrictions might prevent access to iframe content
+            // console.error("Error accessing video element:", e);
+          }
+        }, 1000);
+        
+        return videoCheckInterval;
+      }
+      
+      return null;
+    };
+    
+    // Alternative approach using the Vturb player API
+    const setupVturbPlayerMonitoring = () => {
+      // Create a global object to receive messages from the player
+      window.vturbPlayerAPI = window.vturbPlayerAPI || {};
+      window.vturbPlayerAPI.onTimeUpdate = (currentTime) => {
+        console.log(`API Time update: ${currentTime}s`);
+        
+        if (DEBUG_MODE && timeDisplayRef.current) {
+          timeDisplayRef.current.textContent = `Video Time: ${currentTime.toFixed(1)}s`;
         }
-        return false;
+        
+        if (currentTime >= REVEAL_TIME && !videoRevealed) {
+          revealContent();
+        }
       };
       
-      // Try immediately
-      if (!findVideoElement()) {
-        // If not found, try again after a delay
-        setTimeout(() => {
-          if (!findVideoElement()) {
-            // If still not found, set up a polling interval
-            const videoCheckInterval = setInterval(() => {
-              if (findVideoElement()) {
-                clearInterval(videoCheckInterval);
+      // Inject a script to communicate with the player
+      const script = document.createElement('script');
+      script.innerHTML = `
+        // Wait for player to initialize
+        setTimeout(function() {
+          // Try to find the video element
+          var videoElement = document.querySelector('video');
+          if (videoElement) {
+            console.log("Found video element, setting up timeupdate listener");
+            videoElement.addEventListener('timeupdate', function() {
+              if (window.vturbPlayerAPI && typeof window.vturbPlayerAPI.onTimeUpdate === 'function') {
+                window.vturbPlayerAPI.onTimeUpdate(videoElement.currentTime);
               }
-            }, 1000);
-            
-            // Clean up after 30 seconds if video is never found
-            setTimeout(() => {
-              clearInterval(videoCheckInterval);
-            }, 30000);
+            });
           }
         }, 2000);
-      }
+      `;
+      document.head.appendChild(script);
     };
     
     // Load the video player script
@@ -102,39 +146,58 @@ export default function VideoPlayer() {
     script.async = true;
     document.head.appendChild(script);
     
-    // Set up the video hook after the script has loaded
-    script.onload = setupVideoHook;
-    
-    // Fallback: Set up a polling mechanism to check video progress
-    const startProgressPolling = () => {
-      if (checkIntervalRef.current) clearInterval(checkIntervalRef.current);
+    // Set up monitoring after the script has loaded
+    script.onload = () => {
+      console.log("Video player script loaded");
+      setupVturbPlayerMonitoring();
       
-      checkIntervalRef.current = setInterval(() => {
-        try {
-          // Try to find the video element
-          const videoElement = document.querySelector(`#vid_${videoId} video`);
-          if (videoElement) {
-            const currentTime = videoElement.currentTime;
-            
-            // Log every 10 seconds in debug mode
-            if (DEBUG_MODE && Math.floor(currentTime) % 10 === 0) {
-              console.log(`Polling - Video time: ${currentTime.toFixed(1)}s`);
-            }
-            
-            if (currentTime >= REVEAL_TIME && !videoRevealed) {
-              console.log(`Video reached ${REVEAL_TIME} seconds via polling, revealing content`);
-              revealContent();
-            }
-          }
-        } catch (error) {
-          console.error("Error checking video progress:", error);
+      // Wait a bit for the iframe to be created
+      setTimeout(() => {
+        const intervalId = monitorVideoElement();
+        if (intervalId) {
+          checkIntervalRef.current = intervalId;
         }
-      }, 1000); // Check every second
+      }, 2000);
     };
     
-    // Start polling after a short delay to allow the player to initialize
-    setTimeout(startProgressPolling, 3000);
-
+    // Fallback: Set up a polling mechanism to check for the video element
+    const startVideoElementPolling = () => {
+      const pollingInterval = setInterval(() => {
+        // Look for the video element in various ways
+        const videoElement = document.querySelector(`video`) || 
+                            document.querySelector(`#vid_${videoId} video`) ||
+                            document.querySelector(`iframe[src*="${videoId}"]`);
+        
+        if (videoElement) {
+          console.log("Found video element through polling");
+          clearInterval(pollingInterval);
+          
+          // Try to set up a timeupdate listener
+          try {
+            videoElement.addEventListener('timeupdate', (e) => {
+              const currentTime = videoElement.currentTime;
+              console.log(`Timeupdate event: ${currentTime.toFixed(1)}s`);
+              
+              if (DEBUG_MODE && timeDisplayRef.current) {
+                timeDisplayRef.current.textContent = `Video Time: ${currentTime.toFixed(1)}s`;
+              }
+              
+              if (currentTime >= REVEAL_TIME && !videoRevealed) {
+                revealContent();
+              }
+            });
+          } catch (e) {
+            console.error("Error setting up timeupdate listener:", e);
+          }
+        }
+      }, 1000);
+      
+      return pollingInterval;
+    };
+    
+    // Start polling after a short delay
+    const pollingInterval = setTimeout(startVideoElementPolling, 3000);
+    
     // For testing in development, add a timeout to reveal content after 10 seconds
     let debugTimer;
     if (DEBUG_MODE) {
@@ -142,6 +205,22 @@ export default function VideoPlayer() {
         console.log("Debug mode: Testing reveal after 10 seconds");
         revealContent();
       }, 10000);
+      
+      // Add a button to manually trigger reveal
+      const revealButton = document.createElement('button');
+      revealButton.textContent = 'Reveal Content';
+      revealButton.style.position = 'fixed';
+      revealButton.style.bottom = '10px';
+      revealButton.style.right = '10px';
+      revealButton.style.zIndex = '9999';
+      revealButton.style.padding = '10px';
+      revealButton.style.background = '#6c5ce7';
+      revealButton.style.color = 'white';
+      revealButton.style.border = 'none';
+      revealButton.style.borderRadius = '5px';
+      revealButton.style.cursor = 'pointer';
+      revealButton.onclick = revealContent;
+      document.body.appendChild(revealButton);
     }
 
     return () => {
@@ -154,9 +233,19 @@ export default function VideoPlayer() {
         clearInterval(checkIntervalRef.current);
       }
       
-      if (DEBUG_MODE && debugTimer) {
-        clearTimeout(debugTimer);
+      clearTimeout(pollingInterval);
+      
+      if (DEBUG_MODE) {
+        if (debugTimer) {
+          clearTimeout(debugTimer);
+        }
+        
+        if (timeDisplayRef.current && timeDisplayRef.current.parentNode) {
+          timeDisplayRef.current.parentNode.removeChild(timeDisplayRef.current);
+        }
       }
+      
+      delete window.vturbPlayerAPI;
     };
   }, [videoRevealed, videoId, DEBUG_MODE, REVEAL_TIME]);
 

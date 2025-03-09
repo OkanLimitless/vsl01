@@ -21,23 +21,24 @@ export default function Home() {
 
   useEffect(() => {
     // Check if content was already revealed in a previous session
-    if (typeof window !== 'undefined') {
-      if (localStorage.getItem('contentRevealed') === 'true') {
-        console.log("Content was previously revealed, showing content immediately");
-        setVideoRevealed(true);
-      }
+    if (typeof window !== 'undefined' && localStorage.getItem('contentRevealed') === 'true') {
+      console.log("Content was previously revealed, showing content immediately");
+      setVideoRevealed(true);
       
-      // Listen for the custom reveal event
-      const handleReveal = () => {
-        console.log("Content reveal event received");
-        setVideoRevealed(true);
-      };
-      
-      window.addEventListener('contentRevealed', handleReveal);
-      
-      return () => {
-        window.removeEventListener('contentRevealed', handleReveal);
-      };
+      // Make sure hidden sections are shown
+      setTimeout(() => {
+        document.querySelectorAll('.hidden-until-reveal').forEach(el => {
+          el.classList.remove('hidden-until-reveal');
+          el.style.display = 'block';
+          el.classList.add('revealed');
+        });
+        
+        // Hide the lock message
+        const lockMessage = document.querySelector('.access-message');
+        if (lockMessage) {
+          lockMessage.style.display = 'none';
+        }
+      }, 500);
     }
   }, []);
 
@@ -101,14 +102,14 @@ export default function Home() {
         <VideoPlayer />
         
         {/* Access Message */}
-        <div className={`access-message ${videoRevealed ? 'hidden' : ''}`}>
+        <div className="access-message">
           <span className="lock-icon">🔒</span>
           <p>YOUR ACCESS WILL BE RELEASED</p>
           <p>AT THE END OF THE VIDEO</p>
         </div>
         
         {/* Special Offer Section - Hidden until video reveal */}
-        <div className={`special-offer ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+        <div className="special-offer hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
           
           <div className="product-options">
@@ -128,7 +129,7 @@ export default function Home() {
         </div>
         
         {/* Testimonials Section - Hidden until video reveal */}
-        <div className={`testimonials-section ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+        <div className="testimonials-section hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <h2 className="section-heading">What they're saying about AlphaBites</h2>
           
           {/* Testimonial Video */}
@@ -140,7 +141,7 @@ export default function Home() {
         </div>
         
         {/* Money Back Guarantee - Hidden until video reveal */}
-        <div className={`guarantee-section ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+        <div className="guarantee-section hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <img src="/images/moneyback.png" alt="60-Day Money Back Guarantee" className="guarantee-image" />
           
           <div className="certification-badges">
@@ -153,7 +154,7 @@ export default function Home() {
         </div>
         
         {/* FAQ Section - Hidden until video reveal */}
-        <div className={`faq-section ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+        <div className="faq-section hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <h2 className="section-heading">Frequently Asked Questions</h2>
           
           <div className="faq-container">
@@ -180,7 +181,7 @@ export default function Home() {
         </div>
         
         {/* Final CTA - Hidden until video reveal */}
-        <div className={`final-cta ${!videoRevealed ? 'hidden-until-reveal' : 'revealed'}`}>
+        <div className="final-cta hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
           
           <div className="product-options">
@@ -315,14 +316,6 @@ export default function Home() {
           text-align: center;
           color: #fff;
           transition: opacity 0.5s ease;
-        }
-        
-        .access-message.hidden {
-          opacity: 0;
-          height: 0;
-          overflow: hidden;
-          margin: 0;
-          padding: 0;
         }
 
         .lock-icon {
