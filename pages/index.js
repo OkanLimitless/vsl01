@@ -15,16 +15,37 @@ export default function Home() {
     // Check if the content should be revealed
     const checkReveal = () => {
       if (window.isVideoRevealed && window.isVideoRevealed()) {
+        console.log("Content revealed from index.js");
         setVideoRevealed(true);
+        
+        // Show the hidden sections
+        const hiddenSections = document.querySelectorAll('.hidden-until-reveal');
+        hiddenSections.forEach(section => {
+          section.classList.remove('hidden-until-reveal');
+          section.classList.add('revealed');
+        });
       }
     };
 
     // Set up interval to check for reveal
     const revealInterval = setInterval(checkReveal, 1000);
 
+    // Add a button to manually trigger reveal (for testing)
+    if (process.env.NODE_ENV === 'development') {
+      window.manualReveal = () => {
+        if (window.revealContent) {
+          window.revealContent();
+        }
+      };
+      console.log("Development mode: You can call window.manualReveal() in the console to test the reveal functionality");
+    }
+
     // Clean up
     return () => {
       clearInterval(revealInterval);
+      if (process.env.NODE_ENV === 'development') {
+        delete window.manualReveal;
+      }
     };
   }, []);
 
