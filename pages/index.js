@@ -20,48 +20,25 @@ export default function Home() {
   };
 
   useEffect(() => {
-    // Register a global callback for when content is revealed
-    window.onContentRevealed = () => {
-      console.log("Content revealed callback triggered");
-      setVideoRevealed(true);
-    };
-    
-    // Check if the content should be revealed
-    const checkReveal = () => {
-      if (window.isVideoRevealed && window.isVideoRevealed()) {
-        console.log("Content revealed from index.js");
+    // Check if content was already revealed in a previous session
+    if (typeof window !== 'undefined') {
+      if (localStorage.getItem('contentRevealed') === 'true') {
+        console.log("Content was previously revealed, showing content immediately");
         setVideoRevealed(true);
-        
-        // Show the hidden sections
-        const hiddenSections = document.querySelectorAll('.hidden-until-reveal');
-        hiddenSections.forEach(section => {
-          section.classList.remove('hidden-until-reveal');
-          section.classList.add('revealed');
-        });
       }
-    };
-
-    // Set up interval to check for reveal
-    const revealInterval = setInterval(checkReveal, 1000);
-
-    // Add a button to manually trigger reveal (for testing)
-    if (process.env.NODE_ENV === 'development') {
-      window.manualReveal = () => {
-        if (window.revealContent) {
-          window.revealContent();
-        }
+      
+      // Listen for the custom reveal event
+      const handleReveal = () => {
+        console.log("Content reveal event received");
+        setVideoRevealed(true);
       };
-      console.log("Development mode: You can call window.manualReveal() in the console to test the reveal functionality");
+      
+      window.addEventListener('contentRevealed', handleReveal);
+      
+      return () => {
+        window.removeEventListener('contentRevealed', handleReveal);
+      };
     }
-
-    // Clean up
-    return () => {
-      clearInterval(revealInterval);
-      delete window.onContentRevealed;
-      if (process.env.NODE_ENV === 'development') {
-        delete window.manualReveal;
-      }
-    };
   }, []);
 
   return (
@@ -124,7 +101,7 @@ export default function Home() {
         <VideoPlayer />
         
         {/* Access Message */}
-        <div className="access-message">
+        <div className={`access-message ${videoRevealed ? 'hidden' : ''}`}>
           <span className="lock-icon">🔒</span>
           <p>YOUR ACCESS WILL BE RELEASED</p>
           <p>AT THE END OF THE VIDEO</p>
@@ -337,6 +314,15 @@ export default function Home() {
           margin: 20px auto;
           text-align: center;
           color: #fff;
+          transition: opacity 0.5s ease;
+        }
+        
+        .access-message.hidden {
+          opacity: 0;
+          height: 0;
+          overflow: hidden;
+          margin: 0;
+          padding: 0;
         }
 
         .lock-icon {
@@ -358,6 +344,7 @@ export default function Home() {
         
         .revealed {
           animation: fadeIn 1s ease-in-out;
+          display: block;
         }
         
         @keyframes fadeIn {
