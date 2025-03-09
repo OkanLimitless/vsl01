@@ -20,6 +20,12 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Register a global callback for when content is revealed
+    window.onContentRevealed = () => {
+      console.log("Content revealed callback triggered");
+      setVideoRevealed(true);
+    };
+    
     // Check if the content should be revealed
     const checkReveal = () => {
       if (window.isVideoRevealed && window.isVideoRevealed()) {
@@ -51,6 +57,7 @@ export default function Home() {
     // Clean up
     return () => {
       clearInterval(revealInterval);
+      delete window.onContentRevealed;
       if (process.env.NODE_ENV === 'development') {
         delete window.manualReveal;
       }
@@ -64,6 +71,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Discover the natural secret for long-lasting, rock-solid erections they're afraid to reveal." />
         <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+          
           :root {
             --primary-color: #6c5ce7;
             --secondary-color: #ff3333;
@@ -90,6 +99,7 @@ export default function Home() {
           
           img {
             max-width: 100%;
+            overflow: hidden;
           }
           
           button {
@@ -394,6 +404,7 @@ export default function Home() {
           width: 100%;
           height: auto;
           display: block;
+          overflow: hidden;
         }
         
         .best-value {
@@ -440,6 +451,7 @@ export default function Home() {
         .testimonials-image {
           max-width: 100%;
           height: auto;
+          overflow: hidden;
         }
         
         /* Guarantee Section */
@@ -452,6 +464,7 @@ export default function Home() {
           max-width: 100%;
           height: auto;
           margin-bottom: 30px;
+          overflow: hidden;
         }
         
         .certification-badges {
@@ -469,6 +482,7 @@ export default function Home() {
         .badge img {
           height: 80px;
           width: auto;
+          overflow: hidden;
         }
         
         /* FAQ Section */
@@ -532,6 +546,7 @@ export default function Home() {
         .logos-image {
           max-width: 100%;
           height: auto;
+          overflow: hidden;
         }
 
         .disclaimer {

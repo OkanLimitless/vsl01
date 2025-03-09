@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 export default function VideoPlayer() {
   const [videoRevealed, setVideoRevealed] = useState(false);
   const videoId = "67cdb02e18de859a97b2c80b";
+  const playerRef = useRef(null);
+  const checkIntervalRef = useRef(null);
   
-  // For testing in development, set to true to reveal after 5 seconds instead of 25 minutes
+  // For testing in development, set to true to reveal after a shorter time
   const DEBUG_MODE = process.env.NODE_ENV === 'development';
   const REVEAL_TIME = DEBUG_MODE ? 5 : 1500; // 5 seconds in debug mode, 25 minutes (1500 seconds) in production
 
@@ -12,43 +14,56 @@ export default function VideoPlayer() {
     console.log(`Video player initialized. Debug mode: ${DEBUG_MODE ? 'ON' : 'OFF'}`);
     console.log(`Content will be revealed after ${REVEAL_TIME} seconds`);
     
-    // Load the video player script
+    // Create a global object to communicate with the video player
+    window.vtubePlayer = window.vtubePlayer || {};
+    window.vtubePlayer.onTimeUpdate = (currentTime) => {
+      if (currentTime >= REVEAL_TIME && !videoRevealed) {
+        console.log(`Video reached ${REVEAL_TIME} seconds, revealing content`);
+        setVideoRevealed(true);
+        triggerReveal();
+      }
+    };
+    
+    // Load the video player script with a custom callback
     const script = document.createElement('script');
     script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
     script.async = true;
     document.head.appendChild(script);
-
-    // Set up event listener for the video player
-    const handleVideoProgress = (event) => {
-      try {
-        // Check if we have data and it's an object
-        if (!event.data || typeof event.data !== 'object') return;
-        
-        // Log all messages in debug mode
-        if (DEBUG_MODE && event.data.currentTime) {
-          console.log(`Video time: ${event.data.currentTime}s`);
-        }
-        
-        // Check if this is a video progress event
-        if (event.data.currentTime !== undefined) {
-          // Check if the video has reached the reveal time
-          if (event.data.currentTime >= REVEAL_TIME && !videoRevealed) {
-            console.log(`Video reached ${REVEAL_TIME} seconds, revealing content`);
-            setVideoRevealed(true);
+    
+    // Set up a polling mechanism to check video progress
+    // This is a fallback in case the player doesn't emit events we can catch
+    const startProgressPolling = () => {
+      if (checkIntervalRef.current) clearInterval(checkIntervalRef.current);
+      
+      checkIntervalRef.current = setInterval(() => {
+        try {
+          // Try to find the video element
+          const videoElement = document.querySelector(`#vid_${videoId} video`);
+          if (videoElement) {
+            const currentTime = videoElement.currentTime;
+            console.log(`Current video time: ${currentTime}s`);
             
-            // Trigger the reveal in the parent component
-            if (window.revealContent) {
-              window.revealContent();
+            if (currentTime >= REVEAL_TIME && !videoRevealed) {
+              console.log(`Video reached ${REVEAL_TIME} seconds via polling, revealing content`);
+              setVideoRevealed(true);
+              triggerReveal();
             }
           }
+        } catch (error) {
+          console.error("Error checking video progress:", error);
         }
-      } catch (error) {
-        console.error("Error processing video message:", error);
+      }, 1000); // Check every second
+    };
+    
+    // Start polling after a short delay to allow the player to initialize
+    setTimeout(startProgressPolling, 3000);
+
+    // Function to trigger the reveal
+    const triggerReveal = () => {
+      if (window.revealContent) {
+        window.revealContent();
       }
     };
-
-    // Add event listener for the video player's messages
-    window.addEventListener('message', handleVideoProgress);
 
     // Create a global function to check if video is revealed
     window.isVideoRevealed = () => videoRevealed;
@@ -64,6 +79,11 @@ export default function VideoPlayer() {
         section.classList.remove('hidden-until-reveal');
         section.classList.add('revealed');
       });
+      
+      // Also update any React state that needs to know about the reveal
+      if (window.onContentRevealed) {
+        window.onContentRevealed();
+      }
     };
 
     // For testing in development, add a timeout to reveal content after 10 seconds
@@ -75,12 +95,30 @@ export default function VideoPlayer() {
       }, 10000);
     }
 
+    // Add a click handler to the video container to manually trigger reveal in development
+    if (DEBUG_MODE) {
+      setTimeout(() => {
+        const videoContainer = document.querySelector(`#vid_${videoId}`);
+        if (videoContainer) {
+          videoContainer.addEventListener('click', () => {
+            console.log("Debug mode: Video clicked, triggering reveal");
+            window.revealContent();
+          });
+        }
+      }, 2000);
+    }
+
     return () => {
       // Clean up
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }
-      window.removeEventListener('message', handleVideoProgress);
+      
+      if (checkIntervalRef.current) {
+        clearInterval(checkIntervalRef.current);
+      }
+      
+      delete window.vtubePlayer.onTimeUpdate;
       delete window.isVideoRevealed;
       delete window.revealContent;
       
@@ -90,8 +128,34 @@ export default function VideoPlayer() {
     };
   }, [videoRevealed, videoId, DEBUG_MODE, REVEAL_TIME]);
 
+  // Add a script tag to inject our custom code into the player
+  const injectPlayerHook = () => {
+    const scriptContent = `
+      // Try to hook into the player's timeupdate event
+      document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+          try {
+            const videoElement = document.querySelector('#vid_${videoId} video');
+            if (videoElement) {
+              videoElement.addEventListener('timeupdate', function() {
+                if (window.vtubePlayer && typeof window.vtubePlayer.onTimeUpdate === 'function') {
+                  window.vtubePlayer.onTimeUpdate(videoElement.currentTime);
+                }
+              });
+              console.log('Successfully hooked into video timeupdate event');
+            }
+          } catch (e) {
+            console.error('Error setting up video hook:', e);
+          }
+        }, 2000); // Wait for player to initialize
+      });
+    `;
+    
+    return <script dangerouslySetInnerHTML={{ __html: scriptContent }} />;
+  };
+
   return (
-    <div className="video-wrapper">
+    <div className="video-wrapper" ref={playerRef}>
       <div className="video-section">
         <div id={`vid_${videoId}`} style={{position: 'relative', width: '100%', padding: '176.47058823529412% 0 0'}}>
           <img 
@@ -108,6 +172,9 @@ export default function VideoPlayer() {
         
         <p className="video-footer">Attention: Make sure your sound is ON!</p>
       </div>
+
+      {/* Inject our custom script to hook into the player */}
+      {injectPlayerHook()}
 
       <style jsx>{`
         .video-wrapper {
