@@ -42,9 +42,7 @@ export default function TestimonialVideo() {
           width: 100%;
           max-width: 800px;
           margin: 20px auto;
-          border-radius: 0;
           overflow: hidden;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
           background-color: #000;
         }
       `}</style>

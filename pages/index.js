@@ -12,12 +12,22 @@ const ClientSideOnly = dynamic(
 export default function Home() {
   const [videoRevealed, setVideoRevealed] = useState(false);
   const [viewCount, setViewCount] = useState(0);
+  const [openFaq, setOpenFaq] = useState(null);
   
   // Product package links
   const productLinks = {
     sixBottle: "https://pay.hotmart.com/X86267910X?off=qqvnwvxl",
     threeBottle: "https://pay.hotmart.com/X86267910X?off=qqvnwvxl",
     oneBottle: "https://pay.hotmart.com/X86267910X?off=qqvnwvxl"
+  };
+
+  // Toggle FAQ item
+  const toggleFaq = (index) => {
+    if (openFaq === index) {
+      setOpenFaq(null);
+    } else {
+      setOpenFaq(index);
+    }
   };
 
   useEffect(() => {
@@ -115,10 +125,12 @@ export default function Home() {
 
       <div className="container">
         {/* Video Section */}
-        <div className="video-container">
-          <VideoPlayer />
-          <div className="view-counter">
-            <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
+        <div className="black-bg-full">
+          <div className="video-container">
+            <VideoPlayer />
+            <div className="view-counter">
+              <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
+            </div>
           </div>
         </div>
         
@@ -140,8 +152,7 @@ export default function Home() {
               <img src="/images/six.png" alt="6 Bottle Package" className="product-full-image" />
             </a>
             
-            <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="product-link best-value">
-              <div className="best-value-tag">BEST VALUE</div>
+            <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="product-link">
               <img src="/images/three.png" alt="3 Bottle Package" className="product-full-image" />
             </a>
             
@@ -172,7 +183,7 @@ export default function Home() {
           <div className="certification-badges">
             <div className="badge-row">
               <div className="badge">
-                <img src="/images/productlogos.png" alt="Product Certifications" />
+                <img src="/images/productlogos.png" alt="Product Certifications" className="certification-logos" />
               </div>
             </div>
           </div>
@@ -186,23 +197,51 @@ export default function Home() {
           
           <div className="faq-container">
             <div className="faq-item">
-              <h3 className="faq-question">How does AlphaBites work?</h3>
-              <p className="faq-answer">AlphaBites works by naturally increasing blood flow to the penile chambers, supporting healthy testosterone levels, and enhancing nitric oxide production - the three key factors for strong, lasting erections.</p>
+              <button 
+                className={`faq-question-btn ${openFaq === 0 ? 'active' : ''}`} 
+                onClick={() => toggleFaq(0)}
+              >
+                How does AlphaBites work? <span className="toggle-icon">{openFaq === 0 ? '−' : '+'}</span>
+              </button>
+              <div className={`faq-answer ${openFaq === 0 ? 'open' : ''}`}>
+                <p>AlphaBites works by naturally increasing blood flow to the penile chambers, supporting healthy testosterone levels, and enhancing nitric oxide production - the three key factors for strong, lasting erections.</p>
+              </div>
             </div>
             
             <div className="faq-item">
-              <h3 className="faq-question">When will I receive my order?</h3>
-              <p className="faq-answer">Orders are typically processed within 24 hours and shipped via expedited shipping. Domestic orders arrive in 3-5 business days, while international orders may take 7-14 business days.</p>
+              <button 
+                className={`faq-question-btn ${openFaq === 1 ? 'active' : ''}`} 
+                onClick={() => toggleFaq(1)}
+              >
+                When will I receive my order? <span className="toggle-icon">{openFaq === 1 ? '−' : '+'}</span>
+              </button>
+              <div className={`faq-answer ${openFaq === 1 ? 'open' : ''}`}>
+                <p>Orders are typically processed within 24 hours and shipped via expedited shipping. Domestic orders arrive in 3-5 business days, while international orders may take 7-14 business days.</p>
+              </div>
             </div>
             
             <div className="faq-item">
-              <h3 className="faq-question">Is AlphaBites safe to take?</h3>
-              <p className="faq-answer">Yes, AlphaBites is made with 100% natural ingredients in an FDA-registered, GMP-certified facility. It contains no harmful stimulants or additives and has no reported side effects.</p>
+              <button 
+                className={`faq-question-btn ${openFaq === 2 ? 'active' : ''}`} 
+                onClick={() => toggleFaq(2)}
+              >
+                Is AlphaBites safe to take? <span className="toggle-icon">{openFaq === 2 ? '−' : '+'}</span>
+              </button>
+              <div className={`faq-answer ${openFaq === 2 ? 'open' : ''}`}>
+                <p>Yes, AlphaBites is made with 100% natural ingredients in an FDA-registered, GMP-certified facility. It contains no harmful stimulants or additives and has no reported side effects.</p>
+              </div>
             </div>
             
             <div className="faq-item">
-              <h3 className="faq-question">What if it doesn't work for me?</h3>
-              <p className="faq-answer">We're so confident in AlphaBites that we offer a 60-day, 100% money-back guarantee. If you're not completely satisfied, simply return the bottles (even empty ones) for a full refund.</p>
+              <button 
+                className={`faq-question-btn ${openFaq === 3 ? 'active' : ''}`} 
+                onClick={() => toggleFaq(3)}
+              >
+                What if it doesn't work for me? <span className="toggle-icon">{openFaq === 3 ? '−' : '+'}</span>
+              </button>
+              <div className={`faq-answer ${openFaq === 3 ? 'open' : ''}`}>
+                <p>We're so confident in AlphaBites that we offer a 60-day, 100% money-back guarantee. If you're not completely satisfied, simply return the bottles (even empty ones) for a full refund.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -218,8 +257,7 @@ export default function Home() {
               <img src="/images/six.png" alt="6 Bottle Package" className="product-full-image" />
             </a>
             
-            <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="product-link best-value">
-              <div className="best-value-tag">BEST VALUE</div>
+            <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="product-link">
               <img src="/images/three.png" alt="3 Bottle Package" className="product-full-image" />
             </a>
             
@@ -232,7 +270,7 @@ export default function Home() {
         {/* Scientific References Section */}
         <div className="references-section">
           <div className="black-bg-section">
-            <h2>Scientific References</h2>
+            <h2 className="section-heading">Scientific References</h2>
           </div>
           
           <div className="logos-container">
@@ -285,7 +323,7 @@ export default function Home() {
 
         <footer className="site-footer">
           <div className="footer-content">
-            <p className="copyright">Exoboost is the creator of this product. Exoboost is a registered trademark of Exoboost, a Delaware corporation located at 1201 Orange Street Suite #7223, Wilmington, DE, 19801, USA and used with permission. Exoboost may not monitor, does not endorse, and is not responsible or liable for any products, services, statements, or other materials on this website. Statements on this website have not been evaluated by the Food and Drug Administration.</p>
+            <p className="copyright">AlphaBites is the creator of this product. AlphaBites is a registered trademark of AlphaBites, a Delaware corporation located at 1201 Orange Street Suite #7223, Wilmington, DE, 19801, USA and used with permission. AlphaBites may not monitor, does not endorse, and is not responsible or liable for any products, services, statements, or other materials on this website. Statements on this website have not been evaluated by the Food and Drug Administration.</p>
             <div className="footer-links">
               <a href="/shipping-policy">Shipping Policy</a>
               <span className="divider">|</span>
@@ -344,12 +382,17 @@ export default function Home() {
           background-color: var(--background);
         }
         
+        .black-bg-full {
+          background-color: #000;
+          width: 100%;
+          padding: 20px 0;
+        }
+        
         .video-container {
           position: relative;
           width: 100%;
           max-width: 800px;
           margin: 0 auto;
-          padding: 20px;
         }
         
         .view-counter {
@@ -369,7 +412,7 @@ export default function Home() {
         }
 
         .access-message {
-          margin: 20px auto;
+          margin: 0;
           text-align: center;
           color: #fff;
           transition: opacity 0.5s ease;
@@ -459,27 +502,6 @@ export default function Home() {
           overflow: hidden;
         }
         
-        .best-value {
-          position: relative;
-          transform: scale(1.05);
-          z-index: 1;
-          box-shadow: 0 6px 12px rgba(108, 92, 231, 0.3);
-        }
-        
-        .best-value-tag {
-          position: absolute;
-          top: 10px;
-          left: 50%;
-          transform: translateX(-50%);
-          background-color: #6c5ce7;
-          color: white;
-          padding: 5px 15px;
-          border-radius: 20px;
-          font-weight: bold;
-          font-size: 14px;
-          z-index: 2;
-        }
-        
         /* Testimonials Section */
         .testimonials-section {
           margin: 0;
@@ -533,10 +555,10 @@ export default function Home() {
           margin-bottom: 20px;
         }
         
-        .badge img {
-          height: 80px;
-          width: auto;
-          overflow: hidden;
+        .certification-logos {
+          width: 100%;
+          max-width: 600px;
+          height: auto;
         }
         
         /* FAQ Section */
@@ -555,9 +577,9 @@ export default function Home() {
         }
         
         .faq-item {
-          margin-bottom: 25px;
+          margin-bottom: 15px;
           border-bottom: 1px solid #eee;
-          padding-bottom: 20px;
+          padding-bottom: 15px;
         }
         
         .faq-item:last-child {
@@ -566,28 +588,55 @@ export default function Home() {
           padding-bottom: 0;
         }
         
-        .faq-question {
+        .faq-question-btn {
+          width: 100%;
+          text-align: left;
+          background: none;
+          border: none;
+          padding: 10px 0;
           font-size: 18px;
-          margin: 0 0 10px 0;
+          font-weight: 500;
           color: #6c5ce7;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+        .faq-question-btn:hover {
+          color: #5649c0;
+        }
+        
+        .faq-question-btn.active {
+          color: #5649c0;
+        }
+        
+        .toggle-icon {
+          font-size: 20px;
+          font-weight: bold;
         }
         
         .faq-answer {
-          margin: 0;
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.open {
+          max-height: 500px;
+        }
+        
+        .faq-answer p {
+          margin: 10px 0;
           color: #555;
           line-height: 1.6;
+          padding: 0 0 10px 0;
         }
 
         .references-section {
           margin: 0;
           width: 100%;
           text-align: center;
-        }
-        
-        .references-section .black-bg-section h2 {
-          font-size: 36px;
-          margin: 0 auto;
-          max-width: 1000px;
         }
 
         .logos-container {
@@ -679,19 +728,6 @@ export default function Home() {
             max-width: 350px;
           }
           
-          .best-value {
-            transform: scale(1);
-            order: -1;
-          }
-          
-          .references-section .black-bg-section h2 {
-            font-size: 28px;
-          }
-
-          .references-list li {
-            font-size: 14px;
-          }
-          
           .section-heading, .offer-heading {
             font-size: 22px;
           }
@@ -700,6 +736,10 @@ export default function Home() {
             bottom: 25px;
             right: 25px;
             font-size: 12px;
+          }
+          
+          .certification-logos {
+            max-width: 100%;
           }
         }
       `}</style>
