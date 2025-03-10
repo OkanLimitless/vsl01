@@ -74,6 +74,7 @@ export default function Home() {
         <title>AlphaBites - Natural Male Enhancement</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Discover the natural secret for long-lasting, rock-solid erections they're afraid to reveal." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
           
@@ -127,18 +128,25 @@ export default function Home() {
         {/* Video Section */}
         <div className="black-bg-full">
           <div className="video-container">
-            <VideoPlayer />
             <div className="view-counter">
               <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
             </div>
+            <VideoPlayer />
           </div>
         </div>
         
         {/* Access Message */}
-        <div className="access-message">
+        <div className="access-message" style={{display: videoRevealed ? 'none' : 'block'}}>
           <span className="lock-icon">🔒</span>
           <p>YOUR ACCESS WILL BE RELEASED</p>
           <p>AT THE END OF THE VIDEO</p>
+        </div>
+        
+        {/* Released Message - Shown when content is revealed */}
+        <div className="released-message" style={{display: videoRevealed ? 'block' : 'none'}}>
+          <span className="unlock-icon">🔓</span>
+          <p>ACCESS RELEASED</p>
+          <p>ENJOY YOUR EXCLUSIVE CONTENT</p>
         </div>
         
         {/* Special Offer Section - Hidden until video reveal */}
@@ -269,10 +277,6 @@ export default function Home() {
 
         {/* Scientific References Section */}
         <div className="references-section">
-          <div className="black-bg-section">
-            <h2 className="section-heading">Scientific References</h2>
-          </div>
-          
           <div className="logos-container">
             <img src="/images/logos.png" alt="Scientific Institution Logos" className="logos-image" />
           </div>
@@ -386,6 +390,7 @@ export default function Home() {
           background-color: #000;
           width: 100%;
           padding: 20px 0;
+          overflow: hidden;
         }
         
         .video-container {
@@ -393,12 +398,13 @@ export default function Home() {
           width: 100%;
           max-width: 800px;
           margin: 0 auto;
+          overflow: hidden;
         }
         
         .view-counter {
           position: absolute;
-          bottom: 30px;
-          right: 30px;
+          top: 10px;
+          right: 10px;
           background-color: rgba(0, 0, 0, 0.7);
           color: white;
           padding: 5px 10px;
@@ -419,17 +425,38 @@ export default function Home() {
           background-color: #000;
           padding: 20px;
         }
+        
+        .released-message {
+          margin: 0;
+          text-align: center;
+          color: #fff;
+          transition: opacity 0.5s ease;
+          background-color: #000;
+          padding: 20px;
+        }
 
         .lock-icon {
           font-size: 24px;
           display: block;
           margin-bottom: 10px;
+          color: #ff3333;
+        }
+        
+        .unlock-icon {
+          font-size: 24px;
+          display: block;
+          margin-bottom: 10px;
+          color: #00b894;
         }
 
-        .access-message p {
+        .access-message p, .released-message p {
           margin: 5px 0;
           font-weight: bold;
           font-size: 14px;
+        }
+        
+        .released-message p {
+          color: #00b894;
         }
         
         /* Black background sections for headings */
@@ -637,10 +664,12 @@ export default function Home() {
           margin: 0;
           width: 100%;
           text-align: center;
+          padding-top: 30px;
+          background-color: #fff;
         }
 
         .logos-container {
-          margin: 30px auto;
+          margin: 0 auto;
           padding: 20px;
           max-width: 800px;
           background-color: #fff;
@@ -733,12 +762,22 @@ export default function Home() {
           }
           
           .view-counter {
-            bottom: 25px;
-            right: 25px;
+            top: 5px;
+            right: 5px;
             font-size: 12px;
+            padding: 3px 8px;
           }
           
           .certification-logos {
+            max-width: 100%;
+          }
+          
+          .black-bg-full {
+            padding: 10px 0;
+          }
+          
+          .video-container {
+            width: 100%;
             max-width: 100%;
           }
         }
