@@ -100,10 +100,10 @@ export default function Home() {
             --accent-color: #00b894;
             --text-color: #333;
             --light-text: #777;
-            --background: #000;
+            --background: #fff;
             --card-bg: #fff;
             --border-radius: 8px;
-            --glow-color: rgba(255, 215, 0, 0.6);
+            --glow-color: rgba(255, 215, 0, 0.8);
           }
           
           * {
@@ -196,7 +196,7 @@ export default function Home() {
         {/* Special Offer Section - Hidden until video reveal */}
         <div className="special-offer hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <div className="black-bg-section">
-            <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
+            <h2 className="offer-heading">To get started with <span className="highlight">AlphaBites</span> today, simply click below and take advantage of this unique special time-limited offer...</h2>
           </div>
           
           <div className="product-options">
@@ -217,7 +217,7 @@ export default function Home() {
         {/* Testimonials Section - Hidden until video reveal */}
         <div className="testimonials-section hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <div className="black-bg-section">
-            <h2 className="section-heading">What they're saying about AlphaBites</h2>
+            <h2 className="section-heading">What they're saying about <span className="highlight">AlphaBites</span></h2>
           </div>
           
           {/* Testimonial Video */}
@@ -301,7 +301,7 @@ export default function Home() {
         {/* Final CTA - Hidden until video reveal */}
         <div className="final-cta hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <div className="black-bg-section">
-            <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
+            <h2 className="offer-heading">To get started with <span className="highlight">AlphaBites</span> today, simply click below and take advantage of this unique special time-limited offer...</h2>
           </div>
           
           <div className="product-options">
@@ -477,7 +477,7 @@ export default function Home() {
         
         .video-wrapper {
           border-radius: 10px;
-          box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
+          box-shadow: 0 0 25px var(--glow-color), 0 0 50px var(--glow-color);
           overflow: hidden;
           margin: 0 auto;
           width: 100%;
@@ -568,6 +568,7 @@ export default function Home() {
         .special-offer, .final-cta {
           margin: 0;
           width: 100%;
+          background-color: #fff;
         }
         
         .offer-heading {
@@ -617,6 +618,7 @@ export default function Home() {
           position: relative;
           clear: both;
           display: block;
+          background-color: #fff;
         }
         
         .section-heading {
@@ -624,6 +626,11 @@ export default function Home() {
           font-size: 28px;
           margin: 0 auto;
           max-width: 1000px;
+        }
+        
+        .section-heading .highlight {
+          color: #ff6b6b;
+          font-weight: bold;
         }
         
         .testimonials-container {
@@ -679,6 +686,7 @@ export default function Home() {
         .faq-section {
           margin: 0;
           width: 100%;
+          background-color: #fff;
         }
         
         .faq-container {

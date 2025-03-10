@@ -9,9 +9,9 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     const DEBUG_MODE = process.env.NODE_ENV === 'development';
     const REVEAL_TIME = DEBUG_MODE ? 5 : 1084; // 5 seconds in debug mode, 1084 seconds in production
     
-    // Load the video player script
+    // Load the video player script with autoplay disabled
     const script = document.createElement('script');
-    script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
+    script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js?autoplay=false`;
     script.async = true;
     script.id = `scr_${videoId}`;
     document.head.appendChild(script);
@@ -76,10 +76,10 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     };
   }, [onVideoProgress]);
 
-  // The video player with a glow effect
+  // The video player with a stronger glow effect
   return (
     <div className="video-wrapper">
-      <div id={`vid_${videoId}`} style={{width: '100%'}}>
+      <div id={`vid_${videoId}`} style={{width: '100%', borderRadius: '10px', overflow: 'hidden'}}>
         <img 
           id={`thumb_${videoId}`} 
           src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`} 
