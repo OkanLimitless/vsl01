@@ -44,29 +44,94 @@ export default function Home() {
       });
     }, 30000); // Update every 30 seconds
     
+    // For testing in development, set to true to reveal after a shorter time
+    const DEBUG_MODE = process.env.NODE_ENV === 'development';
+    const REVEAL_TIME = DEBUG_MODE ? 5 : 1500; // 5 seconds in debug mode, 25 minutes (1500 seconds) in production
+    
+    // Function to reveal content
+    const revealContent = () => {
+      console.log("REVEALING CONTENT NOW!");
+      setVideoRevealed(true);
+      
+      // Show the hidden sections by directly removing the class
+      document.querySelectorAll('.hidden-until-reveal').forEach(el => {
+        el.classList.remove('hidden-until-reveal');
+        el.style.display = 'block';
+        el.classList.add('revealed');
+      });
+      
+      // Hide the lock message
+      const lockMessage = document.querySelector('.access-message');
+      if (lockMessage) {
+        lockMessage.style.display = 'none';
+      }
+      
+      // Show the released message
+      const releasedMessage = document.querySelector('.released-message');
+      if (releasedMessage) {
+        releasedMessage.style.display = 'block';
+      }
+      
+      // Store in localStorage that content has been revealed
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('contentRevealed', 'true');
+      }
+    };
+    
     // Check if content was already revealed in a previous session
     if (typeof window !== 'undefined' && localStorage.getItem('contentRevealed') === 'true') {
       console.log("Content was previously revealed, showing content immediately");
-      setVideoRevealed(true);
-      
-      // Make sure hidden sections are shown
-      setTimeout(() => {
-        document.querySelectorAll('.hidden-until-reveal').forEach(el => {
-          el.classList.remove('hidden-until-reveal');
-          el.style.display = 'block';
-          el.classList.add('revealed');
-        });
+      setTimeout(revealContent, 500); // Small delay to ensure DOM is ready
+    } else {
+      // Set up monitoring for the video
+      const monitorVideo = () => {
+        // Create a global object to receive messages from the player
+        window.vturbPlayerAPI = window.vturbPlayerAPI || {};
+        window.vturbPlayerAPI.onTimeUpdate = (currentTime) => {
+          console.log(`API Time update: ${currentTime}s`);
+          
+          if (currentTime >= REVEAL_TIME && !videoRevealed) {
+            revealContent();
+          }
+        };
         
-        // Hide the lock message
-        const lockMessage = document.querySelector('.access-message');
-        if (lockMessage) {
-          lockMessage.style.display = 'none';
-        }
-      }, 500);
+        // Inject a script to communicate with the player
+        const script = document.createElement('script');
+        script.innerHTML = `
+          // Wait for player to initialize
+          setTimeout(function() {
+            // Try to find the video element
+            var videoElement = document.querySelector('video');
+            if (videoElement) {
+              console.log("Found video element, setting up timeupdate listener");
+              videoElement.addEventListener('timeupdate', function() {
+                if (window.vturbPlayerAPI && typeof window.vturbPlayerAPI.onTimeUpdate === 'function') {
+                  window.vturbPlayerAPI.onTimeUpdate(videoElement.currentTime);
+                }
+              });
+            }
+          }, 2000);
+        `;
+        document.head.appendChild(script);
+      };
+      
+      // Start monitoring after a short delay
+      setTimeout(monitorVideo, 2000);
+      
+      // For testing in development, add a timeout to reveal content after 10 seconds
+      if (DEBUG_MODE) {
+        setTimeout(() => {
+          console.log("Debug mode: Testing reveal after 10 seconds");
+          revealContent();
+        }, 10000);
+      }
     }
     
-    return () => clearInterval(viewCountInterval);
-  }, []);
+    return () => {
+      clearInterval(viewCountInterval);
+      delete window.vturbPlayerAPI;
+    };
+  }, [videoRevealed]);
 
   return (
     <>
@@ -134,7 +199,31 @@ export default function Home() {
             <div className="view-counter">
               <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
             </div>
-            <VideoPlayer />
+            
+            {/* Direct video embed */}
+            <div id="vid_67cdb02e18de859a97b2c80b" style={{position: 'relative', width: '100%', padding: '176.47058823529412% 0 0'}}> 
+              <img id="thumb_67cdb02e18de859a97b2c80b" src="https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/67cdb02e18de859a97b2c80b/thumbnail.jpg" style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block'}} alt="thumbnail" /> 
+              <div id="backdrop_67cdb02e18de859a97b2c80b" style={{WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%'}}></div> 
+            </div>
+            
+            {/* Video script */}
+            <ClientSideOnly>
+              {() => {
+                useEffect(() => {
+                  const script = document.createElement('script');
+                  script.src = "https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/67cdb02e18de859a97b2c80b/player.js";
+                  script.async = true;
+                  document.head.appendChild(script);
+                  
+                  return () => {
+                    if (script.parentNode) {
+                      script.parentNode.removeChild(script);
+                    }
+                  };
+                }, []);
+                return null;
+              }}
+            </ClientSideOnly>
           </div>
         </div>
         
@@ -393,7 +482,6 @@ export default function Home() {
           background-color: #000;
           width: 100%;
           padding: 0;
-          overflow: hidden;
         }
         
         .video-container {
@@ -401,8 +489,6 @@ export default function Home() {
           width: 100%;
           max-width: 800px;
           margin: 0 auto;
-          overflow: visible;
-          padding: 0;
         }
         
         .view-counter {
