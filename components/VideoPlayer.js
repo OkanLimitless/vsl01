@@ -256,26 +256,9 @@ export default function VideoPlayer() {
   }, [videoRevealed, videoId, DEBUG_MODE, REVEAL_TIME]);
 
   return (
-    <div className="video-wrapper">
-      <div id="vid_67cdb02e18de859a97b2c80b" style={{position: 'relative', width: '100%', padding: '176.47058823529412% 0 0'}}> 
-        <img id="thumb_67cdb02e18de859a97b2c80b" src="https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/67cdb02e18de859a97b2c80b/thumbnail.jpg" style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block'}} alt="thumbnail" /> 
-        <div id="backdrop_67cdb02e18de859a97b2c80b" style={{WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%'}}></div> 
-      </div>
-      <style jsx>{`
-        .video-wrapper {
-          width: 100%;
-          max-width: 800px;
-          margin: 0 auto;
-          overflow: hidden;
-        }
-        
-        @media (max-width: 768px) {
-          .video-wrapper {
-            width: 100%;
-            max-width: 100%;
-          }
-        }
-      `}</style>
+    <div id="vid_67cdb02e18de859a97b2c80b" style={{position: 'relative', width: '100%', padding: '176.47058823529412% 0 0'}}> 
+      <img id="thumb_67cdb02e18de859a97b2c80b" src="https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/67cdb02e18de859a97b2c80b/thumbnail.jpg" style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block'}} alt="thumbnail" /> 
+      <div id="backdrop_67cdb02e18de859a97b2c80b" style={{WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%'}}></div> 
     </div>
   );
 }

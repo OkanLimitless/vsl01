@@ -74,7 +74,7 @@ export default function Home() {
         <title>AlphaBites - Natural Male Enhancement</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Discover the natural secret for long-lasting, rock-solid erections they're afraid to reveal." />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
           
@@ -91,6 +91,7 @@ export default function Home() {
           
           * {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
           }
           
           body {
@@ -100,6 +101,8 @@ export default function Home() {
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
           }
           
           img {
@@ -131,7 +134,9 @@ export default function Home() {
             <div className="view-counter">
               <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
             </div>
-            <VideoPlayer />
+            <div className="video-wrapper">
+              <VideoPlayer />
+            </div>
           </div>
         </div>
         
@@ -398,13 +403,20 @@ export default function Home() {
           width: 100%;
           max-width: 800px;
           margin: 0 auto;
+          overflow: visible;
+          padding: 0 10px;
+        }
+        
+        .video-wrapper {
+          width: 100%;
+          position: relative;
           overflow: hidden;
         }
         
         .view-counter {
           position: absolute;
           top: 10px;
-          right: 10px;
+          right: 20px;
           background-color: rgba(0, 0, 0, 0.7);
           color: white;
           padding: 5px 10px;
@@ -763,7 +775,7 @@ export default function Home() {
           
           .view-counter {
             top: 5px;
-            right: 5px;
+            right: 10px;
             font-size: 12px;
             padding: 3px 8px;
           }
@@ -779,6 +791,7 @@ export default function Home() {
           .video-container {
             width: 100%;
             max-width: 100%;
+            padding: 0;
           }
         }
       `}</style>
