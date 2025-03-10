@@ -162,21 +162,21 @@ export default function Home() {
               <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
             </div>
             <MainVideoPlayer onVideoProgress={revealContent} />
+            
+            {/* Access Message */}
+            <div className="access-message" style={{display: videoRevealed ? 'none' : 'block'}}>
+              <span className="lock-icon">🔒</span>
+              <p>YOUR ACCESS WILL BE RELEASED</p>
+              <p>AT THE END OF THE VIDEO</p>
+            </div>
+            
+            {/* Released Message - Shown when content is revealed */}
+            <div className="released-message" style={{display: videoRevealed ? 'block' : 'none'}}>
+              <span className="unlock-icon">🔓</span>
+              <p>ACCESS RELEASED</p>
+              <p>ENJOY YOUR EXCLUSIVE CONTENT</p>
+            </div>
           </div>
-        </div>
-        
-        {/* Access Message */}
-        <div className="access-message" style={{display: videoRevealed ? 'none' : 'block'}}>
-          <span className="lock-icon">🔒</span>
-          <p>YOUR ACCESS WILL BE RELEASED</p>
-          <p>AT THE END OF THE VIDEO</p>
-        </div>
-        
-        {/* Released Message - Shown when content is revealed */}
-        <div className="released-message" style={{display: videoRevealed ? 'block' : 'none'}}>
-          <span className="unlock-icon">🔓</span>
-          <p>ACCESS RELEASED</p>
-          <p>ENJOY YOUR EXCLUSIVE CONTENT</p>
         </div>
         
         {/* Special Offer Section - Hidden until video reveal */}
@@ -421,11 +421,9 @@ export default function Home() {
           width: 100%;
           padding: 0;
           display: block;
-          clear: both;
         }
         
         .video-container {
-          position: relative;
           width: 100%;
           max-width: 800px;
           margin: 0 auto;
@@ -433,15 +431,14 @@ export default function Home() {
         }
         
         .view-counter {
-          position: absolute;
-          top: 10px;
-          right: 20px;
           background-color: rgba(0, 0, 0, 0.7);
           color: white;
           padding: 5px 10px;
           border-radius: 20px;
           font-size: 14px;
-          z-index: 10;
+          margin: 10px 20px;
+          display: inline-block;
+          float: right;
         }
         
         .view-icon {
@@ -449,27 +446,23 @@ export default function Home() {
         }
 
         .access-message {
-          margin: 0;
+          margin: 20px 0 0 0;
           text-align: center;
           color: #fff;
           transition: opacity 0.5s ease;
           background-color: #000;
           padding: 20px;
-          position: relative;
           display: block;
-          clear: both;
         }
         
         .released-message {
-          margin: 0;
+          margin: 20px 0 0 0;
           text-align: center;
           color: #fff;
           transition: opacity 0.5s ease;
           background-color: #000;
           padding: 20px;
-          position: relative;
           display: block;
-          clear: both;
         }
 
         .lock-icon {
@@ -809,8 +802,7 @@ export default function Home() {
           }
           
           .view-counter {
-            top: 5px;
-            right: 10px;
+            margin: 5px 10px;
             font-size: 12px;
             padding: 3px 8px;
           }
