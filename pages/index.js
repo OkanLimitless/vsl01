@@ -111,7 +111,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>AlphaBites - Natural Male Enhancement</title>
+        <title>Natural Male Enhancement Secret</title>
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Discover the natural secret for long-lasting, rock-solid erections they're afraid to reveal." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -411,7 +411,7 @@ export default function Home() {
 
         <footer className="site-footer">
           <div className="footer-content">
-            <p className="copyright">AlphaBites is the creator of this product. AlphaBites is a registered trademark of AlphaBites, a Delaware corporation located at 1201 Orange Street Suite #7223, Wilmington, DE, 19801, USA and used with permission. AlphaBites may not monitor, does not endorse, and is not responsible or liable for any products, services, statements, or other materials on this website. Statements on this website have not been evaluated by the Food and Drug Administration.</p>
+            <p className="copyright">This product is brought to you by a Delaware corporation located at 1201 Orange Street Suite #7223, Wilmington, DE, 19801, USA. We do not monitor, endorse, or take responsibility for any products, services, statements, or other materials on this website. Statements on this website have not been evaluated by the Food and Drug Administration.</p>
             <div className="footer-links">
               <a href="/shipping-policy">Shipping Policy</a>
               <span className="divider">|</span>
