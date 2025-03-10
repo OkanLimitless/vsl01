@@ -155,13 +155,20 @@ export default function Home() {
       </div>
 
       <div className="container">
-        {/* Video Section */}
+        {/* Video Section - Simple vertical stack */}
         <div className="black-bg-full">
-          <div className="video-container">
-            <div className="view-counter">
-              <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
+          <div className="video-section">
+            {/* View Counter */}
+            <div className="view-counter-container">
+              <div className="view-counter">
+                <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
+              </div>
             </div>
-            <MainVideoPlayer onVideoProgress={revealContent} />
+            
+            {/* Video Player */}
+            <div className="video-player-container">
+              <MainVideoPlayer onVideoProgress={revealContent} />
+            </div>
             
             {/* Access Message */}
             <div className="access-message" style={{display: videoRevealed ? 'none' : 'block'}}>
@@ -170,7 +177,7 @@ export default function Home() {
               <p>AT THE END OF THE VIDEO</p>
             </div>
             
-            {/* Released Message - Shown when content is revealed */}
+            {/* Released Message */}
             <div className="released-message" style={{display: videoRevealed ? 'block' : 'none'}}>
               <span className="unlock-icon">🔓</span>
               <p>ACCESS RELEASED</p>
@@ -423,11 +430,18 @@ export default function Home() {
           display: block;
         }
         
-        .video-container {
+        .video-section {
           width: 100%;
           max-width: 800px;
           margin: 0 auto;
           display: block;
+          padding: 0;
+        }
+        
+        .view-counter-container {
+          width: 100%;
+          text-align: right;
+          padding: 10px 0;
         }
         
         .view-counter {
@@ -436,30 +450,35 @@ export default function Home() {
           padding: 5px 10px;
           border-radius: 20px;
           font-size: 14px;
-          margin: 10px 20px;
           display: inline-block;
-          float: right;
+          margin-right: 10px;
         }
         
         .view-icon {
           margin-right: 5px;
         }
+        
+        .video-player-container {
+          width: 100%;
+          margin: 0 auto;
+          display: block;
+        }
 
         .access-message {
+          width: 100%;
           margin: 20px 0 0 0;
           text-align: center;
           color: #fff;
-          transition: opacity 0.5s ease;
           background-color: #000;
           padding: 20px;
           display: block;
         }
         
         .released-message {
+          width: 100%;
           margin: 20px 0 0 0;
           text-align: center;
           color: #fff;
-          transition: opacity 0.5s ease;
           background-color: #000;
           padding: 20px;
           display: block;
@@ -802,7 +821,7 @@ export default function Home() {
           }
           
           .view-counter {
-            margin: 5px 10px;
+            margin-right: 5px;
             font-size: 12px;
             padding: 3px 8px;
           }
@@ -815,7 +834,7 @@ export default function Home() {
             padding: 0;
           }
           
-          .video-container {
+          .video-section {
             width: 100%;
             max-width: 100%;
             margin-bottom: 0;

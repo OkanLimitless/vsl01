@@ -76,24 +76,17 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     };
   }, [onVideoProgress]);
 
+  // The simplest possible implementation - just a div with an ID
+  // The script will replace this with the video player
   return (
-    <div id={`vid_${videoId}`} style={{width: '100%', display: 'block', margin: '0 auto'}}> 
-      {/* The video player script will replace this content */}
+    <div id={`vid_${videoId}`} style={{width: '100%'}}>
       <img 
         id={`thumb_${videoId}`} 
         src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`} 
-        style={{width: '100%', display: 'block'}} 
-        alt="thumbnail" 
-      /> 
-      <div 
-        id={`backdrop_${videoId}`} 
-        style={{
-          WebkitBackdropFilter: 'blur(5px)', 
-          backdropFilter: 'blur(5px)', 
-          width: '100%',
-          display: 'none' // Hide this initially, the script will handle it
-        }}
-      ></div> 
+        style={{width: '100%'}} 
+        alt="Video thumbnail" 
+      />
+      <div id={`backdrop_${videoId}`}></div>
     </div>
   );
 } 
