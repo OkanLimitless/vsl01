@@ -4,6 +4,7 @@ import VideoPlayer from '../components/VideoPlayer';
 import MainVideoPlayer from '../components/MainVideoPlayer';
 import TestimonialVideo from '../components/TestimonialVideo';
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 const ClientSideOnly = dynamic(
   () => Promise.resolve(({ children }) => <>{children}</>),
@@ -14,12 +15,14 @@ export default function Home() {
   const [videoRevealed, setVideoRevealed] = useState(false);
   const [viewCount, setViewCount] = useState(0);
   const [openFaq, setOpenFaq] = useState(null);
+  const [gtagParams, setGtagParams] = useState({ id: null, label: null });
+  const router = useRouter();
   
-  // Product package links
+  // Product package links - Updated with the new URL
   const productLinks = {
-    sixBottle: "https://pay.hotmart.com/X86267910X?off=qqvnwvxl",
-    threeBottle: "https://pay.hotmart.com/X86267910X?off=qqvnwvxl",
-    oneBottle: "https://pay.hotmart.com/X86267910X?off=qqvnwvxl"
+    sixBottle: "https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571",
+    threeBottle: "https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571",
+    oneBottle: "https://afflat3e3.com/lnk.asp?o=28584&c=918277&a=271469&k=C710AE04C0E95E8AF6C4BC458930795E&l=31571"
   };
 
   // Toggle FAQ item
@@ -55,6 +58,18 @@ export default function Home() {
       releasedMessage.style.display = 'block';
     }
     
+    // Fire Google Ads conversion tracking for 20-minute mark using dynamic parameters
+    if (typeof window !== 'undefined' && window.gtag && gtagParams.id && gtagParams.label) {
+      console.log(`Firing Google Ads conversion for 20-minute mark with ID: ${gtagParams.id} and Label: ${gtagParams.label}`);
+      window.gtag('event', 'conversion', {
+        'send_to': `${gtagParams.id}/${gtagParams.label}`,
+        'value': 1.0,
+        'currency': 'USD'
+      });
+    } else {
+      console.log("Google Ads conversion not fired - missing gtag function or parameters");
+    }
+    
     // Store in localStorage that content has been revealed
     if (typeof window !== 'undefined') {
       localStorage.setItem('contentRevealed', 'true');
@@ -62,6 +77,15 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Extract gtag parameters from URL if available
+    if (router.isReady) {
+      const { gtag_id, gtag_label } = router.query;
+      if (gtag_id && gtag_label) {
+        console.log(`Found gtag parameters in URL - ID: ${gtag_id}, Label: ${gtag_label}`);
+        setGtagParams({ id: gtag_id, label: gtag_label });
+      }
+    }
+    
     // Generate a realistic view count between 1,200 and 2,500
     const baseViewCount = Math.floor(Math.random() * (2500 - 1200 + 1)) + 1200;
     setViewCount(baseViewCount);
@@ -82,7 +106,7 @@ export default function Home() {
     }
     
     return () => clearInterval(viewCountInterval);
-  }, []);
+  }, [router.isReady, router.query]);
 
   return (
     <>
@@ -91,6 +115,22 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content="Discover the natural secret for long-lasting, rock-solid erections they're afraid to reveal." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        
+        {/* Google Ads Conversion Tracking - Dynamic Script */}
+        {gtagParams.id && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${gtagParams.id}`}></script>
+            <script dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${gtagParams.id}');
+              `
+            }} />
+          </>
+        )}
+        
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
           
