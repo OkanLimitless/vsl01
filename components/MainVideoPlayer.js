@@ -9,15 +9,6 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     const DEBUG_MODE = process.env.NODE_ENV === 'development';
     const REVEAL_TIME = DEBUG_MODE ? 5 : 1084; // 5 seconds in debug mode, 1084 seconds in production
     
-    // Load the video player script with autoplay disabled
-    const script = document.createElement('script');
-    script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js?autoplay=false`;
-    script.async = true;
-    script.id = `scr_${videoId}`;
-    document.head.appendChild(script);
-    
-    scriptRef.current = script;
-    
     // Set up monitoring for the video
     const monitorVideo = () => {
       // Create a global object to receive messages from the player
@@ -76,18 +67,25 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     };
   }, [onVideoProgress]);
 
-  // The video player with a stronger glow effect
+  // Using the exact code snippet provided by the user
   return (
     <div className="video-wrapper">
-      <div id={`vid_${videoId}`} style={{width: '100%', borderRadius: '10px', overflow: 'hidden'}}>
+      <div id={`vid_${videoId}`} style={{ position: 'relative', width: '100%', padding: '176.47058823529412% 0 0' }}>
         <img 
           id={`thumb_${videoId}`} 
           src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`} 
-          style={{width: '100%', borderRadius: '10px'}} 
-          alt="Video thumbnail" 
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
+          alt="thumbnail" 
         />
-        <div id={`backdrop_${videoId}`}></div>
+        <div 
+          id={`backdrop_${videoId}`} 
+          style={{ WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%' }}
+        ></div>
       </div>
+      {/* Using the exact script tag provided by the user */}
+      <script type="text/javascript" id={`scr_${videoId}`} dangerouslySetInnerHTML={{
+        __html: `var s=document.createElement("script"); s.src="https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js", s.async=!0,document.head.appendChild(s);`
+      }} />
     </div>
   );
 } 
