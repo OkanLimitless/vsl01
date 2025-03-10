@@ -134,9 +134,7 @@ export default function Home() {
             <div className="view-counter">
               <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
             </div>
-            <div className="video-wrapper">
-              <VideoPlayer />
-            </div>
+            <VideoPlayer />
           </div>
         </div>
         
@@ -394,7 +392,7 @@ export default function Home() {
         .black-bg-full {
           background-color: #000;
           width: 100%;
-          padding: 20px 0;
+          padding: 0;
           overflow: hidden;
         }
         
@@ -404,13 +402,7 @@ export default function Home() {
           max-width: 800px;
           margin: 0 auto;
           overflow: visible;
-          padding: 0 10px;
-        }
-        
-        .video-wrapper {
-          width: 100%;
-          position: relative;
-          overflow: hidden;
+          padding: 0;
         }
         
         .view-counter {
@@ -785,7 +777,7 @@ export default function Home() {
           }
           
           .black-bg-full {
-            padding: 10px 0;
+            padding: 0;
           }
           
           .video-container {
