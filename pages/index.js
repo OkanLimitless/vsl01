@@ -11,6 +11,7 @@ const ClientSideOnly = dynamic(
 
 export default function Home() {
   const [videoRevealed, setVideoRevealed] = useState(false);
+  const [viewCount, setViewCount] = useState(0);
   
   // Product package links
   const productLinks = {
@@ -20,6 +21,19 @@ export default function Home() {
   };
 
   useEffect(() => {
+    // Generate a realistic view count between 1,200 and 2,500
+    const baseViewCount = Math.floor(Math.random() * (2500 - 1200 + 1)) + 1200;
+    setViewCount(baseViewCount);
+    
+    // Simulate view count increasing over time
+    const viewCountInterval = setInterval(() => {
+      setViewCount(prevCount => {
+        // Random increase between 1-3 viewers
+        const increase = Math.floor(Math.random() * 3) + 1;
+        return prevCount + increase;
+      });
+    }, 30000); // Update every 30 seconds
+    
     // Check if content was already revealed in a previous session
     if (typeof window !== 'undefined' && localStorage.getItem('contentRevealed') === 'true') {
       console.log("Content was previously revealed, showing content immediately");
@@ -40,6 +54,8 @@ export default function Home() {
         }
       }, 500);
     }
+    
+    return () => clearInterval(viewCountInterval);
   }, []);
 
   return (
@@ -57,7 +73,7 @@ export default function Home() {
             --accent-color: #00b894;
             --text-color: #333;
             --light-text: #777;
-            --background: #000;
+            --background: #f5f5f5;
             --card-bg: #fff;
             --border-radius: 8px;
           }
@@ -68,7 +84,7 @@ export default function Home() {
           
           body {
             background-color: var(--background);
-            color: #fff;
+            color: #333;
             font-family: 'Roboto', 'Helvetica Neue', sans-serif;
             margin: 0;
             padding: 0;
@@ -99,7 +115,12 @@ export default function Home() {
 
       <div className="container">
         {/* Video Section */}
-        <VideoPlayer />
+        <div className="video-container">
+          <VideoPlayer />
+          <div className="view-counter">
+            <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
+          </div>
+        </div>
         
         {/* Access Message */}
         <div className="access-message">
@@ -110,7 +131,9 @@ export default function Home() {
         
         {/* Special Offer Section - Hidden until video reveal */}
         <div className="special-offer hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
-          <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
+          <div className="black-bg-section">
+            <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
+          </div>
           
           <div className="product-options">
             <a href={productLinks.sixBottle} target="_blank" rel="noopener noreferrer" className="product-link">
@@ -130,7 +153,9 @@ export default function Home() {
         
         {/* Testimonials Section - Hidden until video reveal */}
         <div className="testimonials-section hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
-          <h2 className="section-heading">What they're saying about AlphaBites</h2>
+          <div className="black-bg-section">
+            <h2 className="section-heading">What they're saying about AlphaBites</h2>
+          </div>
           
           {/* Testimonial Video */}
           <TestimonialVideo />
@@ -155,7 +180,9 @@ export default function Home() {
         
         {/* FAQ Section - Hidden until video reveal */}
         <div className="faq-section hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
-          <h2 className="section-heading">Frequently Asked Questions</h2>
+          <div className="black-bg-section">
+            <h2 className="section-heading">Frequently Asked Questions</h2>
+          </div>
           
           <div className="faq-container">
             <div className="faq-item">
@@ -182,7 +209,9 @@ export default function Home() {
         
         {/* Final CTA - Hidden until video reveal */}
         <div className="final-cta hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
-          <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
+          <div className="black-bg-section">
+            <h2 className="offer-heading">To get started with AlphaBites today, simply click below and take advantage of this unique special time-limited offer...</h2>
+          </div>
           
           <div className="product-options">
             <a href={productLinks.sixBottle} target="_blank" rel="noopener noreferrer" className="product-link">
@@ -202,7 +231,9 @@ export default function Home() {
 
         {/* Scientific References Section */}
         <div className="references-section">
-          <h2>Scientific References</h2>
+          <div className="black-bg-section">
+            <h2>Scientific References</h2>
+          </div>
           
           <div className="logos-container">
             <img src="/images/logos.png" alt="Scientific Institution Logos" className="logos-image" />
@@ -305,10 +336,36 @@ export default function Home() {
         }
 
         .container {
-          max-width: 1200px;
+          width: 100%;
+          max-width: 100%;
+          margin: 0 auto;
+          padding: 0;
+          text-align: center;
+          background-color: var(--background);
+        }
+        
+        .video-container {
+          position: relative;
+          width: 100%;
+          max-width: 800px;
           margin: 0 auto;
           padding: 20px;
-          text-align: center;
+        }
+        
+        .view-counter {
+          position: absolute;
+          bottom: 30px;
+          right: 30px;
+          background-color: rgba(0, 0, 0, 0.7);
+          color: white;
+          padding: 5px 10px;
+          border-radius: 20px;
+          font-size: 14px;
+          z-index: 10;
+        }
+        
+        .view-icon {
+          margin-right: 5px;
         }
 
         .access-message {
@@ -316,6 +373,8 @@ export default function Home() {
           text-align: center;
           color: #fff;
           transition: opacity 0.5s ease;
+          background-color: #000;
+          padding: 20px;
         }
 
         .lock-icon {
@@ -328,6 +387,15 @@ export default function Home() {
           margin: 5px 0;
           font-weight: bold;
           font-size: 14px;
+        }
+        
+        /* Black background sections for headings */
+        .black-bg-section {
+          background-color: #000;
+          color: #fff;
+          padding: 30px 20px;
+          width: 100%;
+          margin: 0;
         }
         
         /* Hidden sections until reveal */
@@ -347,14 +415,15 @@ export default function Home() {
         
         /* Special Offer Section */
         .special-offer, .final-cta {
-          margin: 40px auto;
-          max-width: 1000px;
+          margin: 0;
+          width: 100%;
         }
         
         .offer-heading {
           color: #fff;
           font-size: 24px;
-          margin-bottom: 30px;
+          margin: 0 auto;
+          max-width: 1000px;
           line-height: 1.4;
         }
         
@@ -363,7 +432,10 @@ export default function Home() {
           flex-wrap: wrap;
           justify-content: center;
           gap: 20px;
-          margin-top: 30px;
+          margin: 30px auto;
+          padding: 20px;
+          max-width: 1200px;
+          background-color: var(--background);
         }
         
         .product-link {
@@ -410,22 +482,23 @@ export default function Home() {
         
         /* Testimonials Section */
         .testimonials-section {
-          margin: 60px auto;
-          max-width: 800px;
+          margin: 0;
+          width: 100%;
         }
         
         .section-heading {
           color: #fff;
           font-size: 28px;
-          margin-bottom: 30px;
+          margin: 0 auto;
+          max-width: 1000px;
         }
         
         .testimonials-container {
           background-color: #fff;
-          border-radius: 8px;
           padding: 20px;
           color: #333;
-          margin-top: 30px;
+          margin: 0 auto;
+          max-width: 800px;
         }
         
         .testimonials-image {
@@ -436,8 +509,9 @@ export default function Home() {
         
         /* Guarantee Section */
         .guarantee-section {
-          margin: 60px auto;
+          margin: 40px auto;
           max-width: 800px;
+          padding: 20px;
         }
         
         .guarantee-image {
@@ -467,16 +541,17 @@ export default function Home() {
         
         /* FAQ Section */
         .faq-section {
-          margin: 60px auto;
-          max-width: 800px;
+          margin: 0;
+          width: 100%;
         }
         
         .faq-container {
           background-color: #fff;
-          border-radius: 8px;
           padding: 30px;
           color: #333;
           text-align: left;
+          max-width: 800px;
+          margin: 0 auto;
         }
         
         .faq-item {
@@ -504,23 +579,22 @@ export default function Home() {
         }
 
         .references-section {
-          margin: 40px auto;
-          max-width: 1000px;
+          margin: 0;
+          width: 100%;
           text-align: center;
-          background-color: #fff;
-          color: #333;
-          padding: 30px;
-          border-radius: 8px;
         }
-
-        .references-section h2 {
+        
+        .references-section .black-bg-section h2 {
           font-size: 36px;
-          margin-bottom: 30px;
-          color: #000;
+          margin: 0 auto;
+          max-width: 1000px;
         }
 
         .logos-container {
           margin: 30px auto;
+          padding: 20px;
+          max-width: 800px;
+          background-color: #fff;
         }
 
         .logos-image {
@@ -534,12 +608,16 @@ export default function Home() {
           color: #777;
           margin: 20px 0;
           font-size: 14px;
+          background-color: #fff;
+          padding: 0 20px;
         }
 
         .references-list {
           text-align: left;
           max-width: 800px;
           margin: 0 auto;
+          padding: 20px;
+          background-color: #fff;
         }
 
         .references-list ol {
@@ -606,11 +684,7 @@ export default function Home() {
             order: -1;
           }
           
-          .references-section {
-            padding: 20px;
-          }
-
-          .references-section h2 {
+          .references-section .black-bg-section h2 {
             font-size: 28px;
           }
 
@@ -620,6 +694,12 @@ export default function Home() {
           
           .section-heading, .offer-heading {
             font-size: 22px;
+          }
+          
+          .view-counter {
+            bottom: 25px;
+            right: 25px;
+            font-size: 12px;
           }
         }
       `}</style>

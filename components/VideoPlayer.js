@@ -250,49 +250,29 @@ export default function VideoPlayer() {
   }, [videoRevealed, videoId, DEBUG_MODE, REVEAL_TIME]);
 
   return (
-    <div className="video-wrapper" ref={playerRef}>
-      <div className="video-section">
-        <div id={`vid_${videoId}`} style={{position: 'relative', width: '100%', padding: '176.47058823529412% 0 0'}}>
-          <img 
-            id={`thumb_${videoId}`} 
-            src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`}
-            style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', overflow: 'hidden'}}
-            alt="Video Thumbnail"
-          />
-          <div 
-            id={`backdrop_${videoId}`} 
-            style={{WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%'}}
-          ></div>
-        </div>
-        
-        <p className="video-footer">Attention: Make sure your sound is ON!</p>
+    <div className="video-wrapper">
+      <div id={`vid_${videoId}`} style={{position: 'relative', width: '100%', padding: '56.25% 0 0'}}>
+        <img 
+          id={`thumb_${videoId}`} 
+          src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`}
+          style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block', overflow: 'hidden'}}
+          alt="Video Thumbnail"
+        />
+        <div 
+          id={`backdrop_${videoId}`} 
+          style={{WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%'}}
+        ></div>
       </div>
 
       <style jsx>{`
         .video-wrapper {
           width: 100%;
-          max-width: 600px;
+          max-width: 800px;
           margin: 0 auto;
-        }
-        
-        .video-section {
-          width: 100%;
-          background: #000;
           border-radius: 8px;
           overflow: hidden;
           box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-          position: relative;
-        }
-        
-        .video-footer {
-          position: absolute;
-          bottom: 10px;
-          left: 0;
-          width: 100%;
-          text-align: center;
-          color: white;
-          font-size: 12px;
-          margin: 0;
+          background-color: #000;
         }
       `}</style>
     </div>
