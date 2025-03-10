@@ -7,7 +7,7 @@ export default function MainVideoPlayer({ onVideoProgress }) {
   useEffect(() => {
     // For testing in development, set to true to reveal after a shorter time
     const DEBUG_MODE = process.env.NODE_ENV === 'development';
-    const REVEAL_TIME = DEBUG_MODE ? 5 : 1500; // 5 seconds in debug mode, 25 minutes (1500 seconds) in production
+    const REVEAL_TIME = DEBUG_MODE ? 5 : 1084; // 5 seconds in debug mode, 1084 seconds in production
     
     // Load the video player script
     const script = document.createElement('script');
@@ -76,17 +76,18 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     };
   }, [onVideoProgress]);
 
-  // The simplest possible implementation - just a div with an ID
-  // The script will replace this with the video player
+  // The video player with a glow effect
   return (
-    <div id={`vid_${videoId}`} style={{width: '100%'}}>
-      <img 
-        id={`thumb_${videoId}`} 
-        src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`} 
-        style={{width: '100%'}} 
-        alt="Video thumbnail" 
-      />
-      <div id={`backdrop_${videoId}`}></div>
+    <div className="video-wrapper">
+      <div id={`vid_${videoId}`} style={{width: '100%'}}>
+        <img 
+          id={`thumb_${videoId}`} 
+          src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`} 
+          style={{width: '100%', borderRadius: '10px'}} 
+          alt="Video thumbnail" 
+        />
+        <div id={`backdrop_${videoId}`}></div>
+      </div>
     </div>
   );
 } 

@@ -100,9 +100,10 @@ export default function Home() {
             --accent-color: #00b894;
             --text-color: #333;
             --light-text: #777;
-            --background: #f5f5f5;
+            --background: #000;
             --card-bg: #fff;
             --border-radius: 8px;
+            --glow-color: rgba(255, 215, 0, 0.6);
           }
           
           * {
@@ -134,11 +135,13 @@ export default function Home() {
           iframe {
             max-width: 100%;
             width: 100%;
+            border-radius: 10px;
           }
           
           /* Fix for video containers */
           div[id^="vid_"] {
             width: 100%;
+            border-radius: 10px;
           }
         `}</style>
       </Head>
@@ -150,8 +153,7 @@ export default function Home() {
       </div>
 
       <div className="sub-notification">
-        <p>Discover the natural secret for long-lasting, rock-solid erections they're afraid to reveal.</p>
-        <p className="watching-now">Start watching now</p>
+        <h1 className="main-title">Discover the natural secret for long-lasting, rock-solid erections they're afraid to reveal.</h1>
       </div>
 
       <div className="container">
@@ -161,13 +163,18 @@ export default function Home() {
             {/* View Counter */}
             <div className="view-counter-container">
               <div className="view-counter">
-                <span className="view-icon">👁️</span> {viewCount.toLocaleString()} people watching now
+                <span className="view-icon">👁️</span> {viewCount.toLocaleString()} watching now ...
               </div>
             </div>
             
             {/* Video Player */}
             <div className="video-player-container">
               <MainVideoPlayer onVideoProgress={revealContent} />
+            </div>
+            
+            {/* Sound Reminder */}
+            <div className="sound-reminder">
+              <p>ATTENTION: Make Sure Your Sound Is On!</p>
             </div>
             
             {/* Access Message */}
@@ -404,14 +411,17 @@ export default function Home() {
           border-bottom: 1px solid #333;
         }
 
-        .sub-notification p {
-          margin: 5px 0;
-          font-size: 14px;
-        }
-
-        .watching-now {
-          color: #aaa;
-          font-size: 12px !important;
+        .main-title {
+          margin: 10px auto;
+          font-size: 28px;
+          max-width: 800px;
+          background: linear-gradient(to right, #ff6b6b, #9c88ff, #ff6b6b);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+          font-weight: 700;
+          line-height: 1.3;
         }
 
         .container {
@@ -446,12 +456,13 @@ export default function Home() {
         
         .view-counter {
           background-color: rgba(0, 0, 0, 0.7);
-          color: white;
+          color: #ff3333;
           padding: 5px 10px;
           border-radius: 20px;
           font-size: 14px;
           display: inline-block;
           margin-right: 10px;
+          font-weight: bold;
         }
         
         .view-icon {
@@ -462,6 +473,23 @@ export default function Home() {
           width: 100%;
           margin: 0 auto;
           display: block;
+        }
+        
+        .video-wrapper {
+          border-radius: 10px;
+          box-shadow: 0 0 20px var(--glow-color), 0 0 40px var(--glow-color);
+          overflow: hidden;
+          margin: 0 auto;
+          width: 100%;
+          max-width: 500px;
+        }
+        
+        .sound-reminder {
+          margin: 10px auto;
+          color: #fff;
+          font-weight: bold;
+          font-size: 14px;
+          text-align: center;
         }
 
         .access-message {
