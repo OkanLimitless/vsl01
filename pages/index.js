@@ -129,6 +129,17 @@ export default function Home() {
           button {
             cursor: pointer;
           }
+          
+          /* Fix for video iframes */
+          iframe {
+            max-width: 100%;
+            width: 100%;
+          }
+          
+          /* Fix for video containers */
+          div[id^="vid_"] {
+            width: 100%;
+          }
         `}</style>
       </Head>
       
@@ -409,6 +420,8 @@ export default function Home() {
           background-color: #000;
           width: 100%;
           padding: 0;
+          display: block;
+          clear: both;
         }
         
         .video-container {
@@ -416,6 +429,7 @@ export default function Home() {
           width: 100%;
           max-width: 800px;
           margin: 0 auto;
+          display: block;
         }
         
         .view-counter {
@@ -441,6 +455,9 @@ export default function Home() {
           transition: opacity 0.5s ease;
           background-color: #000;
           padding: 20px;
+          position: relative;
+          display: block;
+          clear: both;
         }
         
         .released-message {
@@ -450,6 +467,9 @@ export default function Home() {
           transition: opacity 0.5s ease;
           background-color: #000;
           padding: 20px;
+          position: relative;
+          display: block;
+          clear: both;
         }
 
         .lock-icon {
@@ -488,11 +508,15 @@ export default function Home() {
         /* Hidden sections until reveal */
         .hidden-until-reveal {
           display: none;
+          position: relative;
+          clear: both;
         }
         
         .revealed {
           animation: fadeIn 1s ease-in-out;
           display: block;
+          position: relative;
+          clear: both;
         }
         
         @keyframes fadeIn {
@@ -550,6 +574,9 @@ export default function Home() {
         .testimonials-section {
           margin: 0;
           width: 100%;
+          position: relative;
+          clear: both;
+          display: block;
         }
         
         .section-heading {
@@ -565,6 +592,9 @@ export default function Home() {
           color: #333;
           margin: 0 auto;
           max-width: 800px;
+          position: relative;
+          clear: both;
+          display: block;
         }
         
         .testimonials-image {
@@ -796,6 +826,19 @@ export default function Home() {
           .video-container {
             width: 100%;
             max-width: 100%;
+            margin-bottom: 0;
+          }
+          
+          /* Ensure video elements display properly on mobile */
+          #vid_67cdb02e18de859a97b2c80b, 
+          #vid_67cdac39072c3fc40e3f9f4b {
+            width: 100% !important;
+          }
+          
+          .access-message, .released-message {
+            position: relative;
+            display: block;
+            clear: both;
           }
         }
       `}</style>
