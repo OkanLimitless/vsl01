@@ -56,6 +56,22 @@ export default function Home() {
     const releasedMessage = document.querySelector('.released-message');
     if (releasedMessage) {
       releasedMessage.style.display = 'block';
+      
+      // Hide the scroll indicator after 10 seconds
+      setTimeout(() => {
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (scrollIndicator) {
+          scrollIndicator.style.opacity = '0';
+          scrollIndicator.style.transition = 'opacity 1s ease-out';
+          
+          // Remove from DOM after fade out
+          setTimeout(() => {
+            if (scrollIndicator.parentNode) {
+              scrollIndicator.style.display = 'none';
+            }
+          }, 1000);
+        }
+      }, 10000);
     }
     
     // Fire Google Ads conversion tracking for 20-minute mark using dynamic parameters
@@ -90,14 +106,14 @@ export default function Home() {
     const baseViewCount = Math.floor(Math.random() * (2500 - 1200 + 1)) + 1200;
     setViewCount(baseViewCount);
     
-    // Simulate view count increasing over time
+    // Simulate view count increasing over time - more frequently
     const viewCountInterval = setInterval(() => {
       setViewCount(prevCount => {
-        // Random increase between 1-3 viewers
-        const increase = Math.floor(Math.random() * 3) + 1;
+        // Random increase between 1-5 viewers
+        const increase = Math.floor(Math.random() * 5) + 1;
         return prevCount + increase;
       });
-    }, 30000); // Update every 30 seconds
+    }, 5000); // Update every 5 seconds
     
     // Check if content was already revealed in a previous session
     if (typeof window !== 'undefined' && localStorage.getItem('contentRevealed') === 'true') {
@@ -248,6 +264,16 @@ export default function Home() {
               <span className="unlock-icon">🔓</span>
               <p>ACCESS RELEASED</p>
               <p>ENJOY YOUR EXCLUSIVE CONTENT</p>
+              
+              {/* Scroll down indicator */}
+              <div className="scroll-indicator">
+                <p>Scroll Down to See Special Offer</p>
+                <div className="arrows-container">
+                  <div className="arrow-down"></div>
+                  <div className="arrow-down"></div>
+                  <div className="arrow-down"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -509,10 +535,11 @@ export default function Home() {
         
         .view-counter-container {
           width: 100%;
-          text-align: right;
+          text-align: center;
           padding: 10px 0;
           position: relative;
           z-index: 2;
+          margin-bottom: 10px;
         }
         
         .view-counter {
@@ -523,7 +550,6 @@ export default function Home() {
           font-size: 14px;
           display: inline-flex;
           align-items: center;
-          margin-right: 10px;
           font-weight: bold;
           border: 1px solid rgba(255, 51, 51, 0.3);
           box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -681,6 +707,9 @@ export default function Home() {
         }
         
         .released-message p {
+          margin: 5px 0;
+          font-weight: bold;
+          font-size: 14px;
           color: #00b894;
         }
         
@@ -1034,6 +1063,70 @@ export default function Home() {
             position: relative;
             display: block;
             clear: both;
+          }
+        }
+        
+        /* Scroll indicator styles */
+        .scroll-indicator {
+          margin-top: 20px;
+          animation: fadeInUp 0.8s ease-out forwards;
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        
+        .scroll-indicator p {
+          color: #ffffff;
+          font-size: 16px;
+          margin-bottom: 10px;
+          text-shadow: 0 0 10px rgba(0, 184, 148, 0.7);
+        }
+        
+        .arrows-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          height: 60px;
+          margin-top: 5px;
+        }
+        
+        .arrow-down {
+          width: 20px;
+          height: 20px;
+          border-right: 4px solid #00b894;
+          border-bottom: 4px solid #00b894;
+          transform: rotate(45deg);
+          margin: -10px 0;
+          animation: arrowBounce 2s infinite;
+        }
+        
+        .arrow-down:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        
+        .arrow-down:nth-child(3) {
+          animation-delay: 0.4s;
+        }
+        
+        @keyframes arrowBounce {
+          0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0) rotate(45deg);
+          }
+          40% {
+            transform: translateY(10px) rotate(45deg);
+          }
+          60% {
+            transform: translateY(5px) rotate(45deg);
+          }
+        }
+        
+        @keyframes fadeInUp {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
       `}</style>
