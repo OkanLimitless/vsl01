@@ -17,21 +17,23 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     const DEBUG_MODE = process.env.NODE_ENV === 'development';
     const REVEAL_TIME = DEBUG_MODE ? 5 : 1084; // 5 seconds in debug mode, 1084 seconds in production
     
-    // Create and inject the player script
-    const script = document.createElement('script');
-    script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
-    script.async = true;
-    script.id = `scr_${videoId}`;
-    document.head.appendChild(script);
-    scriptRef.current = script;
+    // Wait for DOM to be fully ready before injecting scripts
+    const initializePlayer = () => {
+      // Create and inject the player script
+      const script = document.createElement('script');
+      script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
+      script.async = true;
+      script.id = `scr_${videoId}`;
+      document.head.appendChild(script);
+      scriptRef.current = script;
+    };
     
     // Set up monitoring for the video
     const monitorVideo = () => {
       // Create a global object to receive messages from the player
       window.vturbPlayerAPI = window.vturbPlayerAPI || {};
       window.vturbPlayerAPI.onTimeUpdate = (currentTime) => {
-        console.log(`API Time update: ${currentTime}s`);
-        
+        // Removed console.log for API time updates
         if (currentTime >= REVEAL_TIME) {
           onVideoProgress && onVideoProgress();
         }
@@ -45,27 +47,30 @@ export default function MainVideoPlayer({ onVideoProgress }) {
           // Try to find the video element
           var videoElement = document.querySelector('video');
           if (videoElement) {
-            console.log("Found video element, setting up timeupdate listener");
+            // Removed console.log for finding video element
             videoElement.addEventListener('timeupdate', function() {
               if (window.vturbPlayerAPI && typeof window.vturbPlayerAPI.onTimeUpdate === 'function') {
                 window.vturbPlayerAPI.onTimeUpdate(videoElement.currentTime);
               }
             });
           }
-        }, 2000);
+        }, 3000); // Increased timeout to ensure video element is loaded
       `;
       document.head.appendChild(monitorScript);
       monitorScriptRef.current = monitorScript;
     };
     
-    // Start monitoring after a short delay
-    const monitorTimer = setTimeout(monitorVideo, 2000);
+    // Initialize player with a slight delay to ensure DOM is ready
+    const initTimer = setTimeout(initializePlayer, 100);
+    
+    // Start monitoring after a longer delay to ensure player is loaded
+    const monitorTimer = setTimeout(monitorVideo, 3000);
     
     // For testing in development, add a timeout to reveal content after 10 seconds
     let debugTimer;
     if (DEBUG_MODE) {
       debugTimer = setTimeout(() => {
-        console.log("Debug mode: Testing reveal after 10 seconds");
+        // Removed console.log for debug mode
         onVideoProgress && onVideoProgress();
       }, 10000);
     }
@@ -76,7 +81,7 @@ export default function MainVideoPlayer({ onVideoProgress }) {
         try {
           document.head.removeChild(scriptRef.current);
         } catch (e) {
-          console.log("Error removing player script:", e);
+          // Silently handle errors
         }
       }
       
@@ -84,11 +89,12 @@ export default function MainVideoPlayer({ onVideoProgress }) {
         try {
           document.head.removeChild(monitorScriptRef.current);
         } catch (e) {
-          console.log("Error removing monitor script:", e);
+          // Silently handle errors
         }
       }
       
       // Clear timers
+      clearTimeout(initTimer);
       clearTimeout(monitorTimer);
       if (DEBUG_MODE && debugTimer) {
         clearTimeout(debugTimer);
@@ -114,7 +120,6 @@ export default function MainVideoPlayer({ onVideoProgress }) {
             style={{ WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%' }}
           ></div>
         </div>
-        {/* Script is now injected in useEffect instead of here */}
       </div>
     </ClientSideOnly>
   );

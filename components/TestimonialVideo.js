@@ -12,14 +12,20 @@ export default function TestimonialVideo() {
   const scriptRef = useRef(null);
 
   useEffect(() => {
-    // Load the video player script
-    const script = document.createElement('script');
-    script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
-    script.async = true;
-    script.id = `scr_${videoId}`;
-    document.head.appendChild(script);
-    
-    scriptRef.current = script;
+    // Wait for DOM to be fully ready before injecting scripts
+    const initializePlayer = () => {
+      // Load the video player script
+      const script = document.createElement('script');
+      script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
+      script.async = true;
+      script.id = `scr_${videoId}`;
+      document.head.appendChild(script);
+      
+      scriptRef.current = script;
+    };
+
+    // Initialize player with a slight delay to ensure DOM is ready
+    const initTimer = setTimeout(initializePlayer, 100);
 
     return () => {
       // Clean up
@@ -27,9 +33,12 @@ export default function TestimonialVideo() {
         try {
           document.head.removeChild(scriptRef.current);
         } catch (e) {
-          console.log("Error removing testimonial video script:", e);
+          // Silently handle errors
         }
       }
+      
+      // Clear timer
+      clearTimeout(initTimer);
     };
   }, []);
 
@@ -37,14 +46,14 @@ export default function TestimonialVideo() {
   // The script will replace this with the video player
   return (
     <ClientSideOnly>
-      <div id={`vid_${videoId}`} style={{width: '100%'}}>
+      <div id={`vid_${videoId}`} style={{width: '100%', position: 'relative'}}>
         <img 
           id={`thumb_${videoId}`} 
           src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`} 
           style={{width: '100%'}} 
           alt="Testimonial video thumbnail" 
         />
-        <div id={`backdrop_${videoId}`}></div>
+        <div id={`backdrop_${videoId}`} style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}></div>
       </div>
     </ClientSideOnly>
   );

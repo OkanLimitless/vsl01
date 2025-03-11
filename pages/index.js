@@ -116,6 +116,11 @@ export default function Home() {
         <meta name="description" content="Discover the natural secret for long-lasting, rock-solid erections they're afraid to reveal." />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         
+        {/* Google Fonts - Fixed import */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+        
         {/* Google Ads Conversion Tracking - Dynamic Script */}
         {gtagParams.id && (
           <>
@@ -132,7 +137,7 @@ export default function Home() {
         )}
         
         <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+          /* Font import removed from here and added as link above */
           
           :root {
             --primary-color: #6c5ce7;
@@ -165,6 +170,7 @@ export default function Home() {
           img {
             max-width: 100%;
             overflow: hidden;
+            display: block;
           }
           
           button {
@@ -176,12 +182,21 @@ export default function Home() {
             max-width: 100%;
             width: 100%;
             border-radius: 10px;
+            overflow: hidden;
           }
           
           /* Fix for video containers */
           div[id^="vid_"] {
             width: 100%;
             border-radius: 10px;
+            overflow: hidden;
+          }
+          
+          /* Fix for video elements */
+          video {
+            max-width: 100%;
+            width: 100%;
+            overflow: hidden;
           }
         `}</style>
       </Head>
