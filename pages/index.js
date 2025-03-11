@@ -56,23 +56,23 @@ export default function Home() {
     const releasedMessage = document.querySelector('.released-message');
     if (releasedMessage) {
       releasedMessage.style.display = 'block';
-      
-      // Hide the scroll indicator after 10 seconds
-      setTimeout(() => {
-        const scrollIndicator = document.querySelector('.scroll-indicator');
-        if (scrollIndicator) {
-          scrollIndicator.style.opacity = '0';
-          scrollIndicator.style.transition = 'opacity 1s ease-out';
-          
-          // Remove from DOM after fade out
-          setTimeout(() => {
-            if (scrollIndicator.parentNode) {
-              scrollIndicator.style.display = 'none';
-            }
-          }, 1000);
-        }
-      }, 10000);
     }
+    
+    // Hide the scroll indicator after 10 seconds
+    setTimeout(() => {
+      const scrollIndicator = document.querySelector('.scroll-indicator-container');
+      if (scrollIndicator) {
+        scrollIndicator.style.opacity = '0';
+        scrollIndicator.style.transition = 'opacity 1s ease-out';
+        
+        // Remove from DOM after fade out
+        setTimeout(() => {
+          if (scrollIndicator) {
+            scrollIndicator.style.display = 'none';
+          }
+        }, 1000);
+      }
+    }, 10000);
     
     // Fire Google Ads conversion tracking for 20-minute mark using dynamic parameters
     if (typeof window !== 'undefined' && window.gtag && gtagParams.id && gtagParams.label) {
@@ -247,6 +247,18 @@ export default function Home() {
               <MainVideoPlayer onVideoProgress={revealContent} />
             </div>
             
+            {/* Scroll down indicator - Only visible when content is revealed */}
+            <div className="scroll-indicator-container" style={{display: videoRevealed ? 'block' : 'none'}}>
+              <div className="scroll-indicator">
+                <p>Scroll Down to See Special Offer</p>
+                <div className="arrows-container">
+                  <div className="arrow-down"></div>
+                  <div className="arrow-down"></div>
+                  <div className="arrow-down"></div>
+                </div>
+              </div>
+            </div>
+            
             {/* Sound Reminder */}
             <div className="sound-reminder">
               <p>ATTENTION: Make Sure Your Sound Is On!</p>
@@ -264,16 +276,6 @@ export default function Home() {
               <span className="unlock-icon">🔓</span>
               <p>ACCESS RELEASED</p>
               <p>ENJOY YOUR EXCLUSIVE CONTENT</p>
-              
-              {/* Scroll down indicator */}
-              <div className="scroll-indicator">
-                <p>Scroll Down to See Special Offer</p>
-                <div className="arrows-container">
-                  <div className="arrow-down"></div>
-                  <div className="arrow-down"></div>
-                  <div className="arrow-down"></div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -656,6 +658,93 @@ export default function Home() {
           pointer-events: none;
           z-index: 1;
           box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+        
+        .scroll-indicator-container {
+          width: 100%;
+          text-align: center;
+          padding: 10px 0;
+          position: relative;
+          z-index: 5;
+          margin: 10px 0;
+        }
+        
+        .scroll-indicator {
+          background-color: rgba(0, 0, 0, 0.8);
+          color: #fff;
+          padding: 10px 15px;
+          border-radius: 20px;
+          font-size: 16px;
+          display: inline-flex;
+          flex-direction: column;
+          align-items: center;
+          font-weight: bold;
+          border: 1px solid rgba(0, 184, 148, 0.5);
+          box-shadow: 0 0 15px rgba(0, 184, 148, 0.3);
+          animation: fadeInPulse 0.8s ease-out forwards;
+          max-width: 90%;
+          margin: 0 auto;
+        }
+        
+        .scroll-indicator p {
+          color: #ffffff;
+          font-size: 16px;
+          margin-bottom: 10px;
+          text-shadow: 0 0 10px rgba(0, 184, 148, 0.7);
+          font-weight: 700;
+        }
+        
+        .arrows-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          height: 60px;
+          margin-top: 5px;
+        }
+        
+        .arrow-down {
+          width: 20px;
+          height: 20px;
+          border-right: 4px solid #00b894;
+          border-bottom: 4px solid #00b894;
+          transform: rotate(45deg);
+          margin: -10px 0;
+          animation: arrowBounce 2s infinite;
+        }
+        
+        .arrow-down:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        
+        .arrow-down:nth-child(3) {
+          animation-delay: 0.4s;
+        }
+        
+        @keyframes arrowBounce {
+          0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0) rotate(45deg);
+          }
+          40% {
+            transform: translateY(10px) rotate(45deg);
+          }
+          60% {
+            transform: translateY(5px) rotate(45deg);
+          }
+        }
+        
+        @keyframes fadeInPulse {
+          0% {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          70% {
+            opacity: 1;
+            transform: scale(1.05);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
         }
         
         .sound-reminder {
@@ -1063,70 +1152,6 @@ export default function Home() {
             position: relative;
             display: block;
             clear: both;
-          }
-        }
-        
-        /* Scroll indicator styles */
-        .scroll-indicator {
-          margin-top: 20px;
-          animation: fadeInUp 0.8s ease-out forwards;
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        
-        .scroll-indicator p {
-          color: #ffffff;
-          font-size: 16px;
-          margin-bottom: 10px;
-          text-shadow: 0 0 10px rgba(0, 184, 148, 0.7);
-        }
-        
-        .arrows-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          height: 60px;
-          margin-top: 5px;
-        }
-        
-        .arrow-down {
-          width: 20px;
-          height: 20px;
-          border-right: 4px solid #00b894;
-          border-bottom: 4px solid #00b894;
-          transform: rotate(45deg);
-          margin: -10px 0;
-          animation: arrowBounce 2s infinite;
-        }
-        
-        .arrow-down:nth-child(2) {
-          animation-delay: 0.2s;
-        }
-        
-        .arrow-down:nth-child(3) {
-          animation-delay: 0.4s;
-        }
-        
-        @keyframes arrowBounce {
-          0%, 20%, 50%, 80%, 100% {
-            transform: translateY(0) rotate(45deg);
-          }
-          40% {
-            transform: translateY(10px) rotate(45deg);
-          }
-          60% {
-            transform: translateY(5px) rotate(45deg);
-          }
-        }
-        
-        @keyframes fadeInUp {
-          0% {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
           }
         }
       `}</style>
