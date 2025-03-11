@@ -108,16 +108,40 @@ export default function MainVideoPlayer({ onVideoProgress }) {
   return (
     <ClientSideOnly>
       <div className="video-wrapper">
-        <div id={`vid_${videoId}`} style={{ position: 'relative', width: '100%', padding: '176.47058823529412% 0 0' }}>
+        <div id={`vid_${videoId}`} style={{ 
+          position: 'relative', 
+          width: '100%', 
+          padding: '176.47058823529412% 0 0',
+          borderRadius: '6px',
+          overflow: 'hidden',
+          zIndex: 2
+        }}>
           <img 
             id={`thumb_${videoId}`} 
             src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`} 
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} 
+            style={{ 
+              position: 'absolute', 
+              top: 0, 
+              left: 0, 
+              width: '100%', 
+              height: '100%', 
+              objectFit: 'cover', 
+              display: 'block',
+              borderRadius: '6px'
+            }} 
             alt="thumbnail" 
           />
           <div 
             id={`backdrop_${videoId}`} 
-            style={{ WebkitBackdropFilter: 'blur(5px)', backdropFilter: 'blur(5px)', position: 'absolute', top: 0, height: '100%', width: '100%' }}
+            style={{ 
+              WebkitBackdropFilter: 'blur(5px)', 
+              backdropFilter: 'blur(5px)', 
+              position: 'absolute', 
+              top: 0, 
+              height: '100%', 
+              width: '100%',
+              borderRadius: '6px'
+            }}
           ></div>
         </div>
       </div>

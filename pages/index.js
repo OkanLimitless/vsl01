@@ -218,7 +218,11 @@ export default function Home() {
             {/* View Counter */}
             <div className="view-counter-container">
               <div className="view-counter">
-                <span className="view-icon">👁️</span> {viewCount.toLocaleString()} watching now ...
+                <span className="view-icon">
+                  <span className="live-dot"></span>
+                </span>
+                <span className="view-count">{viewCount.toLocaleString()}</span>
+                <span className="view-text">watching now</span>
               </div>
             </div>
             
@@ -507,21 +511,74 @@ export default function Home() {
           width: 100%;
           text-align: right;
           padding: 10px 0;
+          position: relative;
+          z-index: 2;
         }
         
         .view-counter {
-          background-color: rgba(0, 0, 0, 0.7);
+          background-color: rgba(0, 0, 0, 0.8);
           color: #ff3333;
-          padding: 5px 10px;
+          padding: 6px 12px;
           border-radius: 20px;
           font-size: 14px;
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
           margin-right: 10px;
           font-weight: bold;
+          border: 1px solid rgba(255, 51, 51, 0.3);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         
         .view-icon {
+          margin-right: 8px;
+          background-color: rgba(255, 51, 51, 0.2);
+          width: 22px;
+          height: 22px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          font-size: 12px;
+          position: relative;
+        }
+        
+        .live-dot {
+          width: 10px;
+          height: 10px;
+          background-color: #ff3333;
+          border-radius: 50%;
+          display: block;
+          position: relative;
+          animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+          0% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7);
+          }
+          
+          70% {
+            transform: scale(1);
+            box-shadow: 0 0 0 5px rgba(255, 51, 51, 0);
+          }
+          
+          100% {
+            transform: scale(0.95);
+            box-shadow: 0 0 0 0 rgba(255, 51, 51, 0);
+          }
+        }
+        
+        .view-count {
+          color: #ffffff;
           margin-right: 5px;
+          font-weight: 700;
+        }
+        
+        .view-text {
+          color: #aaaaaa;
+          font-size: 12px;
+          font-weight: 400;
         }
         
         .video-player-container {
@@ -537,6 +594,42 @@ export default function Home() {
           margin: 0 auto;
           width: 100%;
           max-width: 500px;
+          position: relative;
+          border: 1px solid rgba(255, 215, 0, 0.5);
+          padding: 8px;
+          background: linear-gradient(145deg, rgba(0,0,0,0.9), rgba(20,20,20,0.8));
+        }
+        
+        /* Canvas-like texture overlay for video */
+        .video-wrapper::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-image: 
+            linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+          background-size: 20px 20px;
+          pointer-events: none;
+          z-index: 1;
+          border-radius: 8px;
+        }
+        
+        /* Enhanced corners for canvas effect */
+        .video-wrapper::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border: 2px solid rgba(255, 215, 0, 0.3);
+          border-radius: 8px;
+          pointer-events: none;
+          z-index: 1;
+          box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.2);
         }
         
         .sound-reminder {
