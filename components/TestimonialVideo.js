@@ -15,7 +15,7 @@ export default function TestimonialVideo() {
         <video 
           controls
           preload="metadata"
-          poster="https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/67cdac39072c3fc40e3f9f4b/thumbnail.jpg"
+          poster="/images/reviewvidthumbnail.png"
           style={{
             width: '100%',
             maxWidth: '100%',
