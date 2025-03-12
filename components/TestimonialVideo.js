@@ -10,10 +10,23 @@ const ClientSideOnly = dynamic(
 export default function TestimonialVideo() {
   const videoId = "67cdac39072c3fc40e3f9f4b";
   const scriptRef = useRef(null);
+  const playerInitialized = useRef(false);
 
   useEffect(() => {
+    // Prevent multiple initializations
+    if (playerInitialized.current) {
+      return;
+    }
+    
+    playerInitialized.current = true;
+    
     // Wait for DOM to be fully ready before injecting scripts
     const initializePlayer = () => {
+      // Check if script already exists to prevent duplicates
+      if (document.getElementById(`scr_${videoId}`)) {
+        return;
+      }
+      
       // Load the video player script
       const script = document.createElement('script');
       script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
@@ -28,8 +41,8 @@ export default function TestimonialVideo() {
     const initTimer = setTimeout(initializePlayer, 100);
 
     return () => {
-      // Clean up
-      if (scriptRef.current) {
+      // Only attempt to remove scripts if they exist and are still in the document
+      if (scriptRef.current && document.getElementById(scriptRef.current.id)) {
         try {
           document.head.removeChild(scriptRef.current);
         } catch (e) {
@@ -39,6 +52,8 @@ export default function TestimonialVideo() {
       
       // Clear timer
       clearTimeout(initTimer);
+      
+      playerInitialized.current = false;
     };
   }, []);
 

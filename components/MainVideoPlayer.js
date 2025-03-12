@@ -11,14 +11,27 @@ export default function MainVideoPlayer({ onVideoProgress }) {
   const videoId = "67cdb02e18de859a97b2c80b";
   const scriptRef = useRef(null);
   const monitorScriptRef = useRef(null);
+  const playerInitialized = useRef(false);
 
   useEffect(() => {
     // For testing in development, set to true to reveal after a shorter time
     const DEBUG_MODE = process.env.NODE_ENV === 'development';
     const REVEAL_TIME = DEBUG_MODE ? 5 : 1084; // 5 seconds in debug mode, 1084 seconds in production
     
+    // Prevent multiple initializations
+    if (playerInitialized.current) {
+      return;
+    }
+    
+    playerInitialized.current = true;
+    
     // Wait for DOM to be fully ready before injecting scripts
     const initializePlayer = () => {
+      // Check if script already exists to prevent duplicates
+      if (document.getElementById(`scr_${videoId}`)) {
+        return;
+      }
+      
       // Create and inject the player script
       const script = document.createElement('script');
       script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
@@ -33,7 +46,6 @@ export default function MainVideoPlayer({ onVideoProgress }) {
       // Create a global object to receive messages from the player
       window.vturbPlayerAPI = window.vturbPlayerAPI || {};
       window.vturbPlayerAPI.onTimeUpdate = (currentTime) => {
-        // Removed console.log for API time updates
         if (currentTime >= REVEAL_TIME) {
           onVideoProgress && onVideoProgress();
         }
@@ -41,13 +53,13 @@ export default function MainVideoPlayer({ onVideoProgress }) {
       
       // Inject a script to communicate with the player
       const monitorScript = document.createElement('script');
+      monitorScript.id = `monitor_${videoId}`;
       monitorScript.innerHTML = `
         // Wait for player to initialize
         setTimeout(function() {
           // Try to find the video element
           var videoElement = document.querySelector('video');
           if (videoElement) {
-            // Removed console.log for finding video element
             videoElement.addEventListener('timeupdate', function() {
               if (window.vturbPlayerAPI && typeof window.vturbPlayerAPI.onTimeUpdate === 'function') {
                 window.vturbPlayerAPI.onTimeUpdate(videoElement.currentTime);
@@ -56,8 +68,12 @@ export default function MainVideoPlayer({ onVideoProgress }) {
           }
         }, 3000); // Increased timeout to ensure video element is loaded
       `;
-      document.head.appendChild(monitorScript);
-      monitorScriptRef.current = monitorScript;
+      
+      // Check if script already exists to prevent duplicates
+      if (!document.getElementById(`monitor_${videoId}`)) {
+        document.head.appendChild(monitorScript);
+        monitorScriptRef.current = monitorScript;
+      }
     };
     
     // Initialize player with a slight delay to ensure DOM is ready
@@ -70,14 +86,14 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     let debugTimer;
     if (DEBUG_MODE) {
       debugTimer = setTimeout(() => {
-        // Removed console.log for debug mode
         onVideoProgress && onVideoProgress();
       }, 10000);
     }
 
+    // Cleanup function
     return () => {
-      // Clean up all scripts
-      if (scriptRef.current) {
+      // Only attempt to remove scripts if they exist and are still in the document
+      if (scriptRef.current && document.getElementById(scriptRef.current.id)) {
         try {
           document.head.removeChild(scriptRef.current);
         } catch (e) {
@@ -85,7 +101,7 @@ export default function MainVideoPlayer({ onVideoProgress }) {
         }
       }
       
-      if (monitorScriptRef.current) {
+      if (monitorScriptRef.current && document.getElementById(monitorScriptRef.current.id)) {
         try {
           document.head.removeChild(monitorScriptRef.current);
         } catch (e) {
@@ -100,7 +116,12 @@ export default function MainVideoPlayer({ onVideoProgress }) {
         clearTimeout(debugTimer);
       }
       
-      delete window.vturbPlayerAPI;
+      // Reset the API
+      if (window.vturbPlayerAPI) {
+        window.vturbPlayerAPI.onTimeUpdate = null;
+      }
+      
+      playerInitialized.current = false;
     };
   }, [onVideoProgress]);
 
