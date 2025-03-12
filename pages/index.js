@@ -910,6 +910,23 @@ export default function Home() {
           display: block;
         }
         
+        .testimonial-video-container {
+          margin: 20px auto;
+          max-width: 800px;
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+          background-color: #000;
+          border-radius: 8px;
+        }
+        
+        .testimonial-video-container video {
+          display: block;
+          width: 100%;
+          height: auto;
+          background-color: #000;
+        }
+        
         .testimonials-image {
           max-width: 100%;
           height: auto;

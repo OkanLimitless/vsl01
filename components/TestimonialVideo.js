@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 
 // Create a client-side only wrapper to avoid hydration issues
@@ -8,67 +8,27 @@ const ClientSideOnly = dynamic(
 );
 
 export default function TestimonialVideo() {
-  const videoId = "67cdac39072c3fc40e3f9f4b";
-  const scriptRef = useRef(null);
-  const playerInitialized = useRef(false);
-
-  useEffect(() => {
-    // Prevent multiple initializations
-    if (playerInitialized.current) {
-      return;
-    }
-    
-    playerInitialized.current = true;
-    
-    // Wait for DOM to be fully ready before injecting scripts
-    const initializePlayer = () => {
-      // Check if script already exists to prevent duplicates
-      if (document.getElementById(`scr_${videoId}`)) {
-        return;
-      }
-      
-      // Load the video player script
-      const script = document.createElement('script');
-      script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
-      script.async = true;
-      script.id = `scr_${videoId}`;
-      document.head.appendChild(script);
-      
-      scriptRef.current = script;
-    };
-
-    // Initialize player with a slight delay to ensure DOM is ready
-    const initTimer = setTimeout(initializePlayer, 100);
-
-    return () => {
-      // Only attempt to remove scripts if they exist and are still in the document
-      if (scriptRef.current && document.getElementById(scriptRef.current.id)) {
-        try {
-          document.head.removeChild(scriptRef.current);
-        } catch (e) {
-          // Silently handle errors
-        }
-      }
-      
-      // Clear timer
-      clearTimeout(initTimer);
-      
-      playerInitialized.current = false;
-    };
-  }, []);
-
-  // The simplest possible implementation - just a div with an ID
-  // The script will replace this with the video player
+  // Using direct MP4 video instead of the vturb player to avoid conflicts
   return (
     <ClientSideOnly>
-      <div id={`vid_${videoId}`} style={{width: '100%', position: 'relative'}}>
-        <img 
-          id={`thumb_${videoId}`} 
-          src={`https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/thumbnail.jpg`} 
-          style={{width: '100%'}} 
-          alt="Testimonial video thumbnail" 
-        />
-        <div id={`backdrop_${videoId}`} style={{position: 'absolute', top: 0, left: 0, width: '100%', height: '100%'}}></div>
+      <div className="testimonial-video-container">
+        <video 
+          controls
+          preload="metadata"
+          poster="https://images.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/67cdac39072c3fc40e3f9f4b/thumbnail.jpg"
+          style={{
+            width: '100%',
+            maxWidth: '100%',
+            borderRadius: '8px',
+            boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+          }}
+        >
+          <source 
+            src="https://dalrnrpokeqkc.cloudfront.net/0b62a3c4-d373-4d44-b808-36e366f23f00/67cdac2d59e75be524042576/original.mp4" 
+            type="video/mp4" 
+          />
+          Your browser does not support the video tag.
+        </video>
       </div>
     </ClientSideOnly>
   );
