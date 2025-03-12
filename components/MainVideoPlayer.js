@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-// Simple vturb player component following official vturb React integration guide
+// Enhanced vturb player component with reliable reveal functionality
 export default function MainVideoPlayer({ onVideoProgress }) {
   const videoId = "67cdb02e18de859a97b2c80b";
   const scriptRef = useRef(null);
   const playerInitialized = useRef(false);
+  const revealTriggered = useRef(false);
+  const [debugInfo, setDebugInfo] = useState({ currentTime: 0, playerFound: false });
 
   useEffect(() => {
     // For testing in development, set to true to reveal after a shorter time
@@ -18,6 +20,15 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     
     playerInitialized.current = true;
     
+    // Function to trigger the reveal
+    const triggerReveal = () => {
+      if (!revealTriggered.current) {
+        console.log(`Reached reveal time (${REVEAL_TIME}s), triggering content reveal`);
+        revealTriggered.current = true;
+        onVideoProgress && onVideoProgress();
+      }
+    };
+    
     // Create and inject the player script
     const script = document.createElement('script');
     script.src = `https://scripts.converteai.net/0b62a3c4-d373-4d44-b808-36e366f23f00/players/${videoId}/player.js`;
@@ -26,27 +37,56 @@ export default function MainVideoPlayer({ onVideoProgress }) {
     document.head.appendChild(script);
     scriptRef.current = script;
     
-    // Set up event listener for video time updates
-    // This uses vturb's API to monitor video progress
-    window.addEventListener('message', function(event) {
+    // Set up event listener for video time updates via window messages
+    const messageHandler = function(event) {
       // Make sure message is from vturb
       if (event.data && typeof event.data === 'object' && event.data.action === 'timeupdate') {
-        console.log('Video time update:', event.data.currentTime);
+        console.log('Video time update from message:', event.data.currentTime);
+        setDebugInfo(prev => ({ ...prev, currentTime: event.data.currentTime }));
         
         // Check if we've reached the reveal time
         if (event.data.currentTime >= REVEAL_TIME) {
-          console.log(`Reached reveal time (${REVEAL_TIME}s), triggering content reveal`);
-          onVideoProgress && onVideoProgress();
+          triggerReveal();
         }
       }
-    });
+    };
+    
+    window.addEventListener('message', messageHandler);
+    
+    // Fallback: Set up a timer to check video progress periodically
+    // This is needed because some vturb players might not send message events
+    const checkInterval = setInterval(() => {
+      try {
+        // Try to find the video element using different selectors
+        const videoElement = document.querySelector(`#vid_${videoId} video`) || 
+                             document.querySelector('video') ||
+                             document.querySelector('iframe')?.contentDocument?.querySelector('video');
+        
+        if (videoElement) {
+          setDebugInfo(prev => ({ 
+            ...prev, 
+            playerFound: true, 
+            currentTime: videoElement.currentTime || 0 
+          }));
+          
+          console.log('Video time update from interval:', videoElement.currentTime);
+          
+          // Check if we've reached the reveal time
+          if (videoElement.currentTime >= REVEAL_TIME) {
+            triggerReveal();
+          }
+        }
+      } catch (error) {
+        console.log('Error checking video time:', error);
+      }
+    }, 1000); // Check every second
     
     // For testing in development, add a timeout to reveal content after 10 seconds
     let debugTimer;
     if (DEBUG_MODE) {
       debugTimer = setTimeout(() => {
         console.log("DEBUG MODE: Revealing content after timeout");
-        onVideoProgress && onVideoProgress();
+        triggerReveal();
       }, 10000);
     }
 
@@ -57,12 +97,18 @@ export default function MainVideoPlayer({ onVideoProgress }) {
         document.head.removeChild(scriptRef.current);
       }
       
-      // Clear debug timer if it exists
+      // Remove event listener
+      window.removeEventListener('message', messageHandler);
+      
+      // Clear interval and timer
+      clearInterval(checkInterval);
+      
       if (DEBUG_MODE && debugTimer) {
         clearTimeout(debugTimer);
       }
       
       playerInitialized.current = false;
+      revealTriggered.current = false;
     };
   }, [onVideoProgress]);
 
@@ -104,6 +150,24 @@ export default function MainVideoPlayer({ onVideoProgress }) {
           }}
         ></div>
       </div>
+      
+      {/* Debug info - only visible in development mode */}
+      {process.env.NODE_ENV === 'development' && (
+        <div style={{ 
+          position: 'absolute', 
+          bottom: '10px', 
+          left: '10px', 
+          background: 'rgba(0,0,0,0.7)', 
+          color: 'white', 
+          padding: '5px', 
+          fontSize: '12px',
+          zIndex: 100,
+          borderRadius: '4px'
+        }}>
+          Time: {debugInfo.currentTime.toFixed(1)}s | 
+          Player found: {debugInfo.playerFound ? 'Yes' : 'No'}
+        </div>
+      )}
     </div>
   );
 } 
