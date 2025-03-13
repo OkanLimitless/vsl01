@@ -1,0 +1,24 @@
+.floating-button {
+    position: fixed;
+    bottom: 0; /* 按钮距离底部为0 */
+    left: 0; /* 按钮距离左侧为0 */
+    width: 100%; /* 按钮宽度100% */
+    background-color: red; /* 按钮框为红色 */
+    color: white; /* 文字为白色 */
+    padding: 15px 20px; /* 按钮内边距 */
+    border: none;
+    border-radius: 0; /* 去除圆角 */
+    font-size: 32px;
+    text-decoration: none; /* 去除链接下划线 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+    z-index: 700; /* 确保在其他内容上方显示 */
+    white-space: nowrap; /* 强制文字不换行 */
+    text-align: center; /* 文字居中 */
+}
+
+/* 对移动设备的特定样式设置 */
+@media (max-width: 768px) {
+    .floating-button {
+        border-radius: 0; /* 去除圆角 */
+    }
+}

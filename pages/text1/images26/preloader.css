@@ -1,0 +1,1 @@
+.ring-loading{animation:loadingD 1.5s .3s cubic-bezier(.17,.37,.43,.67) infinite;width:10px;height:10px;margin:0 auto;padding:15px!important;border:7px dashed #000;border-radius:100%;display:none;margin:10px auto!important}@keyframes loadingD{0%{transform:rotate(0deg)}50%{transform:rotate(180deg)}100%{transform:rotate(360deg)}}
