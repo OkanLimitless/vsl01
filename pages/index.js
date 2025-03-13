@@ -283,21 +283,42 @@ export default function Home() {
         {/* Special Offer Section - Hidden until video reveal */}
         <div className="special-offer hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <div className="black-bg-section">
-            <h2 className="offer-heading">To get started with <span className="highlight">AlphaBites</span> today, simply click below and take advantage of this unique special time-limited offer...</h2>
+            <h2 className="offer-heading">To get started with <span className="highlight">AlphaBites</span> today, simply select your package below:</h2>
           </div>
           
-          <div className="product-options">
-            <a href={productLinks.sixBottle} target="_blank" rel="noopener noreferrer" className="product-link">
-              <img src="/images/six.png" alt="6 Bottle Package" className="product-full-image" />
-            </a>
+          <div className="product-options-new">
+            <div className="product-card">
+              <div className="product-header">BEST VALUE - 6 BOTTLES</div>
+              <div className="product-image-container">
+                <img src="/images/six.png" alt="6 Bottle Package" className="product-image" />
+              </div>
+              <div className="product-price">$49/ Bottle</div>
+              <a href={productLinks.sixBottle} target="_blank" rel="noopener noreferrer" className="buy-button">
+                CLICK HERE TO BUY
+              </a>
+            </div>
             
-            <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="product-link">
-              <img src="/images/three.png" alt="3 Bottle Package" className="product-full-image" />
-            </a>
+            <div className="product-card">
+              <div className="product-header">GOOD VALUE - 3 BOTTLES</div>
+              <div className="product-image-container">
+                <img src="/images/three.png" alt="3 Bottle Package" className="product-image" />
+              </div>
+              <div className="product-price">$69/ Bottle</div>
+              <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="buy-button">
+                CLICK HERE TO BUY
+              </a>
+            </div>
             
-            <a href={productLinks.oneBottle} target="_blank" rel="noopener noreferrer" className="product-link">
-              <img src="/images/two.png" alt="1 Bottle Package" className="product-full-image" />
-            </a>
+            <div className="product-card">
+              <div className="product-header">BASIC - 2 BOTTLES</div>
+              <div className="product-image-container">
+                <img src="/images/two.png" alt="2 Bottle Package" className="product-image" />
+              </div>
+              <div className="product-price">$79/ Bottle</div>
+              <a href={productLinks.oneBottle} target="_blank" rel="noopener noreferrer" className="buy-button">
+                CLICK HERE TO BUY
+              </a>
+            </div>
           </div>
         </div>
         
@@ -388,21 +409,42 @@ export default function Home() {
         {/* Final CTA - Hidden until video reveal */}
         <div className="final-cta hidden-until-reveal" style={{display: videoRevealed ? 'block' : 'none'}}>
           <div className="black-bg-section">
-            <h2 className="offer-heading">To get started with <span className="highlight">AlphaBites</span> today, simply click below and take advantage of this unique special time-limited offer...</h2>
+            <h2 className="offer-heading">To get started with <span className="highlight">AlphaBites</span> today, simply select your package below:</h2>
           </div>
           
-          <div className="product-options">
-            <a href={productLinks.sixBottle} target="_blank" rel="noopener noreferrer" className="product-link">
-              <img src="/images/six.png" alt="6 Bottle Package" className="product-full-image" />
-            </a>
+          <div className="product-options-new">
+            <div className="product-card">
+              <div className="product-header">BEST VALUE - 6 BOTTLES</div>
+              <div className="product-image-container">
+                <img src="/images/six.png" alt="6 Bottle Package" className="product-image" />
+              </div>
+              <div className="product-price">$49/ Bottle</div>
+              <a href={productLinks.sixBottle} target="_blank" rel="noopener noreferrer" className="buy-button">
+                CLICK HERE TO BUY
+              </a>
+            </div>
             
-            <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="product-link">
-              <img src="/images/three.png" alt="3 Bottle Package" className="product-full-image" />
-            </a>
+            <div className="product-card">
+              <div className="product-header">GOOD VALUE - 3 BOTTLES</div>
+              <div className="product-image-container">
+                <img src="/images/three.png" alt="3 Bottle Package" className="product-image" />
+              </div>
+              <div className="product-price">$69/ Bottle</div>
+              <a href={productLinks.threeBottle} target="_blank" rel="noopener noreferrer" className="buy-button">
+                CLICK HERE TO BUY
+              </a>
+            </div>
             
-            <a href={productLinks.oneBottle} target="_blank" rel="noopener noreferrer" className="product-link">
-              <img src="/images/two.png" alt="1 Bottle Package" className="product-full-image" />
-            </a>
+            <div className="product-card">
+              <div className="product-header">BASIC - 2 BOTTLES</div>
+              <div className="product-image-container">
+                <img src="/images/two.png" alt="2 Bottle Package" className="product-image" />
+              </div>
+              <div className="product-price">$79/ Bottle</div>
+              <a href={productLinks.oneBottle} target="_blank" rel="noopener noreferrer" className="buy-button">
+                CLICK HERE TO BUY
+              </a>
+            </div>
           </div>
         </div>
 
@@ -845,7 +887,7 @@ export default function Home() {
           line-height: 1.4;
         }
         
-        .product-options {
+        .product-options-new {
           display: flex;
           flex-wrap: wrap;
           justify-content: center;
@@ -853,28 +895,75 @@ export default function Home() {
           margin: 30px auto;
           padding: 20px;
           max-width: 1200px;
-          background-color: var(--background);
+          background-color: #000;
         }
         
-        .product-link {
-          display: block;
-          width: 300px;
-          position: relative;
+        .product-card {
+          background-color: #fff;
           border-radius: 8px;
           overflow: hidden;
           transition: transform 0.3s ease;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+          width: 300px;
+          margin-bottom: 20px;
+          border: 1px solid #333;
         }
         
-        .product-link:hover {
+        .product-card:hover {
           transform: translateY(-5px);
         }
         
-        .product-full-image {
+        .product-header {
+          background-color: #b8860b; /* Golden color */
+          color: #fff;
+          padding: 15px 10px;
+          font-size: 20px;
+          font-weight: bold;
+          text-align: center;
+          text-transform: uppercase;
+        }
+        
+        .product-image-container {
           width: 100%;
+          padding: 20px;
+          background-color: #fff;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .product-image {
+          max-width: 100%;
           height: auto;
+        }
+        
+        .product-price {
+          background-color: #000;
+          color: #fff;
+          padding: 15px 10px;
+          font-size: 28px;
+          font-weight: bold;
+          text-align: center;
+        }
+        
+        .buy-button {
           display: block;
-          overflow: hidden;
+          width: 100%;
+          background-color: #4CAF50; /* Green */
+          color: #fff;
+          padding: 15px 10px;
+          font-size: 20px;
+          font-weight: bold;
+          text-align: center;
+          text-decoration: none;
+          border: none;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          text-transform: uppercase;
+        }
+        
+        .buy-button:hover {
+          background-color: #45a049; /* Darker green */
         }
         
         /* Testimonials Section */
@@ -1125,12 +1214,12 @@ export default function Home() {
         }
 
         @media (max-width: 768px) {
-          .product-options {
+          .product-options-new {
             flex-direction: column;
             align-items: center;
           }
           
-          .product-link {
+          .product-card {
             width: 100%;
             max-width: 350px;
           }
