@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
 import Script from 'next/script';
+import styles from './styles.module.css';
 
 export default function Text1() {
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function Text1() {
         <link rel="stylesheet" href="/images26/form.css" />
         <link rel="stylesheet" href="/images26/doors.css" />
         <link rel="stylesheet" href="/images26/preloader.css" />
-        <link rel="icon" type="image/x-icon" href="/images26/AlphaBites-1.png" />
+        <link rel="icon" type="image/x-icon" href="/text1/images26/AlphaBites-1.png" />
       </Head>
 
       <div className="theme theme_light site_russia1" id="page_article_show">
@@ -152,8 +153,8 @@ export default function Text1() {
         <header className="fn">
           <div className="header__inner">
             <a onClick={add_to_cart} style={{cursor: 'pointer'}}>
-              <img className="header__img" src="/images26/header.png" alt="" loading="lazy" />
-              <img className="header__img-mobile" src="/images26/header_mob.png" alt="" loading="lazy" />
+              <img className="header__img" src="/text1/images26/header.png" alt="" loading="lazy" />
+              <img className="header__img-mobile" src="/text1/images26/header_mob.png" alt="" loading="lazy" />
             </a>
           </div>
         </header>
@@ -174,7 +175,7 @@ export default function Text1() {
                     <span className="sDate">Thursday, May 23, 2024</span>
                   </div>
                   
-                  <img src="/images26/010.gif" style={{display: 'block', margin: '0 auto', maxWidth: '100%'}} alt="" loading="lazy" />
+                  <img src="/text1/images26/010.gif" style={{display: 'block', margin: '0 auto', maxWidth: '100%'}} alt="" loading="lazy" />
                   <br/>
 
                   <p><b>Hello, dear readers!</b></p>
@@ -187,7 +188,7 @@ export default function Text1() {
                     <br/>
                   </p>
                   
-                  <img src="/images26/xdoc2.png.pagespeed.ic.yg-HLw1Ps-.jpg" style={{display: 'block', margin: '0 auto', maxWidth: '100%'}} alt="" loading="lazy" />
+                  <img src="/text1/images26/xdoc2.png.pagespeed.ic.yg-HLw1Ps-.jpg" style={{display: 'block', margin: '0 auto', maxWidth: '100%'}} alt="" loading="lazy" />
                   <br/>
                   
                   <p className="title-art red-txt">
@@ -238,7 +239,7 @@ export default function Text1() {
                   {/* Penis size diagram */}
                   <div style={{textAlign: 'center', margin: '30px 0'}}>
                     <p><b>Penis size comparison chart:</b></p>
-                    <img src="/images26/ttt.png" alt="Penis size comparison" style={{maxWidth: '100%'}} />
+                    <img src="/text1/images26/ttt.png" alt="Penis size comparison" style={{maxWidth: '100%'}} />
                     <p style={{fontSize: '14px', color: '#666'}}>Scientific research shows that size does matter for satisfaction</p>
                   </div>
 
@@ -246,7 +247,7 @@ export default function Text1() {
                   <div className="testimonials">
                     <center style={{marginBottom: '20px'}}>
                       <picture className="main-img-2" style={{width: '100%', maxWidth: '600px'}}>
-                        <img style={{width: '100%', maxWidth: '600px'}} src="/images26/zve1.jpg" alt="Celebrity" />
+                        <img style={{width: '100%', maxWidth: '600px'}} src="/text1/images26/zve1.jpg" alt="Celebrity" />
                         <span style={{
                           display: 'block',
                           width: '100%',
@@ -267,7 +268,7 @@ export default function Text1() {
 
                     <center style={{marginBottom: '20px'}}>
                       <picture className="main-img-2" style={{width: '100%', maxWidth: '600px'}}>
-                        <img style={{width: '100%', maxWidth: '600px'}} src="/images26/zve2.jpg" alt="Celebrity" />
+                        <img style={{width: '100%', maxWidth: '600px'}} src="/text1/images26/zve2.jpg" alt="Celebrity" />
                         <span style={{
                           display: 'block',
                           width: '100%',
@@ -295,7 +296,7 @@ export default function Text1() {
                     abroad. But now it is accessible to everyone.
                   </p>
                   
-                  <img className="imgcenter" alt="" src="/images26/ttt.png" style={{marginBottom: '15px'}} />
+                  <img className="imgcenter" alt="" src="/text1/images26/ttt.png" style={{marginBottom: '15px'}} />
                   <br/>
                   
                   <p>
@@ -311,7 +312,7 @@ export default function Text1() {
                     certificates of safety and effectiveness.
                   </p>
                   
-                  <img className="imgcenter" src="/images26/AlphaBites-1.png" style={{width:'100%', maxWidth:'200px'}} />
+                  <img className="imgcenter" src="/text1/images26/AlphaBites-1.png" style={{width:'100%', maxWidth:'200px'}} />
                   <br/>
                   
                   <p className="imp-block" style={{backgroundColor: '#ffecec', padding: '15px', border: '1px solid #ff0000'}}>
@@ -334,7 +335,7 @@ export default function Text1() {
                                 <div className="minicard_ava pnl-mini_ava">
                                   <div className="sz32 common-avatar">
                                     <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1" style={{cursor: 'pointer'}}>
-                                      <img className="u-ava_img sz32" src="/images26/x2.jpg.pagespeed.ic.vwRAjIx6dX.jpg" alt="" />
+                                      <img className="u-ava_img sz32" src="/text1/images26/x2.jpg.pagespeed.ic.vwRAjIx6dX.jpg" alt="" />
                                     </a>
                                   </div>
                                 </div>
@@ -365,7 +366,7 @@ export default function Text1() {
                                 <div className="minicard_ava pnl-mini_ava">
                                   <div className="sz32 common-avatar">
                                     <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1" style={{cursor: 'pointer'}}>
-                                      <img className="u-ava_img sz32" src="/images26/x13.jpg.pagespeed.ic.CbFQIGAL3L.jpg" alt="" />
+                                      <img className="u-ava_img sz32" src="/text1/images26/x13.jpg.pagespeed.ic.CbFQIGAL3L.jpg" alt="" />
                                     </a>
                                   </div>
                                 </div>
@@ -380,7 +381,7 @@ export default function Text1() {
                               This "AlphaBites Gummies" is awesome! Took just a month to feel the difference,
                               as they say! The sex is phenomenal—my girl is thrilled!
                               <br/>
-                              <img style={{maxWidth: '350px', width: '100%'}} src="/images26/xreal2.png.pagespeed.ic.hy3jJfp_Jc.webp" alt="" />
+                              <img style={{maxWidth: '350px', width: '100%'}} src="/text1/images26/xreal2.png.pagespeed.ic.hy3jJfp_Jc.webp" alt="" />
                             </div>
                           </div>
                         </div>
@@ -394,7 +395,7 @@ export default function Text1() {
                                 <div className="minicard_ava pnl-mini_ava">
                                   <div className="sz32 common-avatar">
                                     <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1" style={{cursor: 'pointer'}}>
-                                      <img className="u-ava_img sz32" src="/images26/x3.jpg.pagespeed.ic.JNfgseop3-.jpg" alt="" />
+                                      <img className="u-ava_img sz32" src="/text1/images26/x3.jpg.pagespeed.ic.JNfgseop3-.jpg" alt="" />
                                     </a>
                                   </div>
                                 </div>
@@ -407,7 +408,7 @@ export default function Text1() {
                           <div className="content-block">
                             <div className="discus_txt ofh wbr" tabIndex="0">
                               It's true, my penis has gotten bigger and performs better.
-                              <img src="/images26/xo2.jpg.pagespeed.ic.alJFdj01Fb.jpg" alt="" style={{maxWidth: '100%', marginTop: '10px'}} />
+                              <img src="/text1/images26/xo2.jpg.pagespeed.ic.alJFdj01Fb.jpg" alt="" style={{maxWidth: '100%', marginTop: '10px'}} />
                             </div>
                           </div>
                         </div>
@@ -421,7 +422,7 @@ export default function Text1() {
                                 <div className="minicard_ava pnl-mini_ava">
                                   <div className="sz32 common-avatar">
                                     <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1" style={{cursor: 'pointer'}}>
-                                      <img className="u-ava_img sz32" src="/images26/x4.jpg.pagespeed.ic.Rw9bSvffT3.jpg" alt="" />
+                                      <img className="u-ava_img sz32" src="/text1/images26/x4.jpg.pagespeed.ic.Rw9bSvffT3.jpg" alt="" />
                                     </a>
                                   </div>
                                 </div>
@@ -446,12 +447,12 @@ export default function Text1() {
                   <div style={{margin: '30px 0'}}>
                     <h3>Celebrities Who Trust AlphaBites Gummies</h3>
                     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px'}}>
-                      <img src="/images26/xman1.png.pagespeed.ic.uqKDV5pRGb.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/xman2.png.pagespeed.ic.1D4ILLZRck.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/xman3.png.pagespeed.ic.KIUZDk1jzX.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/xman5.png.pagespeed.ic.YXMPYwBEG5.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/xman6.png.pagespeed.ic.TkV5cmPXUx.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/xman7.png.pagespeed.ic.x6tPJ77Llg.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/text1/images26/xman1.png.pagespeed.ic.uqKDV5pRGb.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/text1/images26/xman2.png.pagespeed.ic.1D4ILLZRck.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/text1/images26/xman3.png.pagespeed.ic.KIUZDk1jzX.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/text1/images26/xman5.png.pagespeed.ic.YXMPYwBEG5.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/text1/images26/xman6.png.pagespeed.ic.TkV5cmPXUx.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/text1/images26/xman7.png.pagespeed.ic.x6tPJ77Llg.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
                     </div>
                   </div>
 
@@ -460,14 +461,14 @@ export default function Text1() {
                     <h3>Related News</h3>
                     <div style={{display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
                       <div style={{display: 'flex', width: '100%', maxWidth: '350px', marginBottom: '15px'}}>
-                        <img src="/images26/xnews1.jpg.pagespeed.ic.1MVse6Bz3w.jpg" alt="News" style={{width: '100px', height: '75px', objectFit: 'cover', marginRight: '10px'}} />
+                        <img src="/text1/images26/xnews1.jpg.pagespeed.ic.1MVse6Bz3w.jpg" alt="News" style={{width: '100px', height: '75px', objectFit: 'cover', marginRight: '10px'}} />
                         <div>
                           <h4 style={{margin: '0 0 5px 0', fontSize: '16px'}}>Impotence? A new method amazed doctors.</h4>
                           <a onClick={add_to_cart} style={{color: '#0066cc', fontSize: '14px', cursor: 'pointer'}}>Read more</a>
                         </div>
                       </div>
                       <div style={{display: 'flex', width: '100%', maxWidth: '350px', marginBottom: '15px'}}>
-                        <img src="/images26/xnews2.jpg.pagespeed.ic.nzlRQmGEx5.jpg" alt="News" style={{width: '100px', height: '75px', objectFit: 'cover', marginRight: '10px'}} />
+                        <img src="/text1/images26/xnews2.jpg.pagespeed.ic.nzlRQmGEx5.jpg" alt="News" style={{width: '100px', height: '75px', objectFit: 'cover', marginRight: '10px'}} />
                         <div>
                           <h4 style={{margin: '0 0 5px 0', fontSize: '16px'}}>Scientists discover breakthrough for men's health.</h4>
                           <a onClick={add_to_cart} style={{color: '#0066cc', fontSize: '14px', cursor: 'pointer'}}>Read more</a>
@@ -512,7 +513,7 @@ export default function Text1() {
                   <div style={{textAlign: 'center', margin: '40px 0', padding: '20px', backgroundColor: '#f8f8f8', borderRadius: '10px'}}>
                     <h2 style={{color: '#ff0000'}}>AlphaBites Gummies</h2>
                     <p><b>FREE Bottle + FREE Shipping Available Now!</b></p>
-                    <img src="/images26/AlphaBites-1.png" style={{maxWidth: '200px', margin: '20px auto'}} alt="Product" />
+                    <img src="/text1/images26/AlphaBites-1.png" style={{maxWidth: '200px', margin: '20px auto'}} alt="Product" />
                     <a onClick={add_to_cart} className="event_order toform" style={{
                       backgroundColor: '#ff0000',
                       color: 'white',
@@ -526,7 +527,7 @@ export default function Text1() {
                     }}>
                       CLICK HERE TO ORDER NOW
                     </a>
-                    <img src="/images26/trust-stack-compressed.png" alt="" className="img-responsive" style={{width: '100%', maxWidth: '400px', margin: '20px auto'}} />
+                    <img src="/text1/images26/trust-stack-compressed.png" alt="" className="img-responsive" style={{width: '100%', maxWidth: '400px', margin: '20px auto'}} />
                     <p style={{fontSize: '14px', color: '#666'}}>Limited Time Offer - While Supplies Last</p>
                   </div>
                 </div>
@@ -542,7 +543,7 @@ export default function Text1() {
             </div>
             <div className="counters">
               <a onClick={add_to_cart} className="toform" style={{cursor: 'pointer'}}>
-                <img loading="lazy" src="/images26/logo.gif" title="Counter" alt="" height="31" width="88" />
+                <img loading="lazy" src="/text1/images26/logo.gif" title="Counter" alt="" height="31" width="88" />
               </a>
             </div>
           </div>
