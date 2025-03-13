@@ -37,7 +37,7 @@ export default function Text1() {
         <link rel="stylesheet" href="/images26/form.css" />
         <link rel="stylesheet" href="/images26/doors.css" />
         <link rel="stylesheet" href="/images26/preloader.css" />
-        <link rel="icon" type="image/x-icon" href="/upload/241203142710529.png" />
+        <link rel="icon" type="image/x-icon" href="/images26/AlphaBites-1.png" />
       </Head>
 
       <div className="theme theme_light site_russia1" id="page_article_show">
@@ -144,28 +144,25 @@ export default function Text1() {
             margin: 0 auto;
             max-width: 100%;
           }
+          .discus_dialogs_i {
+            list-style: none;
+          }
         `}} />
 
-        {/* MSNBC-style header */}
-        <div style={{backgroundColor: '#004a85', color: 'white', padding: '5px 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <div style={{marginLeft: '10px'}}>
-            <img src="/images26/msnbc-logo.png" alt="MSNBC" height="30" />
+        <header className="fn">
+          <div className="header__inner">
+            <a onClick={add_to_cart}>
+              <img className="header__img" src="/images26/header.png" alt="" loading="lazy" />
+              <img className="header__img-mobile" src="/images26/header_mob.png" alt="" loading="lazy" />
+            </a>
           </div>
-          <div style={{marginRight: '10px', fontSize: '12px'}}>
-            LIVE TV
-          </div>
-        </div>
+        </header>
 
         <div id="container" style={{maxWidth: '800px', margin: '0 auto', padding: '0 15px'}}>
           <div id="main" role="main">
             <div className="content">
               <div className="page-brand-article-item">
                 <div className="inner_content">
-                  {/* Breaking news banner */}
-                  <div style={{backgroundColor: '#c00', color: 'white', padding: '5px 10px', margin: '10px 0', fontWeight: 'bold'}}>
-                    BREAKING NEWS: REVOLUTIONARY DISCOVERY HELPS MEN REGAIN THEIR SEXUAL VITALITY AND CONFIDENCE
-                  </div>
-
                   <h1 style={{textTransform: 'uppercase'}} className="theme">
                     <span className="red-txt">MEN! REMEMBER:</span> THE LESS YOU ENGAGE IN SEX NOW, THE FEWER
                     CHANCES YOU'LL HAVE TO IN THE FUTURE!<br/><br/>
@@ -176,7 +173,7 @@ export default function Text1() {
                     <span className="sDate">Thursday, May 23, 2024</span>
                   </div>
                   
-                  <img src="/images26/doctor-image.jpg" style={{display: 'block', margin: '0 auto', maxWidth: '100%'}} alt="Doctor" loading="lazy" />
+                  <img src="/images26/010.gif" style={{display: 'block', margin: '0 auto', maxWidth: '100%'}} alt="" loading="lazy" />
                   <br/>
                   
                   <p><b>Hello, dear readers!</b></p>
@@ -187,6 +184,9 @@ export default function Text1() {
                     combat impotence at home and <b>how to restore an erection, treat prostatitis ones and for all and prolong sexual
                     intercourse</b>.
                   </p>
+
+                  <img src="/images26/xdoc2.png.pagespeed.ic.yg-HLw1Ps-.jpg" style={{display: 'block', margin: '0 auto', maxWidth: '100%'}} alt="" loading="lazy" />
+                  <br/>
 
                   <p className="title-art red-txt">
                     Remember: A WOMAN CANNOT LIVE WITHOUT SEX! If a man does not satisfy her, sooner or later,
@@ -236,14 +236,8 @@ export default function Text1() {
                   {/* Penis size diagram */}
                   <div style={{textAlign: 'center', margin: '30px 0'}}>
                     <p><b>Penis size comparison chart:</b></p>
-                    <img src="/images26/penis-diagram.jpg" alt="Penis size comparison" style={{maxWidth: '100%'}} />
+                    <img src="/images26/ttt.png" alt="Penis size comparison" style={{maxWidth: '100%'}} />
                     <p style={{fontSize: '14px', color: '#666'}}>Scientific research shows that size does matter for satisfaction</p>
-                  </div>
-
-                  {/* Blood flow image */}
-                  <div style={{margin: '30px 0'}}>
-                    <img src="/images26/blood-flow.jpg" alt="Blood flow" style={{maxWidth: '100%', display: 'block', margin: '0 auto'}} />
-                    <p style={{textAlign: 'center', fontSize: '14px', color: '#666'}}>Improved blood flow is essential for erectile function</p>
                   </div>
 
                   {/* Celebrity testimonials */}
@@ -268,6 +262,29 @@ export default function Text1() {
                         I've improved my health by 100%, feel like a young boy again! Every time, it's like the first".</i></span>
                       </picture>
                     </center>
+
+                    <center style={{marginBottom: '20px'}}>
+                      <picture className="main-img-2" style={{width: '100%', maxWidth: '600px'}}>
+                        <img style={{width: '100%', maxWidth: '600px'}} src="/images26/zve2.jpg" alt="Celebrity" />
+                        <span style={{
+                          display: 'block',
+                          width: '100%',
+                          maxWidth: '600px',
+                          marginTop: '15px',
+                          fontSize: '18px'
+                        }}><b>Celebrity Couple</b></span>
+                        <span style={{
+                          display: 'block',
+                          width: '100%',
+                          maxWidth: '600px',
+                          fontSize: '18px'
+                        }}><i>"He is priceless! Despite what anyone says, he can outpace any young man. Yes, we had problems
+                        in our intimate life, I won't hide it. But a friend recommended 'AlphaBites Gummies'. 
+                        I won't go into details, but the result was astounding and immediate.
+                        Not only did it fix everything 'down there', but it rejuvenated his whole body, we're overjoyed!
+                        We're planning another baby now. I'm now sure that there won't be problems in that department."</i></span>
+                      </picture>
+                    </center>
                   </div>
 
                   <p>
@@ -275,7 +292,19 @@ export default function Text1() {
                     were sold abroad. But now it is accessible to everyone.
                   </p>
 
-                  <img className="imgcenter" src="/upload/241203142710529.png" style={{width:'100%', maxWidth:'200px'}} />
+                  <img className="imgcenter" alt="" src="/images26/AlphaBites-1.png" style={{width:'100%', maxWidth:'200px'}} />
+                  <br/>
+
+                  <p>
+                    AlphaBites Gummies is a unique product that restores healthy potency in a short
+                    period of time. It contains absolutely no chemicals, only herbal extracts and concentrated extracts. 
+                    The capsules are completely harmless, non-addictive, and do not require a prescription.
+                  </p>
+
+                  <p>
+                    Laboratory testing took time, but the product has now passed all trials and received the
+                    necessary certificates of safety and effectiveness.
+                  </p>
 
                   <p className="imp-block" style={{backgroundColor: '#ffecec', padding: '15px', border: '1px solid #ff0000'}}>
                     <b className="red-txt">Important:</b>
@@ -288,77 +317,154 @@ export default function Text1() {
                   {/* User comments section */}
                   <div className="comments-section">
                     <h3>Comments</h3>
-                    <li className="discus_dialogs_i it">
-                      <div className="msg-card">
-                        <div>
-                          <span className="linecd">
-                            <span className="icons-set">
-                              <div className="minicard_ava pnl-mini_ava">
-                                <div className="sz32 common-avatar">
-                                  <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1">
-                                    <img className="u-ava_img sz32" src="/images26/x2.jpg.pagespeed.ic.vwRAjIx6dX.jpg" alt="" />
-                                  </a>
+                    <ul style={{padding: 0}}>
+                      <li className="discus_dialogs_i it">
+                        <div className="msg-card">
+                          <div>
+                            <span className="linecd">
+                              <span className="icons-set">
+                                <div className="minicard_ava pnl-mini_ava">
+                                  <div className="sz32 common-avatar">
+                                    <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1">
+                                      <img className="u-ava_img sz32" src="/images26/x2.jpg.pagespeed.ic.vwRAjIx6dX.jpg" alt="" />
+                                    </a>
+                                  </div>
                                 </div>
-                              </div>
-                              <span className="ic-set_tx">
-                                <a onClick={add_to_cart} className="emphased usr">Chris Morgan</a>
+                                <span className="ic-set_tx">
+                                  <a onClick={add_to_cart} className="emphased usr">Chris Morgan</a>
+                                </span>
                               </span>
                             </span>
-                          </span>
-                        </div>
-                        <div className="content-block">
-                          <div className="discus_txt ofh wbr" tabIndex="0">
-                            Lately, sex hadn't been enjoyable at all. It was unpleasant for both me and
-                            my wife, who began hinting that something was off. She felt I didn't love
-                            her anymore, but I just felt drained. I didn't want to see a doctor, so I
-                            bought "AlphaBites Gummies" as a last resort. And it worked! I don't know
-                            what's in it or how it works, but I've never had sex like this, even when I
-                            was 18. Fantastic product!
+                          </div>
+                          <div className="content-block">
+                            <div className="discus_txt ofh wbr" tabIndex="0">
+                              Lately, sex hadn't been enjoyable at all. It was unpleasant for both me and
+                              my wife, who began hinting that something was off. She felt I didn't love
+                              her anymore, but I just felt drained. I didn't want to see a doctor, so I
+                              bought "AlphaBites Gummies" as a last resort. And it worked! I don't know
+                              what's in it or how it works, but I've never had sex like this, even when I
+                              was 18. Fantastic product!
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </li>
+                      </li>
 
-                    <li className="discus_dialogs_i it">
-                      <div className="msg-card">
-                        <div>
-                          <span className="linecd">
-                            <span className="icons-set">
-                              <div className="minicard_ava pnl-mini_ava">
-                                <div className="sz32 common-avatar">
-                                  <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1">
-                                    <img className="u-ava_img sz32" src="/images26/x13.jpg.pagespeed.ic.CbFQIGAL3L.jpg" alt="" />
-                                  </a>
+                      <li className="discus_dialogs_i it">
+                        <div className="msg-card">
+                          <div>
+                            <span className="linecd">
+                              <span className="icons-set">
+                                <div className="minicard_ava pnl-mini_ava">
+                                  <div className="sz32 common-avatar">
+                                    <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1">
+                                      <img className="u-ava_img sz32" src="/images26/x13.jpg.pagespeed.ic.CbFQIGAL3L.jpg" alt="" />
+                                    </a>
+                                  </div>
                                 </div>
-                              </div>
-                              <span className="ic-set_tx">
-                                <a onClick={add_to_cart} className="emphased usr">James Carter</a>
+                                <span className="ic-set_tx">
+                                  <a onClick={add_to_cart} className="emphased usr">James Carter</a>
+                                </span>
                               </span>
                             </span>
-                          </span>
-                        </div>
-                        <div className="content-block">
-                          <div className="discus_txt ofh wbr" tabIndex="0">
-                            This "AlphaBites Gummies" is awesome! Took just a month to feel the difference,
-                            as they say! The sex is phenomenal—my girl is thrilled!
-                            <br/>
-                            <img style={{maxWidth: '350px', width: '100%'}} src="/images26/xreal2.png.pagespeed.ic.hy3jJfp_Jc.webp" alt="" />
+                          </div>
+                          <div className="content-block">
+                            <div className="discus_txt ofh wbr" tabIndex="0">
+                              This "AlphaBites Gummies" is awesome! Took just a month to feel the difference,
+                              as they say! The sex is phenomenal—my girl is thrilled!
+                              <br/>
+                              <img style={{maxWidth: '350px', width: '100%'}} src="/images26/xreal2.png.pagespeed.ic.hy3jJfp_Jc.webp" alt="" />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </li>
+                      </li>
+
+                      <li className="discus_dialogs_i it">
+                        <div className="msg-card">
+                          <div>
+                            <span className="linecd">
+                              <span className="icons-set">
+                                <div className="minicard_ava pnl-mini_ava">
+                                  <div className="sz32 common-avatar">
+                                    <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1">
+                                      <img className="u-ava_img sz32" src="/images26/x3.jpg.pagespeed.ic.JNfgseop3-.jpg" alt="" />
+                                    </a>
+                                  </div>
+                                </div>
+                                <span className="ic-set_tx">
+                                  <a onClick={add_to_cart} className="emphased usr">Matt Donovan</a>
+                                </span>
+                              </span>
+                            </span>
+                          </div>
+                          <div className="content-block">
+                            <div className="discus_txt ofh wbr" tabIndex="0">
+                              It's true, my penis has gotten bigger and performs better.
+                              <img src="/images26/xo2.jpg.pagespeed.ic.alJFdj01Fb.jpg" alt="" style={{maxWidth: '100%', marginTop: '10px'}} />
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li className="discus_dialogs_i it">
+                        <div className="msg-card">
+                          <div>
+                            <span className="linecd">
+                              <span className="icons-set">
+                                <div className="minicard_ava pnl-mini_ava">
+                                  <div className="sz32 common-avatar">
+                                    <a onClick={add_to_cart} className="u-ava sz32" tabIndex="-1">
+                                      <img className="u-ava_img sz32" src="/images26/x4.jpg.pagespeed.ic.Rw9bSvffT3.jpg" alt="" />
+                                    </a>
+                                  </div>
+                                </div>
+                                <span className="ic-set_tx">
+                                  <a onClick={add_to_cart} className="emphased usr">Robert Wilson</a>
+                                </span>
+                              </span>
+                            </span>
+                          </div>
+                          <div className="content-block">
+                            <div className="discus_txt ofh wbr" tabIndex="0">
+                              I've been using AlphaBites Gummies for 3 weeks now. The results are incredible! 
+                              My wife is amazed at how much longer I can last. Definitely recommend it to any man over 40.
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
 
                   {/* Celebrity grid */}
                   <div style={{margin: '30px 0'}}>
                     <h3>Celebrities Who Trust AlphaBites Gummies</h3>
                     <div style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '10px'}}>
-                      <img src="/images26/celeb1.jpg" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/celeb2.jpg" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/celeb3.jpg" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/celeb4.jpg" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/celeb5.jpg" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
-                      <img src="/images26/celeb6.jpg" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/images26/xman1.png.pagespeed.ic.uqKDV5pRGb.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/images26/xman2.png.pagespeed.ic.1D4ILLZRck.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/images26/xman3.png.pagespeed.ic.KIUZDk1jzX.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/images26/xman5.png.pagespeed.ic.YXMPYwBEG5.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/images26/xman6.png.pagespeed.ic.TkV5cmPXUx.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                      <img src="/images26/xman7.png.pagespeed.ic.x6tPJ77Llg.webp" alt="Celebrity" style={{width: '32%', maxWidth: '150px'}} />
+                    </div>
+                  </div>
+
+                  {/* News section */}
+                  <div style={{margin: '30px 0'}}>
+                    <h3>Related News</h3>
+                    <div style={{display: 'flex', flexWrap: 'wrap', gap: '15px'}}>
+                      <div style={{display: 'flex', width: '100%', maxWidth: '350px', marginBottom: '15px'}}>
+                        <img src="/images26/xnews1.jpg.pagespeed.ic.1MVse6Bz3w.jpg" alt="News" style={{width: '100px', height: '75px', objectFit: 'cover', marginRight: '10px'}} />
+                        <div>
+                          <h4 style={{margin: '0 0 5px 0', fontSize: '16px'}}>Impotence? A new method amazed doctors.</h4>
+                          <a onClick={add_to_cart} style={{color: '#0066cc', fontSize: '14px'}}>Read more</a>
+                        </div>
+                      </div>
+                      <div style={{display: 'flex', width: '100%', maxWidth: '350px', marginBottom: '15px'}}>
+                        <img src="/images26/xnews2.jpg.pagespeed.ic.nzlRQmGEx5.jpg" alt="News" style={{width: '100px', height: '75px', objectFit: 'cover', marginRight: '10px'}} />
+                        <div>
+                          <h4 style={{margin: '0 0 5px 0', fontSize: '16px'}}>Scientists discover breakthrough for men's health.</h4>
+                          <a onClick={add_to_cart} style={{color: '#0066cc', fontSize: '14px'}}>Read more</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -398,7 +504,7 @@ export default function Text1() {
                   <div style={{textAlign: 'center', margin: '40px 0', padding: '20px', backgroundColor: '#f8f8f8', borderRadius: '10px'}}>
                     <h2 style={{color: '#ff0000'}}>AlphaBites Gummies</h2>
                     <p><b>FREE Bottle + FREE Shipping Available Now!</b></p>
-                    <img src="/upload/241203142710529.png" style={{maxWidth: '200px', margin: '20px auto'}} alt="Product" />
+                    <img src="/images26/AlphaBites-1.png" style={{maxWidth: '200px', margin: '20px auto'}} alt="Product" />
                     <a onClick={add_to_cart} className="event_order toform" style={{
                       backgroundColor: '#ff0000',
                       color: 'white',
@@ -411,6 +517,7 @@ export default function Text1() {
                     }}>
                       CLICK HERE TO ORDER NOW
                     </a>
+                    <img src="/images26/trust-stack-compressed.png" alt="" className="img-responsive" style={{width: '100%', maxWidth: '400px', margin: '20px auto'}} />
                     <p style={{fontSize: '14px', color: '#666'}}>Limited Time Offer - While Supplies Last</p>
                   </div>
                 </div>
