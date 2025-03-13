@@ -1,7 +1,5 @@
 import Head from 'next/head';
 import { useEffect } from 'react';
-import Script from 'next/script';
-import styles from './styles.module.css';
 
 export default function Text1() {
   useEffect(() => {
@@ -32,41 +30,47 @@ export default function Text1() {
         <title>AlphaBites Gummies</title>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta httpEquiv="X-UA-Compatible" content="IE=Edge" />
-        <link rel="stylesheet" href="/images26/A.style.css.pagespeed.cf.B0sW-PEd5C.css" type="text/css" />
-        <link rel="stylesheet" href="/images26/A.index.css.pagespeed.cf.QujpixwJSd.css" type="text/css" />
-        <link rel="stylesheet" href="/images26/A.mob-modern.core.css.pagespeed.cf.DRpGUiVpWW.css" type="text/css" />
-        <link rel="stylesheet" href="/images26/form.css" />
-        <link rel="stylesheet" href="/images26/doors.css" />
-        <link rel="stylesheet" href="/images26/preloader.css" />
         <link rel="icon" type="image/x-icon" href="/text1/images26/AlphaBites-1.png" />
       </Head>
 
       <div className="theme theme_light site_russia1" id="page_article_show">
-        <style dangerouslySetInnerHTML={{ __html: `
+        <style jsx global>{`
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+          }
+          
           body *:not(i) {
             font-family: sans-serif !important;
           }
+          
           .mch, .ofh, .wbr, ul:not(.menu)>li, ol>li, i, p, p * {
             font-size: 22px !important;
             line-height: 26px !important;
           }
+          
           .submit-roulette {
             justify-content: center !important;
             max-width: 300px !important;
             text-indent: 0 !important;
           }
+          
           #main {
             display: flex;
           }
+          
           .header__img-mobile, .header__img {
             display: block;
             width: 100%;
           }
+          
           @media only screen and (min-width: 766px) {
             .header__img-mobile {
               display: none !important;
             }
           }
+          
           @media only screen and (max-width: 767px) {
             .header__img {
               display: none !important;
@@ -76,13 +80,17 @@ export default function Text1() {
               display: block;
             }
           }
+          
           a {
             text-decoration: none !important;
+            color: inherit;
           }
+          
           .red-txt {
             color: red;
             font-weight: bold;
           }
+          
           .floating-button {
             position: fixed;
             bottom: 20px;
@@ -95,60 +103,116 @@ export default function Text1() {
             z-index: 1000;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
           }
+          
           .footer-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
           }
+          
           .bg-color {
             background-color: #fff2cc;
             border: 1px solid #000;
             padding: 20px;
             margin: 20px 0;
           }
+          
           .testimonials img {
             max-width: 100%;
           }
+          
           .comments-section {
             margin: 30px 0;
           }
+          
           .msg-card {
             border: 1px solid #e0e0e0;
             border-radius: 5px;
             padding: 15px;
             margin-bottom: 15px;
           }
+          
           .vik-winners-bl {
             background-color: #f8f8f8;
             padding: 20px;
             border-radius: 5px;
             margin: 30px 0;
           }
+          
           .win_line {
             display: flex;
             justify-content: space-between;
             padding: 10px 0;
             border-bottom: 1px solid #e0e0e0;
           }
+          
           .event_order {
             background-color: #ff0000;
-            color: white;
+            color: white !important;
             padding: 15px 30px;
             border-radius: 5px;
             font-weight: bold;
             display: inline-block;
             margin: 20px 0;
           }
+          
           .imgcenter {
             display: block;
             margin: 0 auto;
             max-width: 100%;
           }
+          
           .discus_dialogs_i {
             list-style: none;
           }
-        `}} />
+          
+          .theme {
+            background-color: #ffffff;
+          }
+          
+          .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+          }
+          
+          .title-art {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+          }
+          
+          .imp-block {
+            background-color: #ffecec;
+            padding: 15px;
+            border: 1px solid #ff0000;
+            margin: 20px 0;
+          }
+          
+          .u-ava_img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+          }
+          
+          .emphased {
+            font-weight: bold;
+          }
+          
+          .content-block {
+            margin-top: 10px;
+          }
+          
+          .minicard_ava {
+            margin-right: 10px;
+          }
+          
+          .icons-set {
+            display: flex;
+            align-items: center;
+          }
+        `}</style>
 
         <header className="fn">
           <div className="header__inner">
@@ -551,8 +615,6 @@ export default function Text1() {
 
         <a onClick={add_to_cart} className="floating-button" style={{cursor: 'pointer'}}>SHOP NOW</a>
       </div>
-
-      <Script src="https://jiershun.com/images26/jquery.js.%E4%B8%8B%E8%BD%BD" strategy="lazyOnload" />
     </>
   );
 }
